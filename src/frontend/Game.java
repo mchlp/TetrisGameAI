@@ -95,6 +95,10 @@ public class Game extends Application {
 
         sideBar.setPadding(new Insets(DEFAULT_MARGINS));
 
+        NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth/2, GAME_BACKGROUND_COLOUR);
+        sideBar.getChildren().add(nextTetrominoBox);
+        updateItems.add(nextTetrominoBox);
+
         StatsBox statsBox = new StatsBox(gameArea);
         sideBar.getChildren().add(statsBox);
         updateItems.add(statsBox);
@@ -123,7 +127,6 @@ public class Game extends Application {
             @Override
             public void handle(KeyEvent keyPressed) {
                 KeyCode code = keyPressed.getCode();
-                System.out.println(code);
                 switch (code) {
                     case LEFT:
                         gameController.keyPressed(ControllerKeys.LEFT);

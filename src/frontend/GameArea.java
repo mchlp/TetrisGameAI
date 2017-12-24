@@ -28,16 +28,18 @@ public class GameArea extends Canvas implements Updatable {
     private static final Color LINE_COLOUR = Color.GREY;
     private static final double LINE_WIDTH = 0.5;
 
-    private static final double CELL_OUTLINE_WIDTH = 3;
+    public static final double CELL_OUTLINE_WIDTH = 3;
+    public static final Color CELL_OUTLINE_COLOUR = Color.BLACK;
 
     private Color mBgColour;
     private GraphicsContext mGc;
     private double mWidth;
     private double mHeight;
     private double mCellWidth;
-    private double cellHeight;
+    private double mCellHeight;
     private Cell[][] mGrid;
     private Tetromino mCurTetromino;
+    private Tetromino mNextTetromino;
     private double mTetrominoUpdateTime;
     private Random mGenerator;
     private GameState mGameState;
@@ -50,7 +52,7 @@ public class GameArea extends Canvas implements Updatable {
         mHeight = height;
         mWidth = width;
         mBgColour = bgColour;
-        cellHeight = this.mHeight / NUM_ROWS;
+        mCellHeight = this.mHeight / NUM_ROWS;
         mCellWidth = this.mWidth / NUM_COLS;
         mGenerator = new Random(100);
         mGc = getGraphicsContext2D();
@@ -113,11 +115,11 @@ public class GameArea extends Canvas implements Updatable {
     private void drawCell(int x, int y, Color colour) {
         if (y >= EXTRA_ROWS_AT_TOP) {
             int screenY = y - EXTRA_ROWS_AT_TOP;
-            mGc.setFill(Color.BLACK);
-            mGc.fillRoundRect(x * mCellWidth, screenY * cellHeight, mCellWidth, cellHeight, 5, 5);
+            mGc.setFill(CELL_OUTLINE_COLOUR);
+            mGc.fillRoundRect(x * mCellWidth, screenY * mCellHeight, mCellWidth, mCellHeight, 5, 5);
             mGc.setFill(colour);
-            mGc.fillRoundRect(x * mCellWidth + CELL_OUTLINE_WIDTH, screenY * cellHeight + CELL_OUTLINE_WIDTH,
-                    mCellWidth - (CELL_OUTLINE_WIDTH * 2), cellHeight - (CELL_OUTLINE_WIDTH * 2), 5, 5);
+            mGc.fillRoundRect(x * mCellWidth + CELL_OUTLINE_WIDTH, screenY * mCellHeight + CELL_OUTLINE_WIDTH,
+                    mCellWidth - (CELL_OUTLINE_WIDTH * 2), mCellHeight - (CELL_OUTLINE_WIDTH * 2), 5, 5);
         }
     }
 
@@ -134,6 +136,8 @@ public class GameArea extends Canvas implements Updatable {
                     }
                 }
             }
+        } else {
+            selectNextTetromino();
         }
 
         if (checkGameOver()) {
@@ -150,10 +154,15 @@ public class GameArea extends Canvas implements Updatable {
         mLevel = (mNumLinesCleared/10)+1;
 
         mTetrominoUpdateTime = calculateDropSpeed();
+        mCurTetromino = mNextTetromino;
+        selectNextTetromino();
+    }
+
+    private void selectNextTetromino() {
         int selectListLength = TetrominoBlueprint.values().length;
         int randSelect = mGenerator.nextInt(selectListLength);
         TetrominoBlueprint selectedTetromino = TetrominoBlueprint.values()[randSelect];
-        mCurTetromino = new Tetromino(this, selectedTetromino, NUM_COLS);
+        mNextTetromino = new Tetromino(this, selectedTetromino, NUM_COLS);
     }
 
     private boolean checkGameOver() {
@@ -226,7 +235,7 @@ public class GameArea extends Canvas implements Updatable {
         }
 
         for (int row = 0; row < NUM_ROWS; row++) {
-            mGc.strokeLine(0, row * cellHeight, mWidth, row * cellHeight);
+            mGc.strokeLine(0, row * mCellHeight, mWidth, row * mCellHeight);
         }
     }
 
@@ -257,5 +266,17 @@ public class GameArea extends Canvas implements Updatable {
 
     public int getmLevel() {
         return mLevel;
+    }
+
+    public Tetromino getmNextTetromino() {
+        return mNextTetromino;
+    }
+
+    public double getmCellWidth() {
+        return mCellWidth;
+    }
+
+    public double getmCellHeight() {
+        return mCellHeight;
     }
 }
