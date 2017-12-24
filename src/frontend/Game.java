@@ -17,10 +17,11 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public class Game extends Application {
 
     private static final int DEFAULT_MARGINS = 20;
     private static final double WINDOW_PERCENTAGE_OF_SCREEN = 0.8;
+
+    private static final Color GAME_OUTLINE_COLOUR =  Color.grayRgb(83);
+    private static final Color GAME_BACKGROUND_COLOUR = Color.grayRgb(23);
 
     private long prevTime;
 
@@ -74,11 +78,12 @@ public class Game extends Application {
         gamePane.setPrefWidth(gameAreaWidth);
         root.setLeft(gamePane);
 
-        GameArea gameArea = new GameArea(canvasWidth, canvasHeight);
+        Rectangle gameAreaBackground = new Rectangle(canvasWidth+10, canvasHeight+10, GAME_OUTLINE_COLOUR);
+        gamePane.getChildren().add(gameAreaBackground);
+
+        GameArea gameArea = new GameArea(canvasWidth, canvasHeight, GAME_BACKGROUND_COLOUR);
         gamePane.getChildren().add(gameArea);
         updateItems.add(gameArea);
-
-        GraphicsContext gc = gameArea.getGraphicsContext2D();
 
         VBox sideBar = new VBox(10);
         sideBar.setAlignment(Pos.TOP_CENTER);
@@ -129,37 +134,19 @@ public class Game extends Application {
                 String code = keyPressed.getCode().toString();
                 switch (code) {
                     case "LEFT":
-                        gameController.setKeyPressed(ControllerKeys.LEFT, true);
+                        gameController.keyPressed(ControllerKeys.LEFT);
                         break;
                     case "RIGHT":
-                        gameController.setKeyPressed(ControllerKeys.RIGHT, true);
+                        gameController.keyPressed(ControllerKeys.RIGHT);
                         break;
                     case "UP":
-                        gameController.setKeyPressed(ControllerKeys.UP, true);
+                        gameController.keyPressed(ControllerKeys.UP);
                         break;
                     case "DOWN":
-                        gameController.setKeyPressed(ControllerKeys.DOWN, true);
+                        gameController.keyPressed(ControllerKeys.DOWN);
                         break;
-                }
-            }
-        });
-
-        scene.addEventFilter(KeyEvent.KEY_RELEASED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyPressed) {
-                String code = keyPressed.getCode().toString();
-                switch (code) {
-                    case "LEFT":
-                        gameController.setKeyPressed(ControllerKeys.LEFT, false);
-                        break;
-                    case "RIGHT":
-                        gameController.setKeyPressed(ControllerKeys.RIGHT, false);
-                        break;
-                    case "UP":
-                        gameController.setKeyPressed(ControllerKeys.UP, false);
-                        break;
-                    case "DOWN":
-                        gameController.setKeyPressed(ControllerKeys.DOWN, false);
+                    case "SPACE":
+                        gameController.keyPressed(ControllerKeys.SPACE);
                         break;
                 }
             }
