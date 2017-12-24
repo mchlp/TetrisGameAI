@@ -13,33 +13,32 @@ public class GameController implements Updatable {
 
     private static final double KEY_TIMEOUT_LENGTH = 10.0;
 
-    private GameArea gameArea;
+    private GameArea mGameArea;
 
     public GameController(GameArea gameArea) {
-        this.gameArea = gameArea;
+        this.mGameArea = gameArea;
     }
 
     public void keyPressed(ControllerKeys key) {
         switch (key) {
             case UP:
-                gameArea.rotate();
+                mGameArea.rotate();
                 break;
             case DOWN:
-                gameArea.moveDown();
+                mGameArea.moveDown();
                 break;
             case LEFT:
-                gameArea.moveLeft();
+                mGameArea.moveLeft();
                 break;
             case RIGHT:
-                gameArea.moveRight();
+                mGameArea.moveRight();
                 break;
             case SPACE:
-                gameArea.drop();
+                mGameArea.drop();
         }
     }
 
     @Override
     public void update(double deltaTime) {
-
     }
 }

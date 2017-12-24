@@ -26,30 +26,34 @@ public class GameArea extends Canvas implements Updatable {
     private static final Color CELL_OUTLINE_COLOUR = Color.BLACK;
     private static final double CELL_OUTLINE_WIDTH = 3;
 
-    private Color bgColour;
-    private GraphicsContext gc;
-    private double width;
-    private double height;
-    private double cellWidth;
+    private static final double TETROMINO_UPDATE_INTERVAL = 0.5;
+
+    private Color mBgColour;
+    private GraphicsContext mGc;
+    private double mWidth;
+    private double mHeight;
+    private double mCellWidth;
     private double cellHeight;
-    private Cell[][] grid;
-    private Tetromino curTetromino;
+    private Cell[][] mGrid;
+    private Tetromino mCurTetromino;
+    private double  mTetrominoUpdateTime;
 
     public GameArea(double width, double height, Color bgColour) {
         super(width, height);
-        this.height = height;
-        this.width = width;
-        this.bgColour = bgColour;
-        cellHeight = this.height /NUM_ROWS;
-        cellWidth = this.width /NUM_COLS;
-        gc = getGraphicsContext2D();
-        grid = new Cell[NUM_COLS][NUM_ROWS];
+        this.mHeight = height;
+        this.mWidth = width;
+        this.mBgColour = bgColour;
+        cellHeight = this.mHeight /NUM_ROWS;
+        mCellWidth = this.mWidth /NUM_COLS;
+        mGc = getGraphicsContext2D();
+        mGrid = new Cell[NUM_COLS][NUM_ROWS];
         for (int i=0; i<NUM_COLS; i++) {
             for (int j=0; j<NUM_ROWS; j++) {
-                grid[i][j] = new Cell();
+                mGrid[i][j] = new Cell();
             }
         }
-        curTetromino = new Tetromino(TetrominoBlueprint.S, NUM_COLS);
+        mTetrominoUpdateTime = TETROMINO_UPDATE_INTERVAL;
+        mCurTetromino = new Tetromino(this, TetrominoBlueprint.S, NUM_COLS);
     }
 
     public void moveLeft() {
@@ -73,48 +77,56 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     private void drawCell(int x, int y, Color colour) {
-        gc.setFill(colour.darker());
-        gc.fillRoundRect(x* cellWidth, y* cellHeight, cellWidth, cellHeight, 5, 5);
-        gc.setFill(colour);
-        gc.fillRoundRect(x* cellWidth +CELL_OUTLINE_WIDTH, y* cellHeight +CELL_OUTLINE_WIDTH,
-                cellWidth -(CELL_OUTLINE_WIDTH*2), cellHeight -(CELL_OUTLINE_WIDTH*2), 5, 5);
+        mGc.setFill(colour.brighter());
+        mGc.fillRoundRect(x* mCellWidth, y* cellHeight, mCellWidth, cellHeight, 5, 5);
+        mGc.setFill(colour);
+        mGc.fillRoundRect(x* mCellWidth +CELL_OUTLINE_WIDTH, y* cellHeight +CELL_OUTLINE_WIDTH,
+                mCellWidth -(CELL_OUTLINE_WIDTH*2), cellHeight -(CELL_OUTLINE_WIDTH*2), 5, 5);
     }
 
     public void update(double deltaTime) {
 
-        gc.setFill(bgColour);
-        gc.fillRect(0, 0, width, height);
+        mGc.setFill(mBgColour);
+        mGc.fillRect(0, 0, mWidth, mHeight);
 
         for (int i=0; i<NUM_COLS; i++) {
             for (int j=0; j<NUM_ROWS; j++) {
-                if (grid[i][j].isFilled()) {
-                    drawCell(i, j, grid[i][j].getColour());
+                if (mGrid[i][j].ismIsFilled()) {
+                    drawCell(i, j, mGrid[i][j].getmColour());
                 }
             }
         }
 
-        if (curTetromino != null) {
-            int[][] tBody = curTetromino.getBody();
-            Point tPos = curTetromino.getCurPos();
-            for (int i=0; i<tBody.length; i++) {
-                for (int j=0; j<tBody[0].length; j++) {
-                    if (tBody[i][j] == 1) {
-                        drawCell(tPos.x+i, tPos.y+j, curTetromino.getColour());
-                    }
+        int[][] tBody = mCurTetromino.getmBody();
+        Point tPos = mCurTetromino.getmCurPos();
+        for (int i = 0; i < tBody.length; i++) {
+            for (int j = 0; j < tBody[0].length; j++) {
+                if (tBody[i][j] == 1) {
+                    drawCell(tPos.x + i, tPos.y + j, mCurTetromino.getmColour());
                 }
             }
         }
 
         /*
-        gc.setStroke(LINE_COLOUR);
-        gc.setLineWidth(LINE_WIDTH);
+        if (mCurTetromino != null) {
+            mTetrominoUpdateTime -= deltaTime;
+            if (mTetrominoUpdateTime <= 0) {
+                mCurTetromino.update();
+                mTetrominoUpdateTime = TETROMINO_UPDATE_INTERVAL;
+            }
+        }*/
+
+
+        /*
+        mGc.setStroke(LINE_COLOUR);
+        mGc.setLineWidth(LINE_WIDTH);
 
         for (int col=0; col<NUM_COLS; col++) {
-            gc.strokeLine(col*cellWidth, 0,col*cellWidth, height);
+            mGc.strokeLine(col*mCellWidth, 0,col*mCellWidth, mHeight);
         }
 
         for (int row=0; row<NUM_ROWS; row++) {
-            gc.strokeLine(0,row*cellHeight, width, row*cellHeight);
+            mGc.strokeLine(0,row*cellHeight, mWidth, row*cellHeight);
         }*/
     }
 

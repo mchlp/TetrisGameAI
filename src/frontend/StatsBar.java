@@ -22,22 +22,22 @@ public class StatsBar extends BorderPane implements Updatable {
             "-fx-background-color: lightgrey; " +
             "-fx-opacity: 1;";
 
-    private Text labelText;
-    private Text valueText;
+    private Text mLabelText;
+    private Text mValueText;
 
     public StatsBar(String label, String value) {
         super();
-        labelText = new Text(label);
-        labelText.setFont(new Font(FONT_SIZE));
-        valueText = new Text(value);
-        labelText.setFont(new Font(FONT_SIZE));
+        mLabelText = new Text(label);
+        mLabelText.setFont(new Font(FONT_SIZE));
+        mValueText = new Text(value);
+        mLabelText.setFont(new Font(FONT_SIZE));
 
         setPadding(new Insets(PADDING_SIZE));
         setStyle(DEFAULT_STYLE);
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-        setLeft(labelText);
-        setRight(valueText);
+        setLeft(mLabelText);
+        setRight(mValueText);
     }
 
     @Override

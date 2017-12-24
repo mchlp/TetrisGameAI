@@ -14,48 +14,54 @@ import java.awt.*;
 
 public class Tetromino {
 
-    private int[][] body;
-    private Color colour;
-    private Point curPos;
+    private GameArea mGameArea;
+    private int[][] mBody;
+    private Color mColour;
+    private Point mCurPos;
 
-    public Tetromino(TetrominoBlueprint blueprint, int numCols) {
-        body = blueprint.body.clone();
-        colour = blueprint.colour;
-        curPos = new Point((numCols/2)-(body[0].length/2), 0);
+    public Tetromino(GameArea gameArea, TetrominoBlueprint blueprint, int numCols) {
+        mGameArea = gameArea;
+        mBody = blueprint.body.clone();
+        mColour = blueprint.colour;
+        mCurPos = new Point((numCols/2)-(mBody[0].length/2), 0);
     }
 
     public void rotate() {
-        int[][] newBody = new int[body.length][body[0].length];
+        int[][] newBody = new int[mBody.length][mBody[0].length];
         for (int i=0; i<newBody.length; i++) {
             for (int j=0; j<newBody[0].length; j++) {
-                newBody[newBody.length-j-1][i] = body[i][j];
+                newBody[newBody.length-j-1][i] = mBody[i][j];
             }
         }
-        body = newBody;
+        mBody = newBody;
     }
 
-    public int[][] getBody() {
-        return body;
+    public int[][] getmBody() {
+        return mBody;
     }
 
-    public Point getCurPos() {
-        return curPos;
+    public Point getmCurPos() {
+        return mCurPos;
     }
 
-    public Color getColour() {
-        return colour;
+    public Color getmColour() {
+        return mColour;
     }
 
     public void moveLeft() {
-        curPos.x--;
+        mCurPos.x--;
     }
 
     public void moveRight() {
-        curPos.x++;
+        mCurPos.x++;
     }
 
     public void moveDown() {
-        curPos.y++;
+        mCurPos.y++;
+    }
+
+    public void update() {
+        //moveDown();
     }
 
 }
