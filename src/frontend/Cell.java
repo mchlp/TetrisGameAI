@@ -11,23 +11,23 @@ import javafx.scene.paint.Color;
 
 public class Cell {
 
-    private Color mColour;
-    private boolean mFilled;
+    private Color colour;
+    private boolean filled;
 
     public Cell() {
-        mFilled = false;
+        filled = false;
     }
 
     public void fill(Color colour) {
-        mColour = colour;
-        mFilled = true;
+        this.colour = colour;
+        filled = true;
     }
 
-    public boolean ismFilled() {
-        return mFilled;
+    public boolean isFilled() {
+        return filled;
     }
 
-    public Color getmColour() {
-        return mColour;
+    public Color getColour() {
+        return colour;
     }
 }

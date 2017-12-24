@@ -7,10 +7,13 @@
 
 package frontend;
 
+import backend.TetrominoBlueprint;
 import backend.Updatable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
+
+import java.awt.*;
 
 public class GameArea extends Canvas implements Updatable {
 
@@ -23,31 +26,30 @@ public class GameArea extends Canvas implements Updatable {
     private static final Color CELL_OUTLINE_COLOUR = Color.BLACK;
     private static final double CELL_OUTLINE_WIDTH = 3;
 
-    private Color mBgColour;
-    private GraphicsContext mGc;
-    private double mWidth;
-    private double mHeight;
-    private double mCellWidth;
-    private double mCellHeight;
-    private Cell[][] mGrid;
+    private Color bgColour;
+    private GraphicsContext gc;
+    private double width;
+    private double height;
+    private double cellWidth;
+    private double cellHeight;
+    private Cell[][] grid;
+    private Tetromino curTetromino;
 
     public GameArea(double width, double height, Color bgColour) {
         super(width, height);
-        mHeight = height;
-        mWidth = width;
-        mBgColour = bgColour;
-        mCellHeight = mHeight/NUM_ROWS;
-        mCellWidth = mWidth/NUM_COLS;
-        mGc = getGraphicsContext2D();
-        mGrid = new Cell[NUM_COLS][NUM_ROWS];
+        this.height = height;
+        this.width = width;
+        this.bgColour = bgColour;
+        cellHeight = this.height /NUM_ROWS;
+        cellWidth = this.width /NUM_COLS;
+        gc = getGraphicsContext2D();
+        grid = new Cell[NUM_COLS][NUM_ROWS];
         for (int i=0; i<NUM_COLS; i++) {
             for (int j=0; j<NUM_ROWS; j++) {
-                mGrid[i][j] = new Cell();
-                if (Math.random() < 0.2) {
-                   mGrid[i][j].fill(Color.GREEN);
-                }
+                grid[i][j] = new Cell();
             }
         }
+        curTetromino = new Tetromino(TetrominoBlueprint.S, NUM_COLS);
     }
 
     public void moveLeft() {
@@ -70,36 +72,49 @@ public class GameArea extends Canvas implements Updatable {
         System.out.println("DROP");
     }
 
+    private void drawCell(int x, int y, Color colour) {
+        gc.setFill(colour.darker());
+        gc.fillRoundRect(x* cellWidth, y* cellHeight, cellWidth, cellHeight, 5, 5);
+        gc.setFill(colour);
+        gc.fillRoundRect(x* cellWidth +CELL_OUTLINE_WIDTH, y* cellHeight +CELL_OUTLINE_WIDTH,
+                cellWidth -(CELL_OUTLINE_WIDTH*2), cellHeight -(CELL_OUTLINE_WIDTH*2), 5, 5);
+    }
+
     public void update(double deltaTime) {
 
-        mGc.setFill(mBgColour);
-        mGc.fillRect(0, 0, mWidth, mHeight);
+        gc.setFill(bgColour);
+        gc.fillRect(0, 0, width, height);
 
         for (int i=0; i<NUM_COLS; i++) {
             for (int j=0; j<NUM_ROWS; j++) {
-                if (mGrid[i][j].ismFilled()) {
-                    //mGc.setStroke(CELL_OUTLINE_COLOUR);
-                    //mGc.setLineWidth(2);
-                    //mGc.strokeRect(i*mCellWidth, j*mCellHeight, mCellWidth, mCellHeight);
-                    mGc.setFill(mGrid[i][j].getmColour().brighter());
-                    mGc.fillRoundRect(i*mCellWidth, j*mCellHeight, mCellWidth, mCellHeight, 5, 5);
-                    mGc.setFill(mGrid[i][j].getmColour());
-                    mGc.fillRoundRect(i*mCellWidth+CELL_OUTLINE_WIDTH, j*mCellHeight+CELL_OUTLINE_WIDTH,
-                            mCellWidth-(CELL_OUTLINE_WIDTH*2), mCellHeight-(CELL_OUTLINE_WIDTH*2), 5, 5);
+                if (grid[i][j].isFilled()) {
+                    drawCell(i, j, grid[i][j].getColour());
                 }
             }
         }
 
-        mGc.setStroke(LINE_COLOUR);
-        mGc.setLineWidth(LINE_WIDTH);
+        if (curTetromino != null) {
+            int[][] tBody = curTetromino.getBody();
+            Point tPos = curTetromino.getCurPos();
+            for (int i=0; i<tBody.length; i++) {
+                for (int j=0; j<tBody[0].length; j++) {
+                    if (tBody[i][j] == 1) {
+                        drawCell(tPos.x+i, tPos.y+j, curTetromino.getColour());
+                    }
+                }
+            }
+        }
 
         /*
+        gc.setStroke(LINE_COLOUR);
+        gc.setLineWidth(LINE_WIDTH);
+
         for (int col=0; col<NUM_COLS; col++) {
-            mGc.strokeLine(col*mCellWidth, 0,col*mCellWidth, mHeight);
+            gc.strokeLine(col*cellWidth, 0,col*cellWidth, height);
         }
 
         for (int row=0; row<NUM_ROWS; row++) {
-            mGc.strokeLine(0,row*mCellHeight, mWidth, row*mCellHeight);
+            gc.strokeLine(0,row*cellHeight, width, row*cellHeight);
         }*/
     }
 
