@@ -64,7 +64,7 @@ public class GameArea extends Canvas implements Updatable {
             }
         }
         mCurTetromino = null;
-        spawnTetronimo();
+        spawnTetromino();
         drawGame();
     }
 
@@ -113,7 +113,7 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    public void spawnTetronimo() {
+    public void spawnTetromino() {
         if (mCurTetromino != null) {
             Point tPos = mCurTetromino.getmCurPos();
             int[][] tBody = mCurTetromino.getmBody();

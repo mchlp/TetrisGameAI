@@ -126,7 +126,7 @@ public class Tetromino {
             moveDown();
         } else {
             System.out.println("NEW TETRO");
-            mGameArea.spawnTetronimo();
+            mGameArea.spawnTetromino();
         }
     }
 
