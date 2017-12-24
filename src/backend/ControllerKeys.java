@@ -12,5 +12,6 @@ public enum ControllerKeys {
     RIGHT,
     UP,
     DOWN,
-    SPACE;
+    SPACE,
+    RESTART;
 }

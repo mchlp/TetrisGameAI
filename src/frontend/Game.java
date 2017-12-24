@@ -12,12 +12,14 @@ import backend.ControllerKeys;
 import backend.Updatable;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -93,20 +95,9 @@ public class Game extends Application {
 
         sideBar.setPadding(new Insets(DEFAULT_MARGINS));
 
-        VBox statsBox = new VBox(10);
+        StatsBox statsBox = new StatsBox(gameArea);
         sideBar.getChildren().add(statsBox);
-
-        StatsBar scoreBar = new StatsBar("Score", "0");
-        statsBox.getChildren().add(scoreBar);
-        updateItems.add(scoreBar);
-
-        StatsBar linesBar = new StatsBar("Lines", "0");
-        statsBox.getChildren().add(linesBar);
-        updateItems.add(linesBar);
-
-        StatsBar levelBar = new StatsBar("Level", "0");
-        statsBox.getChildren().add(levelBar);
-        updateItems.add(levelBar);
+        updateItems.add(statsBox);
 
         Button restart = new Button("Restart");
         sideBar.getChildren().add(restart);
@@ -131,24 +122,36 @@ public class Game extends Application {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyPressed) {
-                String code = keyPressed.getCode().toString();
+                KeyCode code = keyPressed.getCode();
+                System.out.println(code);
                 switch (code) {
-                    case "LEFT":
+                    case LEFT:
                         gameController.keyPressed(ControllerKeys.LEFT);
                         break;
-                    case "RIGHT":
+                    case RIGHT:
                         gameController.keyPressed(ControllerKeys.RIGHT);
                         break;
-                    case "UP":
+                    case UP:
                         gameController.keyPressed(ControllerKeys.UP);
                         break;
-                    case "DOWN":
+                    case DOWN:
                         gameController.keyPressed(ControllerKeys.DOWN);
                         break;
-                    case "SPACE":
+                    case SPACE:
                         gameController.keyPressed(ControllerKeys.SPACE);
                         break;
+                    case R:
+                        gameController.keyPressed(ControllerKeys.RESTART);
+                        break;
                 }
+                keyPressed.consume();
+            }
+        });
+
+        restart.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent click) {
+                gameController.keyPressed(ControllerKeys.RESTART);
             }
         });
 

@@ -11,37 +11,37 @@ import javafx.scene.paint.Color;
 
 public enum TetrominoBlueprint {
 
-    I(Color.CYAN, new int[][]{
+    I(Color.rgb(0, 159, 218), new int[][]{
             {0, 0, 0, 0},
             {1, 1, 1, 1},
             {0, 0, 0, 0},
             {0, 0, 0, 0}
     }),
-    J(Color.BLUE, new int[][] {
+    J(Color.rgb(0, 101, 189), new int[][] {
             {1, 0, 0},
             {1, 1, 1},
             {0, 0, 0}
     }),
-    L(Color.ORANGE, new int[][] {
+    L(Color.rgb(255, 121, 0), new int[][] {
             {0, 0, 1},
             {1, 1, 1},
             {0, 0, 0}
     }),
-    O(Color.YELLOW, new int[][] {
+    O(Color.rgb(254, 203, 0), new int[][] {
             {1, 1},
             {1, 1}
     }),
-    S(Color.GREEN, new int[][] {
+    S(Color.rgb(105, 190, 40), new int[][] {
             {0, 1, 1},
             {1, 1, 0},
             {0, 0, 0},
     }),
-    Z(Color.RED, new int[][] {
+    Z(Color.rgb(237, 41, 57), new int[][] {
             {1, 1, 0},
             {0, 1, 1},
             {0, 0, 0},
     }),
-    T(Color.PURPLE, new int[][] {
+    T(Color.rgb(149, 45, 152), new int[][] {
             {0, 1, 0},
             {1, 1, 1},
             {0, 0, 0},

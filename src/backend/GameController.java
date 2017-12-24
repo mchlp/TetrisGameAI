@@ -33,6 +33,10 @@ public class GameController implements Updatable {
                 break;
             case SPACE:
                 mGameArea.drop();
+                break;
+            case RESTART:
+                mGameArea.restart();
+                break;
         }
     }
 

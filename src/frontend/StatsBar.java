@@ -14,7 +14,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-public class StatsBar extends BorderPane implements Updatable {
+public class StatsBar extends BorderPane {
 
     private static final int FONT_SIZE = 15;
     private static final int PADDING_SIZE = 10;
@@ -40,8 +40,7 @@ public class StatsBar extends BorderPane implements Updatable {
         setRight(mValueText);
     }
 
-    @Override
-    public void update(double deltaTime) {
-
+    public void setValue(String value) {
+        mValueText.setText(value);
     }
 }

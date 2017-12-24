@@ -24,10 +24,11 @@ public class Tetromino {
     private boolean mCanMove;
 
     public Tetromino(GameArea gameArea, TetrominoBlueprint blueprint, int numCols) {
+        int spawnYPos = 0;
         mGameArea = gameArea;
         mBody = blueprint.body.clone();
         mColour = blueprint.colour;
-        mCurPos = new Point((numCols / 2) - (mBody[0].length / 2), 0);
+        mCurPos = new Point((numCols / 2) - (mBody[0].length / 2), spawnYPos);
         mLastMove = MOVE_TIMEOUT;
         mCanMove = true;
     }
@@ -44,39 +45,41 @@ public class Tetromino {
         return mColour;
     }
 
-    public boolean rotate() {
+    public boolean rotate(boolean tryMove) {
         int[][] newBody = new int[mBody.length][mBody[0].length];
         for (int i = 0; i < newBody.length; i++) {
             for (int j = 0; j < newBody[0].length; j++) {
                 newBody[newBody.length - j - 1][i] = mBody[i][j];
             }
         }
-        return tryMove(mCurPos, newBody);
+        return tryMove(mCurPos, newBody, tryMove);
     }
 
-    public boolean moveLeft() {
+    public boolean moveLeft(boolean tryMove) {
         Point tryPos = (Point) mCurPos.clone();
         tryPos.x--;
-        return tryMove(tryPos, mBody);
+        return tryMove(tryPos, mBody, tryMove);
     }
 
-    public boolean moveRight() {
+    public boolean moveRight(boolean tryMove) {
         Point tryPos = (Point) mCurPos.clone();
         tryPos.x++;
-        return tryMove(tryPos, mBody);
+        return tryMove(tryPos, mBody, tryMove);
     }
 
-    public boolean moveDown() {
+    public boolean moveDown(boolean tryMove) {
         Point tryPos = (Point) mCurPos.clone();
         tryPos.y++;
-        if (tryMove(tryPos, mBody)) {
-            mLastMove = MOVE_TIMEOUT;
+        if (tryMove(tryPos, mBody, tryMove)) {
+            if (!tryMove) {
+                mLastMove = MOVE_TIMEOUT;
+            }
             return true;
         }
         return false;
     }
 
-    private boolean tryMove(Point tryPos, int[][] tryBody) {
+    private boolean tryMove(Point tryPos, int[][] tryBody, boolean tryMove) {
 
         if (!mCanMove) {
             return false;
@@ -108,7 +111,7 @@ public class Tetromino {
                 }
             }
 
-            if (ableToMove) {
+            if (ableToMove && !tryMove) {
                 mCurPos = tryPos;
                 mBody = tryBody;
             }
@@ -121,11 +124,12 @@ public class Tetromino {
         if (mCanMove) {
             mLastMove--;
             if (mLastMove < 0) {
-                mCanMove = false;
+                if (!moveDown(true)) {
+                    mCanMove = false;
+                }
             }
-            moveDown();
+            moveDown(false);
         } else {
-            System.out.println("NEW TETRO");
             mGameArea.spawnTetromino();
         }
     }
