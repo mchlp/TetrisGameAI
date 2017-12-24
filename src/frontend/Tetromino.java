@@ -14,7 +14,7 @@ import java.awt.*;
 
 public class Tetromino {
 
-    private static final int MOVE_TIMEOUT = 1;
+    private static final int MOVE_TIMEOUT = 2;
 
     private GameArea mGameArea;
     private int[][] mBody;
@@ -27,7 +27,7 @@ public class Tetromino {
         mGameArea = gameArea;
         mBody = blueprint.body.clone();
         mColour = blueprint.colour;
-        mCurPos = new Point((numCols / 2) - (mBody[0].length / 2), 1);
+        mCurPos = new Point((numCols / 2) - (mBody[0].length / 2), 0);
         mLastMove = MOVE_TIMEOUT;
         mCanMove = true;
     }
@@ -95,7 +95,7 @@ public class Tetromino {
                             break checkLoop;
                         }
 
-                        if (tryPos.y + i < 0 || tryPos.y + i > mGameArea.getmGrid()[0].length - 1) {
+                        if (tryPos.y + i > mGameArea.getmGrid()[0].length - 1) {
                             ableToMove = false;
                             break checkLoop;
                         }
@@ -120,11 +120,13 @@ public class Tetromino {
     public void update() {
         if (mCanMove) {
             mLastMove--;
-            System.out.println(mLastMove);
             if (mLastMove < 0) {
                 mCanMove = false;
             }
             moveDown();
+        } else {
+            System.out.println("NEW TETRO");
+            mGameArea.spawnTetronimo();
         }
     }
 
