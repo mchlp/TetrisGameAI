@@ -26,7 +26,7 @@ public class GameArea extends Canvas implements Updatable {
     private static final Color CELL_OUTLINE_COLOUR = Color.BLACK;
     private static final double CELL_OUTLINE_WIDTH = 3;
 
-    private static final double TETROMINO_UPDATE_INTERVAL = 0.5;
+    private static final double TETROMINO_UPDATE_INTERVAL = 1;
 
     private Color mBgColour;
     private GraphicsContext mGc;
@@ -50,6 +50,9 @@ public class GameArea extends Canvas implements Updatable {
         for (int i=0; i<NUM_COLS; i++) {
             for (int j=0; j<NUM_ROWS; j++) {
                 mGrid[i][j] = new Cell();
+                if (Math.random() < 0.3 && j > 10) {
+                    mGrid[i][j].fill(Color.BLUE);
+                }
             }
         }
         mTetrominoUpdateTime = TETROMINO_UPDATE_INTERVAL;
@@ -58,22 +61,40 @@ public class GameArea extends Canvas implements Updatable {
 
     public void moveLeft() {
         System.out.println("LEFT");
+        if (mCurTetromino != null) {
+            mCurTetromino.moveLeft();
+        }
     }
 
     public void moveRight() {
         System.out.println("RIGHT");
+        if (mCurTetromino != null) {
+            mCurTetromino.moveRight();
+        }
     }
 
     public void moveDown() {
         System.out.println("DOWN");
+        if (mCurTetromino != null) {
+            mCurTetromino.moveDown();
+        }
     }
 
     public void rotate() {
         System.out.println("ROTATE");
+        if (mCurTetromino != null) {
+            mCurTetromino.rotate();
+        }
     }
 
     public void drop() {
         System.out.println("DROP");
+        while (mCurTetromino.moveDown());
+        mCurTetromino.freeze();
+    }
+
+    public Cell[][] getmGrid() {
+        return mGrid;
     }
 
     private void drawCell(int x, int y, Color colour) {
@@ -102,22 +123,19 @@ public class GameArea extends Canvas implements Updatable {
         for (int i = 0; i < tBody.length; i++) {
             for (int j = 0; j < tBody[0].length; j++) {
                 if (tBody[i][j] == 1) {
-                    drawCell(tPos.x + i, tPos.y + j, mCurTetromino.getmColour());
+                    drawCell(tPos.x + j, tPos.y + i, mCurTetromino.getmColour());
                 }
             }
         }
 
-        /*
         if (mCurTetromino != null) {
             mTetrominoUpdateTime -= deltaTime;
             if (mTetrominoUpdateTime <= 0) {
                 mCurTetromino.update();
                 mTetrominoUpdateTime = TETROMINO_UPDATE_INTERVAL;
             }
-        }*/
+        }
 
-
-        /*
         mGc.setStroke(LINE_COLOUR);
         mGc.setLineWidth(LINE_WIDTH);
 
@@ -127,7 +145,7 @@ public class GameArea extends Canvas implements Updatable {
 
         for (int row=0; row<NUM_ROWS; row++) {
             mGc.strokeLine(0,row*cellHeight, mWidth, row*cellHeight);
-        }*/
+        }
     }
 
 }

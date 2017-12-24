@@ -11,8 +11,6 @@ import frontend.GameArea;
 
 public class GameController implements Updatable {
 
-    private static final double KEY_TIMEOUT_LENGTH = 10.0;
-
     private GameArea mGameArea;
 
     public GameController(GameArea gameArea) {
