@@ -67,8 +67,12 @@ public class Trainer implements Updatable {
     }
 
     private void prepareNextOrganism() {
+        if (mCurOrganismIndex >= 0) {
+            mCurOrganism.printFitness();
+        }
         mCurOrganismIndex++;
         mCurOrganism = mPopulation.getOrganism(mCurOrganismIndex);
+        mCurOrganism.printGenes();
     }
 
     private ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino, Genome genome) {

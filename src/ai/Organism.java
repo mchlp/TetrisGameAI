@@ -54,4 +54,21 @@ public class Organism implements Serializable {
     public Genome getmGenome() {
         return mGenome;
     }
+
+    public void printFitness() {
+        System.out.println("-");
+        System.out.println("Organism - " + mId.toString());
+        System.out.println("Score: " + mScore);
+        System.out.println("Level: " + mLevel);
+        System.out.println("Lines: " + mLinesCleared);
+        System.out.println("Fitness: " + calculateFitness());
+    }
+
+    public void printGenes() {
+        System.out.println("-");
+        System.out.println("Organism - " + mId.toString());
+        for (Genes geneType : Genes.values()) {
+            System.out.println(geneType.name() + ": " + mGenome.getGeneValue(geneType));
+        }
+    }
 }
