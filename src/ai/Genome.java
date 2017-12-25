@@ -35,7 +35,7 @@ public class Genome implements Serializable {
         return new Genome(childGeneList);
     }
 
-    public Gene getGene(Genes gene) {
-        return mGeneList[gene.ordinal()];
+    public double getGeneValue(Genes gene) {
+        return mGeneList[gene.ordinal()].getmValue();
     }
 }

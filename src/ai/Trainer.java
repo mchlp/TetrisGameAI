@@ -9,14 +9,13 @@ package ai;
 
 import backend.ControllerKeys;
 import backend.Updatable;
-import frontend.common.Cell;
-import frontend.common.GameArea;
-import frontend.common.GameController;
-import frontend.common.Tetromino;
+import frontend.common.*;
 
 import java.util.ArrayList;
 
 public class Trainer implements Updatable {
+
+    private static final int GAME_OVER_RATING_PENALTY = 500;
 
     private GameArea mGameArea;
     private GameController mGameController;
@@ -58,22 +57,47 @@ public class Trainer implements Updatable {
         }
     }
 
-    private ArrayList<ControllerKeys> getBestMove(Cell[][] grid, Tetromino curTetromino) {
+    private ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino) {
         ArrayList<ControllerKeys> bestMoves = new ArrayList<>();
 
         for (int numRotations = 0; numRotations < 4; numRotations++) {
-            
+            for (int numTranslate = -(grid.getmWidth()/2); numTranslate <= grid.getmWidth()/2; numTranslate++) {
+
+
+            }
         }
 
         bestMoves.clear();
+
+        return bestMoves;
     }
 
-    private int getFullLines(Cell[][] grid) {
+    private double getRating(GameGrid grid, Genome genome) {
+        double rating = 0;
+
+        rating += genome.getGeneValue(Genes.LINES_CLEARED) * getNumFullLines(grid);
+        rating += genome.getGeneValue(Genes.NUM_HOLES) * getNumHoles(grid);
+        rating += genome.getGeneValue(Genes.ROUGHNESS) * getRoughness(grid);
+        rating += genome.getGeneValue(Genes.RELATIVE_HEIGHT) * getRelativeHeight(grid);
+        rating += genome.getGeneValue(Genes.TOTAL_HEIGHT) * getTotalHeight(grid);
+        rating += genome.getGeneValue(Genes.MAX_HEIGHT) * getMaxHeight(grid);
+
+        if (getGameOver(grid)) {
+            rating -= GAME_OVER_RATING_PENALTY;
+        }
+        return rating;
+    }
+
+    private boolean getGameOver(GameGrid grid) {
+        return grid.checkGameOver();
+    }
+
+    private int getNumFullLines(GameGrid grid) {
         int numFullLines = 0;
-        for (int i=0; i<grid[0].length; i++) {
+        for (int i=0; i<grid.getmHeight(); i++) {
             boolean lineFull = true;
-            for (int j=0; j<grid.length; j++) {
-                if (!grid[j][i].ismIsFilled()) {
+            for (int j=0; j<grid.getmWidth(); j++) {
+                if (!grid.isFilled(j, i)) {
                     lineFull = false;
                     break;
                 }
@@ -85,12 +109,12 @@ public class Trainer implements Updatable {
         return numFullLines;
     }
 
-    private int getTotalHeight(Cell[][] grid) {
+    private int getTotalHeight(GameGrid grid) {
         int sumHeight = 0;
-        for (int i=0; i<grid.length; i++) {
-            for (int j=0; j<grid[0].length; j++) {
-                if (grid[i][j].ismIsFilled()) {
-                    sumHeight += grid[0].length-j;
+        for (int i=0; i<grid.getmWidth(); i++) {
+            for (int j=0; j<grid.getmHeight(); j++) {
+                if (grid.isFilled(i, j)) {
+                    sumHeight += grid.getmHeight()-j;
                     break;
                 }
             }
@@ -98,12 +122,12 @@ public class Trainer implements Updatable {
         return sumHeight;
     }
 
-    private int getMaxHeight(Cell[][] grid) {
+    private int getMaxHeight(GameGrid grid) {
         int maxHeight = 0;
-        for (int i=0; i<grid.length; i++) {
-            for (int j=0; j<grid[0].length; j++) {
-                if (grid[i][j].ismIsFilled()) {
-                    int height = grid[0].length-j;
+        for (int i=0; i<grid.getmWidth(); i++) {
+            for (int j=0; j<grid.getmHeight(); j++) {
+                if (grid.isFilled(i, j)) {
+                    int height = grid.getmHeight()-j;
                     if (height > maxHeight) {
                         maxHeight = height;
                     }
@@ -114,13 +138,13 @@ public class Trainer implements Updatable {
         return maxHeight;
     }
 
-    private int getRelativeHeight(Cell[][] grid) {
+    private int getRelativeHeight(GameGrid grid) {
         int maxHeight = 0;
         int minHeight = Integer.MAX_VALUE;
-        for (int i=0; i<grid.length; i++) {
-            for (int j=0; j<grid[0].length; j++) {
-                if (grid[i][j].ismIsFilled()) {
-                    int height = grid[0].length-j;
+        for (int i=0; i<grid.getmWidth(); i++) {
+            for (int j=0; j<grid.getmHeight(); j++) {
+                if (grid.isFilled(i, j)) {
+                    int height = grid.getmHeight()-j;
                     if (height > maxHeight) {
                         maxHeight = height;
                     }
@@ -134,13 +158,13 @@ public class Trainer implements Updatable {
         return maxHeight-minHeight;
     }
 
-    private int getRoughness(Cell[][] grid) {
+    private int getRoughness(GameGrid grid) {
         int prevHeight = 0;
         int sumAbsDiff = 0;
-        for (int i=0; i<grid.length; i++) {
-            for (int j=0; j<grid[0].length; j++) {
-                if (grid[i][j].ismIsFilled()) {
-                    int height = grid[0].length-j;
+        for (int i=0; i<grid.getmWidth(); i++) {
+            for (int j=0; j<grid.getmHeight(); j++) {
+                if (grid.isFilled(i, j)) {
+                    int height = grid.getmHeight()-j;
                     if (!(i == 0)) {
                         sumAbsDiff += Math.abs(height-prevHeight);
                     }
@@ -152,17 +176,17 @@ public class Trainer implements Updatable {
         return sumAbsDiff;
     }
 
-    private int getHoles(Cell[][] grid) {
+    private int getNumHoles(GameGrid grid) {
         int numHoles = 0;
-        for (int i=0; i<grid.length; i++) {
+        for (int i=0; i<grid.getmWidth(); i++) {
             boolean foundTop = false;
-            for (int j = 0; j < grid[0].length; j++) {
+            for (int j = 0; j < grid.getmHeight(); j++) {
                 if (foundTop) {
-                    if (!grid[i][j].ismIsFilled()) {
+                    if (!grid.isFilled(i, j)) {
                         numHoles++;
                     }
                 } else {
-                    if (grid[i][j].ismIsFilled()) {
+                    if (grid.isFilled(i, j)) {
                         foundTop = true;
                     }
                 }

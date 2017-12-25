@@ -36,7 +36,7 @@ public class GameArea extends Canvas implements Updatable {
     private double mHeight;
     private double mCellWidth;
     private double mCellHeight;
-    private Cell[][] mGrid;
+    private GameGrid mGrid;
     private Tetromino mCurTetromino;
     private Tetromino mNextTetromino;
     private double mTetrominoUpdateTime;
@@ -59,7 +59,7 @@ public class GameArea extends Canvas implements Updatable {
         mCellWidth = this.mWidth / NUM_COLS;
         mGenerator = new Random(100);
         mGc = getGraphicsContext2D();
-        mGrid = new Cell[NUM_COLS][NUM_ROWS + EXTRA_ROWS_AT_TOP];
+        mGrid = new GameGrid(NUM_COLS, NUM_ROWS + EXTRA_ROWS_AT_TOP, EXTRA_ROWS_AT_TOP);
         mGameMode = gameMode;
         mShowGridlines = true;
         newGame();
@@ -72,11 +72,7 @@ public class GameArea extends Canvas implements Updatable {
         mLevelUpCountdown = LINES_CLEAR_FOR_LEVEL_UP;
         mLevel = 1;
         mScore = 0;
-        for (int i = 0; i < mGrid.length; i++) {
-            for (int j = 0; j < mGrid[0].length; j++) {
-                mGrid[i][j] = new Cell();
-            }
-        }
+        mGrid.resetGrid();
         mCurTetromino = null;
         spawnTetromino();
         drawGame();
@@ -143,7 +139,7 @@ public class GameArea extends Canvas implements Updatable {
         mShowGridlines = !mShowGridlines;
     }
 
-    public Cell[][] getmGrid() {
+    public GameGrid getmGrid() {
         return mGrid;
     }
 
@@ -162,25 +158,17 @@ public class GameArea extends Canvas implements Updatable {
 
         if (mCurTetromino != null) {
             mScore += (mCurTetromino.getmCurPos().y - EXTRA_ROWS_AT_TOP);
-            Point tPos = mCurTetromino.getmCurPos();
-            int[][] tBody = mCurTetromino.getmBody();
-            for (int i = 0; i < tBody.length; i++) {
-                for (int j = 0; j < tBody[0].length; j++) {
-                    if (tBody[i][j] == 1) {
-                        mGrid[tPos.x + j][tPos.y + i].fill(mCurTetromino.getmColour());
-                    }
-                }
-            }
+            mGrid.applyTetromino(mCurTetromino);
         } else {
             selectNextTetromino();
         }
 
-        if (checkGameOver()) {
+        if (mGrid.checkGameOver()) {
             mGameState = GameState.OVER;
             return;
         }
 
-        int numRowsCleared = checkCompleteRows();
+        int numRowsCleared = mGrid.checkCompleteRows();
         mNumLinesCleared += numRowsCleared;
         mLevelUpCountdown -= numRowsCleared;
 
@@ -205,56 +193,16 @@ public class GameArea extends Canvas implements Updatable {
         mNextTetromino = new Tetromino(this, selectedTetromino, NUM_COLS);
     }
 
-    private boolean checkGameOver() {
-        for (int i = 0; i < mGrid.length; i++) {
-            if (mGrid[i][EXTRA_ROWS_AT_TOP].ismIsFilled()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    private int checkCompleteRows() {
-        int numRowsCleared = 0;
-        for (int i = 0; i < mGrid[0].length; i++) {
-            boolean rowFull = true;
-            for (int j = 0; j < mGrid.length; j++) {
-                if (!mGrid[j][i].ismIsFilled()) {
-                    rowFull = false;
-                    break;
-                }
-            }
-            if (rowFull) {
-                clearRow(i);
-                numRowsCleared++;
-            }
-        }
-        return numRowsCleared;
-    }
-
-    private void clearRow(int rowNum) {
-        for (int i = rowNum; i >= 0; i--) {
-            for (int j = 0; j < mGrid.length; j++) {
-                if (i == 0) {
-                    mGrid[j][i] = new Cell();
-                } else {
-                    mGrid[j][i] = mGrid[j][i - 1];
-                }
-            }
-        }
-    }
-
     private void drawGame() {
 
         setEffect(null);
         mGc.setFill(mBgColour);
         mGc.fillRect(0, 0, mWidth, mHeight);
 
-        for (int i = 0; i < mGrid.length; i++) {
-            for (int j = 0; j < mGrid[0].length; j++) {
-                if (mGrid[i][j].ismIsFilled()) {
-                    drawCell(i, j, mGrid[i][j].getmColour());
+        for (int i = 0; i < mGrid.getmWidth(); i++) {
+            for (int j = 0; j < mGrid.getmHeight(); j++) {
+                if (mGrid.isFilled(i, j)) {
+                    drawCell(i, j, mGrid.getColour(i, j));
                 }
             }
         }
@@ -311,7 +259,7 @@ public class GameArea extends Canvas implements Updatable {
 
     private double calculateDropSpeed() {
         // return -0.04242*mLevel + 0.6884;
-        return (725 * Math.pow(0.85, mLevel) + mLevel)/1000;
+        return (725 * Math.pow(0.85, mLevel) + mLevel) / 1000;
         //return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
     }
 

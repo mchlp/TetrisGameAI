@@ -53,6 +53,7 @@ public class Game extends Application {
         double height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
         double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
 
+        //startPlayerGame(height, width);
         startAITrain(height, width);
 
         primaryStage.setResizable(false);

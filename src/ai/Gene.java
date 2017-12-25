@@ -21,12 +21,8 @@ public class Gene implements Serializable {
         mValue = value;
     }
 
-    public Genes getmType() {
-        return mType;
-    }
-
-    public void setmValue(double mValue) {
-        this.mValue = mValue;
+    public double getmValue() {
+        return mValue;
     }
 
     public Gene merge(Gene parentGene) {

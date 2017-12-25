@@ -93,17 +93,17 @@ public class Tetromino {
 
                     if (tryBody[i][j] == 1) {
 
-                        if (tryPos.x + j < 0 || tryPos.x + j > mGameArea.getmGrid().length - 1) {
+                        if (tryPos.x + j < 0 || tryPos.x + j > mGameArea.getmGrid().getmWidth() - 1) {
                             ableToMove = false;
                             break checkLoop;
                         }
 
-                        if (tryPos.y + i > mGameArea.getmGrid()[0].length - 1) {
+                        if (tryPos.y + i > mGameArea.getmGrid().getmHeight() - 1) {
                             ableToMove = false;
                             break checkLoop;
                         }
 
-                        if (mGameArea.getmGrid()[tryPos.x + j][tryPos.y + i].ismIsFilled()) {
+                        if (mGameArea.getmGrid().isFilled(tryPos.x + j, tryPos.y + i)) {
                             ableToMove = false;
                             break checkLoop;
                         }

@@ -18,16 +18,24 @@ public class Cell {
         mIsFilled = false;
     }
 
-    public void fill(Color colour) {
+    void fill(Color colour) {
         this.mColour = colour;
         mIsFilled = true;
     }
 
-    public boolean ismIsFilled() {
+    boolean ismIsFilled() {
         return mIsFilled;
     }
 
-    public Color getmColour() {
+    Color getmColour() {
         return mColour;
+    }
+
+    public Cell clone() {
+        Cell newCell = new Cell();
+        if (ismIsFilled()) {
+            newCell.fill(mColour);
+        }
+        return newCell;
     }
 }
