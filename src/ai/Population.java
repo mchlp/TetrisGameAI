@@ -58,4 +58,8 @@ public class Population implements Serializable {
     public Organism getOrganism(int index) {
         return mOrganisms[index];
     }
+
+    public int getNumOrganisms() {
+        return mOrganisms.length;
+    }
 }

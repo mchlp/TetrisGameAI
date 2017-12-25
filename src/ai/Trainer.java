@@ -20,44 +20,42 @@ public class Trainer implements Updatable {
     private GameArea mGameArea;
     private GameController mGameController;
     private Population mPopulation;
-    private int mCurTrainOrganismIndex;
-    private Organism mCurTrainOrganism;
+    private int mCurOrganismIndex;
+    private Organism mCurOrganism;
+    private int mPrevScore;
 
     public Trainer(GameArea gameArea, GameController gameController, Population population) {
         mGameArea = gameArea;
         mGameController = gameController;
         mPopulation = population;
-        mCurTrainOrganismIndex = 0;
-        mCurTrainOrganism = population.getOrganism(0);
+        mCurOrganismIndex = 0;
+        mCurOrganism = population.getOrganism(0);
+        mPrevScore = -1;
     }
 
     @Override
     public void update(double deltaTime) {
         switch (mGameArea.getmGameState()) {
             case PLAYING:
-                int num = (int) (Math.random()*10);
-                int rotate = (int) (Math.random()*4);
-                while (rotate-- > 0) {
-                    mGameController.keyPressed(ControllerKeys.ROTATE);
-                }
-                if (Math.random() >= 0.5) {
-                    while (num-- > 0) {
-                        mGameController.keyPressed(ControllerKeys.LEFT);
+                if (mPrevScore != mGameArea.getmScore()) {
+                    ArrayList<ControllerKeys> moves = getBestMove(mGameArea.getmGrid(), mGameArea.getmCurTetromino(), mCurOrganism.getmGenome());
+                    for (ControllerKeys move : moves) {
+                        mGameController.keyPressed(move);
                     }
-                } else {
-                    while (num-- > 0) {
-                        mGameController.keyPressed(ControllerKeys.RIGHT);
-                    }
+                    mPrevScore = mGameArea.getmScore();
                 }
-                mGameController.keyPressed(ControllerKeys.DROP);
                 break;
             case OVER:
+                if (mCurOrganismIndex == mPopulation.getNumOrganisms())
                 mGameController.keyPressed(ControllerKeys.RESTART);
                 break;
         }
     }
 
-    private ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino) {
+    private ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino, Genome genome) {
+
+        double highestRating = Double.NEGATIVE_INFINITY;
+
         ArrayList<ControllerKeys> bestMoves = new ArrayList<>();
 
         for (int numRotations = 0; numRotations < 4; numRotations++) {
@@ -79,14 +77,27 @@ public class Trainer implements Updatable {
                 }
 
                 testTetromino.drop(false);
-
                 testGrid.applyTetromino(testTetromino);
 
+                double curRating = getRating(testGrid, genome);
+
+                if (curRating > highestRating) {
+                    highestRating = curRating;
+                    bestMoves.clear();
+                    for (int i=0; i<numRotations; i++) {
+                        bestMoves.add(ControllerKeys.ROTATE);
+                    }
+                    for (int i=0; i<Math.abs(numTranslate); i++) {
+                        if (numTranslate < 0) {
+                            bestMoves.add(ControllerKeys.LEFT);
+                        } else {
+                            bestMoves.add(ControllerKeys.RIGHT);
+                        }
+                    }
+                    bestMoves.add(ControllerKeys.DROP);
+                }
             }
         }
-
-        bestMoves.clear();
-
         return bestMoves;
     }
 
@@ -213,7 +224,7 @@ public class Trainer implements Updatable {
         return numHoles;
     }
 
-    public Organism getmCurTrainOrganism() {
-        return mCurTrainOrganism;
+    public Organism getmCurOrganism() {
+        return mCurOrganism;
     }
 }

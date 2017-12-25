@@ -270,6 +270,10 @@ public class GameArea extends Canvas implements Updatable {
         return mNextTetromino;
     }
 
+    public Tetromino getmCurTetromino() {
+        return mCurTetromino;
+    }
+
     public double getmCellWidth() {
         return mCellWidth;
     }

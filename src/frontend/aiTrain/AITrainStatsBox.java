@@ -29,6 +29,6 @@ public class AITrainStatsBox extends StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mOrganismBar.setValue(mTrainer.getmCurTrainOrganism().getmId().toString());
+        mOrganismBar.setValue(mTrainer.getmCurOrganism().getmId().toString());
     }
 }
