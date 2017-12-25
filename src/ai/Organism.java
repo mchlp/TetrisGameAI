@@ -13,7 +13,9 @@ import java.util.UUID;
 public class Organism implements Serializable {
 
     private Genome mGenome;
-    private double mScore;
+    private int mScore;
+    private int mLinesCleared;
+    private int mLevel;
     private UUID mId;
 
     public Organism() {
@@ -29,8 +31,20 @@ public class Organism implements Serializable {
         return new Organism(mGenome.merge(otherParent.mGenome));
     }
 
-    public double calculateFitness() {
+    public int calculateFitness() {
         return mScore;
+    }
+
+    public void setmScore(int mScore) {
+        this.mScore = mScore;
+    }
+
+    public void setmLevel(int mLevel) {
+        this.mLevel = mLevel;
+    }
+
+    public void setmLinesCleared(int mLinesCleared) {
+        this.mLinesCleared = mLinesCleared;
     }
 
     public UUID getmId() {

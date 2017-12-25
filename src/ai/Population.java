@@ -40,6 +40,9 @@ public class Population implements Serializable {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public void selectAndKill() {
 
     }
 

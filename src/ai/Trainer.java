@@ -29,8 +29,7 @@ public class Trainer implements Updatable {
         mGameController = gameController;
         mPopulation = population;
         mCurOrganismIndex = 0;
-        mCurOrganism = population.getOrganism(0);
-        mPrevScore = -1;
+        goToFirstOrganism();
     }
 
     @Override
@@ -45,11 +44,31 @@ public class Trainer implements Updatable {
                     mPrevScore = mGameArea.getmScore();
                 }
                 break;
+
             case OVER:
-                if (mCurOrganismIndex == mPopulation.getNumOrganisms())
+                mCurOrganism.setmScore(mGameArea.getmScore());
+                mCurOrganism.setmLevel(mGameArea.getmLevel());
+                mCurOrganism.setmLinesCleared(mGameArea.getmNumLinesCleared());
+
+                if (mCurOrganismIndex == mPopulation.getNumOrganisms()) {
+                    mPopulation.selectAndKill();
+                    goToFirstOrganism();
+                } else {
+                    prepareNextOrganism();
+                }
                 mGameController.keyPressed(ControllerKeys.RESTART);
                 break;
         }
+    }
+
+    private void goToFirstOrganism() {
+        mCurOrganismIndex = -1;
+        prepareNextOrganism();
+    }
+
+    private void prepareNextOrganism() {
+        mCurOrganismIndex++;
+        mCurOrganism = mPopulation.getOrganism(mCurOrganismIndex);
     }
 
     private ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino, Genome genome) {
