@@ -9,6 +9,7 @@ package frontend.player;
 
 import backend.ControllerKeys;
 import frontend.base.Sidebar;
+import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import javafx.event.ActionEvent;
@@ -23,8 +24,12 @@ public class PlayerSidebar extends Sidebar {
         super(gameArea, margins, sideBarHeight, sideBarWidth);
 
         NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth / 2, gameBgColour);
-        getChildren().add(0, nextTetrominoBox);
+        getChildren().add(nextTetrominoBox);
         mUpdateItems.add(nextTetrominoBox);
+
+        PlayerStatsBox playerStatsBox = new PlayerStatsBox(gameArea);
+        getChildren().add(playerStatsBox);
+        mUpdateItems.add(playerStatsBox);
 
         HBox buttonBar = new HBox(10);
         buttonBar.setAlignment(Pos.CENTER);

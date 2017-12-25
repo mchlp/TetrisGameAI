@@ -11,6 +11,7 @@ import backend.ControllerKeys;
 import backend.Updatable;
 import frontend.common.GameArea;
 import frontend.common.GameController;
+import frontend.common.GameState;
 
 public class Trainer implements Updatable {
 
@@ -25,10 +26,22 @@ public class Trainer implements Updatable {
         mGameController = gameController;
         mPopulation = population;
         mCurTrainOrganismIndex = 0;
+        mCurTrainOrganism = population.getOrganism(0);
     }
 
     @Override
     public void update(double deltaTime) {
-        mGameController.keyPressed(ControllerKeys.DROP);
+        switch (mGameArea.getmGameState()) {
+            case PLAYING:
+                mGameController.keyPressed(ControllerKeys.DROP);
+                break;
+            case OVER:
+                mGameController.keyPressed(ControllerKeys.RESTART);
+                break;
+        }
+    }
+
+    public Organism getmCurTrainOrganism() {
+        return mCurTrainOrganism;
     }
 }

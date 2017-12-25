@@ -7,11 +7,16 @@
 
 package frontend.aiTrain;
 
+import ai.Trainer;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 
 public class AITrainSidebar extends Sidebar {
-    public AITrainSidebar(GameArea gameArea, double margins, double sideBarHeight, double sideBarWidth) {
+    public AITrainSidebar(GameArea gameArea, Trainer trainer, double margins, double sideBarHeight, double sideBarWidth) {
         super(gameArea, margins, sideBarHeight, sideBarWidth);
+
+        AITrainStatsBox aiTrainStatsBox = new AITrainStatsBox(gameArea, trainer);
+        getChildren().add(aiTrainStatsBox);
+        mUpdateItems.add(aiTrainStatsBox);
     }
 }

@@ -8,6 +8,7 @@
 package frontend.common;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -16,6 +17,7 @@ import javafx.scene.text.Text;
 public class StatsBar extends BorderPane {
 
     private static final int FONT_SIZE = 15;
+    private static final int SMALLER_FONT_SIZE = 12;
     private static final int PADDING_SIZE = 10;
     private static final String DEFAULT_STYLE = "" +
             "-fx-background-color: lightgrey; " +
@@ -31,12 +33,18 @@ public class StatsBar extends BorderPane {
         mValueText = new Text(value);
         mLabelText.setFont(new Font(FONT_SIZE));
 
+        setAlignment(mLabelText, Pos.CENTER);
+        setAlignment(mValueText, Pos.CENTER);
         setPadding(new Insets(PADDING_SIZE));
         setStyle(DEFAULT_STYLE);
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
         setLeft(mLabelText);
         setRight(mValueText);
+    }
+
+    public void setSmallerFont() {
+        mValueText.setFont(new Font(SMALLER_FONT_SIZE));
     }
 
     public void setValue(String value) {

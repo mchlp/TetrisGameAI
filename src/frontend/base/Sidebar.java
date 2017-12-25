@@ -9,7 +9,6 @@ package frontend.base;
 
 import backend.Updatable;
 import frontend.common.GameArea;
-import frontend.common.StatsBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
@@ -27,10 +26,6 @@ public abstract class Sidebar extends VBox implements Updatable {
         setPrefHeight(sideBarHeight);
         setPrefWidth(sideBarWidth);
         mUpdateItems = new ArrayList<>();
-
-        StatsBox statsBox = new StatsBox(gameArea);
-        getChildren().add(statsBox);
-        mUpdateItems.add(statsBox);
     }
 
     @Override

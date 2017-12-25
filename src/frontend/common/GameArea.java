@@ -28,6 +28,8 @@ public class GameArea extends Canvas implements Updatable {
     private static final int[] LINE_CLEAR_SCORING = {0, 40, 100, 300, 1200};
     private static final Color LINE_COLOUR = Color.GREY;
     private static final double LINE_WIDTH = 0.5;
+    private static final int MAX_LEVEL = 20;
+
     private Color mBgColour;
     private GraphicsContext mGc;
     private double mWidth;
@@ -40,6 +42,7 @@ public class GameArea extends Canvas implements Updatable {
     private double mTetrominoUpdateTime;
     private Random mGenerator;
     private GameState mGameState;
+    private GameMode mGameMode;
     private int mNumLinesCleared;
     private int mScore;
     private int mLevel;
@@ -47,7 +50,7 @@ public class GameArea extends Canvas implements Updatable {
     private double mElapsedTime;
     private boolean mShowGridlines;
 
-    public GameArea(double width, double height, Color bgColour) {
+    public GameArea(double width, double height, Color bgColour, GameMode gameMode) {
         super(width, height);
         mHeight = height;
         mWidth = width;
@@ -57,6 +60,7 @@ public class GameArea extends Canvas implements Updatable {
         mGenerator = new Random(100);
         mGc = getGraphicsContext2D();
         mGrid = new Cell[NUM_COLS][NUM_ROWS + EXTRA_ROWS_AT_TOP];
+        mGameMode = gameMode;
         mShowGridlines = true;
         newGame();
     }
@@ -130,7 +134,9 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     void incrementLevel() {
-        mLevel++;
+        if (mLevel < MAX_LEVEL) {
+            mLevel++;
+        }
     }
 
     void toggleGridliens() {
@@ -201,7 +207,7 @@ public class GameArea extends Canvas implements Updatable {
 
     private boolean checkGameOver() {
         for (int i = 0; i < mGrid.length; i++) {
-            if (mGrid[i][0].ismIsFilled()) {
+            if (mGrid[i][EXTRA_ROWS_AT_TOP].ismIsFilled()) {
                 return true;
             }
         }
@@ -304,7 +310,9 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     private double calculateDropSpeed() {
-        return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
+        // return -0.04242*mLevel + 0.6884;
+        return (725 * Math.pow(0.85, mLevel) + mLevel)/1000;
+        //return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
     }
 
     public int getmLevel() {
@@ -329,5 +337,9 @@ public class GameArea extends Canvas implements Updatable {
 
     public GameState getmGameState() {
         return mGameState;
+    }
+
+    public GameMode getmGameMode() {
+        return mGameMode;
     }
 }

@@ -9,11 +9,12 @@ package frontend.player;
 
 import frontend.base.GameWindow;
 import frontend.common.GameController;
+import frontend.common.GameMode;
 
 public class PlayerGameWindow extends GameWindow {
 
     public PlayerGameWindow(double height, double width) {
-        super(height, width);
+        super(height, width, GameMode.PLAYER);
 
         PlayerSidebar playerSidebar = new PlayerSidebar(mGameArea, mGameController, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth, GAME_BACKGROUND_COLOUR);
         setRight(playerSidebar);

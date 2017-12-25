@@ -10,6 +10,7 @@ package frontend.base;
 import backend.Updatable;
 import frontend.common.GameArea;
 import frontend.common.GameController;
+import frontend.common.GameMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -33,7 +34,7 @@ public abstract class GameWindow extends BorderPane implements Updatable {
     protected double mSideBarWidth;
     protected GameController mGameController;
 
-    public GameWindow(double height, double width) {
+    public GameWindow(double height, double width, GameMode gameMode) {
 
         super();
         mUpdateItems = new ArrayList<>();
@@ -58,7 +59,7 @@ public abstract class GameWindow extends BorderPane implements Updatable {
         Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         gamePane.getChildren().add(gameAreaBackground);
 
-        mGameArea = new GameArea(mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR);
+        mGameArea = new GameArea(mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, gameMode);
         gamePane.getChildren().add(mGameArea);
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
