@@ -63,6 +63,24 @@ public class Trainer implements Updatable {
         for (int numRotations = 0; numRotations < 4; numRotations++) {
             for (int numTranslate = -(grid.getmWidth()/2); numTranslate <= grid.getmWidth()/2; numTranslate++) {
 
+                GameGrid testGrid = grid.clone();
+                Tetromino testTetromino = curTetromino.clone();
+
+                for (int i=0; i<numRotations; i++) {
+                    testTetromino.rotate(false);
+                }
+
+                for (int i=0; i<Math.abs(numTranslate); i++) {
+                    if (numTranslate < 0) {
+                        testTetromino.moveLeft(false);
+                    } else {
+                        testTetromino.moveRight(false);
+                    }
+                }
+
+                testTetromino.drop(false);
+
+                testGrid.applyTetromino(testTetromino);
 
             }
         }

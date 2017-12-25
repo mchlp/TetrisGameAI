@@ -18,17 +18,21 @@ public class Tetromino {
 
     private GameArea mGameArea;
     private int[][] mBody;
+    private TetrominoBlueprint mBlueprint;
     private Color mColour;
     private Point mCurPos;
     private double mLastMove;
     private boolean mCanMove;
+    private int mNumCols;
 
     public Tetromino(GameArea gameArea, TetrominoBlueprint blueprint, int numCols) {
         int spawnYPos = 0;
         mGameArea = gameArea;
+        mBlueprint = blueprint;
         mBody = blueprint.body.clone();
         mColour = blueprint.colour;
-        mCurPos = new Point((numCols / 2) - (mBody[0].length / 2), spawnYPos);
+        mNumCols = numCols;
+        mCurPos = new Point((mNumCols / 2) - (mBody[0].length / 2), spawnYPos);
         mLastMove = MOVE_TIMEOUT;
         mCanMove = true;
     }
@@ -77,6 +81,15 @@ public class Tetromino {
             return true;
         }
         return false;
+    }
+
+    public void drop(boolean tryMove) {
+        while (moveDown(tryMove));
+        freeze();
+    }
+
+    private void freeze() {
+        mCanMove = false;
     }
 
     private boolean tryMove(Point tryPos, int[][] tryBody, boolean tryMove) {
@@ -134,7 +147,11 @@ public class Tetromino {
         }
     }
 
-    public void freeze() {
-        mCanMove = false;
+    public Tetromino clone() {
+        Tetromino newTetromino = new Tetromino(mGameArea, mBlueprint, mNumCols);
+        newTetromino.mCurPos = new Point(mCurPos.x, mCurPos.y);
+        newTetromino.mLastMove = mLastMove;
+        newTetromino.mCanMove = mCanMove;
+        return newTetromino;
     }
 }

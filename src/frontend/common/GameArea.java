@@ -112,8 +112,7 @@ public class GameArea extends Canvas implements Updatable {
 
     void drop() {
         if (mGameState == GameState.PLAYING) {
-            while (mCurTetromino.moveDown(false)) ;
-            mCurTetromino.freeze();
+            mCurTetromino.drop(false);
         }
     }
 
