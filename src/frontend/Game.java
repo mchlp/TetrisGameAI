@@ -102,7 +102,7 @@ public class Game extends Application {
                         gameController.keyPressed(ControllerKeys.RIGHT);
                         break;
                     case UP:
-                        gameController.keyPressed(ControllerKeys.UP);
+                        gameController.keyPressed(ControllerKeys.ROTATE);
                         break;
                     case DOWN:
                         gameController.keyPressed(ControllerKeys.DOWN);

@@ -36,4 +36,8 @@ public class Organism implements Serializable {
     public UUID getmId() {
         return mId;
     }
+
+    public Genome getmGenome() {
+        return mGenome;
+    }
 }

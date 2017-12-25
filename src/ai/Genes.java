@@ -8,12 +8,12 @@
 package ai;
 
 public enum Genes {
+    LINES_CLEARED("Lines cleared"),
     NUM_HOLES("Number of holes"),
     ROUGHNESS("Roughness"),
-    LINES_CLEARED("Lines cleared"),
-    NUM_VALLEYS("Number of valleys"),
-    NUM_MOUNTAINS("Number of mountains"),
-    HEIGHT("Height of tallest column");
+    RELATIVE_HEIGHT("Sum of absolute differences of heights"),
+    TOTAL_HEIGHT("Total of heights"),
+    MAX_HEIGHT("Height of tallest column");
 
     private final String name;
 

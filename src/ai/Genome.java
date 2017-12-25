@@ -21,7 +21,7 @@ public class Genome implements Serializable {
         Gene[] geneList = new Gene[Genes.values().length];
 
         for (Genes geneType : Genes.values()) {
-            double initalValue = Math.random();
+            double initalValue = Math.random() * Math.random() >= 0.5 ? 1 : -1;
             geneList[geneType.ordinal()] = new Gene(geneType, initalValue);
         }
         return new Genome(geneList);
@@ -33,5 +33,9 @@ public class Genome implements Serializable {
             childGeneList[i] = mGeneList[i].merge(otherParent.mGeneList[i]);
         }
         return new Genome(childGeneList);
+    }
+
+    public Gene getGene(Genes gene) {
+        return mGeneList[gene.ordinal()];
     }
 }

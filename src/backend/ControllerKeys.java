@@ -10,7 +10,7 @@ package backend;
 public enum ControllerKeys {
     LEFT,
     RIGHT,
-    UP,
+    ROTATE,
     DOWN,
     DROP,
     RESTART,

@@ -19,7 +19,7 @@ public class GameController {
 
     public void keyPressed(ControllerKeys key) {
         switch (key) {
-            case UP:
+            case ROTATE:
                 mGameArea.rotate();
                 break;
             case DOWN:
