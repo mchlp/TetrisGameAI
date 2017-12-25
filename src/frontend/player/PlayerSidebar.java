@@ -8,9 +8,9 @@
 package frontend.player;
 
 import backend.ControllerKeys;
-import backend.GameController;
-import frontend.GameArea;
-import frontend.Sidebar;
+import frontend.base.Sidebar;
+import frontend.common.GameArea;
+import frontend.common.GameController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -20,9 +20,9 @@ import javafx.scene.paint.Color;
 
 public class PlayerSidebar extends Sidebar {
     public PlayerSidebar(GameArea gameArea, GameController gameController, double margins, double sideBarHeight, double sideBarWidth, Color gameBgColour) {
-        super(gameArea, gameController, margins, sideBarHeight, sideBarWidth);
+        super(gameArea, margins, sideBarHeight, sideBarWidth);
 
-        NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth/2, gameBgColour);
+        NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth / 2, gameBgColour);
         getChildren().add(0, nextTetrominoBox);
         mUpdateItems.add(nextTetrominoBox);
 

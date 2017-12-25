@@ -2,19 +2,19 @@
  * Michael Pu
  * TetrisGameAI - GameState
  * ICS3U1 - Mr. Radulovic
- * December 23, 2017
+ * December 24, 2017
  */
 
-package frontend;
+package frontend.common;
 
 import javafx.scene.paint.Color;
 
 public enum GameState {
 
-    PAUSED ("Paused", Color.rgb(255, 51, 51)),
-    PLAYING ("Playing", Color.rgb(51, 204, 0)),
-    OVER ("Game Over!", Color.rgb(255, 51, 51)),
-    AI ("AI Mode", Color.rgb(51, 102, 255));
+    PAUSED("Paused", Color.rgb(255, 51, 51)),
+    PLAYING("Playing", Color.rgb(51, 204, 0)),
+    OVER("Game Over!", Color.rgb(255, 51, 51)),
+    AI("AI Mode", Color.rgb(51, 102, 255));
 
     public final String message;
     public final Color colour;

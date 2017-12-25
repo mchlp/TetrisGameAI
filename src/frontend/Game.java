@@ -8,8 +8,10 @@
 package frontend;
 
 import backend.ControllerKeys;
-import backend.GameController;
 import backend.Updatable;
+import frontend.aiTrain.AITrainGameWindow;
+import frontend.common.GameController;
+import frontend.player.PlayerGameWindow;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -48,22 +50,18 @@ public class Game extends Application {
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         double minDimension = Math.min(screenBounds.getHeight(), screenBounds.getWidth());
 
-        double height = minDimension*WINDOW_PERCENTAGE_OF_SCREEN;
-        double width = minDimension*WINDOW_PERCENTAGE_OF_SCREEN;
+        double height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
+        double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
 
-        GameWindow gameWindow = new GameWindow(height, width);
-        updateItems.add(gameWindow);
+        startAITrain(height, width);
 
-        scene = new Scene(gameWindow);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Tetris Game");
         primaryStage.setResizable(false);
         primaryStage.show();
 
         AnimationTimer timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                double deltaTime = (now-prevTime)/1E9;
+                double deltaTime = (now - prevTime) / 1E9;
                 onUpdate(deltaTime);
                 prevTime = now;
             }
@@ -71,21 +69,30 @@ public class Game extends Application {
 
         prevTime = System.nanoTime();
         timer.start();
-
-        startPlayerGame(gameWindow);
     }
 
-    public void startAIGame() {
-
+    public void startAITrain(double height, double width) {
+        AITrainGameWindow aiTrainGameWindow = new AITrainGameWindow(height, width);
+        updateItems.add(aiTrainGameWindow);
+        scene = new Scene(aiTrainGameWindow);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Tetris Game - AI Train Version");
     }
 
 
-    public void startPlayerGame(GameWindow gameWindow) {
+    public void startPlayerGame(double height, double width) {
+
+        PlayerGameWindow playerGameWindow = new PlayerGameWindow(height, width);
+        updateItems.add(playerGameWindow);
+        scene = new Scene(playerGameWindow);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Tetris Game - Player Version");
+
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyPressed) {
                 KeyCode code = keyPressed.getCode();
-                GameController gameController = gameWindow.getmGameController();
+                GameController gameController = playerGameWindow.getmGameController();
                 //System.out.println(code);
                 switch (code) {
                     case LEFT:
@@ -101,7 +108,7 @@ public class Game extends Application {
                         gameController.keyPressed(ControllerKeys.DOWN);
                         break;
                     case SPACE:
-                        gameController.keyPressed(ControllerKeys.SPACE);
+                        gameController.keyPressed(ControllerKeys.DROP);
                         break;
                     case R:
                         gameController.keyPressed(ControllerKeys.RESTART);
@@ -121,7 +128,7 @@ public class Game extends Application {
     }
 
     private void onUpdate(double deltaTime) {
-        for (Updatable updatable: updateItems) {
+        for (Updatable updatable : updateItems) {
             updatable.update(deltaTime);
         }
     }

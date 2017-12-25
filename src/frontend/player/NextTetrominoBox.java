@@ -8,9 +8,9 @@
 package frontend.player;
 
 import backend.Updatable;
-import frontend.GameArea;
-import frontend.GameState;
-import frontend.Tetromino;
+import frontend.common.GameArea;
+import frontend.common.GameState;
+import frontend.common.Tetromino;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.GaussianBlur;
@@ -32,12 +32,12 @@ public class NextTetrominoBox extends Canvas implements Updatable {
     }
 
     private void drawCell(double x, double y, double width, double height, Color colour) {
-            mGc.setFill(mGameArea.CELL_OUTLINE_COLOUR);
-            mGc.fillRoundRect(x, y, width, height, 5, 5);
-            mGc.setFill(colour);
-            mGc.fillRoundRect(x + mGameArea.CELL_OUTLINE_WIDTH, y + mGameArea.CELL_OUTLINE_WIDTH,
-                    width - (mGameArea.CELL_OUTLINE_WIDTH * 2), height - (mGameArea.CELL_OUTLINE_WIDTH * 2),
-                    5, 5);
+        mGc.setFill(mGameArea.CELL_OUTLINE_COLOUR);
+        mGc.fillRoundRect(x, y, width, height, 5, 5);
+        mGc.setFill(colour);
+        mGc.fillRoundRect(x + mGameArea.CELL_OUTLINE_WIDTH, y + mGameArea.CELL_OUTLINE_WIDTH,
+                width - (mGameArea.CELL_OUTLINE_WIDTH * 2), height - (mGameArea.CELL_OUTLINE_WIDTH * 2),
+                5, 5);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class NextTetrominoBox extends Canvas implements Updatable {
 
         setEffect(null);
         mGc.setFill(mBgColour);
-        mGc.fillRect(0,0,mDimension, mDimension);
+        mGc.fillRect(0, 0, mDimension, mDimension);
 
         Tetromino nextTetromino = mGameArea.getmNextTetromino();
         Color colour = nextTetromino.getmColour();
@@ -56,8 +56,8 @@ public class NextTetrominoBox extends Canvas implements Updatable {
         int emptyRowsOnTop = 0;
         int emptyRowsOnLeft = 0;
 
-        for (int i=0; i<body.length; i++) {
-            for (int j=0; j<body[i].length; j++) {
+        for (int i = 0; i < body.length; i++) {
+            for (int j = 0; j < body[i].length; j++) {
                 if (body[i][j] == 1) {
                     bodyActualHeight++;
                     break;
@@ -68,8 +68,8 @@ public class NextTetrominoBox extends Canvas implements Updatable {
             }
         }
 
-        for (int i=0; i<body[0].length; i++) {
-            for (int j=0; j<body.length; j++) {
+        for (int i = 0; i < body[0].length; i++) {
+            for (int j = 0; j < body.length; j++) {
                 if (body[j][i] == 1) {
                     bodyActualWidth++;
                     break;
@@ -82,13 +82,13 @@ public class NextTetrominoBox extends Canvas implements Updatable {
 
         double cellWidth = mGameArea.getmCellWidth();
         double cellHeight = mGameArea.getmCellHeight();
-        double xOffset = (mDimension-(bodyActualWidth * cellWidth))/2;
-        double yOffset = (mDimension-(bodyActualHeight * cellHeight))/2;
+        double xOffset = (mDimension - (bodyActualWidth * cellWidth)) / 2;
+        double yOffset = (mDimension - (bodyActualHeight * cellHeight)) / 2;
 
-        for (int i=0; i<body[0].length; i++) {
-            for (int j=0; j<body.length; j++) {
+        for (int i = 0; i < body[0].length; i++) {
+            for (int j = 0; j < body.length; j++) {
                 if (body[j][i] == 1) {
-                    drawCell(xOffset + (i-emptyRowsOnLeft)*cellWidth, yOffset + (j-emptyRowsOnTop)*cellHeight, cellWidth, cellHeight, colour);
+                    drawCell(xOffset + (i - emptyRowsOnLeft) * cellWidth, yOffset + (j - emptyRowsOnTop) * cellHeight, cellWidth, cellHeight, colour);
                 }
             }
         }

@@ -16,6 +16,16 @@ public class Population implements Serializable {
     private Organism[] mOrganisms;
     private transient File mSaveFile;
 
+    public Population(File saveFile) {
+
+        mSaveFile = saveFile;
+        mOrganisms = new Organism[MAX_NUMBER_OF_ORGANISMS];
+
+        for (int i = 0; i < MAX_NUMBER_OF_ORGANISMS; i++) {
+            mOrganisms[i] = new Organism();
+        }
+    }
+
     public static Population loadPopulationFromFile(File loadFile) {
         try {
             FileInputStream fileIn = new FileInputStream(loadFile);
@@ -31,16 +41,6 @@ public class Population implements Serializable {
             return null;
         }
 
-    }
-
-    public Population(File saveFile) {
-
-        mSaveFile = saveFile;
-        mOrganisms = new Organism[MAX_NUMBER_OF_ORGANISMS];
-
-        for (int i=0; i<MAX_NUMBER_OF_ORGANISMS; i++) {
-            mOrganisms[i] = new Organism();
-        }
     }
 
     public void saveToFile() {

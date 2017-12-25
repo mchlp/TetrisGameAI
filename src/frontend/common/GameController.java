@@ -2,12 +2,12 @@
  * Michael Pu
  * TetrisGameAI - GameController
  * ICS3U1 - Mr. Radulovic
- * December 23, 2017
+ * December 25, 2017
  */
 
-package backend;
+package frontend.common;
 
-import frontend.GameArea;
+import backend.ControllerKeys;
 
 public class GameController {
 
@@ -31,7 +31,7 @@ public class GameController {
             case RIGHT:
                 mGameArea.moveRight();
                 break;
-            case SPACE:
+            case DROP:
                 mGameArea.drop();
                 break;
             case RESTART:

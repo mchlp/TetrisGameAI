@@ -2,13 +2,14 @@
  * Michael Pu
  * TetrisGameAI - Sidebar
  * ICS3U1 - Mr. Radulovic
- * December 24, 2017
+ * December 25, 2017
  */
 
-package frontend;
+package frontend.base;
 
-import backend.GameController;
 import backend.Updatable;
+import frontend.common.GameArea;
+import frontend.common.StatsBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
@@ -19,7 +20,7 @@ public abstract class Sidebar extends VBox implements Updatable {
 
     protected ArrayList<Updatable> mUpdateItems;
 
-    public Sidebar(GameArea gameArea, GameController gameController, double margins, double sideBarHeight, double sideBarWidth) {
+    public Sidebar(GameArea gameArea, double margins, double sideBarHeight, double sideBarWidth) {
         super(margins);
         setPadding(new Insets(margins));
         setAlignment(Pos.TOP_CENTER);

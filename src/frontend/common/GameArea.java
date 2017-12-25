@@ -2,10 +2,10 @@
  * Michael Pu
  * TetrisGameAI - GameArea
  * ICS3U1 - Mr. Radulovic
- * December 23, 2017
+ * December 24, 2017
  */
 
-package frontend;
+package frontend.common;
 
 import backend.TetrominoBlueprint;
 import backend.Updatable;
@@ -20,20 +20,14 @@ import java.util.Random;
 public class GameArea extends Canvas implements Updatable {
 
     public static final int EXTRA_ROWS_AT_TOP = 2;
-
-    private static final int NUM_ROWS = 20;
-    private static final int NUM_COLS = 10;
-
-    private static final int LINES_CLEAR_FOR_LEVEL_UP = 10;
-
-    private static final int[] LINE_CLEAR_SCORING = {0, 40, 100, 300, 1200};
-
-    private static final Color LINE_COLOUR = Color.GREY;
-    private static final double LINE_WIDTH = 0.5;
-
     public static final double CELL_OUTLINE_WIDTH = 3;
     public static final Color CELL_OUTLINE_COLOUR = Color.BLACK;
-
+    private static final int NUM_ROWS = 20;
+    private static final int NUM_COLS = 10;
+    private static final int LINES_CLEAR_FOR_LEVEL_UP = 10;
+    private static final int[] LINE_CLEAR_SCORING = {0, 40, 100, 300, 1200};
+    private static final Color LINE_COLOUR = Color.GREY;
+    private static final double LINE_WIDTH = 0.5;
     private Color mBgColour;
     private GraphicsContext mGc;
     private double mWidth;
@@ -84,7 +78,7 @@ public class GameArea extends Canvas implements Updatable {
         drawGame();
     }
 
-    public void moveLeft() {
+    void moveLeft() {
         if (mGameState == GameState.PLAYING) {
             if (mCurTetromino != null) {
                 mCurTetromino.moveLeft(false);
@@ -92,7 +86,7 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    public void moveRight() {
+    void moveRight() {
         if (mGameState == GameState.PLAYING) {
             if (mCurTetromino != null) {
                 mCurTetromino.moveRight(false);
@@ -100,7 +94,7 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    public void moveDown() {
+    void moveDown() {
         if (mGameState == GameState.PLAYING) {
             if (mCurTetromino != null) {
                 mCurTetromino.moveDown(false);
@@ -108,7 +102,7 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    public void rotate() {
+    void rotate() {
         if (mGameState == GameState.PLAYING) {
             if (mCurTetromino != null) {
                 mCurTetromino.rotate(false);
@@ -116,18 +110,18 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    public void drop() {
+    void drop() {
         if (mGameState == GameState.PLAYING) {
             while (mCurTetromino.moveDown(false)) ;
             mCurTetromino.freeze();
         }
     }
 
-    public void restart() {
+    void restart() {
         newGame();
     }
 
-    public void togglePause() {
+    void togglePause() {
         if (mGameState == GameState.PAUSED) {
             mGameState = GameState.PLAYING;
         } else {
@@ -135,11 +129,11 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    public void incrementLevel() {
+    void incrementLevel() {
         mLevel++;
     }
 
-    public void toggleGridliens() {
+    void toggleGridliens() {
         mShowGridlines = !mShowGridlines;
     }
 
@@ -158,7 +152,7 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    public void spawnTetromino() {
+    void spawnTetromino() {
 
         if (mCurTetromino != null) {
             mScore += (mCurTetromino.getmCurPos().y - EXTRA_ROWS_AT_TOP);

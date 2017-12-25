@@ -13,6 +13,10 @@ public class Genome implements Serializable {
 
     private Gene[] mGeneList;
 
+    public Genome(Gene[] geneList) {
+        mGeneList = geneList;
+    }
+
     public static Genome getRandomGenome() {
         Gene[] geneList = new Gene[Genes.values().length];
 
@@ -23,13 +27,9 @@ public class Genome implements Serializable {
         return new Genome(geneList);
     }
 
-    public Genome(Gene[] geneList) {
-        mGeneList = geneList;
-    }
-
     public Genome merge(Genome otherParent) {
         Gene[] childGeneList = new Gene[mGeneList.length];
-        for (int i=0; i<mGeneList.length; i++) {
+        for (int i = 0; i < mGeneList.length; i++) {
             childGeneList[i] = mGeneList[i].merge(otherParent.mGeneList[i]);
         }
         return new Genome(childGeneList);

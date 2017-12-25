@@ -2,12 +2,11 @@
  * Michael Pu
  * TetrisGameAI - StatsBar
  * ICS3U1 - Mr. Radulovic
- * December 23, 2017
+ * December 24, 2017
  */
 
-package frontend;
+package frontend.common;
 
-import backend.Updatable;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;

@@ -17,31 +17,31 @@ public enum TetrominoBlueprint {
             {0, 0, 0, 0},
             {0, 0, 0, 0}
     }),
-    J(Color.rgb(0, 101, 189), new int[][] {
+    J(Color.rgb(0, 101, 189), new int[][]{
             {1, 0, 0},
             {1, 1, 1},
             {0, 0, 0}
     }),
-    L(Color.rgb(255, 121, 0), new int[][] {
+    L(Color.rgb(255, 121, 0), new int[][]{
             {0, 0, 1},
             {1, 1, 1},
             {0, 0, 0}
     }),
-    O(Color.rgb(254, 203, 0), new int[][] {
+    O(Color.rgb(254, 203, 0), new int[][]{
             {1, 1},
             {1, 1}
     }),
-    S(Color.rgb(105, 190, 40), new int[][] {
+    S(Color.rgb(105, 190, 40), new int[][]{
             {0, 1, 1},
             {1, 1, 0},
             {0, 0, 0},
     }),
-    Z(Color.rgb(237, 41, 57), new int[][] {
+    Z(Color.rgb(237, 41, 57), new int[][]{
             {1, 1, 0},
             {0, 1, 1},
             {0, 0, 0},
     }),
-    T(Color.rgb(149, 45, 152), new int[][] {
+    T(Color.rgb(149, 45, 152), new int[][]{
             {0, 1, 0},
             {1, 1, 1},
             {0, 0, 0},

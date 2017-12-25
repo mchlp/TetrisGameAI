@@ -12,7 +12,7 @@ public enum ControllerKeys {
     RIGHT,
     UP,
     DOWN,
-    SPACE,
+    DROP,
     RESTART,
     TOGGLE_PAUSE,
     TOGGLE_GRIDLINES,

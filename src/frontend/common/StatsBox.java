@@ -2,29 +2,23 @@
  * Michael Pu
  * TetrisGameAI - StatsBox
  * ICS3U1 - Mr. Radulovic
- * December 24, 2017
+ * December 25, 2017
  */
 
-package frontend;
+package frontend.common;
 
 import backend.Updatable;
 import javafx.scene.layout.VBox;
 
-import java.time.Duration;
-import java.util.Calendar;
-import java.util.Date;
-
 public class StatsBox extends VBox implements Updatable {
 
+    private static final int ELEMENT_SPACING = 10;
     private GameArea mGameArea;
-
     private StatsBar mStateBar;
     private StatsBar mScoreBar;
     private StatsBar mLinesBar;
     private StatsBar mLevelBar;
     private StatsBar mTimeBar;
-
-    private static final int ELEMENT_SPACING = 10;
 
     public StatsBox(GameArea gameArea) {
 
@@ -58,9 +52,9 @@ public class StatsBox extends VBox implements Updatable {
     }
 
     private String getTimeInString(int time) {
-        int hours = time/(60*60);
-        time %= (60*60);
-        int mins = time/(60);
+        int hours = time / (60 * 60);
+        time %= (60 * 60);
+        int mins = time / (60);
         time %= (60);
         int secs = time;
         return (hours + ":" + zeroPad(mins, 2) + ":" + zeroPad(secs, 2));
