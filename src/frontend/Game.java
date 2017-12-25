@@ -29,6 +29,7 @@ public class Game extends Application {
     private long prevTime;
 
     private Stage primaryStage;
+    private Scene scene;
     private ArrayList<Updatable> updateItems;
 
     public static void main(String[] args) {
@@ -38,11 +39,10 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        startGame();
+        startBasicGame();
     }
 
-    public void startGame() {
-
+    public void startBasicGame() {
         updateItems = new ArrayList<>();
 
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -54,7 +54,7 @@ public class Game extends Application {
         GameWindow gameWindow = new GameWindow(height, width);
         updateItems.add(gameWindow);
 
-        Scene scene = new Scene(gameWindow);
+        scene = new Scene(gameWindow);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Tetris Game");
         primaryStage.setResizable(false);
@@ -69,6 +69,18 @@ public class Game extends Application {
             }
         };
 
+        prevTime = System.nanoTime();
+        timer.start();
+
+        startPlayerGame(gameWindow);
+    }
+
+    public void startAIGame() {
+
+    }
+
+
+    public void startPlayerGame(GameWindow gameWindow) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyPressed) {
@@ -106,9 +118,6 @@ public class Game extends Application {
                 keyPressed.consume();
             }
         });
-
-        prevTime = System.nanoTime();
-        timer.start();
     }
 
     private void onUpdate(double deltaTime) {
