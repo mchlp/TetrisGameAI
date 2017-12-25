@@ -75,6 +75,5 @@ public class StatsBox extends VBox implements Updatable {
         mLinesBar.setValue(Integer.toString(mGameArea.getmNumLinesCleared()));
         mLevelBar.setValue(Integer.toString(mGameArea.getmLevel()));
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
-
     }
 }

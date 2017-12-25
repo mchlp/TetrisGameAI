@@ -2,12 +2,15 @@
  * Michael Pu
  * TetrisGameAI - NextTetrominoBox
  * ICS3U1 - Mr. Radulovic
- * December 24, 2017
+ * December 25, 2017
  */
 
-package frontend;
+package frontend.player;
 
 import backend.Updatable;
+import frontend.GameArea;
+import frontend.GameState;
+import frontend.Tetromino;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.GaussianBlur;

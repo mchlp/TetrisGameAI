@@ -7,35 +7,24 @@
 
 package frontend;
 
-import backend.GameController;
 import backend.ControllerKeys;
+import backend.GameController;
 import backend.Updatable;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+
 import java.util.ArrayList;
 
 public class Game extends Application {
 
-    private static final int DEFAULT_MARGINS = 20;
     private static final double WINDOW_PERCENTAGE_OF_SCREEN = 0.8;
-
-    private static final Color GAME_OUTLINE_COLOUR =  Color.grayRgb(83);
-    private static final Color GAME_BACKGROUND_COLOUR = Color.grayRgb(23);
 
     private long prevTime;
 
@@ -62,40 +51,12 @@ public class Game extends Application {
         double height = minDimension*WINDOW_PERCENTAGE_OF_SCREEN;
         double width = minDimension*WINDOW_PERCENTAGE_OF_SCREEN;
 
-        BorderPane root = new BorderPane();
-        root.setPrefHeight(height);
-        root.setPrefWidth(width);
+        GameWindow gameWindow = new GameWindow(height, width);
+        updateItems.add(gameWindow);
 
-        double canvasHeight = height-(2*DEFAULT_MARGINS);
-        double canvasWidth = 10.0*canvasHeight/20.0;
-
-        double gameAreaHeight = canvasHeight + (2*DEFAULT_MARGINS);
-        double gameAreaWidth = canvasWidth + (2*DEFAULT_MARGINS);
-
-        double sideBarHeight = height;
-        double sideBarWidth = width - gameAreaWidth;
-
-
-        StackPane gamePane = new StackPane();
-        gamePane.setPrefHeight(gameAreaHeight);
-        gamePane.setPrefWidth(gameAreaWidth);
-        root.setLeft(gamePane);
-
-        Rectangle gameAreaBackground = new Rectangle(canvasWidth+10, canvasHeight+10, GAME_OUTLINE_COLOUR);
-        gamePane.getChildren().add(gameAreaBackground);
-
-        GameArea gameArea = new GameArea(canvasWidth, canvasHeight, GAME_BACKGROUND_COLOUR);
-        gamePane.getChildren().add(gameArea);
-        updateItems.add(gameArea);
-
-        GameController gameController = new GameController(gameArea);
-
-        PlayerSidebar sideBar = new PlayerSidebar(gameArea, gameController, DEFAULT_MARGINS, sideBarHeight, sideBarWidth, GAME_BACKGROUND_COLOUR);
-        root.setRight(sideBar);
-        updateItems.add(sideBar);
-
-        Scene scene = new Scene(root);
+        Scene scene = new Scene(gameWindow);
         primaryStage.setScene(scene);
+        primaryStage.setTitle("Tetris Game");
         primaryStage.setResizable(false);
         primaryStage.show();
 
@@ -112,7 +73,8 @@ public class Game extends Application {
             @Override
             public void handle(KeyEvent keyPressed) {
                 KeyCode code = keyPressed.getCode();
-                System.out.println(code);
+                GameController gameController = gameWindow.getmGameController();
+                //System.out.println(code);
                 switch (code) {
                     case LEFT:
                         gameController.keyPressed(ControllerKeys.LEFT);

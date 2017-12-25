@@ -5,10 +5,12 @@
  * December 25, 2017
  */
 
-package frontend;
+package frontend.player;
 
 import backend.ControllerKeys;
 import backend.GameController;
+import frontend.GameArea;
+import frontend.Sidebar;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
