@@ -10,6 +10,7 @@ package frontend;
 import backend.Updatable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 
 public class NextTetrominoBox extends Canvas implements Updatable {
@@ -38,6 +39,8 @@ public class NextTetrominoBox extends Canvas implements Updatable {
 
     @Override
     public void update(double deltaTime) {
+
+        setEffect(null);
         mGc.setFill(mBgColour);
         mGc.fillRect(0,0,mDimension, mDimension);
 
@@ -46,38 +49,49 @@ public class NextTetrominoBox extends Canvas implements Updatable {
         int[][] body = nextTetromino.getmBody();
 
         int bodyActualWidth = 0;
-        int bodyActualLength = 0;
+        int bodyActualHeight = 0;
+        int emptyRowsOnTop = 0;
+        int emptyRowsOnLeft = 0;
 
         for (int i=0; i<body.length; i++) {
             for (int j=0; j<body[i].length; j++) {
                 if (body[i][j] == 1) {
-                    bodyActualLength++;
+                    bodyActualHeight++;
                     break;
                 }
+            }
+            if (bodyActualHeight == 0) {
+                emptyRowsOnTop++;
             }
         }
 
         for (int i=0; i<body[0].length; i++) {
             for (int j=0; j<body.length; j++) {
-
                 if (body[j][i] == 1) {
                     bodyActualWidth++;
                     break;
                 }
+            }
+            if (bodyActualWidth == 0) {
+                emptyRowsOnLeft++;
             }
         }
 
         double cellWidth = mGameArea.getmCellWidth();
         double cellHeight = mGameArea.getmCellHeight();
         double xOffset = (mDimension-(bodyActualWidth * cellWidth))/2;
-        double yOffset = (mDimension-(bodyActualLength * cellHeight))/2;
+        double yOffset = (mDimension-(bodyActualHeight * cellHeight))/2;
 
         for (int i=0; i<body[0].length; i++) {
             for (int j=0; j<body.length; j++) {
                 if (body[j][i] == 1) {
-                    drawCell(xOffset + i*cellWidth, yOffset + j*cellHeight, cellWidth, cellHeight, colour);
+                    drawCell(xOffset + (i-emptyRowsOnLeft)*cellWidth, yOffset + (j-emptyRowsOnTop)*cellHeight, cellWidth, cellHeight, colour);
                 }
             }
+        }
+
+        if (mGameArea.getmGameState() == GameState.PAUSED) {
+            setEffect(new GaussianBlur(15));
         }
 
     }

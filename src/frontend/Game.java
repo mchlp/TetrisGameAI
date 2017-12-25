@@ -19,6 +19,7 @@ import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
@@ -103,8 +104,18 @@ public class Game extends Application {
         sideBar.getChildren().add(statsBox);
         updateItems.add(statsBox);
 
-        Button restart = new Button("Restart");
-        sideBar.getChildren().add(restart);
+        HBox buttonBar = new HBox(10);
+        buttonBar.setAlignment(Pos.CENTER);
+        sideBar.getChildren().add(buttonBar);
+
+        Button restartButton = new Button("Restart");
+        buttonBar.getChildren().add(restartButton);
+
+        Button pauseButton = new Button("Toggle Pause");
+        buttonBar.getChildren().add(pauseButton);
+
+        Button gridlinesButton = new Button("Toggle Gridlines");
+        buttonBar.getChildren().add(gridlinesButton);
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -146,15 +157,35 @@ public class Game extends Application {
                     case R:
                         gameController.keyPressed(ControllerKeys.RESTART);
                         break;
+                    case P:
+                        gameController.keyPressed(ControllerKeys.TOGGLE_PAUSE);
+                        break;
+                    case G:
+                        gameController.keyPressed(ControllerKeys.TOGGLE_GRIDLINES);
+                        break;
                 }
                 keyPressed.consume();
             }
         });
 
-        restart.setOnAction(new EventHandler<ActionEvent>() {
+        restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
                 gameController.keyPressed(ControllerKeys.RESTART);
+            }
+        });
+
+        pauseButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent click) {
+                gameController.keyPressed(ControllerKeys.TOGGLE_PAUSE);
+            }
+        });
+
+        gridlinesButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent click) {
+                gameController.keyPressed(ControllerKeys.TOGGLE_GRIDLINES);
             }
         });
 

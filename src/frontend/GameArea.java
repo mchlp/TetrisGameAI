@@ -11,6 +11,7 @@ import backend.TetrominoBlueprint;
 import backend.Updatable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
@@ -49,6 +50,8 @@ public class GameArea extends Canvas implements Updatable {
     private int mScore;
     private int mLevel;
     private int mLevelUpCountdown;
+    private double mElapsedTime;
+    private boolean mShowGridlines;
 
     public GameArea(double width, double height, Color bgColour) {
         super(width, height);
@@ -60,10 +63,12 @@ public class GameArea extends Canvas implements Updatable {
         mGenerator = new Random(100);
         mGc = getGraphicsContext2D();
         mGrid = new Cell[NUM_COLS][NUM_ROWS + EXTRA_ROWS_AT_TOP];
+        mShowGridlines = true;
         newGame();
     }
 
     private void newGame() {
+        mElapsedTime = 0;
         mGameState = GameState.PLAYING;
         mNumLinesCleared = 0;
         mLevelUpCountdown = LINES_CLEAR_FOR_LEVEL_UP;
@@ -80,26 +85,41 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     public void moveLeft() {
-        if (mCurTetromino != null) {
-            mCurTetromino.moveLeft(false);
+        if (mGameState == GameState.PLAYING) {
+            if (mCurTetromino != null) {
+                mCurTetromino.moveLeft(false);
+            }
         }
     }
 
     public void moveRight() {
-        if (mCurTetromino != null) {
-            mCurTetromino.moveRight(false);
+        if (mGameState == GameState.PLAYING) {
+            if (mCurTetromino != null) {
+                mCurTetromino.moveRight(false);
+            }
         }
     }
 
     public void moveDown() {
-        if (mCurTetromino != null) {
-            mCurTetromino.moveDown(false);
+        if (mGameState == GameState.PLAYING) {
+            if (mCurTetromino != null) {
+                mCurTetromino.moveDown(false);
+            }
         }
     }
 
     public void rotate() {
-        if (mCurTetromino != null) {
-            mCurTetromino.rotate(false);
+        if (mGameState == GameState.PLAYING) {
+            if (mCurTetromino != null) {
+                mCurTetromino.rotate(false);
+            }
+        }
+    }
+
+    public void drop() {
+        if (mGameState == GameState.PLAYING) {
+            while (mCurTetromino.moveDown(false)) ;
+            mCurTetromino.freeze();
         }
     }
 
@@ -107,9 +127,16 @@ public class GameArea extends Canvas implements Updatable {
         newGame();
     }
 
-    public void drop() {
-        while (mCurTetromino.moveDown(false)) ;
-        mCurTetromino.freeze();
+    public void togglePause() {
+        if (mGameState == GameState.PAUSED) {
+            mGameState = GameState.PLAYING;
+        } else {
+            mGameState = GameState.PAUSED;
+        }
+    }
+
+    public void toggleGridliens() {
+        mShowGridlines = !mShowGridlines;
     }
 
     public Cell[][] getmGrid() {
@@ -159,7 +186,7 @@ public class GameArea extends Canvas implements Updatable {
         }
 
         numRowsCleared = numRowsCleared > 4 ? 4 : numRowsCleared;
-        mScore += LINE_CLEAR_SCORING[numRowsCleared]*mLevel;
+        mScore += LINE_CLEAR_SCORING[numRowsCleared] * mLevel;
 
         mTetrominoUpdateTime = calculateDropSpeed();
         mCurTetromino = mNextTetromino;
@@ -170,6 +197,7 @@ public class GameArea extends Canvas implements Updatable {
         int selectListLength = TetrominoBlueprint.values().length;
         int randSelect = mGenerator.nextInt(selectListLength);
         TetrominoBlueprint selectedTetromino = TetrominoBlueprint.values()[randSelect];
+        //selectedTetromino = TetrominoBlueprint.I;
         mNextTetromino = new Tetromino(this, selectedTetromino, NUM_COLS);
     }
 
@@ -214,6 +242,8 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     private void drawGame() {
+
+        setEffect(null);
         mGc.setFill(mBgColour);
         mGc.fillRect(0, 0, mWidth, mHeight);
 
@@ -235,20 +265,27 @@ public class GameArea extends Canvas implements Updatable {
             }
         }
 
-        mGc.setStroke(LINE_COLOUR);
-        mGc.setLineWidth(LINE_WIDTH);
-
-        for (int col = 0; col < NUM_COLS; col++) {
-            mGc.strokeLine(col * mCellWidth, 0, col * mCellWidth, mHeight);
+        if (mGameState == GameState.PAUSED) {
+            setEffect(new GaussianBlur(15));
         }
 
-        for (int row = 0; row < NUM_ROWS; row++) {
-            mGc.strokeLine(0, row * mCellHeight, mWidth, row * mCellHeight);
+        if (mShowGridlines) {
+            mGc.setStroke(LINE_COLOUR);
+            mGc.setLineWidth(LINE_WIDTH);
+
+            for (int col = 0; col < NUM_COLS; col++) {
+                mGc.strokeLine(col * mCellWidth, 0, col * mCellWidth, mHeight);
+            }
+
+            for (int row = 0; row < NUM_ROWS; row++) {
+                mGc.strokeLine(0, row * mCellHeight, mWidth, row * mCellHeight);
+            }
         }
     }
 
     public void update(double deltaTime) {
         if (mGameState == GameState.PLAYING) {
+            mElapsedTime += deltaTime;
             if (mCurTetromino != null) {
                 mTetrominoUpdateTime -= deltaTime;
                 if (mTetrominoUpdateTime <= 0) {
@@ -256,8 +293,8 @@ public class GameArea extends Canvas implements Updatable {
                     mTetrominoUpdateTime = calculateDropSpeed();
                 }
             }
-            drawGame();
         }
+        drawGame();
     }
 
     public int getmScore() {
@@ -269,7 +306,7 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     private double calculateDropSpeed() {
-        return Math.pow(0.8-((mLevel-1)*0.007), mLevel-1);
+        return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
     }
 
     public int getmLevel() {
@@ -286,5 +323,13 @@ public class GameArea extends Canvas implements Updatable {
 
     public double getmCellHeight() {
         return mCellHeight;
+    }
+
+    public double getmElapsedTime() {
+        return mElapsedTime;
+    }
+
+    public GameState getmGameState() {
+        return mGameState;
     }
 }

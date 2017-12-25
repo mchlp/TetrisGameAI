@@ -43,4 +43,8 @@ public class StatsBar extends BorderPane {
     public void setValue(String value) {
         mValueText.setText(value);
     }
+
+    public void setColour(Color colour) {
+        setBackground(new Background(new BackgroundFill(colour, CornerRadii.EMPTY, Insets.EMPTY)));
+    }
 }

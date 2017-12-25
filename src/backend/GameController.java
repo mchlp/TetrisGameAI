@@ -37,6 +37,11 @@ public class GameController implements Updatable {
             case RESTART:
                 mGameArea.restart();
                 break;
+            case TOGGLE_PAUSE:
+                mGameArea.togglePause();
+                break;
+            case TOGGLE_GRIDLINES:
+                mGameArea.toggleGridliens();
         }
     }
 
