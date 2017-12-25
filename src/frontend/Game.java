@@ -88,34 +88,11 @@ public class Game extends Application {
         gamePane.getChildren().add(gameArea);
         updateItems.add(gameArea);
 
-        VBox sideBar = new VBox(DEFAULT_MARGINS);
-        sideBar.setAlignment(Pos.TOP_CENTER);
-        sideBar.setPrefHeight(sideBarHeight);
-        sideBar.setPrefWidth(sideBarWidth);
+        GameController gameController = new GameController(gameArea);
+
+        PlayerSidebar sideBar = new PlayerSidebar(gameArea, gameController, DEFAULT_MARGINS, sideBarHeight, sideBarWidth, GAME_BACKGROUND_COLOUR);
         root.setRight(sideBar);
-
-        sideBar.setPadding(new Insets(DEFAULT_MARGINS));
-
-        NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth/2, GAME_BACKGROUND_COLOUR);
-        sideBar.getChildren().add(nextTetrominoBox);
-        updateItems.add(nextTetrominoBox);
-
-        StatsBox statsBox = new StatsBox(gameArea);
-        sideBar.getChildren().add(statsBox);
-        updateItems.add(statsBox);
-
-        HBox buttonBar = new HBox(10);
-        buttonBar.setAlignment(Pos.CENTER);
-        sideBar.getChildren().add(buttonBar);
-
-        Button restartButton = new Button("Restart");
-        buttonBar.getChildren().add(restartButton);
-
-        Button pauseButton = new Button("Toggle Pause");
-        buttonBar.getChildren().add(pauseButton);
-
-        Button gridlinesButton = new Button("Toggle Gridlines");
-        buttonBar.getChildren().add(gridlinesButton);
+        updateItems.add(sideBar);
 
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
@@ -130,9 +107,6 @@ public class Game extends Application {
                 prevTime = now;
             }
         };
-
-        GameController gameController = new GameController(gameArea);
-        updateItems.add(gameController);
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
@@ -168,27 +142,6 @@ public class Game extends Application {
                         gameController.keyPressed(ControllerKeys.NEXT_LEVEL);
                 }
                 keyPressed.consume();
-            }
-        });
-
-        restartButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent click) {
-                gameController.keyPressed(ControllerKeys.RESTART);
-            }
-        });
-
-        pauseButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent click) {
-                gameController.keyPressed(ControllerKeys.TOGGLE_PAUSE);
-            }
-        });
-
-        gridlinesButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent click) {
-                gameController.keyPressed(ControllerKeys.TOGGLE_GRIDLINES);
             }
         });
 

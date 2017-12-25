@@ -9,7 +9,7 @@ package backend;
 
 import frontend.GameArea;
 
-public class GameController implements Updatable {
+public class GameController {
 
     private GameArea mGameArea;
 
@@ -46,9 +46,5 @@ public class GameController implements Updatable {
             case NEXT_LEVEL:
                 mGameArea.incrementLevel();
         }
-    }
-
-    @Override
-    public void update(double deltaTime) {
     }
 }
