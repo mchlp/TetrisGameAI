@@ -42,6 +42,9 @@ public class GameController implements Updatable {
                 break;
             case TOGGLE_GRIDLINES:
                 mGameArea.toggleGridliens();
+                break;
+            case NEXT_LEVEL:
+                mGameArea.incrementLevel();
         }
     }
 

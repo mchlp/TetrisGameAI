@@ -138,6 +138,7 @@ public class Game extends Application {
             @Override
             public void handle(KeyEvent keyPressed) {
                 KeyCode code = keyPressed.getCode();
+                System.out.println(code);
                 switch (code) {
                     case LEFT:
                         gameController.keyPressed(ControllerKeys.LEFT);
@@ -163,6 +164,8 @@ public class Game extends Application {
                     case G:
                         gameController.keyPressed(ControllerKeys.TOGGLE_GRIDLINES);
                         break;
+                    case ADD:
+                        gameController.keyPressed(ControllerKeys.NEXT_LEVEL);
                 }
                 keyPressed.consume();
             }

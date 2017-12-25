@@ -135,6 +135,10 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
+    public void incrementLevel() {
+        mLevel++;
+    }
+
     public void toggleGridliens() {
         mShowGridlines = !mShowGridlines;
     }

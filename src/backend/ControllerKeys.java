@@ -15,5 +15,6 @@ public enum ControllerKeys {
     SPACE,
     RESTART,
     TOGGLE_PAUSE,
-    TOGGLE_GRIDLINES;
+    TOGGLE_GRIDLINES,
+    NEXT_LEVEL;
 }
