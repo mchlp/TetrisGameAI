@@ -87,7 +87,7 @@ public class Game extends Application {
         gamePane.getChildren().add(gameArea);
         updateItems.add(gameArea);
 
-        VBox sideBar = new VBox(10);
+        VBox sideBar = new VBox(DEFAULT_MARGINS);
         sideBar.setAlignment(Pos.TOP_CENTER);
         sideBar.setPrefHeight(sideBarHeight);
         sideBar.setPrefWidth(sideBarWidth);

@@ -23,6 +23,8 @@ public class GameArea extends Canvas implements Updatable {
     private static final int NUM_ROWS = 20;
     private static final int NUM_COLS = 10;
 
+    private static final int LINES_CLEAR_FOR_LEVEL_UP = 10;
+
     private static final int[] LINE_CLEAR_SCORING = {0, 40, 100, 300, 1200};
 
     private static final Color LINE_COLOUR = Color.GREY;
@@ -46,6 +48,7 @@ public class GameArea extends Canvas implements Updatable {
     private int mNumLinesCleared;
     private int mScore;
     private int mLevel;
+    private int mLevelUpCountdown;
 
     public GameArea(double width, double height, Color bgColour) {
         super(width, height);
@@ -63,7 +66,8 @@ public class GameArea extends Canvas implements Updatable {
     private void newGame() {
         mGameState = GameState.PLAYING;
         mNumLinesCleared = 0;
-        mLevel = 3;
+        mLevelUpCountdown = LINES_CLEAR_FOR_LEVEL_UP;
+        mLevel = 1;
         mScore = 0;
         for (int i = 0; i < mGrid.length; i++) {
             for (int j = 0; j < mGrid[0].length; j++) {
@@ -147,11 +151,15 @@ public class GameArea extends Canvas implements Updatable {
 
         int numRowsCleared = checkCompleteRows();
         mNumLinesCleared += numRowsCleared;
+        mLevelUpCountdown -= numRowsCleared;
+
+        if (mLevelUpCountdown <= 0) {
+            mLevel++;
+            mLevelUpCountdown += LINES_CLEAR_FOR_LEVEL_UP;
+        }
 
         numRowsCleared = numRowsCleared > 4 ? 4 : numRowsCleared;
         mScore += LINE_CLEAR_SCORING[numRowsCleared]*mLevel;
-
-        mLevel = (mNumLinesCleared/10)+1;
 
         mTetrominoUpdateTime = calculateDropSpeed();
         mCurTetromino = mNextTetromino;
