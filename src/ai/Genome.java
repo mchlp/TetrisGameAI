@@ -17,12 +17,27 @@ public class Genome implements Serializable {
         mGeneList = geneList;
     }
 
+    public static Genome getRandomGenome() {
+        Gene[] geneList = new Gene[Genes.values().length];
+
+        for (Genes geneType : Genes.values()) {
+            double randomValue = Math.random() * (Math.random() >= 0.5 ? 1 : -1);
+            geneList[geneType.ordinal()] = new Gene(geneType, randomValue);
+        }
+        return new Genome(geneList);
+    }
+
     public static Genome getInitialGenome() {
         Gene[] geneList = new Gene[Genes.values().length];
 
         for (Genes geneType : Genes.values()) {
-            double initialValue = Math.random() * (Math.random() >= 0.5 ? 1 : -1);
-            geneList[geneType.ordinal()] = new Gene(geneType, initialValue);
+            double randomValue = Math.random();
+            if (geneType.modifier == 0) {
+                randomValue *= (Math.random() > 0.5 ? 1 : -1);
+            } else {
+                randomValue *= geneType.modifier;
+            }
+            geneList[geneType.ordinal()] = new Gene(geneType, randomValue);
         }
         return new Genome(geneList);
     }

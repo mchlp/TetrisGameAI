@@ -101,9 +101,8 @@ public class Trainer implements Updatable {
                 }
 
                 testTetromino.drop(false);
-                testGrid.applyTetromino(testTetromino);
 
-                double curRating = getRating(testGrid, genome);
+                double curRating = getRating(testGrid, genome, testTetromino);
 
                 if (curRating > highestRating) {
                     highestRating = curRating;
@@ -125,15 +124,24 @@ public class Trainer implements Updatable {
         return bestMoves;
     }
 
-    private double getRating(GameGrid grid, Genome genome) {
+    private double getRating(GameGrid grid, Genome genome, Tetromino tetromino) {
+
+        int beforeHoles = getNumHoles(grid);
+        grid.applyTetromino(tetromino);
+        int numClearRows = grid.checkCompleteRows();
         double rating = 0;
 
-        rating += genome.getGeneValue(Genes.LINES_CLEARED) * getNumFullLines(grid);
+        int minHeight = getMinHeight(grid);
+        int maxHeight = getMaxHeight(grid);
+
+        rating += genome.getGeneValue(Genes.LINES_CLEARED) * numClearRows;
         rating += genome.getGeneValue(Genes.NUM_HOLES) * getNumHoles(grid);
+        rating += genome.getGeneValue(Genes.INCREASED_NUMBER_OF_HOLES) * getNumHoles(grid) - beforeHoles;
+        rating += genome.getGeneValue(Genes.SUM_BLOCKS_ABOVE_HOLE) * getSumBlocksAboveHole(grid);
         rating += genome.getGeneValue(Genes.ROUGHNESS) * getRoughness(grid);
-        rating += genome.getGeneValue(Genes.RELATIVE_HEIGHT) * getRelativeHeight(grid);
         rating += genome.getGeneValue(Genes.TOTAL_HEIGHT) * getTotalHeight(grid);
-        rating += genome.getGeneValue(Genes.MAX_HEIGHT) * getMaxHeight(grid);
+        rating += genome.getGeneValue(Genes.MAX_HEIGHT) * maxHeight;
+        rating += genome.getGeneValue(Genes.MIN_MAX_HEIGHT_DIFFERENCE) * (maxHeight - minHeight);
 
         if (getGameOver(grid)) {
             rating -= GAME_OVER_RATING_PENALTY;
@@ -143,23 +151,6 @@ public class Trainer implements Updatable {
 
     private boolean getGameOver(GameGrid grid) {
         return grid.checkGameOver();
-    }
-
-    private int getNumFullLines(GameGrid grid) {
-        int numFullLines = 0;
-        for (int i=0; i<grid.getmHeight(); i++) {
-            boolean lineFull = true;
-            for (int j=0; j<grid.getmWidth(); j++) {
-                if (!grid.isFilled(j, i)) {
-                    lineFull = false;
-                    break;
-                }
-            }
-            if (lineFull) {
-                numFullLines++;
-            }
-        }
-        return numFullLines;
     }
 
     private int getTotalHeight(GameGrid grid) {
@@ -173,6 +164,21 @@ public class Trainer implements Updatable {
             }
         }
         return sumHeight;
+    }
+
+    private int getSumBlocksAboveHole(GameGrid grid) {
+        int sumBlocksAboveHole = 0;
+        for (int i=0; i<grid.getmWidth(); i++) {
+            int numHolesInCol = 0;
+            for (int j=grid.getmHeight()-1; j>=0; j--) {
+                if (!grid.isFilled(i, j)) {
+                    numHolesInCol++;
+                } else {
+                    sumBlocksAboveHole += numHolesInCol;
+                }
+            }
+        }
+        return sumBlocksAboveHole;
     }
 
     private int getMaxHeight(GameGrid grid) {
@@ -191,16 +197,12 @@ public class Trainer implements Updatable {
         return maxHeight;
     }
 
-    private int getRelativeHeight(GameGrid grid) {
-        int maxHeight = 0;
+    private int getMinHeight(GameGrid grid) {
         int minHeight = Integer.MAX_VALUE;
         for (int i=0; i<grid.getmWidth(); i++) {
             for (int j=0; j<grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
                     int height = grid.getmHeight()-j;
-                    if (height > maxHeight) {
-                        maxHeight = height;
-                    }
                     if (height < minHeight) {
                         minHeight = height;
                     }
@@ -208,7 +210,7 @@ public class Trainer implements Updatable {
                 }
             }
         }
-        return maxHeight-minHeight;
+        return minHeight;
     }
 
     private int getRoughness(GameGrid grid) {
