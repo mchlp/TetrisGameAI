@@ -32,4 +32,8 @@ public class Gene implements Serializable {
         }
         return new Gene(mType, newValue);
     }
+
+    public Gene clone() {
+        return new Gene(mType, mValue);
+    }
 }

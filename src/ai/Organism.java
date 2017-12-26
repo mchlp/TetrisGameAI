@@ -110,4 +110,8 @@ public class Organism implements Serializable {
             e.printStackTrace();
         }
     }
+
+    public Organism clone() {
+        return new Organism(mGenome.clone());
+    }
 }
