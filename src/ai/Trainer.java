@@ -36,6 +36,7 @@ public class Trainer implements Updatable {
     public void update(double deltaTime) {
         switch (mGameArea.getmGameState()) {
             case PLAYING:
+                mPopulation.addmTrainTime(deltaTime);
                 if (mPrevScore != mGameArea.getmScore()) {
                     ArrayList<ControllerKeys> moves = getBestMove(mGameArea.getmGrid(), mGameArea.getmCurTetromino(), mCurOrganism.getmGenome());
                     for (ControllerKeys move : moves) {

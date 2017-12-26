@@ -21,10 +21,12 @@ public class Population implements Serializable {
     private ArrayList<Organism> mElites;
     private transient File mSaveFile;
     private int mGeneration;
+    private double mTrainTime;
 
     public Population(File saveFile) {
 
         mGeneration = 1;
+        mTrainTime = 0;
         mSaveFile = saveFile;
         mOrganisms = new Organism[MAX_NUMBER_OF_ORGANISMS];
         mElites = new ArrayList<>();
@@ -118,5 +120,13 @@ public class Population implements Serializable {
 
     public int getmGeneration() {
         return mGeneration;
+    }
+
+    public double getmTrainTime() {
+        return mTrainTime;
+    }
+
+    public void addmTrainTime(double addTime) {
+        mTrainTime += addTime;
     }
 }

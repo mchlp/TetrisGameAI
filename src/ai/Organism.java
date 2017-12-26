@@ -19,7 +19,7 @@ public class Organism implements Serializable {
     private UUID mId;
 
     public Organism() {
-        this(Genome.getRandomGenome());
+        this(Genome.getInitialGenome());
     }
 
     public Organism(Genome genome) {

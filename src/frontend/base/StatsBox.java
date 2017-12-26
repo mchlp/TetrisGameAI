@@ -58,7 +58,7 @@ public abstract class StatsBox extends VBox implements Updatable {
         return strNum;
     }
 
-    private String getTimeInString(int time) {
+    protected String getTimeInString(int time) {
         int hours = time / (60 * 60);
         time %= (60 * 60);
         int mins = time / (60);
