@@ -10,6 +10,7 @@ package frontend;
 import backend.ControllerKeys;
 import backend.Updatable;
 import frontend.aiTrain.AITrainGameWindow;
+import frontend.aiWatch.AIWatchGameWindow;
 import frontend.common.GameController;
 import frontend.player.PlayerGameWindow;
 import javafx.animation.AnimationTimer;
@@ -54,7 +55,8 @@ public class Game extends Application {
         double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
 
         //startPlayerGame(height, width);
-        startAITrain(height, width);
+        //startAITrain(height, width);
+        startAIWatch(height, width);
 
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -78,6 +80,14 @@ public class Game extends Application {
         scene = new Scene(aiTrainGameWindow);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Tetris Game - AI Train Version");
+    }
+
+    public void startAIWatch(double height, double width) {
+        AIWatchGameWindow aiWatchGameWindow = new AIWatchGameWindow(height, width);
+        updateItems.add(aiWatchGameWindow);
+        scene = new Scene(aiWatchGameWindow);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Tetris Game - AI Watch Version");
     }
 
 

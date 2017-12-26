@@ -53,6 +53,7 @@ public class Population implements Serializable {
     }
 
     public void evolve() {
+        mGeneration++;
         Organism[] survivors = selectAndKill();
         System.out.println("Top Fitness: " + survivors[0].calculateFitness());
         int totalFitness = 0;
@@ -65,7 +66,6 @@ public class Population implements Serializable {
         in.nextLine();
         saveToFile();
         System.out.println("SAVED TO FILE.");
-        mGeneration++;
     }
 
     public Organism[] selectAndKill() {
@@ -108,6 +108,12 @@ public class Population implements Serializable {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveElite(File saveFolder) {
+        Organism[] organisms = mOrganisms.clone();
+        Arrays.sort(organisms, new OrganismComparator());
+        organisms[0].saveToFile(saveFolder);
     }
 
     public Organism getOrganism(int index) {

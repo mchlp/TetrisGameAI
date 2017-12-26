@@ -7,15 +7,15 @@
 
 package ai;
 
-import java.io.Serializable;
+import java.io.*;
 import java.util.UUID;
 
 public class Organism implements Serializable {
 
     private Genome mGenome;
-    private int mScore;
-    private int mLinesCleared;
-    private int mLevel;
+    private transient int mScore;
+    private transient int mLinesCleared;
+    private transient int mLevel;
     private UUID mId;
 
     public Organism() {
@@ -28,6 +28,21 @@ public class Organism implements Serializable {
         mLinesCleared = 0;
         mLevel = 0;
         mGenome = genome;
+    }
+
+    public static Organism loadOrganismFromFile(File loadFile) {
+        try {
+            FileInputStream fileIn = new FileInputStream(loadFile);
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            Organism loadedOrganism = (Organism) in.readObject();
+            return loadedOrganism;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Organism breed(Organism otherParent) {
@@ -72,6 +87,19 @@ public class Organism implements Serializable {
         System.out.println("Organism - " + mId.toString());
         for (Genes geneType : Genes.values()) {
             System.out.println(geneType.name() + ": " + mGenome.getGeneValue(geneType));
+        }
+    }
+
+    public void saveToFile(File saveFolder) {
+        try {
+            File saveFile = new File(saveFolder, mId+".org.ser");
+            FileOutputStream fileOut = new FileOutputStream(saveFile);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(this);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
