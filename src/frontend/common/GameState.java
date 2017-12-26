@@ -13,7 +13,8 @@ public enum GameState {
 
     PAUSED("Paused", Color.rgb(255, 51, 51)),
     PLAYING("Playing", Color.rgb(51, 204, 0)),
-    OVER("Game Over!", Color.rgb(255, 51, 51));
+    OVER("Game Over!", Color.rgb(255, 51, 51)),
+    LOADING("Loading...", Color.rgb(255, 207, 61));
 
     public final String message;
     public final Color colour;

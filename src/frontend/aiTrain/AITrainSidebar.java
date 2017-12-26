@@ -8,6 +8,7 @@
 package frontend.aiTrain;
 
 import ai.Trainer;
+import backend.GameBrain;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import javafx.event.ActionEvent;
@@ -19,7 +20,7 @@ import java.io.File;
 
 public class AITrainSidebar extends Sidebar {
     public AITrainSidebar(GameArea gameArea, Trainer trainer, double margins, double sideBarHeight, double sideBarWidth) {
-        super(gameArea, margins, sideBarHeight, sideBarWidth);
+        super(margins, sideBarHeight, sideBarWidth);
 
         AITrainStatsBox aiTrainStatsBox = new AITrainStatsBox(gameArea, trainer);
         getChildren().add(aiTrainStatsBox);

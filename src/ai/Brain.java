@@ -10,18 +10,21 @@ package ai;
 import backend.ControllerKeys;
 import backend.GameBrain;
 import backend.Updatable;
-import frontend.common.GameArea;
-import frontend.common.GameController;
 import frontend.common.GameGrid;
 import frontend.common.Tetromino;
 
 import java.util.ArrayList;
 
-public abstract class Brain {
+public abstract class Brain implements Updatable {
 
     private static final int GAME_OVER_RATING_PENALTY = 500;
 
     protected Organism mCurOrganism;
+    protected GameBrain mGameBrain;
+
+    public Brain(GameBrain gameBrain) {
+        mGameBrain = gameBrain;
+    }
 
     protected ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino, Genome genome) {
 

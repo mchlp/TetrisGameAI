@@ -18,7 +18,7 @@ import javafx.scene.control.Button;
 public class AIWatchSidebar extends Sidebar{
 
     public AIWatchSidebar(GameArea gameArea, Watcher watcher, double margins, double sideBarHeight, double sideBarWidth) {
-        super(gameArea, margins, sideBarHeight, sideBarWidth);
+        super(margins, sideBarHeight, sideBarWidth);
 
         AIWatchStatsBox aiWatchStatsBox = new AIWatchStatsBox(gameArea, watcher);
         getChildren().add(aiWatchStatsBox);

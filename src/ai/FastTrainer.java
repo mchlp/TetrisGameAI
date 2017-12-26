@@ -9,8 +9,7 @@ package ai;
 
 import backend.ControllerKeys;
 import backend.GameBrain;
-import backend.TetrominoBlueprint;
-import frontend.common.*;
+import frontend.common.GameState;
 import javafx.scene.control.TextArea;
 import java.util.ArrayList;
 
@@ -21,13 +20,15 @@ public class FastTrainer extends Brain {
     private int mCurOrganismIndex;
     private boolean mTraining;
     private long mLastUpdateTime;
-    private GameBrain mGameBrain;
+    private int mTopScore;
 
-    public FastTrainer(TextArea outputConsole, GameArea gameArea, Population population) {
+    public FastTrainer(TextArea outputConsole, GameBrain gameBrain, Population population) {
+        super(gameBrain);
         mOutputConsole = outputConsole;
         mPopulation = population;
         mTraining = true;
         mLastUpdateTime = System.currentTimeMillis();
+        mTopScore = 0;
         goToFirstOrganism();
     }
 
@@ -37,9 +38,10 @@ public class FastTrainer extends Brain {
         mLastUpdateTime = currentTimeMillis;
     }
 
-    private void startTrainer() {
-        while (mTraining) {
-            startTrainGame(mCurOrganism.getmGenome());
+    @Override
+    public void update(double deltaTime) {
+        if (mTraining) {
+            startGame(mCurOrganism.getmGenome());
             if (mCurOrganismIndex == mPopulation.getNumOrganisms()-1) {
                 mPopulation.evolve();
                 goToFirstOrganism();
@@ -49,30 +51,37 @@ public class FastTrainer extends Brain {
         }
     }
 
-    private void startTrainGame(Genome testGenome) {
-        //mGameArea.get;
-        while (!mGameBrain.getmGrid().checkGameOver()) {
-            TetrominoBlueprint newBlueprint = TetrominoBlueprint.getRandomTetrominoBlueprint();
-            Tetromino curTetromino = new Tetromino(mGameBrain, newBlueprint, mGameBrain.getNumCols());
-            ArrayList<ControllerKeys> bestMoves = getBestMove(mGameBrain.getmGrid(), curTetromino, testGenome);
+    private void startGame(Genome testGenome) {
+        updateTrainTime();
+        mGameBrain.newGame();
+        mGameBrain.createTetromino();
+        while (mGameBrain.getmGameState() == GameState.PLAYING) {
+            ArrayList<ControllerKeys> bestMoves = getBestMove(mGameBrain.getmGrid(), mGameBrain.getmCurTetromino(), testGenome);
             for (ControllerKeys move : bestMoves) {
                 switch (move) {
                     case LEFT:
-                        curTetromino.moveLeft(false);
+                        mGameBrain.moveLeft();
                         break;
                     case RIGHT:
-                        curTetromino.moveRight(false);
+                        mGameBrain.moveRight();
+                        break;
+                    case ROTATE:
+                        mGameBrain.rotate();
                         break;
                     case DROP:
-                        curTetromino.moveDown(false);
+                        mGameBrain.drop();
+                        break;
                 }
             }
-            mGameBrain.getmGrid().applyTetromino(curTetromino);
-            mGameBrain.updateStats();
+            mGameBrain.moveDown();
+            mGameBrain.update();
         }
         mCurOrganism.setmScore(mGameBrain.getmScore());
         mCurOrganism.setmLevel(mGameBrain.getmLevel());
         mCurOrganism.setmLinesCleared(mGameBrain.getmNumLinesCleared());
+        if (mCurOrganism.calculateFitness() > mTopScore) {
+            mTopScore = mCurOrganism.calculateFitness();
+        }
     }
 
     private void goToFirstOrganism() {
@@ -82,11 +91,11 @@ public class FastTrainer extends Brain {
 
     private void prepareNextOrganism() {
         if (mCurOrganismIndex >= 0) {
-            mCurOrganism.printFitness();
+            mOutputConsole.appendText(mCurOrganism.printFitness());
         }
         mCurOrganismIndex++;
         mCurOrganism = mPopulation.getOrganism(mCurOrganismIndex);
-        mCurOrganism.printGenes();
+        mOutputConsole.appendText(mCurOrganism.printGenes());
     }
 
     public Population getmPopulation() {
@@ -95,5 +104,16 @@ public class FastTrainer extends Brain {
 
     public int getmCurOrganismIndex() {
         return mCurOrganismIndex;
+    }
+
+    public int getmTopScore() {
+        return mTopScore;
+    }
+
+    public void toggleTraining() {
+        mTraining = !mTraining;
+        if (mTraining) {
+            mLastUpdateTime = System.currentTimeMillis();
+        }
     }
 }

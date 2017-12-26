@@ -9,6 +9,7 @@ package frontend;
 
 import backend.ControllerKeys;
 import backend.Updatable;
+import frontend.aiFastTrain.AIFastTrainGameWindow;
 import frontend.aiTrain.AITrainGameWindow;
 import frontend.aiWatch.AIWatchGameWindow;
 import frontend.common.GameController;
@@ -54,10 +55,6 @@ public class Game extends Application {
         double height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
         double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
 
-        //startPlayerGame(height, width);
-        startAITrain(height, width);
-        //startAIWatch(height, width);
-
         primaryStage.setResizable(false);
         primaryStage.show();
 
@@ -72,6 +69,19 @@ public class Game extends Application {
 
         prevTime = System.nanoTime();
         timer.start();
+
+        //startPlayerGame(height, width);
+        //startAITrain(height, width);
+        startAIFastTrain(height, width);
+        //startAIWatch(height, width);
+    }
+
+    public void startAIFastTrain(double height, double width) {
+        AIFastTrainGameWindow aiFastTrainGameWindow = new AIFastTrainGameWindow(height, width);
+        updateItems.add(aiFastTrainGameWindow);
+        scene = new Scene(aiFastTrainGameWindow);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Tetris Game - AI Fast Train Version");
     }
 
     public void startAITrain(double height, double width) {

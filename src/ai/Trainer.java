@@ -8,6 +8,7 @@
 package ai;
 
 import backend.ControllerKeys;
+import backend.GameBrain;
 import frontend.common.*;
 
 public class Trainer extends GUIBrain {
@@ -15,14 +16,15 @@ public class Trainer extends GUIBrain {
     private Population mPopulation;
     private int mCurOrganismIndex;
 
-    public Trainer(GameArea gameArea, GameController gameController, Population population) {
-        super(gameArea, gameController);
+    public Trainer(GameBrain gameBrain, GameController gameController, Population population) {
+        super(gameBrain, gameController);
         mPopulation = population;
         goToFirstOrganism();
     }
 
     public void update(double deltaTime) {
-        switch (mGameArea.getmGameState()) {
+        super.update(deltaTime);
+        switch (mGameBrain.getmGameState()) {
             case PLAYING:
                 mPopulation.addmTrainTime(deltaTime);
                 break;
@@ -36,7 +38,6 @@ public class Trainer extends GUIBrain {
                 mGameController.keyPressed(ControllerKeys.RESTART);
                 break;
         }
-        super.update(deltaTime);
     }
 
     private void goToFirstOrganism() {

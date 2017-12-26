@@ -7,13 +7,13 @@
 
 package ai;
 
-import frontend.common.GameArea;
+import backend.GameBrain;
 import frontend.common.GameController;
 
 public class Watcher extends GUIBrain {
 
-    public Watcher(GameArea gameArea, GameController gameController, Organism organism) {
-        super(gameArea, gameController);
+    public Watcher(GameBrain gameBrain, GameController gameController, Organism organism) {
+        super(gameBrain, gameController);
         mCurOrganism = organism;
     }
 }

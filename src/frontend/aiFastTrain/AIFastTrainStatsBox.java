@@ -8,7 +8,7 @@
 package frontend.aiFastTrain;
 
 import ai.FastTrainer;
-import ai.Trainer;
+import backend.GameBrain;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.StatsBar;
@@ -19,11 +19,12 @@ public class AIFastTrainStatsBox extends StatsBox {
     private StatsBar mGenerationBar;
     private StatsBar mOrganismNumBar;
     private StatsBar mTrainTimeBar;
+    private StatsBar mTopScoreBar;
     private FastTrainer mFastTrainer;
 
-    public AIFastTrainStatsBox(GameArea gameArea, FastTrainer fastTrainer) {
-        super(gameArea);
-        mFastTrainer = mFastTrainer;
+    public AIFastTrainStatsBox(GameBrain gameBrain, FastTrainer fastTrainer) {
+        super(gameBrain);
+        mFastTrainer = fastTrainer;
 
         mOrganismBar = new StatsBar("Organism ID", "Loading...");
         mOrganismBar.setSmallerFont();
@@ -37,16 +38,19 @@ public class AIFastTrainStatsBox extends StatsBox {
 
         mTrainTimeBar = new StatsBar("Training Time: ", "0:00");
         getChildren().add(mTrainTimeBar);
+
+        mTopScoreBar = new StatsBar("Top Score: ", "0");
+        getChildren().add(mTopScoreBar);
     }
 
     @Override
     public void update(double deltaTime) {
-        /*
+
         super.update(deltaTime);
-        mOrganismBar.setValue(fas.getmCurOrganism().getmId().toString());
-        mOrganismNumBar.setValue(mTrainer.getmCurOrganismIndex()+1 + "/" + mTrainer.getmPopulation().getNumOrganisms());
-        mGenerationBar.setValue(Integer.toString(mTrainer.getmPopulation().getmGeneration()));
-        mTrainTimeBar.setValue(getTimeInString((int) (mTrainer.getmPopulation().getmTrainTime())));
-        */
+        mOrganismBar.setValue(mFastTrainer.getmCurOrganism().getmId().toString());
+        mOrganismNumBar.setValue(mFastTrainer.getmCurOrganismIndex()+1 + "/" + mFastTrainer.getmPopulation().getNumOrganisms());
+        mGenerationBar.setValue(Integer.toString(mFastTrainer.getmPopulation().getmGeneration()));
+        mTrainTimeBar.setValue(getTimeInString((int) (mFastTrainer.getmPopulation().getmTrainTime())));
+        mTopScoreBar.setValue(Integer.toString(mFastTrainer.getmTopScore()));
     }
 }

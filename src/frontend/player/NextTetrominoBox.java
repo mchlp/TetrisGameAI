@@ -7,6 +7,7 @@
 
 package frontend.player;
 
+import backend.GameBrain;
 import backend.Updatable;
 import frontend.common.GameArea;
 import frontend.common.GameState;
@@ -47,7 +48,7 @@ public class NextTetrominoBox extends Canvas implements Updatable {
         mGc.setFill(mBgColour);
         mGc.fillRect(0, 0, mDimension, mDimension);
 
-        Tetromino nextTetromino = mGameArea.getmNextTetromino();
+        Tetromino nextTetromino = mGameArea.getmGameBrain().getmNextTetromino();
         Color colour = nextTetromino.getmColour();
         int[][] body = nextTetromino.getmBody();
 
@@ -93,7 +94,7 @@ public class NextTetrominoBox extends Canvas implements Updatable {
             }
         }
 
-        if (mGameArea.getmGameState() == GameState.PAUSED) {
+        if (mGameArea.getmGameBrain().getmGameState() == GameState.PAUSED) {
             setEffect(new GaussianBlur(15));
         }
 

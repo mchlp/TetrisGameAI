@@ -15,6 +15,8 @@ import javafx.scene.shape.Rectangle;
 
 public class PlayerGameWindow extends GameWindow {
 
+    private GameArea mGameArea;
+
     public PlayerGameWindow(double height, double width) {
         super(height, width, GameMode.PLAYER);
 
