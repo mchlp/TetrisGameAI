@@ -29,9 +29,7 @@ public class Trainer implements Updatable {
         mGameController = gameController;
         mPopulation = population;
         mPrevScore = -1;
-        //goToFirstOrganism();
-        mCurOrganismIndex = 48;
-        prepareNextOrganism();
+        goToFirstOrganism();
     }
 
     @Override
@@ -69,8 +67,7 @@ public class Trainer implements Updatable {
     }
 
     private void prepareNextOrganism() {
-        //TODO: CHANGE TO 0
-        if (mCurOrganismIndex >= 100) {
+        if (mCurOrganismIndex >= 0) {
             mCurOrganism.printFitness();
         }
         mCurOrganismIndex++;

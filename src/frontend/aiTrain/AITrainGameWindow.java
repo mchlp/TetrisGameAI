@@ -24,11 +24,6 @@ public class AITrainGameWindow extends GameWindow {
         super(height, width, GameMode.AI_TRAINER);
 
         File saveFile = new File("/home/mpu/Desktop/testAI.ser");
-        try {
-            System.out.println(saveFile.getCanonicalPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         mPopulation = new Population(saveFile);
 
         mTrainer = new Trainer(mGameArea, mGameController, mPopulation);

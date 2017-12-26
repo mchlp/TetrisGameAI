@@ -52,7 +52,12 @@ public class Population implements Serializable {
 
     public void evolve() {
         Organism[] survivors = selectAndKill();
-        System.out.println("Top Fitness: " + mOrganisms[0].calculateFitness());
+        System.out.println("Top Fitness: " + survivors[0].calculateFitness());
+        int totalFitness = 0;
+        for (Organism organism : survivors) {
+            totalFitness += organism.calculateFitness();
+        }
+        System.out.println("Total Fitness: " + totalFitness);
         breed(survivors);
         Scanner in = new Scanner(System.in);
         in.nextLine();
