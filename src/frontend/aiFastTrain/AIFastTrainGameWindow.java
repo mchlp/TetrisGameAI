@@ -9,13 +9,11 @@ package frontend.aiFastTrain;
 
 import ai.FastTrainer;
 import ai.Population;
-import ai.Trainer;
+import backend.GameBrain;
 import backend.Updatable;
-import com.sun.org.apache.bcel.internal.generic.POP;
-import frontend.aiTrain.AITrainSidebar;
 import frontend.base.GameWindow;
 import frontend.common.GameMode;
-import javafx.scene.layout.Pane;
+import javafx.scene.control.TextArea;
 
 import java.io.File;
 
@@ -23,6 +21,7 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
 
     private Population mPopulation;
     private FastTrainer mFastTrainer;
+    private GameBrain mGameBrain;
 
     public AIFastTrainGameWindow(double height, double width) {
         super(height, width, GameMode.AI_FAST_TRAINER);
@@ -30,16 +29,17 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
         File saveFile = new File("/home/mpu/Desktop/fastTestAI.ser");
         mPopulation = new Population(saveFile);
 
-        //mFastTrainer = new FastTrainer(mGameArea, mGameController, mPopulation);
-        //mUpdateItems.add(mFastTrainer);
+        mGameBrain = new GameBrain(GameMode.AI_FAST_TRAINER);
 
-        //AIF aiTrainSidebar = new AITrainSidebar(mGameArea, mTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
-        //setRight(aiTrainSidebar);
-        //mUpdateItems.add(aiTrainSidebar);
-    }
+        TextArea outputConsole = new TextArea();
+        outputConsole.setEditable(false);
+        mGamePane.getChildren().add(outputConsole);
 
-    @Override
-    public void update(double deltaTime) {
+        mFastTrainer = new FastTrainer(outputConsole, mGameBrain, mPopulation);
+        mUpdateItems.add(mFastTrainer);
 
+        AIFastTrainSidebar aiFastTrainSidebar = new AIFastTrainSidebar(mGameBrain, mFastTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
+        setRight(aiFastTrainSidebar);
+        mUpdateItems.add(aiFastTrainSidebar);
     }
 }

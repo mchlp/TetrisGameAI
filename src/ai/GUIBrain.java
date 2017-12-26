@@ -8,41 +8,38 @@
 package ai;
 
 import backend.ControllerKeys;
-import backend.Updatable;
-import frontend.common.GameArea;
+import backend.GameBrain;
 import frontend.common.GameController;
 
 import java.util.ArrayList;
 
-public abstract class GUIBrain extends Brain implements Updatable {
+public abstract class GUIBrain extends Brain {
 
     protected int mPrevScore;
     protected GameController mGameController;
-    protected GameArea mGameArea;
 
-    public GUIBrain(GameArea gameArea, GameController gameController) {
-        mGameArea = gameArea;
+    public GUIBrain(GameBrain gameBrain, GameController gameController) {
+        super(gameBrain);
         mGameController = gameController;
         mPrevScore = -1;
     }
 
     @Override
     public void update(double deltaTime) {
-        switch (mGameArea.getmGameState()) {
+        switch (mGameBrain.getmGameState()) {
             case PLAYING:
-                if (mPrevScore != mGameArea.getmScore()) {
-                    ArrayList<ControllerKeys> moves = getBestMove(mGameArea.getmGrid(), mGameArea.getmCurTetromino(), mCurOrganism.getmGenome());
+                if (mPrevScore != mGameBrain.getmScore()) {
+                    ArrayList<ControllerKeys> moves = getBestMove(mGameBrain.getmGrid(), mGameBrain.getmCurTetromino(), mCurOrganism.getmGenome());
                     for (ControllerKeys move : moves) {
                         mGameController.keyPressed(move);
                     }
-                    mPrevScore = mGameArea.getmScore();
+                    mPrevScore = mGameBrain.getmScore();
                 }
                 break;
-
             case OVER:
-                mCurOrganism.setmScore(mGameArea.getmScore());
-                mCurOrganism.setmLevel(mGameArea.getmLevel());
-                mCurOrganism.setmLinesCleared(mGameArea.getmNumLinesCleared());
+                mCurOrganism.setmScore(mGameBrain.getmScore());
+                mCurOrganism.setmLevel(mGameBrain.getmLevel());
+                mCurOrganism.setmLinesCleared(mGameBrain.getmNumLinesCleared());
         }
     }
 

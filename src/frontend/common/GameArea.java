@@ -34,6 +34,7 @@ public class GameArea extends Canvas implements Updatable {
     private double mTetrominoUpdateTime;
     private boolean mShowGridlines;
     private GameBrain mGameBrain;
+    private double mElapsedTime;
 
     public GameArea(double width, double height, Color bgColour, GameMode gameMode) {
         super(width, height);
@@ -50,6 +51,7 @@ public class GameArea extends Canvas implements Updatable {
 
     private void newGame() {
         mGameBrain.newGame();
+        mElapsedTime = 0;
         spawnTetromino();
         drawGame();
     }
@@ -158,11 +160,11 @@ public class GameArea extends Canvas implements Updatable {
 
     public void update(double deltaTime) {
         if (mGameBrain.getmGameState() == GameState.PLAYING) {
-            mGameBrain.update(deltaTime);
+            mElapsedTime += deltaTime;
             if (mGameBrain.getmCurTetromino() != null) {
                 mTetrominoUpdateTime -= deltaTime;
                 if (mTetrominoUpdateTime <= 0) {
-                    mGameBrain.getmCurTetromino().update();
+                    mGameBrain.update();
                     mTetrominoUpdateTime = calculateDropSpeed();
                 }
             }
@@ -170,30 +172,10 @@ public class GameArea extends Canvas implements Updatable {
         drawGame();
     }
 
-    public int getmScore() {
-        return mGameBrain.getmScore();
-    }
-
-    public int getmNumLinesCleared() {
-        return mGameBrain.getmNumLinesCleared();
-    }
-
     private double calculateDropSpeed() {
         // return -0.04242*mLevel + 0.6884;
         return (725 * Math.pow(0.85, mGameBrain.getmLevel()) + mGameBrain.getmLevel()) / 1000;
         //return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
-    }
-
-    public int getmLevel() {
-        return mGameBrain.getmLevel();
-    }
-
-    public Tetromino getmNextTetromino() {
-        return mGameBrain.getmNextTetromino();
-    }
-
-    public Tetromino getmCurTetromino() {
-        return mGameBrain.getmCurTetromino();
     }
 
     public double getmCellWidth() {
@@ -205,18 +187,10 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     public double getmElapsedTime() {
-        return mGameBrain.getmElapsedTime();
+        return mElapsedTime;
     }
 
-    public GameState getmGameState() {
-        return mGameBrain.getmGameState();
-    }
-
-    public GameMode getmGameMode() {
-        return mGameBrain.getmGameMode();
-    }
-
-    public int getNumCols() {
-        return mGameBrain.getNumCols();
+    public GameBrain getmGameBrain() {
+        return mGameBrain;
     }
 }

@@ -25,7 +25,6 @@ public abstract class GameWindow extends BorderPane implements Updatable {
     protected static final Color GAME_BACKGROUND_COLOUR = Color.grayRgb(23);
 
     protected ArrayList<Updatable> mUpdateItems;
-    protected GameArea mGameArea;
     protected double mCanvasHeight;
     protected double mCanvasWidth;
     protected double mGameAreaHeight;

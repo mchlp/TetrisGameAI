@@ -27,15 +27,14 @@ public class GameBrain {
     private int mScore;
     private int mLevel;
     private int mLevelUpCountdown;
-    private double mElapsedTime;
 
     public GameBrain(GameMode gameMode) {
         mGrid = new GameGrid(NUM_COLS, NUM_ROWS + EXTRA_ROWS_AT_TOP, EXTRA_ROWS_AT_TOP);
         mGameMode = gameMode;
+        mGameState = GameState.LOADING;
     }
 
     public void newGame() {
-        mElapsedTime = 0;
         mGameState = GameState.PLAYING;
         mNumLinesCleared = 0;
         mLevelUpCountdown = LINES_CLEAR_FOR_LEVEL_UP;
@@ -147,10 +146,8 @@ public class GameBrain {
         mNextTetromino = new Tetromino(this, nextBlueprint, NUM_COLS);
     }
 
-    public void update(double deltaTime) {
-        if (mGameState == GameState.PLAYING) {
-            mElapsedTime += deltaTime;
-        }
+    public void update() {
+        getmCurTetromino().update();
     }
 
     public int getmScore() {
@@ -185,15 +182,22 @@ public class GameBrain {
         return EXTRA_ROWS_AT_TOP;
     }
 
-    public double getmElapsedTime() {
-        return mElapsedTime;
-    }
-
     public GameState getmGameState() {
         return mGameState;
     }
 
     public GameMode getmGameMode() {
         return mGameMode;
+    }
+
+    public String getGridInString() {
+        String grid = "";
+        for (int i=0; i<mGrid.getmHeight(); i++) {
+            for (int j=0; j<mGrid.getmWidth(); j++) {
+                grid += mGrid.getCell(j, i).ismIsFilled() ? "X " : ". ";
+            }
+            grid += "\n";
+        }
+        return grid;
     }
 }

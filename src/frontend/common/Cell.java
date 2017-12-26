@@ -23,7 +23,7 @@ public class Cell {
         mIsFilled = true;
     }
 
-    boolean ismIsFilled() {
+    public boolean ismIsFilled() {
         return mIsFilled;
     }
 

@@ -8,6 +8,7 @@
 package frontend.player;
 
 import backend.ControllerKeys;
+import backend.GameBrain;
 import frontend.base.Sidebar;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
@@ -21,7 +22,7 @@ import javafx.scene.paint.Color;
 
 public class PlayerSidebar extends Sidebar {
     public PlayerSidebar(GameArea gameArea, GameController gameController, double margins, double sideBarHeight, double sideBarWidth, Color gameBgColour) {
-        super(gameArea, margins, sideBarHeight, sideBarWidth);
+        super(margins, sideBarHeight, sideBarWidth);
 
         NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth / 2, gameBgColour);
         getChildren().add(nextTetrominoBox);

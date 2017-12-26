@@ -7,6 +7,7 @@
 
 package frontend.base;
 
+import backend.GameBrain;
 import backend.Updatable;
 import frontend.common.GameArea;
 import javafx.geometry.Insets;
@@ -19,7 +20,7 @@ public abstract class Sidebar extends VBox implements Updatable {
 
     protected ArrayList<Updatable> mUpdateItems;
 
-    public Sidebar(GameArea gameArea, double margins, double sideBarHeight, double sideBarWidth) {
+    public Sidebar(double margins, double sideBarHeight, double sideBarWidth) {
         super(margins);
         setPadding(new Insets(margins));
         setAlignment(Pos.TOP_CENTER);

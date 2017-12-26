@@ -22,6 +22,7 @@ public class AITrainGameWindow extends GameWindow {
 
     private Population mPopulation;
     private Trainer mTrainer;
+    private GameArea mGameArea;
 
     public AITrainGameWindow(double height, double width) {
         super(height, width, GameMode.AI_TRAINER);
@@ -37,7 +38,7 @@ public class AITrainGameWindow extends GameWindow {
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
 
-        mTrainer = new Trainer(mGameArea, mGameController, mPopulation);
+        mTrainer = new Trainer(mGameArea.getmGameBrain(), mGameController, mPopulation);
         mUpdateItems.add(mTrainer);
 
         AITrainSidebar aiTrainSidebar = new AITrainSidebar(mGameArea, mTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);

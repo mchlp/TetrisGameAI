@@ -7,10 +7,11 @@
 
 package ai;
 
+import com.sun.deploy.util.ArrayUtil;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
+import java.lang.reflect.Array;
+import java.util.*;
 
 public class Population implements Serializable {
 
@@ -18,7 +19,7 @@ public class Population implements Serializable {
     private static final int MAX_NUMBER_OF_ELITES = 5;
 
     private Organism[] mOrganisms;
-    private ArrayList<Organism> mElites;
+    private List<Organism> mElites;
     private transient File mSaveFile;
     private int mGeneration;
     private double mTrainTime;
@@ -62,22 +63,27 @@ public class Population implements Serializable {
         }
         System.out.println("Total Fitness: " + totalFitness);
         breed(survivors);
-        Scanner in = new Scanner(System.in);
-        in.nextLine();
         saveToFile();
         System.out.println("SAVED TO FILE.");
     }
 
     public Organism[] selectAndKill() {
-        Arrays.sort(mOrganisms, new OrganismComparator());
+        mOrganisms = sort(Arrays.asList(mOrganisms)).toArray(mOrganisms);
         addElite(mOrganisms[0]);
         Organism[] survivors = Arrays.copyOfRange(mOrganisms, 0, mOrganisms.length / 2 - mElites.size());
         for (int i=0; i<mElites.size(); i++) {
             survivors[survivors.length-i-1] = mElites.get(i);
         }
-        Arrays.sort(survivors, new OrganismComparator());
+        survivors = sort(Arrays.asList(survivors)).toArray(survivors);
         return survivors;
     }
+
+    private List<Organism> sort(List<Organism> organisms) {
+        organisms.sort(new OrganismComparator());
+        Collections.reverse(organisms);
+        return organisms;
+    }
+
 
     private void breed(Organism[] parents) {
         for (int i=0; i<MAX_NUMBER_OF_ORGANISMS; i++) {
@@ -92,7 +98,7 @@ public class Population implements Serializable {
 
     private void addElite(Organism elite) {
         mElites.add(elite);
-        mElites.sort(new OrganismComparator());
+        mElites = sort(mElites);
         while (mElites.size() > MAX_NUMBER_OF_ELITES) {
             mElites.remove(mElites.size() - 1);
         }
