@@ -57,6 +57,10 @@ public class Organism implements Serializable {
         this.mScore = mScore;
     }
 
+    public int getmScore() {
+        return mScore;
+    }
+
     public void setmLevel(int mLevel) {
         this.mLevel = mLevel;
     }

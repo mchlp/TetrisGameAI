@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class Gene implements Serializable {
 
-    private static final double MUTATION_RATE = 0.2;
+    private static final double MUTATION_RATE = 0.1;
 
     private Genes mType;
     private double mValue;
@@ -28,7 +28,7 @@ public class Gene implements Serializable {
     public Gene merge(Gene parentGene) {
         double newValue = Math.random() >= 0.5 ? mValue : parentGene.mValue;
         if (Math.random() < MUTATION_RATE) {
-            newValue += Math.random();
+            newValue += Math.random() * (Math.random() >= 0.5 ? 1 : -1);
         }
         return new Gene(mType, newValue);
     }

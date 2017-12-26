@@ -9,20 +9,20 @@ package ai;
 
 import backend.ControllerKeys;
 import backend.GameBrain;
+import frontend.aiFastTrain.OutputConsole;
 import frontend.common.GameState;
-import javafx.scene.control.TextArea;
 import java.util.ArrayList;
 
 public class FastTrainer extends Brain {
 
-    private TextArea mOutputConsole;
+    private OutputConsole mOutputConsole;
     private Population mPopulation;
     private int mCurOrganismIndex;
     private boolean mTraining;
     private long mLastUpdateTime;
     private int mTopScore;
 
-    public FastTrainer(TextArea outputConsole, GameBrain gameBrain, Population population) {
+    public FastTrainer(OutputConsole outputConsole, GameBrain gameBrain, Population population) {
         super(gameBrain);
         mOutputConsole = outputConsole;
         mPopulation = population;
@@ -45,6 +45,7 @@ public class FastTrainer extends Brain {
             if (mCurOrganismIndex == mPopulation.getNumOrganisms()-1) {
                 mPopulation.evolve();
                 goToFirstOrganism();
+                mTopScore = 0;
             } else {
                 prepareNextOrganism();
             }
