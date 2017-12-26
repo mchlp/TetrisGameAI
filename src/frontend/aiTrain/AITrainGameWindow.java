@@ -13,6 +13,7 @@ import frontend.base.GameWindow;
 import frontend.common.GameMode;
 
 import java.io.File;
+import java.io.IOException;
 
 public class AITrainGameWindow extends GameWindow {
 
@@ -22,7 +23,12 @@ public class AITrainGameWindow extends GameWindow {
     public AITrainGameWindow(double height, double width) {
         super(height, width, GameMode.AI_TRAINER);
 
-        File saveFile = new File("~/Desktop/testAI.ser");
+        File saveFile = new File("/home/mpu/Desktop/testAI.ser");
+        try {
+            System.out.println(saveFile.getCanonicalPath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mPopulation = new Population(saveFile);
 
         mTrainer = new Trainer(mGameArea, mGameController, mPopulation);
