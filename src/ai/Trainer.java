@@ -8,14 +8,12 @@
 package ai;
 
 import backend.ControllerKeys;
-import backend.Updatable;
 import frontend.common.*;
 
-public class Trainer extends Brain implements Updatable {
+public class Trainer extends GUIBrain {
 
     private Population mPopulation;
     private int mCurOrganismIndex;
-
 
     public Trainer(GameArea gameArea, GameController gameController, Population population) {
         super(gameArea, gameController);
@@ -39,7 +37,6 @@ public class Trainer extends Brain implements Updatable {
                 break;
         }
         super.update(deltaTime);
-
     }
 
     private void goToFirstOrganism() {
@@ -49,11 +46,11 @@ public class Trainer extends Brain implements Updatable {
 
     private void prepareNextOrganism() {
         if (mCurOrganismIndex >= 0) {
-            mCurOrganism.printFitness();
+            System.out.println(mCurOrganism.printFitness());
         }
         mCurOrganismIndex++;
         mCurOrganism = mPopulation.getOrganism(mCurOrganismIndex);
-        mCurOrganism.printGenes();
+        System.out.println(mCurOrganism.printGenes());
     }
 
     public Population getmPopulation() {

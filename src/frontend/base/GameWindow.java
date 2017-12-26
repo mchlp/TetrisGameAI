@@ -33,11 +33,13 @@ public abstract class GameWindow extends BorderPane implements Updatable {
     protected double mSideBarHeight;
     protected double mSideBarWidth;
     protected GameController mGameController;
+    protected StackPane mGamePane;
+    protected GameMode mGameMode;
 
     public GameWindow(double height, double width, GameMode gameMode) {
 
-        super();
         mUpdateItems = new ArrayList<>();
+        mGameMode = gameMode;
 
         setPrefHeight(height);
         setPrefWidth(width);
@@ -51,19 +53,10 @@ public abstract class GameWindow extends BorderPane implements Updatable {
         mSideBarHeight = height;
         mSideBarWidth = width - mGameAreaWidth;
 
-        StackPane gamePane = new StackPane();
-        gamePane.setPrefHeight(mGameAreaHeight);
-        gamePane.setPrefWidth(mGameAreaWidth);
-        setLeft(gamePane);
-
-        Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
-        gamePane.getChildren().add(gameAreaBackground);
-
-        mGameArea = new GameArea(mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, gameMode);
-        gamePane.getChildren().add(mGameArea);
-        mGameController = new GameController(mGameArea);
-        mUpdateItems.add(mGameArea);
-
+        mGamePane = new StackPane();
+        mGamePane.setPrefHeight(mGameAreaHeight);
+        mGamePane.setPrefWidth(mGameAreaWidth);
+        setLeft(mGamePane);
     }
 
     public void update(double deltaTime) {

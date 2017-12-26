@@ -73,21 +73,25 @@ public class Organism implements Serializable {
         return mGenome;
     }
 
-    public void printFitness() {
-        System.out.println("-");
-        System.out.println("Organism - " + mId.toString());
-        System.out.println("Score: " + mScore);
-        System.out.println("Level: " + mLevel);
-        System.out.println("Lines: " + mLinesCleared);
-        System.out.println("Fitness: " + calculateFitness());
+    public String printFitness() {
+        String message = "";
+        message += "-\n";
+        message += "Organism - " + mId.toString() + "\n";
+        message += "Score: " + mScore + "\n";
+        message += "Level: " + mLevel + "\n";
+        message += "Lines: " + mLinesCleared + "\n";
+        message += "Fitness: " + calculateFitness() + "\n";
+        return message;
     }
 
-    public void printGenes() {
-        System.out.println("-");
-        System.out.println("Organism - " + mId.toString());
+    public String printGenes() {
+        String message = "";
+        message += "-\n";
+        message += "Organism - " + mId.toString() + "\n";
         for (Genes geneType : Genes.values()) {
-            System.out.println(geneType.name() + ": " + mGenome.getGeneValue(geneType));
+            message += geneType.name() + ": " + mGenome.getGeneValue(geneType) + "\n";
         }
+        return message;
     }
 
     public void saveToFile(File saveFolder) {

@@ -55,8 +55,8 @@ public class Game extends Application {
         double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
 
         //startPlayerGame(height, width);
-        //startAITrain(height, width);
-        startAIWatch(height, width);
+        startAITrain(height, width);
+        //startAIWatch(height, width);
 
         primaryStage.setResizable(false);
         primaryStage.show();

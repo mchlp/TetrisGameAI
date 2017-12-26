@@ -41,7 +41,7 @@ public class GameController {
                 mGameArea.togglePause();
                 break;
             case TOGGLE_GRIDLINES:
-                mGameArea.toggleGridliens();
+                mGameArea.toggleGridlines();
                 break;
             case NEXT_LEVEL:
                 mGameArea.incrementLevel();

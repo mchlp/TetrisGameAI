@@ -7,16 +7,18 @@
 
 package frontend.common;
 
+import backend.GameBrain;
 import backend.TetrominoBlueprint;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Tetromino {
 
     private static final int MOVE_TIMEOUT = 2;
 
-    private GameArea mGameArea;
+    private GameBrain mGameBrain;
     private int[][] mBody;
     private TetrominoBlueprint mBlueprint;
     private Color mColour;
@@ -25,9 +27,9 @@ public class Tetromino {
     private boolean mCanMove;
     private int mNumCols;
 
-    public Tetromino(GameArea gameArea, TetrominoBlueprint blueprint, int numCols) {
+    public Tetromino(GameBrain gameBrain, TetrominoBlueprint blueprint, int numCols) {
         int spawnYPos = 0;
-        mGameArea = gameArea;
+        mGameBrain = gameBrain;
         mBlueprint = blueprint;
         mBody = blueprint.body.clone();
         mColour = blueprint.colour;
@@ -106,17 +108,17 @@ public class Tetromino {
 
                     if (tryBody[i][j] == 1) {
 
-                        if (tryPos.x + j < 0 || tryPos.x + j > mGameArea.getmGrid().getmWidth() - 1) {
+                        if (tryPos.x + j < 0 || tryPos.x + j > mGameBrain.getmGrid().getmWidth() - 1) {
                             ableToMove = false;
                             break checkLoop;
                         }
 
-                        if (tryPos.y + i > mGameArea.getmGrid().getmHeight() - 1) {
+                        if (tryPos.y + i > mGameBrain.getmGrid().getmHeight() - 1) {
                             ableToMove = false;
                             break checkLoop;
                         }
 
-                        if (mGameArea.getmGrid().isFilled(tryPos.x + j, tryPos.y + i)) {
+                        if (mGameBrain.getmGrid().isFilled(tryPos.x + j, tryPos.y + i)) {
                             ableToMove = false;
                             break checkLoop;
                         }
@@ -143,12 +145,12 @@ public class Tetromino {
             }
             moveDown(false);
         } else {
-            mGameArea.spawnTetromino();
+            mGameBrain.createTetromino();
         }
     }
 
     public Tetromino clone() {
-        Tetromino newTetromino = new Tetromino(mGameArea, mBlueprint, mNumCols);
+        Tetromino newTetromino = new Tetromino(mGameBrain, mBlueprint, mNumCols);
         newTetromino.mCurPos = new Point(mCurPos.x, mCurPos.y);
         newTetromino.mLastMove = mLastMove;
         newTetromino.mCanMove = mCanMove;

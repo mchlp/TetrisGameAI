@@ -7,10 +7,8 @@
 
 package frontend.aiWatch;
 
-import ai.Trainer;
 import ai.Watcher;
 import backend.ControllerKeys;
-import frontend.aiTrain.AITrainStatsBox;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import javafx.event.ActionEvent;

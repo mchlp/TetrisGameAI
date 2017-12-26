@@ -13,6 +13,7 @@ public enum GameMode {
 
     PLAYER("Human Player", Color.rgb(255, 176, 63)),
     AI_TRAINER("AI Training", Color.rgb(67, 133, 255)),
+    AI_FAST_TRAINER("AI Fast Training", Color.rgb(39, 152, 66)),
     AI_WATCHER("AI Watching", Color.rgb(185, 69, 255));
 
     public final String message;

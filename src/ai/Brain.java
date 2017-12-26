@@ -8,6 +8,7 @@
 package ai;
 
 import backend.ControllerKeys;
+import backend.GameBrain;
 import backend.Updatable;
 import frontend.common.GameArea;
 import frontend.common.GameController;
@@ -16,40 +17,11 @@ import frontend.common.Tetromino;
 
 import java.util.ArrayList;
 
-public abstract class Brain implements Updatable{
+public abstract class Brain {
 
     private static final int GAME_OVER_RATING_PENALTY = 500;
 
-    protected GameArea mGameArea;
-    protected GameController mGameController;
-    protected int mPrevScore;
     protected Organism mCurOrganism;
-
-    public Brain(GameArea gameArea, GameController gameController) {
-        mGameArea = gameArea;
-        mGameController = gameController;
-        mPrevScore = -1;
-    }
-
-    @Override
-    public void update(double deltaTime) {
-        switch (mGameArea.getmGameState()) {
-            case PLAYING:
-                if (mPrevScore != mGameArea.getmScore()) {
-                    ArrayList<ControllerKeys> moves = getBestMove(mGameArea.getmGrid(), mGameArea.getmCurTetromino(), mCurOrganism.getmGenome());
-                    for (ControllerKeys move : moves) {
-                        mGameController.keyPressed(move);
-                    }
-                    mPrevScore = mGameArea.getmScore();
-                }
-                break;
-
-            case OVER:
-                mCurOrganism.setmScore(mGameArea.getmScore());
-                mCurOrganism.setmLevel(mGameArea.getmLevel());
-                mCurOrganism.setmLinesCleared(mGameArea.getmNumLinesCleared());
-        }
-    }
 
     protected ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino, Genome genome) {
 
@@ -99,7 +71,7 @@ public abstract class Brain implements Updatable{
         return bestMoves;
     }
 
-    private double getRating(GameGrid grid, Genome genome, Tetromino tetromino) {
+    protected double getRating(GameGrid grid, Genome genome, Tetromino tetromino) {
 
         int beforeHoles = getNumHoles(grid);
         grid.applyTetromino(tetromino);
@@ -227,9 +199,5 @@ public abstract class Brain implements Updatable{
 
     public Organism getmCurOrganism() {
         return mCurOrganism;
-    }
-
-    public GameController getmGameController() {
-        return mGameController;
     }
 }

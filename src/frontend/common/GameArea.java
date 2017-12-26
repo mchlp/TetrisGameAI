@@ -7,6 +7,7 @@
 
 package frontend.common;
 
+import backend.GameBrain;
 import backend.TetrominoBlueprint;
 import backend.Updatable;
 import javafx.scene.canvas.Canvas;
@@ -19,101 +20,58 @@ import java.util.Random;
 
 public class GameArea extends Canvas implements Updatable {
 
-    public static final int EXTRA_ROWS_AT_TOP = 2;
     public static final double CELL_OUTLINE_WIDTH = 3;
     public static final Color CELL_OUTLINE_COLOUR = Color.BLACK;
-    private static final int NUM_ROWS = 20;
-    private static final int NUM_COLS = 10;
-    private static final int LINES_CLEAR_FOR_LEVEL_UP = 10;
-    private static final int[] LINE_CLEAR_SCORING = {0, 40, 100, 300, 1200};
     private static final Color LINE_COLOUR = Color.GREY;
     private static final double LINE_WIDTH = 0.5;
-    private static final int MAX_LEVEL = 20;
 
-    private Color mBgColour;
-    private GraphicsContext mGc;
     private double mWidth;
     private double mHeight;
+    private Color mBgColour;
+    private GraphicsContext mGc;
     private double mCellWidth;
     private double mCellHeight;
-    private GameGrid mGrid;
-    private Tetromino mCurTetromino;
-    private Tetromino mNextTetromino;
     private double mTetrominoUpdateTime;
-    private Random mGenerator;
-    private GameState mGameState;
-    private GameMode mGameMode;
-    private int mNumLinesCleared;
-    private int mScore;
-    private int mLevel;
-    private int mLevelUpCountdown;
-    private double mElapsedTime;
     private boolean mShowGridlines;
+    private GameBrain mGameBrain;
 
     public GameArea(double width, double height, Color bgColour, GameMode gameMode) {
         super(width, height);
+        mGameBrain = new GameBrain(gameMode);
         mHeight = height;
         mWidth = width;
         mBgColour = bgColour;
-        mCellHeight = this.mHeight / NUM_ROWS;
-        mCellWidth = this.mWidth / NUM_COLS;
-        mGenerator = new Random(100);
+        mCellHeight = this.mHeight / mGameBrain.getNumRows();
+        mCellWidth = this.mWidth / mGameBrain.getNumCols();
         mGc = getGraphicsContext2D();
-        mGrid = new GameGrid(NUM_COLS, NUM_ROWS + EXTRA_ROWS_AT_TOP, EXTRA_ROWS_AT_TOP);
-        mGameMode = gameMode;
         mShowGridlines = true;
         newGame();
     }
 
     private void newGame() {
-        mElapsedTime = 0;
-        mGameState = GameState.PLAYING;
-        mNumLinesCleared = 0;
-        mLevelUpCountdown = LINES_CLEAR_FOR_LEVEL_UP;
-        mLevel = 1;
-        mScore = 0;
-        mGrid.resetGrid();
-        mCurTetromino = null;
+        mGameBrain.newGame();
         spawnTetromino();
         drawGame();
     }
 
     void moveLeft() {
-        if (mGameState == GameState.PLAYING) {
-            if (mCurTetromino != null) {
-                mCurTetromino.moveLeft(false);
-            }
-        }
+        mGameBrain.moveLeft();
     }
 
     void moveRight() {
-        if (mGameState == GameState.PLAYING) {
-            if (mCurTetromino != null) {
-                mCurTetromino.moveRight(false);
-            }
-        }
+        mGameBrain.moveRight();
     }
 
     void moveDown() {
-        if (mGameState == GameState.PLAYING) {
-            if (mCurTetromino != null) {
-                mCurTetromino.moveDown(false);
-            }
-        }
+        mGameBrain.moveDown();
     }
 
     void rotate() {
-        if (mGameState == GameState.PLAYING) {
-            if (mCurTetromino != null) {
-                mCurTetromino.rotate(false);
-            }
-        }
+        mGameBrain.rotate();
     }
 
     void drop() {
-        if (mGameState == GameState.PLAYING) {
-            mCurTetromino.drop(false);
-        }
+        mGameBrain.drop();
     }
 
     void restart() {
@@ -121,30 +79,24 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     void togglePause() {
-        if (mGameState == GameState.PAUSED) {
-            mGameState = GameState.PLAYING;
-        } else {
-            mGameState = GameState.PAUSED;
-        }
+        mGameBrain.togglePause();
     }
 
     void incrementLevel() {
-        if (mLevel < MAX_LEVEL) {
-            mLevel++;
-        }
+        mGameBrain.incrementLevel();
     }
 
-    void toggleGridliens() {
+    void toggleGridlines() {
         mShowGridlines = !mShowGridlines;
     }
 
     public GameGrid getmGrid() {
-        return mGrid;
+        return mGameBrain.getmGrid();
     }
 
     private void drawCell(int x, int y, Color colour) {
-        if (y >= EXTRA_ROWS_AT_TOP) {
-            int screenY = y - EXTRA_ROWS_AT_TOP;
+        if (y >= mGameBrain.getExtraRowsAtTop()) {
+            int screenY = y - mGameBrain.getExtraRowsAtTop();
             mGc.setFill(CELL_OUTLINE_COLOUR);
             mGc.fillRoundRect(x * mCellWidth, screenY * mCellHeight, mCellWidth, mCellHeight, 5, 5);
             mGc.setFill(colour);
@@ -153,43 +105,13 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
-    void spawnTetromino() {
-
-        if (mCurTetromino != null) {
-            mScore += (mCurTetromino.getmCurPos().y - EXTRA_ROWS_AT_TOP);
-            mGrid.applyTetromino(mCurTetromino);
-        } else {
-            selectNextTetromino();
-        }
-
-        if (mGrid.checkGameOver()) {
-            mGameState = GameState.OVER;
-            return;
-        }
-
-        int numRowsCleared = mGrid.checkCompleteRows();
-        mNumLinesCleared += numRowsCleared;
-        mLevelUpCountdown -= numRowsCleared;
-
-        if (mLevelUpCountdown <= 0) {
-            mLevel++;
-            mLevelUpCountdown += LINES_CLEAR_FOR_LEVEL_UP;
-        }
-
-        numRowsCleared = numRowsCleared > 4 ? 4 : numRowsCleared;
-        mScore += LINE_CLEAR_SCORING[numRowsCleared] * mLevel;
-
-        mTetrominoUpdateTime = calculateDropSpeed();
-        mCurTetromino = mNextTetromino;
-        selectNextTetromino();
+    public void updateStats() {
+        mGameBrain.updateStats();
     }
 
-    private void selectNextTetromino() {
-        int selectListLength = TetrominoBlueprint.values().length;
-        int randSelect = mGenerator.nextInt(selectListLength);
-        TetrominoBlueprint selectedTetromino = TetrominoBlueprint.values()[randSelect];
-        //selectedTetromino = TetrominoBlueprint.I;
-        mNextTetromino = new Tetromino(this, selectedTetromino, NUM_COLS);
+    void spawnTetromino() {
+        mGameBrain.createTetromino();
+        mTetrominoUpdateTime = calculateDropSpeed();
     }
 
     private void drawGame() {
@@ -198,25 +120,25 @@ public class GameArea extends Canvas implements Updatable {
         mGc.setFill(mBgColour);
         mGc.fillRect(0, 0, mWidth, mHeight);
 
-        for (int i = 0; i < mGrid.getmWidth(); i++) {
-            for (int j = 0; j < mGrid.getmHeight(); j++) {
-                if (mGrid.isFilled(i, j)) {
-                    drawCell(i, j, mGrid.getColour(i, j));
+        for (int i = 0; i < mGameBrain.getmGrid().getmWidth(); i++) {
+            for (int j = 0; j < mGameBrain.getmGrid().getmHeight(); j++) {
+                if (mGameBrain.getmGrid().isFilled(i, j)) {
+                    drawCell(i, j, mGameBrain.getmGrid().getColour(i, j));
                 }
             }
         }
 
-        int[][] tBody = mCurTetromino.getmBody();
-        Point tPos = mCurTetromino.getmCurPos();
+        int[][] tBody = mGameBrain.getmCurTetromino().getmBody();
+        Point tPos = mGameBrain.getmCurTetromino().getmCurPos();
         for (int i = 0; i < tBody.length; i++) {
             for (int j = 0; j < tBody[0].length; j++) {
                 if (tBody[i][j] == 1) {
-                    drawCell(tPos.x + j, tPos.y + i, mCurTetromino.getmColour());
+                    drawCell(tPos.x + j, tPos.y + i, mGameBrain.getmCurTetromino().getmColour());
                 }
             }
         }
 
-        if (mGameState == GameState.PAUSED) {
+        if (mGameBrain.getmGameState() == GameState.PAUSED) {
             setEffect(new GaussianBlur(15));
         }
 
@@ -224,23 +146,23 @@ public class GameArea extends Canvas implements Updatable {
             mGc.setStroke(LINE_COLOUR);
             mGc.setLineWidth(LINE_WIDTH);
 
-            for (int col = 0; col < NUM_COLS; col++) {
+            for (int col = 0; col < mGameBrain.getNumCols(); col++) {
                 mGc.strokeLine(col * mCellWidth, 0, col * mCellWidth, mHeight);
             }
 
-            for (int row = 0; row < NUM_ROWS; row++) {
+            for (int row = 0; row < mGameBrain.getNumRows(); row++) {
                 mGc.strokeLine(0, row * mCellHeight, mWidth, row * mCellHeight);
             }
         }
     }
 
     public void update(double deltaTime) {
-        if (mGameState == GameState.PLAYING) {
-            mElapsedTime += deltaTime;
-            if (mCurTetromino != null) {
+        if (mGameBrain.getmGameState() == GameState.PLAYING) {
+            mGameBrain.update(deltaTime);
+            if (mGameBrain.getmCurTetromino() != null) {
                 mTetrominoUpdateTime -= deltaTime;
                 if (mTetrominoUpdateTime <= 0) {
-                    mCurTetromino.update();
+                    mGameBrain.getmCurTetromino().update();
                     mTetrominoUpdateTime = calculateDropSpeed();
                 }
             }
@@ -249,29 +171,29 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     public int getmScore() {
-        return mScore;
+        return mGameBrain.getmScore();
     }
 
     public int getmNumLinesCleared() {
-        return mNumLinesCleared;
+        return mGameBrain.getmNumLinesCleared();
     }
 
     private double calculateDropSpeed() {
         // return -0.04242*mLevel + 0.6884;
-        return (725 * Math.pow(0.85, mLevel) + mLevel) / 1000;
+        return (725 * Math.pow(0.85, mGameBrain.getmLevel()) + mGameBrain.getmLevel()) / 1000;
         //return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
     }
 
     public int getmLevel() {
-        return mLevel;
+        return mGameBrain.getmLevel();
     }
 
     public Tetromino getmNextTetromino() {
-        return mNextTetromino;
+        return mGameBrain.getmNextTetromino();
     }
 
     public Tetromino getmCurTetromino() {
-        return mCurTetromino;
+        return mGameBrain.getmCurTetromino();
     }
 
     public double getmCellWidth() {
@@ -283,14 +205,18 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     public double getmElapsedTime() {
-        return mElapsedTime;
+        return mGameBrain.getmElapsedTime();
     }
 
     public GameState getmGameState() {
-        return mGameState;
+        return mGameBrain.getmGameState();
     }
 
     public GameMode getmGameMode() {
-        return mGameMode;
+        return mGameBrain.getmGameMode();
+    }
+
+    public int getNumCols() {
+        return mGameBrain.getNumCols();
     }
 }

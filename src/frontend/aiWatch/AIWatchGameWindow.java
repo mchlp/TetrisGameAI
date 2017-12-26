@@ -11,6 +11,7 @@ import ai.Organism;
 import ai.Watcher;
 import frontend.base.GameWindow;
 import frontend.common.GameMode;
+import javafx.scene.control.TextArea;
 
 import java.io.File;
 
@@ -27,6 +28,9 @@ public class AIWatchGameWindow extends GameWindow {
 
         mWatcher = new Watcher(mGameArea, mGameController, mOrganism);
         mUpdateItems.add(mWatcher);
+
+        TextArea outputConsole = new TextArea();
+        mGamePane.getChildren().add(outputConsole);
 
         AIWatchSidebar aiWatchSidebar = new AIWatchSidebar(mGameArea, mWatcher, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiWatchSidebar);
