@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 public class StatsBar extends BorderPane {
 
     private static final int FONT_SIZE = 15;
-    private static final int SMALLER_FONT_SIZE = 12;
+    private static final int SMALLER_FONT_SIZE = 10;
     private static final int PADDING_SIZE = 10;
     private static final String DEFAULT_STYLE = "" +
             "-fx-background-color: lightgrey; " +

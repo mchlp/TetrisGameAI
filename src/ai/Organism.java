@@ -24,6 +24,9 @@ public class Organism implements Serializable {
 
     public Organism(Genome genome) {
         mId = UUID.randomUUID();
+        mScore = 0;
+        mLinesCleared = 0;
+        mLevel = 0;
         mGenome = genome;
     }
 

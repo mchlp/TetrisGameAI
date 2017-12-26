@@ -28,8 +28,10 @@ public class Trainer implements Updatable {
         mGameArea = gameArea;
         mGameController = gameController;
         mPopulation = population;
-        mCurOrganismIndex = 0;
-        goToFirstOrganism();
+        mPrevScore = -1;
+        //goToFirstOrganism();
+        mCurOrganismIndex = 48;
+        prepareNextOrganism();
     }
 
     @Override
@@ -50,8 +52,8 @@ public class Trainer implements Updatable {
                 mCurOrganism.setmLevel(mGameArea.getmLevel());
                 mCurOrganism.setmLinesCleared(mGameArea.getmNumLinesCleared());
 
-                if (mCurOrganismIndex == mPopulation.getNumOrganisms()) {
-                    mPopulation.selectAndKill();
+                if (mCurOrganismIndex == mPopulation.getNumOrganisms()-1) {
+                    mPopulation.evolve();
                     goToFirstOrganism();
                 } else {
                     prepareNextOrganism();
@@ -67,7 +69,8 @@ public class Trainer implements Updatable {
     }
 
     private void prepareNextOrganism() {
-        if (mCurOrganismIndex >= 0) {
+        //TODO: CHANGE TO 0
+        if (mCurOrganismIndex >= 100) {
             mCurOrganism.printFitness();
         }
         mCurOrganismIndex++;
@@ -249,5 +252,13 @@ public class Trainer implements Updatable {
 
     public Organism getmCurOrganism() {
         return mCurOrganism;
+    }
+
+    public Population getmPopulation() {
+        return mPopulation;
+    }
+
+    public int getmCurOrganismIndex() {
+        return mCurOrganismIndex;
     }
 }

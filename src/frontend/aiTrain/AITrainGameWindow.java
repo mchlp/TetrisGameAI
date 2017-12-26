@@ -22,7 +22,7 @@ public class AITrainGameWindow extends GameWindow {
     public AITrainGameWindow(double height, double width) {
         super(height, width, GameMode.AI_TRAINER);
 
-        File saveFile = new File("test.ser");
+        File saveFile = new File("~/Desktop/testAI.ser");
         mPopulation = new Population(saveFile);
 
         mTrainer = new Trainer(mGameArea, mGameController, mPopulation);
