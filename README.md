@@ -14,13 +14,13 @@ Package                     |Subpackage                                 | Descri
 [ai](src/ai)                |                                           | files related to the AI
 [backend](src/backend)      |                                           | files related to the processing and game logic
 [frontend](src/frontend)    |                                           | files related to the JavaFX components displayed on screen
-A                           |[aiFastTrain](src/frontend/aiFastTrain)    | files related to the AI fast training mode
-A                           |[aiTrain](src/frontend/aiTrain)            | files related to the AI GUI training mode
-A                           |[aiWatch](src/frontend/aiWatch)            | files related to the AI watch mode
-A                           |[base](src/frontend/base)                  | files related to abstract classes that are used in displaying 
-A                           |[common](src/frontend/common)              | files related to GUI elements that are shared between multiple modes
-A                           |[player](src/frontend/common)              | files related to the human player mode
-A                           |[Game](src/frontend/Game)                  | the class that is the entry point into the game
+[frontend](src/frontend)    |[aiFastTrain](src/frontend/aiFastTrain)    | files related to the AI fast training mode
+[frontend](src/frontend)    |[aiTrain](src/frontend/aiTrain)            | files related to the AI GUI training mode
+[frontend](src/frontend)    |[aiWatch](src/frontend/aiWatch)            | files related to the AI watch mode
+[frontend](src/frontend)    |[base](src/frontend/base)                  | files related to abstract classes that are used in displaying 
+[frontend](src/frontend)    |[common](src/frontend/common)              | files related to GUI elements that are shared between multiple modes
+[frontend](src/frontend)    |[player](src/frontend/common)              | files related to the human player mode
+[frontend](src/frontend)    |[Game](src/frontend/Game)                  | the class that is the entry point into the game
 [tests](src/tests)          |                                           | test cases files and JUnit test files
 
 ## Features
