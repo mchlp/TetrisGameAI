@@ -92,7 +92,7 @@ public class Population implements Serializable {
         mAvgFitness = totalFitness/getNumOrganisms();
         Organism[] survivors = Arrays.copyOfRange(mOrganisms, 0, (int) (mOrganisms.length*REPRODUCING_PERCENTAGE) - mElites.size());
         for (int i=0; i<mElites.size(); i++) {
-            survivors[survivors.length-i-1] = mElites.get(i);
+            survivors[survivors.length-i-1] = mElites.get(i).clone();
         }
         survivors = sort(Arrays.asList(survivors)).toArray(survivors);
         return survivors;

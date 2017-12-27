@@ -13,9 +13,11 @@ import java.util.UUID;
 public class Organism implements Serializable {
 
     private Genome mGenome;
-    private transient int mScore;
-    private transient int mLinesCleared;
-    private transient int mLevel;
+    private int mMaxScore;
+    private int mMaxLinesCleared;
+    private int mMaxLevel;
+    private int mTotalScore;
+    private int mNumGames;
     private UUID mId;
 
     public Organism() {
@@ -24,9 +26,11 @@ public class Organism implements Serializable {
 
     public Organism(Genome genome) {
         mId = UUID.randomUUID();
-        mScore = 0;
-        mLinesCleared = 0;
-        mLevel = 0;
+        mMaxScore = 0;
+        mMaxLinesCleared = 0;
+        mMaxLevel = 0;
+        mTotalScore = 0;
+        mNumGames = 0;
         mGenome = genome;
     }
 
@@ -50,23 +54,23 @@ public class Organism implements Serializable {
     }
 
     public int calculateFitness() {
-        return mScore;
+        return mTotalScore/ Math.max(mNumGames, 1);
     }
 
-    public void setmScore(int mScore) {
-        this.mScore = mScore;
+    public void setmMaxScore(int mMaxScore) {
+        this.mMaxScore = mMaxScore;
     }
 
-    public int getmScore() {
-        return mScore;
+    public int getmMaxScore() {
+        return mMaxScore;
     }
 
-    public void setmLevel(int mLevel) {
-        this.mLevel = mLevel;
+    public void setmMaxLevel(int mMaxLevel) {
+        this.mMaxLevel = mMaxLevel;
     }
 
-    public void setmLinesCleared(int mLinesCleared) {
-        this.mLinesCleared = mLinesCleared;
+    public void setmMaxLinesCleared(int mMaxLinesCleared) {
+        this.mMaxLinesCleared = mMaxLinesCleared;
     }
 
     public UUID getmId() {
@@ -80,10 +84,11 @@ public class Organism implements Serializable {
     public String printFitness() {
         String message = "";
         message += "Organism - " + mId.toString() + "\n";
-        message += "Score: " + mScore + "\n";
-        message += "Level: " + mLevel + "\n";
-        message += "Lines: " + mLinesCleared + "\n";
+        message += "Score: " + mMaxScore + "\n";
+        message += "Level: " + mMaxLevel + "\n";
+        message += "Lines: " + mMaxLinesCleared + "\n";
         message += "Fitness: " + calculateFitness() + "\n";
+        message += "Total Score: " + mTotalScore + "\n";
         return message;
     }
 
@@ -111,5 +116,22 @@ public class Organism implements Serializable {
 
     public Organism clone() {
         return new Organism(mGenome.clone());
+    }
+
+    public int getmTotalScore() {
+        return mTotalScore;
+    }
+
+    public int getmMaxLinesCleared() {
+        return mMaxLinesCleared;
+    }
+
+    public int getmMaxLevel() {
+        return mMaxLevel;
+    }
+
+    public void addTotalScore(int mTotalScore) {
+        this.mTotalScore += mTotalScore;
+        mNumGames++;
     }
 }

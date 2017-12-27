@@ -28,8 +28,8 @@ public class AITrainGameWindow extends GameWindow {
         super(height, width, GameMode.AI_TRAINER);
 
         File saveFile = new File("/home/mpu/Desktop/testAI.ser");
-        //mPopulation = new Population(saveFile);
-        mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
+        mPopulation = new Population(saveFile);
+        //mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
 
         Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         mGamePane.getChildren().add(gameAreaBackground);

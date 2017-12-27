@@ -9,11 +9,12 @@ package ai;
 
 import backend.ControllerKeys;
 import backend.GameBrain;
-import frontend.aiFastTrain.OutputConsole;
 import frontend.common.GameState;
 import java.util.ArrayList;
 
 public class FastTrainer extends Brain {
+
+    private static final int NUM_GAMES_PER_SESSION = 5;
 
     private Population mPopulation;
     private int mCurOrganismIndex;
@@ -43,11 +44,12 @@ public class FastTrainer extends Brain {
         if (mTraining) {
             if (!mCurrentlyTraining) {
                 mCurrentlyTraining = true;
-                startGame(mCurOrganism.getmGenome());
+                for (int i=0; i<NUM_GAMES_PER_SESSION; i++) {
+                    startGame(mCurOrganism.getmGenome());
+                }
                 if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {
                     mPopulation.evolve();
                     goToFirstOrganism();
-                    mTopScore = 0;
                 } else {
                     prepareNextOrganism();
                 }
@@ -83,16 +85,24 @@ public class FastTrainer extends Brain {
             mGameBrain.update();
             moves++;
         }
+
         if (moves > mMaxNumMoves) {
             mMaxNumMoves = moves;
             System.out.println(moves);
         }
-        mCurOrganism.setmScore(mGameBrain.getmScore());
-        mCurOrganism.setmLevel(mGameBrain.getmLevel());
-        mCurOrganism.setmLinesCleared(mGameBrain.getmNumLinesCleared());
-        if (mCurOrganism.getmScore() > mTopScore) {
-            mTopScore = mCurOrganism.getmScore();
+        if (mGameBrain.getmScore() > mCurOrganism.getmMaxScore()) {
+            mCurOrganism.setmMaxScore(mGameBrain.getmScore());
         }
+        if (mGameBrain.getmLevel() > mCurOrganism.getmMaxLevel()) {
+            mCurOrganism.setmMaxLevel(mGameBrain.getmLevel());
+        }
+        if (mGameBrain.getmNumLinesCleared() > mCurOrganism.getmMaxLinesCleared()) {
+            mCurOrganism.setmMaxLinesCleared(mGameBrain.getmNumLinesCleared());
+        }
+        if (mCurOrganism.getmMaxScore() > mTopScore) {
+            mTopScore = mCurOrganism.getmMaxScore();
+        }
+        mCurOrganism.addTotalScore(mGameBrain.getmScore());
     }
 
     private void goToFirstOrganism() {

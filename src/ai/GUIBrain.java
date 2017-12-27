@@ -37,9 +37,9 @@ public abstract class GUIBrain extends Brain {
                 }
                 break;
             case OVER:
-                mCurOrganism.setmScore(mGameBrain.getmScore());
-                mCurOrganism.setmLevel(mGameBrain.getmLevel());
-                mCurOrganism.setmLinesCleared(mGameBrain.getmNumLinesCleared());
+                mCurOrganism.setmMaxScore(mGameBrain.getmScore());
+                mCurOrganism.setmMaxLevel(mGameBrain.getmLevel());
+                mCurOrganism.setmMaxLinesCleared(mGameBrain.getmNumLinesCleared());
         }
     }
 
