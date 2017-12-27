@@ -26,7 +26,7 @@ public class AIWatchGameWindow extends GameWindow {
     public AIWatchGameWindow(double height, double width) {
         super(height, width, GameMode.AI_WATCHER);
 
-        File orgFile = new File("/home/mpu/Desktop/90e8ddb7-d6b3-4c1e-b93d-12ddb3421576.org.ser");
+        File orgFile = new File("/home/mpu/Desktop/alpha.org.ser");
         Organism mOrganism = Organism.loadOrganismFromFile(orgFile);
 
         mGameArea = new GameArea(mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
