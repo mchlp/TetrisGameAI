@@ -12,7 +12,6 @@ import backend.TetrominoBlueprint;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
-import java.util.Random;
 
 public class Tetromino {
 

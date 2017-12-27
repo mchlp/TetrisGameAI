@@ -13,8 +13,6 @@ import backend.GameBrain;
 import backend.Updatable;
 import frontend.base.GameWindow;
 import frontend.common.GameMode;
-import javafx.scene.control.TextArea;
-import javafx.scene.text.Font;
 
 import java.io.File;
 
@@ -31,8 +29,8 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
 
         File saveFile = new File("/home/mpu/Desktop/fastTestAI.ser");
 
-        //mPopulation = new Population(saveFile);
-        mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
+        mPopulation = new Population(saveFile);
+        //mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
 
         mGameBrain = new GameBrain(GameMode.AI_FAST_TRAINER);
 

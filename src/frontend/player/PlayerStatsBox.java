@@ -7,7 +7,6 @@
 
 package frontend.player;
 
-import backend.GameBrain;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.StatsBar;

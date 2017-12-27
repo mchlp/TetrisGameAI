@@ -13,7 +13,6 @@ import frontend.base.GameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import frontend.common.GameMode;
-import javafx.scene.control.TextArea;
 
 import java.io.File;
 

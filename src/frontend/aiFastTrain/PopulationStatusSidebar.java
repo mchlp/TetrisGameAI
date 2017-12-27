@@ -10,6 +10,8 @@ package frontend.aiFastTrain;
 import ai.FastTrainer;
 import ai.Population;
 import frontend.base.Sidebar;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 public class PopulationStatusSidebar extends Sidebar {
 
@@ -28,7 +30,7 @@ public class PopulationStatusSidebar extends Sidebar {
         getChildren().add(populationStatusStatsBox);
         mUpdateItems.add(populationStatusStatsBox);
 
-        mOrganismStatusBox = new OrganismStatusBox(mPopulation.getOrganism(0));
+        mOrganismStatusBox = new OrganismStatusBox("Elite Organism Data", mPopulation.getOrganism(0));
         getChildren().add(mOrganismStatusBox);
         mUpdateItems.add(mOrganismStatusBox);
     }

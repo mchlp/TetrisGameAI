@@ -8,13 +8,11 @@
 package frontend.aiTrain;
 
 import ai.Trainer;
-import backend.GameBrain;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.stage.FileChooser;
 
 import java.io.File;
 

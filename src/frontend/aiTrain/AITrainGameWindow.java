@@ -16,7 +16,6 @@ import frontend.common.GameMode;
 import javafx.scene.shape.Rectangle;
 
 import java.io.File;
-import java.io.IOException;
 
 public class AITrainGameWindow extends GameWindow {
 

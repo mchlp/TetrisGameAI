@@ -8,7 +8,6 @@
 package frontend.aiTrain;
 
 import ai.Trainer;
-import backend.GameBrain;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.StatsBar;
@@ -33,7 +32,7 @@ public class AITrainStatsBox extends StatsBox {
         mStateBar = new StatsBar("Game State", "Loading...");
         getChildren().add(1, mStateBar);
 
-        mOrganismBar = new StatsBar("Organism ID", "Loading...");
+        mOrganismBar = new StatsBar("Organism Name", "Loading...");
         mOrganismBar.setSmallerFont();
         getChildren().add(mOrganismBar);
 
@@ -55,7 +54,7 @@ public class AITrainStatsBox extends StatsBox {
         super.update(deltaTime);
         mStateBar.setValue(mGameBrain.getmGameState().message);
         mStateBar.setColour(mGameBrain.getmGameState().colour);
-        mOrganismBar.setValue(mTrainer.getmCurOrganism().getmId().toString());
+        mOrganismBar.setValue(mTrainer.getmCurOrganism().getmName());
         mOrganismNumBar.setValue(mTrainer.getmCurOrganismIndex()+1 + "/" + mTrainer.getmPopulation().getNumOrganisms());
         mGenerationBar.setValue(Integer.toString(mTrainer.getmPopulation().getmGeneration()));
         mTrainTimeBar.setValue(getTimeInString((int) (mTrainer.getmPopulation().getmTrainTime())));

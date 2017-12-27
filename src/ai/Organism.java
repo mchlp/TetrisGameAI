@@ -18,14 +18,14 @@ public class Organism implements Serializable {
     private int mMaxLinesCleared;
     private int mMaxLevel;
     private ArrayList<Integer> mScoreList;
-    private UUID mId;
+    private String mName;
 
     public Organism() {
         this(Genome.getInitialGenome());
     }
 
     public Organism(Genome genome) {
-        mId = UUID.randomUUID();
+        mName = UUID.randomUUID().toString();
         mMaxScore = 0;
         mMaxLinesCleared = 0;
         mMaxLevel = 0;
@@ -39,10 +39,7 @@ public class Organism implements Serializable {
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Organism loadedOrganism = (Organism) in.readObject();
             return loadedOrganism;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
@@ -80,29 +77,24 @@ public class Organism implements Serializable {
         return sum;
     }
 
-    public UUID getmId() {
-        return mId;
+    public String getmName() {
+        return mName;
     }
 
     public Genome getmGenome() {
         return mGenome;
     }
 
-    public String printFitness() {
+    public String getStatus() {
         String message = "";
-        message += "Organism - " + mId.toString() + "\n";
+        message += "ORGANISM NAME\n" + mName + "\n\n";
         message += "Max Score: " + mMaxScore + "\n";
         message += "Max Level: " + mMaxLevel + "\n";
         message += "Max Lines: " + mMaxLinesCleared + "\n";
         message += "Fitness: " + calculateFitness() + "\n";
         message += "Scores: " + mScoreList.toString() + "\n";
         message += "Total Score: " + getTotalScore() + "\n";
-        return message;
-    }
-
-    public String printGenes() {
-        String message = "";
-        message += "Organism - " + mId.toString() + "\n";
+        message += "\nGenes\n";
         for (Genes geneType : Genes.values()) {
             message += geneType.name() + ": " + mGenome.getGeneValue(geneType) + "\n";
         }
@@ -111,7 +103,7 @@ public class Organism implements Serializable {
 
     public void saveToFile(File saveFolder) {
         try {
-            File saveFile = new File(saveFolder, mId+".org.ser");
+            File saveFile = new File(saveFolder, mName+".org.ser");
             FileOutputStream fileOut = new FileOutputStream(saveFile);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);

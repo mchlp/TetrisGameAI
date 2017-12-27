@@ -46,12 +46,9 @@ public class Trainer extends GUIBrain {
     }
 
     private void prepareNextOrganism() {
-        if (mCurOrganismIndex >= 0) {
-            System.out.println(mCurOrganism.printFitness());
-        }
         mCurOrganismIndex++;
         mCurOrganism = mPopulation.getOrganism(mCurOrganismIndex);
-        System.out.println(mCurOrganism.printGenes());
+        System.out.println(mCurOrganism.getStatus());
     }
 
     public Population getmPopulation() {

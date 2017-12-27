@@ -10,7 +10,6 @@ package frontend.aiFastTrain;
 import ai.FastTrainer;
 import backend.GameBrain;
 import frontend.base.StatsBox;
-import frontend.common.GameArea;
 import frontend.common.StatsBar;
 
 public class AIFastTrainStatsBox extends StatsBox {
@@ -26,7 +25,7 @@ public class AIFastTrainStatsBox extends StatsBox {
         super(gameBrain);
         mFastTrainer = fastTrainer;
 
-        mOrganismBar = new StatsBar("Organism ID", "Loading...");
+        mOrganismBar = new StatsBar("Organism Name", "Loading...");
         mOrganismBar.setSmallerFont();
         getChildren().add(mOrganismBar);
 
@@ -47,7 +46,7 @@ public class AIFastTrainStatsBox extends StatsBox {
     public void update(double deltaTime) {
 
         super.update(deltaTime);
-        mOrganismBar.setValue(mFastTrainer.getmCurOrganism().getmId().toString());
+        mOrganismBar.setValue(mFastTrainer.getmCurOrganism().getmName());
         mOrganismNumBar.setValue(mFastTrainer.getmCurOrganismIndex()+1 + "/" + mFastTrainer.getmPopulation().getNumOrganisms());
         mGenerationBar.setValue(Integer.toString(mFastTrainer.getmPopulation().getmGeneration()));
         mTrainTimeBar.setValue(getTimeInString((int) (mFastTrainer.getmPopulation().getmTrainTime())));

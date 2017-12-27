@@ -8,13 +8,11 @@
 package frontend.base;
 
 import backend.Updatable;
-import frontend.common.GameArea;
 import frontend.common.GameController;
 import frontend.common.GameMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 

@@ -53,10 +53,7 @@ public class Population implements Serializable {
             Population loadedPopulation = (Population) in.readObject();
             loadedPopulation.mSaveFile = loadFile;
             return loadedPopulation;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        } catch (ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
         }
@@ -130,7 +127,7 @@ public class Population implements Serializable {
 
     private void addElite(Organism elite) {
         mElites.add(elite);
-        mElites = new ArrayList(sort(mElites));
+        mElites = new ArrayList<>(sort(mElites));
         while (mElites.size() > MAX_NUMBER_OF_ELITES) {
             mElites.remove(mElites.size() - 1);
         }

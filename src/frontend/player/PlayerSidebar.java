@@ -8,9 +8,7 @@
 package frontend.player;
 
 import backend.ControllerKeys;
-import backend.GameBrain;
 import frontend.base.Sidebar;
-import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import javafx.event.ActionEvent;

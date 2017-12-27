@@ -23,6 +23,7 @@ public class FastTrainer extends Brain {
     private int mTopScore;
     private boolean mCurrentlyTraining;
     private int mMaxNumMoves;
+    private int mGameNum;
 
     public FastTrainer(GameBrain gameBrain, Population population) {
         super(gameBrain);
@@ -44,9 +45,12 @@ public class FastTrainer extends Brain {
         if (mTraining) {
             if (!mCurrentlyTraining) {
                 mCurrentlyTraining = true;
-                for (int i=0; i<NUM_GAMES_PER_SESSION; i++) {
-                    startGame(mCurOrganism.getmGenome());
-                }
+                mGameNum = 0;
+            }
+            if (mGameNum < NUM_GAMES_PER_SESSION) {
+                startGame(mCurOrganism.getmGenome());
+                mGameNum++;
+            } else {
                 if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {
                     mPopulation.evolve();
                     goToFirstOrganism();
@@ -59,11 +63,11 @@ public class FastTrainer extends Brain {
     }
 
     private void startGame(Genome testGenome) {
-        updateTrainTime();
         mGameBrain.newGame();
         mGameBrain.createTetromino();
         int moves=0;
         while (mGameBrain.getmGameState() == GameState.PLAYING) {
+            updateTrainTime();
             ArrayList<ControllerKeys> bestMoves = getBestMove(mGameBrain.getmGrid(), mGameBrain.getmCurTetromino(), testGenome);
             for (ControllerKeys move : bestMoves) {
                 switch (move) {

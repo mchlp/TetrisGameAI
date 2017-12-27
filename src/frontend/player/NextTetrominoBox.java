@@ -7,7 +7,6 @@
 
 package frontend.player;
 
-import backend.GameBrain;
 import backend.Updatable;
 import frontend.common.GameArea;
 import frontend.common.GameState;

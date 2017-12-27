@@ -7,7 +7,6 @@
 
 package frontend.aiWatch;
 
-import ai.Trainer;
 import ai.Watcher;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
@@ -28,7 +27,7 @@ public class AIWatchStatsBox extends StatsBox {
         mStateBar = new StatsBar("Game State", "Loading...");
         getChildren().add(1, mStateBar);
 
-        mOrganismBar = new StatsBar("Organism ID", "Loading...");
+        mOrganismBar = new StatsBar("Organism Name", "Loading...");
         mOrganismBar.setSmallerFont();
         getChildren().add(mOrganismBar);
 
@@ -41,7 +40,7 @@ public class AIWatchStatsBox extends StatsBox {
         super.update(deltaTime);
         mStateBar.setValue(mGameBrain.getmGameState().message);
         mStateBar.setColour(mGameBrain.getmGameState().colour);
-        mOrganismBar.setValue(mWatcher.getmCurOrganism().getmId().toString());
+        mOrganismBar.setValue(mWatcher.getmCurOrganism().getmName());
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
     }
 }

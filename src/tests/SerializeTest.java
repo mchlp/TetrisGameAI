@@ -24,6 +24,6 @@ public class SerializeTest {
         Population savePop = new Population(file);
         savePop.saveToFile();
         Population readPop = Population.loadPopulationFromFile(file);
-        System.out.println(readPop.getOrganism(0).getmId().toString());
+        System.out.println(readPop.getOrganism(0).getmName());
     }
 }

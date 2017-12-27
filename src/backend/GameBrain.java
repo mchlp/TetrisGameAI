@@ -7,7 +7,10 @@
 
 package backend;
 
-import frontend.common.*;
+import frontend.common.GameGrid;
+import frontend.common.GameMode;
+import frontend.common.GameState;
+import frontend.common.Tetromino;
 
 public class GameBrain {
 
@@ -21,6 +24,7 @@ public class GameBrain {
     private GameGrid mGrid;
     private Tetromino mCurTetromino;
     private Tetromino mNextTetromino;
+    private RandomBlueprintGenerator mBlueprintGenerator;
     private GameState mGameState;
     private GameMode mGameMode;
     private int mNumLinesCleared;
@@ -30,6 +34,7 @@ public class GameBrain {
 
     public GameBrain(GameMode gameMode) {
         mGrid = new GameGrid(NUM_COLS, NUM_ROWS + EXTRA_ROWS_AT_TOP, EXTRA_ROWS_AT_TOP);
+        mBlueprintGenerator = new RandomBlueprintGenerator();
         mGameMode = gameMode;
         mGameState = GameState.LOADING;
     }
@@ -42,7 +47,6 @@ public class GameBrain {
         mScore = 0;
         mGrid.resetGrid();
         mCurTetromino = null;
-        TetrominoBlueprint.resetGenerator();
     }
 
     public void moveLeft() {
@@ -143,7 +147,7 @@ public class GameBrain {
     }
 
     public void selectNextTetromino() {
-        TetrominoBlueprint nextBlueprint = TetrominoBlueprint.getRandomTetrominoBlueprint();
+        TetrominoBlueprint nextBlueprint = mBlueprintGenerator.getNextTetromino();
         mNextTetromino = new Tetromino(this, nextBlueprint, NUM_COLS);
     }
 
@@ -192,13 +196,13 @@ public class GameBrain {
     }
 
     public String getGridInString() {
-        String grid = "";
-        for (int i=0; i<mGrid.getmHeight(); i++) {
-            for (int j=0; j<mGrid.getmWidth(); j++) {
-                grid += mGrid.getCell(j, i).ismIsFilled() ? "X " : ". ";
+        StringBuilder grid = new StringBuilder();
+        for (int i = 0; i < mGrid.getmHeight(); i++) {
+            for (int j = 0; j < mGrid.getmWidth(); j++) {
+                grid.append(mGrid.getCell(j, i).ismIsFilled() ? "X " : ". ");
             }
-            grid += "\n";
+            grid.append("\n");
         }
-        return grid;
+        return grid.toString();
     }
 }

@@ -8,7 +8,6 @@
 package frontend.common;
 
 import backend.GameBrain;
-import backend.TetrominoBlueprint;
 import backend.Updatable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,7 +15,6 @@ import javafx.scene.effect.GaussianBlur;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
-import java.util.Random;
 
 public class GameArea extends Canvas implements Updatable {
 

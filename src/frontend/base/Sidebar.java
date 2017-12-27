@@ -7,9 +7,7 @@
 
 package frontend.base;
 
-import backend.GameBrain;
 import backend.Updatable;
-import frontend.common.GameArea;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
