@@ -14,6 +14,7 @@ public class Population implements Serializable {
 
     private static final int MAX_NUMBER_OF_ORGANISMS = 50;
     private static final int MAX_NUMBER_OF_ELITES = 5;
+    private static final double REPRODUCING_PERCENTAGE = 0.5;
 
     private Organism[] mOrganisms;
     private ArrayList<Organism> mElites;
@@ -89,7 +90,7 @@ public class Population implements Serializable {
         mBottom25PerFitness = bottom25Fitness/num25Per;
         mTotalFitness = totalFitness;
         mAvgFitness = totalFitness/getNumOrganisms();
-        Organism[] survivors = Arrays.copyOfRange(mOrganisms, 0, mOrganisms.length / 2 - mElites.size());
+        Organism[] survivors = Arrays.copyOfRange(mOrganisms, 0, (int) (mOrganisms.length*REPRODUCING_PERCENTAGE) - mElites.size());
         for (int i=0; i<mElites.size(); i++) {
             survivors[survivors.length-i-1] = mElites.get(i);
         }
@@ -105,8 +106,20 @@ public class Population implements Serializable {
 
 
     private void breed(Organism[] parents) {
-        for (int i=0; i<MAX_NUMBER_OF_ORGANISMS; i++) {
-            mOrganisms[i] = pickRandomOrganism(parents).breed(pickRandomOrganism(parents));
+        int childIndex = 0;
+        /*for (int i=0; i<mElites.size(); i++) {
+            mOrganisms[childIndex] = mElites.get(0).clone();
+            childIndex++;
+        }
+        for (int i=0; i<(parents.length/3); i++) {
+            mOrganisms[childIndex] = parents[i].breed(parents[i+1]);
+            childIndex++;
+            mOrganisms[childIndex] = parents[i].breed(parents[i+1]);
+            childIndex++;
+        }*/
+        while (childIndex < MAX_NUMBER_OF_ORGANISMS) {
+            mOrganisms[childIndex] = pickRandomOrganism(parents).breed(pickRandomOrganism(parents));
+            childIndex++;
         }
     }
 
@@ -137,6 +150,13 @@ public class Population implements Serializable {
 
     public void saveElite(File saveFolder) {
         mElites.get(0).saveToFile(saveFolder);
+    }
+
+    public Organism getElite() {
+        if (mElites.size() == 0) {
+            return null;
+        }
+        return mElites.get(0);
     }
 
     public Organism getOrganism(int index) {

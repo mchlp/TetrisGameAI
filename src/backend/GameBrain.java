@@ -42,6 +42,7 @@ public class GameBrain {
         mScore = 0;
         mGrid.resetGrid();
         mCurTetromino = null;
+        TetrominoBlueprint.resetGenerator();
     }
 
     public void moveLeft() {
@@ -114,7 +115,7 @@ public class GameBrain {
         mLevelUpCountdown -= numRowsCleared;
 
         if (mLevelUpCountdown <= 0) {
-            mLevel++;
+            incrementLevel();
             mLevelUpCountdown += LINES_CLEAR_FOR_LEVEL_UP;
         }
 

@@ -15,16 +15,15 @@ import java.util.ArrayList;
 
 public class FastTrainer extends Brain {
 
-    private OutputConsole mOutputConsole;
     private Population mPopulation;
     private int mCurOrganismIndex;
     private boolean mTraining;
     private long mLastUpdateTime;
     private int mTopScore;
+    private boolean mCurrentlyTraining;
 
-    public FastTrainer(OutputConsole outputConsole, GameBrain gameBrain, Population population) {
+    public FastTrainer(GameBrain gameBrain, Population population) {
         super(gameBrain);
-        mOutputConsole = outputConsole;
         mPopulation = population;
         mTraining = true;
         mLastUpdateTime = System.currentTimeMillis();
@@ -41,13 +40,18 @@ public class FastTrainer extends Brain {
     @Override
     public void update(double deltaTime) {
         if (mTraining) {
-            startGame(mCurOrganism.getmGenome());
-            if (mCurOrganismIndex == mPopulation.getNumOrganisms()-1) {
-                mPopulation.evolve();
-                goToFirstOrganism();
-                mTopScore = 0;
-            } else {
-                prepareNextOrganism();
+            System.out.println(mCurOrganismIndex + " " + mCurrentlyTraining);
+            if (!mCurrentlyTraining) {
+                mCurrentlyTraining = true;
+                startGame(mCurOrganism.getmGenome());
+                if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {
+                    mPopulation.evolve();
+                    goToFirstOrganism();
+                    mTopScore = 0;
+                } else {
+                    prepareNextOrganism();
+                }
+                mCurrentlyTraining = false;
             }
         }
     }
@@ -80,8 +84,8 @@ public class FastTrainer extends Brain {
         mCurOrganism.setmScore(mGameBrain.getmScore());
         mCurOrganism.setmLevel(mGameBrain.getmLevel());
         mCurOrganism.setmLinesCleared(mGameBrain.getmNumLinesCleared());
-        if (mCurOrganism.calculateFitness() > mTopScore) {
-            mTopScore = mCurOrganism.calculateFitness();
+        if (mCurOrganism.getmScore() > mTopScore) {
+            mTopScore = mCurOrganism.getmScore();
         }
     }
 
@@ -91,12 +95,8 @@ public class FastTrainer extends Brain {
     }
 
     private void prepareNextOrganism() {
-        if (mCurOrganismIndex >= 0) {
-            mOutputConsole.appendText(mCurOrganism.printFitness());
-        }
         mCurOrganismIndex++;
         mCurOrganism = mPopulation.getOrganism(mCurOrganismIndex);
-        mOutputConsole.appendText(mCurOrganism.printGenes());
     }
 
     public Population getmPopulation() {

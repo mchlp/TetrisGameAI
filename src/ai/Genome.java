@@ -53,4 +53,12 @@ public class Genome implements Serializable {
     public double getGeneValue(Genes gene) {
         return mGeneList[gene.ordinal()].getmValue();
     }
+
+    public Genome clone() {
+        Gene[] clonedGeneList = new Gene[mGeneList.length];
+        for (int i=0; i<mGeneList.length; i++) {
+            clonedGeneList[i] = mGeneList[i].clone();
+        }
+        return new Genome(clonedGeneList);
+    }
 }
