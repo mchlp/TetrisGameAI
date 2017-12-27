@@ -107,11 +107,11 @@ public class Population implements Serializable {
 
     private void breed(Organism[] parents) {
         int childIndex = 0;
-        for (int i=0; i<mElites.size(); i++) {
+        /*for (int i=0; i<mElites.size(); i++) {
             mOrganisms[childIndex] = mElites.get(0).clone();
             childIndex++;
         }
-        /*for (int i=0; i<(parents.length/3); i++) {
+        for (int i=0; i<(parents.length/3); i++) {
             mOrganisms[childIndex] = parents[i].breed(parents[i+1]);
             childIndex++;
             mOrganisms[childIndex] = parents[i].breed(parents[i+1]);

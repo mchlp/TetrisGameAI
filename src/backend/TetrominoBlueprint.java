@@ -49,13 +49,23 @@ public enum TetrominoBlueprint {
             {0, 0, 0},
     });
 
+    private static final long RANDOM_SEED = 100;
+
     public final int[][] body;
     public final Color colour;
-    private static Random sGenerator =  new Random();
+    private static Random sGenerator;
 
     TetrominoBlueprint(Color colour, int[][] body) {
         this.colour = colour;
         this.body = body;
+    }
+
+    public static void resetGenerator() {
+        if (RANDOM_SEED == 0) {
+            sGenerator = new Random();
+        } else {
+            sGenerator = new Random(RANDOM_SEED);
+        }
     }
 
     public static TetrominoBlueprint getRandomTetrominoBlueprint() {

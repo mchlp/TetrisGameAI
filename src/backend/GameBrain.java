@@ -42,6 +42,7 @@ public class GameBrain {
         mScore = 0;
         mGrid.resetGrid();
         mCurTetromino = null;
+        TetrominoBlueprint.resetGenerator();
     }
 
     public void moveLeft() {

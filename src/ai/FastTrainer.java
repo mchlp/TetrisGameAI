@@ -20,6 +20,7 @@ public class FastTrainer extends Brain {
     private boolean mTraining;
     private long mLastUpdateTime;
     private int mTopScore;
+    private boolean mCurrentlyTraining;
 
     public FastTrainer(GameBrain gameBrain, Population population) {
         super(gameBrain);
@@ -39,13 +40,18 @@ public class FastTrainer extends Brain {
     @Override
     public void update(double deltaTime) {
         if (mTraining) {
-            startGame(mCurOrganism.getmGenome());
-            if (mCurOrganismIndex == mPopulation.getNumOrganisms()-1) {
-                mPopulation.evolve();
-                goToFirstOrganism();
-                mTopScore = 0;
-            } else {
-                prepareNextOrganism();
+            System.out.println(mCurOrganismIndex + " " + mCurrentlyTraining);
+            if (!mCurrentlyTraining) {
+                mCurrentlyTraining = true;
+                startGame(mCurOrganism.getmGenome());
+                if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {
+                    mPopulation.evolve();
+                    goToFirstOrganism();
+                    mTopScore = 0;
+                } else {
+                    prepareNextOrganism();
+                }
+                mCurrentlyTraining = false;
             }
         }
     }

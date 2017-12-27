@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 public class Gene implements Serializable {
 
-    private static final double MUTATION_RATE = 0.3;
+    private static final double MUTATION_RATE = 0.1;
 
     private Genes mType;
     private double mValue;
