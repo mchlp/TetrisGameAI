@@ -19,7 +19,7 @@ public class Organism implements Serializable {
     private UUID mId;
 
     public Organism() {
-        this(Genome.getInitialGenome());
+        this(Genome.getRandomGenome());
     }
 
     public Organism(Genome genome) {
@@ -79,7 +79,6 @@ public class Organism implements Serializable {
 
     public String printFitness() {
         String message = "";
-        message += "-\n";
         message += "Organism - " + mId.toString() + "\n";
         message += "Score: " + mScore + "\n";
         message += "Level: " + mLevel + "\n";
@@ -90,7 +89,6 @@ public class Organism implements Serializable {
 
     public String printGenes() {
         String message = "";
-        message += "-\n";
         message += "Organism - " + mId.toString() + "\n";
         for (Genes geneType : Genes.values()) {
             message += geneType.name() + ": " + mGenome.getGeneValue(geneType) + "\n";

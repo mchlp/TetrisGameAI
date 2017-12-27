@@ -34,13 +34,10 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
 
         mGameBrain = new GameBrain(GameMode.AI_FAST_TRAINER);
 
-        OutputConsole outputConsole = new OutputConsole();
-        outputConsole.setFont(new Font(OUTPUT_CONSOLE_FONT_SIZE));
-
-        mFastTrainer = new FastTrainer(outputConsole, mGameBrain, mPopulation);
+        mFastTrainer = new FastTrainer(mGameBrain, mPopulation);
         mUpdateItems.add(mFastTrainer);
 
-        PopulationStatusSidebar populationStatusSidebar = new PopulationStatusSidebar(DEFAULT_MARGINS, mCanvasHeight, mCanvasWidth, mPopulation, mFastTrainer, outputConsole);
+        PopulationStatusSidebar populationStatusSidebar = new PopulationStatusSidebar(DEFAULT_MARGINS, mCanvasHeight, mCanvasWidth, mPopulation, mFastTrainer);
         setLeft(populationStatusSidebar);
         mUpdateItems.add(populationStatusSidebar);
 

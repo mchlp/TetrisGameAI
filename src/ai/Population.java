@@ -106,11 +106,20 @@ public class Population implements Serializable {
 
 
     private void breed(Organism[] parents) {
+        int childIndex = 0;
         for (int i=0; i<mElites.size(); i++) {
-            mOrganisms[i] = mElites.get(0).clone();
+            mOrganisms[childIndex] = mElites.get(0).clone();
+            childIndex++;
         }
-        for (int i=mElites.size(); i<MAX_NUMBER_OF_ORGANISMS; i++) {
-            mOrganisms[i] = pickRandomOrganism(parents).breed(pickRandomOrganism(parents));
+        /*for (int i=0; i<(parents.length/3); i++) {
+            mOrganisms[childIndex] = parents[i].breed(parents[i+1]);
+            childIndex++;
+            mOrganisms[childIndex] = parents[i].breed(parents[i+1]);
+            childIndex++;
+        }*/
+        while (childIndex < MAX_NUMBER_OF_ORGANISMS) {
+            mOrganisms[childIndex] = pickRandomOrganism(parents).breed(pickRandomOrganism(parents));
+            childIndex++;
         }
     }
 
@@ -141,6 +150,13 @@ public class Population implements Serializable {
 
     public void saveElite(File saveFolder) {
         mElites.get(0).saveToFile(saveFolder);
+    }
+
+    public Organism getElite() {
+        if (mElites.size() == 0) {
+            return null;
+        }
+        return mElites.get(0);
     }
 
     public Organism getOrganism(int index) {

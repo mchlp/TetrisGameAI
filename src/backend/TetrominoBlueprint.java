@@ -51,7 +51,7 @@ public enum TetrominoBlueprint {
 
     public final int[][] body;
     public final Color colour;
-    private static Random sGenerator =  new Random(100);
+    private static Random sGenerator =  new Random();
 
     TetrominoBlueprint(Color colour, int[][] body) {
         this.colour = colour;
