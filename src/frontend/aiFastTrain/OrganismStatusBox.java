@@ -1,6 +1,6 @@
 /*
  * Michael Pu
- * TetrisGameAI - GenomeBox
+ * TetrisGameAI - OrganismStatusBox
  * ICS3U1 - Mr. Radulovic
  * December 26, 2017
  */

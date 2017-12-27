@@ -2,7 +2,7 @@
  * Michael Pu
  * TetrisGameAI - Brain
  * ICS3U1 - Mr. Radulovic
- * December 25, 2017
+ * December 26, 2017
  */
 
 package ai;
@@ -92,6 +92,7 @@ public abstract class Brain implements Updatable {
         rating += genome.getGeneValue(Genes.TOTAL_HEIGHT) * getTotalHeight(grid);
         rating += genome.getGeneValue(Genes.MAX_HEIGHT) * maxHeight;
         rating += genome.getGeneValue(Genes.MIN_MAX_HEIGHT_DIFFERENCE) * (maxHeight - minHeight);
+        rating += genome.getGeneValue(Genes.BLOCKS_TOUCHING_SIDE) * getNumBlocksTouchingSide(grid);
 
         if (getGameOver(grid)) {
             rating -= GAME_OVER_RATING_PENALTY;
@@ -114,6 +115,19 @@ public abstract class Brain implements Updatable {
             }
         }
         return sumHeight;
+    }
+
+    private int getNumBlocksTouchingSide(GameGrid grid) {
+        int numBlocksTouchingSide = 0;
+        for (int i=0; i<grid.getmHeight(); i++) {
+            if (grid.isFilled(0, i)) {
+                numBlocksTouchingSide++;
+            }
+            if (grid.isFilled(grid.getmWidth()-1, i)) {
+                numBlocksTouchingSide++;
+            }
+        }
+        return numBlocksTouchingSide;
     }
 
     private int getSumBlocksAboveHole(GameGrid grid) {

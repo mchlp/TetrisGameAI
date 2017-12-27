@@ -2,12 +2,13 @@
  * Michael Pu
  * TetrisGameAI - Organism
  * ICS3U1 - Mr. Radulovic
- * December 25, 2017
+ * December 26, 2017
  */
 
 package ai;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class Organism implements Serializable {
@@ -16,8 +17,7 @@ public class Organism implements Serializable {
     private int mMaxScore;
     private int mMaxLinesCleared;
     private int mMaxLevel;
-    private int mTotalScore;
-    private int mNumGames;
+    private ArrayList<Integer> mScoreList;
     private UUID mId;
 
     public Organism() {
@@ -29,8 +29,7 @@ public class Organism implements Serializable {
         mMaxScore = 0;
         mMaxLinesCleared = 0;
         mMaxLevel = 0;
-        mTotalScore = 0;
-        mNumGames = 0;
+        mScoreList = new ArrayList<>();
         mGenome = genome;
     }
 
@@ -54,7 +53,7 @@ public class Organism implements Serializable {
     }
 
     public int calculateFitness() {
-        return mTotalScore/ Math.max(mNumGames, 1);
+        return getTotalScore()/(Math.max(mScoreList.size(), 1));
     }
 
     public void setmMaxScore(int mMaxScore) {
@@ -73,6 +72,14 @@ public class Organism implements Serializable {
         this.mMaxLinesCleared = mMaxLinesCleared;
     }
 
+    public int getTotalScore() {
+        int sum = 0;
+        for (int i : mScoreList) {
+            sum += i;
+        }
+        return sum;
+    }
+
     public UUID getmId() {
         return mId;
     }
@@ -88,7 +95,8 @@ public class Organism implements Serializable {
         message += "Max Level: " + mMaxLevel + "\n";
         message += "Max Lines: " + mMaxLinesCleared + "\n";
         message += "Fitness: " + calculateFitness() + "\n";
-        message += "Total Score: " + mTotalScore + "\n";
+        message += "Scores: " + mScoreList.toString() + "\n";
+        message += "Total Score: " + getTotalScore() + "\n";
         return message;
     }
 
@@ -118,10 +126,6 @@ public class Organism implements Serializable {
         return new Organism(mGenome.clone());
     }
 
-    public int getmTotalScore() {
-        return mTotalScore;
-    }
-
     public int getmMaxLinesCleared() {
         return mMaxLinesCleared;
     }
@@ -130,8 +134,7 @@ public class Organism implements Serializable {
         return mMaxLevel;
     }
 
-    public void addTotalScore(int mTotalScore) {
-        this.mTotalScore += mTotalScore;
-        mNumGames++;
+    public void addScore(int score) {
+        mScoreList.add(score);
     }
 }

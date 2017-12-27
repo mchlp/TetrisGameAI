@@ -1,8 +1,8 @@
 /*
  * Michael Pu
- * TetrisGameAI - GameArea
+ * TetrisGameAI - GameBrain
  * ICS3U1 - Mr. Radulovic
- * December 24, 2017
+ * December 26, 2017
  */
 
 package backend;

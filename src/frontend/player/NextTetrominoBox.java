@@ -2,7 +2,7 @@
  * Michael Pu
  * TetrisGameAI - NextTetrominoBox
  * ICS3U1 - Mr. Radulovic
- * December 25, 2017
+ * December 26, 2017
  */
 
 package frontend.player;
@@ -33,11 +33,11 @@ public class NextTetrominoBox extends Canvas implements Updatable {
     }
 
     private void drawCell(double x, double y, double width, double height, Color colour) {
-        mGc.setFill(mGameArea.CELL_OUTLINE_COLOUR);
+        mGc.setFill(GameArea.CELL_OUTLINE_COLOUR);
         mGc.fillRoundRect(x, y, width, height, 5, 5);
         mGc.setFill(colour);
-        mGc.fillRoundRect(x + mGameArea.CELL_OUTLINE_WIDTH, y + mGameArea.CELL_OUTLINE_WIDTH,
-                width - (mGameArea.CELL_OUTLINE_WIDTH * 2), height - (mGameArea.CELL_OUTLINE_WIDTH * 2),
+        mGc.fillRoundRect(x + GameArea.CELL_OUTLINE_WIDTH, y + GameArea.CELL_OUTLINE_WIDTH,
+                width - (GameArea.CELL_OUTLINE_WIDTH * 2), height - (GameArea.CELL_OUTLINE_WIDTH * 2),
                 5, 5);
     }
 

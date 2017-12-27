@@ -2,7 +2,7 @@
  * Michael Pu
  * TetrisGameAI - FastTrainer
  * ICS3U1 - Mr. Radulovic
- * December 25, 2017
+ * December 26, 2017
  */
 
 package ai;
@@ -102,7 +102,7 @@ public class FastTrainer extends Brain {
         if (mCurOrganism.getmMaxScore() > mTopScore) {
             mTopScore = mCurOrganism.getmMaxScore();
         }
-        mCurOrganism.addTotalScore(mGameBrain.getmScore());
+        mCurOrganism.addScore(mGameBrain.getmScore());
     }
 
     private void goToFirstOrganism() {

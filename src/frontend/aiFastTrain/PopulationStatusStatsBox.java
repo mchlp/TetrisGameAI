@@ -1,6 +1,6 @@
 /*
  * Michael Pu
- * TetrisGameAI - PopulationStatusBox
+ * TetrisGameAI - PopulationStatusStatsBox
  * ICS3U1 - Mr. Radulovic
  * December 26, 2017
  */

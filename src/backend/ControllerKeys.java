@@ -1,8 +1,8 @@
 /*
  * Michael Pu
- * TetrisGameAI - Keys
+ * TetrisGameAI - ControllerKeys
  * ICS3U1 - Mr. Radulovic
- * December 23, 2017
+ * December 26, 2017
  */
 
 package backend;
@@ -16,5 +16,5 @@ public enum ControllerKeys {
     RESTART,
     TOGGLE_PAUSE,
     TOGGLE_GRIDLINES,
-    NEXT_LEVEL;
+    NEXT_LEVEL
 }

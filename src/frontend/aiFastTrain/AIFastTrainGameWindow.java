@@ -2,7 +2,7 @@
  * Michael Pu
  * TetrisGameAI - AIFastTrainGameWindow
  * ICS3U1 - Mr. Radulovic
- * December 25, 2017
+ * December 26, 2017
  */
 
 package frontend.aiFastTrain;
@@ -31,8 +31,8 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
 
         File saveFile = new File("/home/mpu/Desktop/fastTestAI.ser");
 
-        //mPopulation = new Population(saveFile);
-        mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
+        mPopulation = new Population(saveFile);
+        //mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
 
         mGameBrain = new GameBrain(GameMode.AI_FAST_TRAINER);
 
