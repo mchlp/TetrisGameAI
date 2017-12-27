@@ -71,8 +71,8 @@ public class Game extends Application {
         timer.start();
 
         //startPlayerGame(height, width);
-        //startAITrain(height, width);
-        startAIFastTrain(height, width);
+        startAITrain(height, width);
+        //startAIFastTrain(height, width);
         //startAIWatch(height, width);
     }
 

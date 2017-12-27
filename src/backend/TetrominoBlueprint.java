@@ -49,7 +49,7 @@ public enum TetrominoBlueprint {
             {0, 0, 0},
     });
 
-    private static final long RANDOM_SEED = 100;
+    private static final long RANDOM_SEED = 0;
 
     public final int[][] body;
     public final Color colour;

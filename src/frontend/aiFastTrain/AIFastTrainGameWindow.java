@@ -30,7 +30,9 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
         super(height, width, GameMode.AI_FAST_TRAINER);
 
         File saveFile = new File("/home/mpu/Desktop/fastTestAI.ser");
-        mPopulation = new Population(saveFile);
+
+        //mPopulation = new Population(saveFile);
+        mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
 
         mGameBrain = new GameBrain(GameMode.AI_FAST_TRAINER);
 
