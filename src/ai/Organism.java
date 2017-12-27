@@ -84,9 +84,9 @@ public class Organism implements Serializable {
     public String printFitness() {
         String message = "";
         message += "Organism - " + mId.toString() + "\n";
-        message += "Score: " + mMaxScore + "\n";
-        message += "Level: " + mMaxLevel + "\n";
-        message += "Lines: " + mMaxLinesCleared + "\n";
+        message += "Max Score: " + mMaxScore + "\n";
+        message += "Max Level: " + mMaxLevel + "\n";
+        message += "Max Lines: " + mMaxLinesCleared + "\n";
         message += "Fitness: " + calculateFitness() + "\n";
         message += "Total Score: " + mTotalScore + "\n";
         return message;

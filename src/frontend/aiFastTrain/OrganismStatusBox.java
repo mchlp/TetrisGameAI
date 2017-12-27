@@ -31,6 +31,6 @@ public class OrganismStatusBox extends TextArea implements Updatable {
 
     @Override
     public void update(double deltaTime) {
-        setText(mOrganism.printGenes() + mOrganism.printFitness());
+        setText(mOrganism.printGenes() + "\n" + mOrganism.printFitness());
     }
 }
