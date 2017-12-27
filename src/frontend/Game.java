@@ -70,9 +70,9 @@ public class Game extends Application {
         prevTime = System.nanoTime();
         timer.start();
 
-        startPlayerGame(height, width);
+        //startPlayerGame(height, width);
         //startAITrain(height, width);
-        //startAIFastTrain(height, width);
+        startAIFastTrain(height, width);
         //startAIWatch(height, width);
     }
 

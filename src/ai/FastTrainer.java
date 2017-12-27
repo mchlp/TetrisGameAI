@@ -51,6 +51,7 @@ public class FastTrainer extends Brain {
                 startGame(mCurOrganism.getmGenome());
                 mGameNum++;
             } else {
+                mCurOrganism.setmGeneration(mPopulation.getmGeneration());
                 if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {
                     mPopulation.evolve();
                     goToFirstOrganism();

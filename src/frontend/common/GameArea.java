@@ -22,6 +22,7 @@ public class GameArea extends Canvas implements Updatable {
     public static final Color CELL_OUTLINE_COLOUR = Color.BLACK;
     private static final Color LINE_COLOUR = Color.GREY;
     private static final double LINE_WIDTH = 0.5;
+    private static final int MAX_SPEED_LEVEL = 20;
 
     private double mWidth;
     private double mHeight;
@@ -171,8 +172,9 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     private double calculateDropSpeed() {
+        int dropSpeedLevel = Math.min(mGameBrain.getmLevel(), MAX_SPEED_LEVEL);
         // return -0.04242*mLevel + 0.6884;
-        return (725 * Math.pow(0.85, mGameBrain.getmLevel()) + mGameBrain.getmLevel()) / 1000;
+        return (725 * Math.pow(0.85, dropSpeedLevel) + dropSpeedLevel) / 1000;
         //return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
     }
 

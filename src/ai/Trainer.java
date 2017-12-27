@@ -29,6 +29,18 @@ public class Trainer extends GUIBrain {
                 mPopulation.addmTrainTime(deltaTime);
                 break;
             case OVER:
+                if (mGameBrain.getmScore() > mCurOrganism.getmMaxScore()) {
+                    mCurOrganism.setmMaxScore(mGameBrain.getmScore());
+                }
+                if (mGameBrain.getmLevel() > mCurOrganism.getmMaxLevel()) {
+                    mCurOrganism.setmMaxLevel(mGameBrain.getmLevel());
+                }
+                if (mGameBrain.getmNumLinesCleared() > mCurOrganism.getmMaxLinesCleared()) {
+                    mCurOrganism.setmMaxLinesCleared(mGameBrain.getmNumLinesCleared());
+                }
+                mCurOrganism.addScore(mGameBrain.getmScore());
+                mCurOrganism.setmGeneration(mPopulation.getmGeneration());
+
                 if (mCurOrganismIndex == mPopulation.getNumOrganisms()-1) {
                     mPopulation.evolve();
                     goToFirstOrganism();

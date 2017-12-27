@@ -19,7 +19,6 @@ public class GameBrain {
     public static final int NUM_COLS = 10;
     public static final int LINES_CLEAR_FOR_LEVEL_UP = 10;
     private static final int[] LINE_CLEAR_SCORING = {0, 40, 100, 300, 1200};
-    private static final int MAX_LEVEL = 20;
 
     private GameGrid mGrid;
     private Tetromino mCurTetromino;
@@ -100,9 +99,7 @@ public class GameBrain {
     }
 
     public void incrementLevel() {
-        if (mLevel < MAX_LEVEL) {
-            mLevel++;
-        }
+        mLevel++;
     }
 
     public GameGrid getmGrid() {

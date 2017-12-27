@@ -2,10 +2,10 @@
  * Michael Pu
  * TetrisGameAI - OrganismStatusBox
  * ICS3U1 - Mr. Radulovic
- * December 26, 2017
+ * December 27, 2017
  */
 
-package frontend.aiFastTrain;
+package frontend.common;
 
 import ai.Organism;
 import backend.Updatable;

@@ -17,6 +17,7 @@ public class Organism implements Serializable {
     private int mMaxScore;
     private int mMaxLinesCleared;
     private int mMaxLevel;
+    private int mGeneration;
     private ArrayList<Integer> mScoreList;
     private String mName;
 
@@ -30,6 +31,7 @@ public class Organism implements Serializable {
         mMaxLinesCleared = 0;
         mMaxLevel = 0;
         mScoreList = new ArrayList<>();
+        mGeneration = -1;
         mGenome = genome;
     }
 
@@ -88,6 +90,7 @@ public class Organism implements Serializable {
     public String getStatus() {
         String message = "";
         message += "ORGANISM NAME\n" + mName + "\n\n";
+        message += "Generation: " + mGeneration + "\n";
         message += "Max Score: " + mMaxScore + "\n";
         message += "Max Level: " + mMaxLevel + "\n";
         message += "Max Lines: " + mMaxLinesCleared + "\n";
@@ -128,5 +131,9 @@ public class Organism implements Serializable {
 
     public void addScore(int score) {
         mScoreList.add(score);
+    }
+
+    public void setmGeneration(int mGeneration) {
+        this.mGeneration = mGeneration;
     }
 }

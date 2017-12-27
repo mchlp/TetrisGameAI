@@ -10,8 +10,7 @@ package frontend.aiFastTrain;
 import ai.FastTrainer;
 import ai.Population;
 import frontend.base.Sidebar;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import frontend.common.OrganismStatusBox;
 
 public class PopulationStatusSidebar extends Sidebar {
 
