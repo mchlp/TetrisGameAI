@@ -72,8 +72,8 @@ public class Game extends Application {
 
         //startPlayerGame(height, width);
         //startAITrain(height, width);
-        startAIFastTrain(height, width);
-        //startAIWatch(height, width);
+        //startAIFastTrain(height, width);
+        startAIWatch(height, width);
     }
 
     public void startAIFastTrain(double height, double width) {

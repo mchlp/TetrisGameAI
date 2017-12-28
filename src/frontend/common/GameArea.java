@@ -9,9 +9,11 @@ package frontend.common;
 
 import backend.GameBrain;
 import backend.Updatable;
+import backend.Utilities;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.GaussianBlur;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
@@ -34,9 +36,11 @@ public class GameArea extends Canvas implements Updatable {
     private boolean mShowGridlines;
     private GameBrain mGameBrain;
     private double mElapsedTime;
+    private AudioClip mBackgroundMusic;
 
     public GameArea(double width, double height, Color bgColour, GameMode gameMode) {
         super(width, height);
+        mBackgroundMusic = new AudioClip(Utilities.getResourceAsURLString(Utilities.AUDIO_BACKGROUND_MUSIC));
         mGameBrain = new GameBrain(gameMode);
         mHeight = height;
         mWidth = width;
@@ -80,6 +84,7 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     void togglePause() {
+        mBackgroundMusic.stop();
         mGameBrain.togglePause();
     }
 
@@ -104,10 +109,6 @@ public class GameArea extends Canvas implements Updatable {
             mGc.fillRoundRect(x * mCellWidth + CELL_OUTLINE_WIDTH, screenY * mCellHeight + CELL_OUTLINE_WIDTH,
                     mCellWidth - (CELL_OUTLINE_WIDTH * 2), mCellHeight - (CELL_OUTLINE_WIDTH * 2), 5, 5);
         }
-    }
-
-    public void updateStats() {
-        mGameBrain.updateStats();
     }
 
     void spawnTetromino() {
@@ -159,6 +160,9 @@ public class GameArea extends Canvas implements Updatable {
 
     public void update(double deltaTime) {
         if (mGameBrain.getmGameState() == GameState.PLAYING) {
+            if (!mBackgroundMusic.isPlaying()) {
+                mBackgroundMusic.play();
+            }
             mElapsedTime += deltaTime;
             if (mGameBrain.getmCurTetromino() != null) {
                 mTetrominoUpdateTime -= deltaTime;
