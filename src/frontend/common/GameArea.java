@@ -171,6 +171,10 @@ public class GameArea extends Canvas implements Updatable {
                     mTetrominoUpdateTime = calculateDropSpeed();
                 }
             }
+        } else {
+            if (mBackgroundMusic.isPlaying()) {
+                mBackgroundMusic.stop();
+            }
         }
         drawGame();
     }
