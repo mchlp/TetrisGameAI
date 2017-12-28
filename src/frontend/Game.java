@@ -7,18 +7,18 @@
 
 package frontend;
 
+import ai.Organism;
 import backend.ControllerKeys;
 import backend.Updatable;
 import frontend.aiFastTrain.AIFastTrainGameWindow;
 import frontend.aiTrain.AITrainGameWindow;
 import frontend.aiWatch.AIWatchGameWindow;
+import frontend.base.GameWindow;
 import frontend.common.GameController;
 import backend.GameMode;
 import frontend.player.PlayerGameWindow;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -26,7 +26,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import menu.Menu;
 import menu.MenuScreen;
 
 import java.util.ArrayList;
@@ -36,12 +36,13 @@ public class Game extends Application {
     private static final double WINDOW_PERCENTAGE_OF_SCREEN = 0.8;
 
     private long prevTime;
-    private AnimationTimer mMenuTimer;
-    private AnimationTimer mTimer;
+    private AnimationTimer menuTimer;
+    private AnimationTimer gameTimer;
 
     private Stage primaryStage;
     private Scene scene;
     private ArrayList<Updatable> updateItems;
+    private GameWindow gameWindow;
 
     public static void main(String[] args) {
         launch(args);
@@ -50,18 +51,16 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        //startBasicGame();
+        //startGame();
         showMenu();
     }
 
     public void showMenu() {
-        Stage menuDialog = new Stage();
-
-        MenuScreen menuScreen = new MenuScreen();
+        MenuScreen menuScreen = new MenuScreen(primaryStage);
         Scene menuScene = new Scene(menuScreen);
-        menuDialog.setScene(menuScene);
-        menuDialog.setResizable(false);
-        menuDialog.show();
+        primaryStage.setScene(menuScene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
 
         menuScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
@@ -74,20 +73,19 @@ public class Game extends Application {
             }
         });
 
-        mMenuTimer = new AnimationTimer() {
+        menuTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (menuScreen.getmGameMode() != GameMode.MAIN_MENU) {
-                    menuDialog.hide();
-                    mMenuTimer.stop();
-                    startBasicGame(menuScreen.getmGameMode());
+                    menuTimer.stop();
+                    startGame(menuScreen.getmGameMode(), menuScreen.getmMenu());
                 }
             }
         };
-        mMenuTimer.start();
+        menuTimer.start();
     }
 
-    public void startBasicGame(GameMode gameMode) {
+    public void startGame(GameMode gameMode, Menu menu) {
         updateItems = new ArrayList<>();
 
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -95,21 +93,6 @@ public class Game extends Application {
 
         double height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
         double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
-
-        primaryStage.setResizable(false);
-        primaryStage.show();
-
-        mTimer = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                double deltaTime = (now - prevTime) / 1E9;
-                onUpdate(deltaTime);
-                prevTime = now;
-            }
-        };
-
-        prevTime = System.nanoTime();
-        mTimer.start();
 
         switch (gameMode) {
             case PLAYER:
@@ -122,49 +105,62 @@ public class Game extends Application {
                 startAIFastTrain(height, width);
                 break;
             case AI_WATCHER:
-                startAIWatch(height, width);
+                Organism loadedOrganism = (Organism) menu.getmLoadedObject();
+                startAIWatch(loadedOrganism, height, width);
                 break;
         }
+
+        updateItems.add(gameWindow);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle(gameWindow.getmWindowTitle());
+        primaryStage.setResizable(false);
+        primaryStage.show();
+
+        gameTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                double deltaTime = (now - prevTime) / 1E9;
+                onUpdate(deltaTime);
+                prevTime = now;
+
+                if (gameWindow.getmGameMode() == GameMode.MAIN_MENU) {
+                    gameTimer.stop();
+                    primaryStage.hide();
+                    showMenu();
+                }
+            }
+        };
+
+        prevTime = System.nanoTime();
+        gameTimer.start();
     }
 
     public void startAIFastTrain(double height, double width) {
-        AIFastTrainGameWindow aiFastTrainGameWindow = new AIFastTrainGameWindow(height, width);
-        updateItems.add(aiFastTrainGameWindow);
-        scene = new Scene(aiFastTrainGameWindow);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Tetris Game - AI Fast Train Version");
+        gameWindow = new AIFastTrainGameWindow(height, width);
+        scene = new Scene(gameWindow);
     }
 
     public void startAITrain(double height, double width) {
-        AITrainGameWindow aiTrainGameWindow = new AITrainGameWindow(height, width);
-        updateItems.add(aiTrainGameWindow);
-        scene = new Scene(aiTrainGameWindow);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Tetris Game - AI Train Version");
+        gameWindow = new AITrainGameWindow(height, width);
+        scene = new Scene(gameWindow);
     }
 
-    public void startAIWatch(double height, double width) {
-        AIWatchGameWindow aiWatchGameWindow = new AIWatchGameWindow(height, width);
-        updateItems.add(aiWatchGameWindow);
-        scene = new Scene(aiWatchGameWindow);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Tetris Game - AI Watch Version");
+    public void startAIWatch(Organism organism, double height, double width) {
+        gameWindow = new AIWatchGameWindow(organism, height, width);
+        scene = new Scene(gameWindow);
     }
 
 
     public void startPlayerGame(double height, double width) {
 
-        PlayerGameWindow playerGameWindow = new PlayerGameWindow(height, width);
-        updateItems.add(playerGameWindow);
-        scene = new Scene(playerGameWindow);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Tetris Game - Player Version");
+        gameWindow = new PlayerGameWindow(height, width);
+        scene = new Scene(gameWindow);
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent keyPressed) {
                 KeyCode code = keyPressed.getCode();
-                GameController gameController = playerGameWindow.getmGameController();
+                GameController gameController = ((PlayerGameWindow) gameWindow).getmGameController();
                 //System.out.println(code);
                 switch (code) {
                     case LEFT:

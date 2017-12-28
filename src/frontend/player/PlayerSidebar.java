@@ -8,6 +8,7 @@
 package frontend.player;
 
 import backend.ControllerKeys;
+import frontend.base.GameWindow;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import frontend.common.GameController;
@@ -19,8 +20,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class PlayerSidebar extends Sidebar {
-    public PlayerSidebar(GameArea gameArea, GameController gameController, double margins, double sideBarHeight, double sideBarWidth, Color gameBgColour) {
-        super(margins, sideBarHeight, sideBarWidth);
+    public PlayerSidebar(GameWindow gameWindow, GameArea gameArea, GameController gameController, double margins, double sideBarHeight, double sideBarWidth, Color gameBgColour) {
+        super(gameWindow, margins, sideBarHeight, sideBarWidth);
 
         NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth / 2, gameBgColour);
         getChildren().add(nextTetrominoBox);
@@ -30,18 +31,16 @@ public class PlayerSidebar extends Sidebar {
         getChildren().add(playerStatsBox);
         mUpdateItems.add(playerStatsBox);
 
-        HBox buttonBar = new HBox(10);
-        buttonBar.setAlignment(Pos.CENTER);
-        getChildren().add(buttonBar);
+        addButtonBar();
 
         Button restartButton = new Button("Restart");
-        buttonBar.getChildren().add(restartButton);
+        mButtonBar.getChildren().add(restartButton);
 
         Button pauseButton = new Button("Toggle Pause");
-        buttonBar.getChildren().add(pauseButton);
+        mButtonBar.getChildren().add(pauseButton);
 
         Button gridlinesButton = new Button("Toggle Gridlines");
-        buttonBar.getChildren().add(gridlinesButton);
+        mButtonBar.getChildren().add(gridlinesButton);
 
         restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

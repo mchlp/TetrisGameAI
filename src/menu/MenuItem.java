@@ -19,6 +19,9 @@ public class MenuItem extends BorderPane {
 
     private static final int PADDING_SIZE = 10;
 
+    private static final Color SELECTED_COLOUR = Color.GREEN;
+    private static final Color NORMAL_COLOUR = Color.LIGHTGREEN;
+
     private Text mText;
 
     public MenuItem(String text) {
@@ -27,7 +30,7 @@ public class MenuItem extends BorderPane {
 
         setPadding(new Insets(PADDING_SIZE));
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
-        setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(NORMAL_COLOUR, CornerRadii.EMPTY, Insets.EMPTY)));
 
         setOnMouseEntered(new EventHandler<MouseEvent>() {
             @Override
@@ -45,12 +48,12 @@ public class MenuItem extends BorderPane {
     }
 
     private void mouseEnter() {
-        setBackground(new Background(new BackgroundFill(Color.GREY, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(SELECTED_COLOUR, CornerRadii.EMPTY, Insets.EMPTY)));
         getScene().setCursor(Cursor.HAND);
     }
 
     private void mouseExit() {
-        setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(NORMAL_COLOUR, CornerRadii.EMPTY, Insets.EMPTY)));
         getScene().setCursor(Cursor.DEFAULT);
     }
 }

@@ -26,6 +26,8 @@ public class AITrainGameWindow extends GameWindow {
     public AITrainGameWindow(double height, double width) {
         super(height, width, GameMode.AI_TRAINER);
 
+        mWindowTitle = "Tetris Game - AI Train Version";
+
         File saveFile = new File("/home/mpu/Desktop/testAI.ser");
         mPopulation = new Population(saveFile);
         //mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
@@ -33,7 +35,7 @@ public class AITrainGameWindow extends GameWindow {
         Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         mGamePane.getChildren().add(gameAreaBackground);
 
-        mGameArea = new GameArea(mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
+        mGameArea = new GameArea(mBackgroundMusic, mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
         mGamePane.getChildren().add(mGameArea);
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
@@ -41,7 +43,7 @@ public class AITrainGameWindow extends GameWindow {
         mTrainer = new Trainer(mGameArea.getmGameBrain(), mGameController, mPopulation);
         mUpdateItems.add(mTrainer);
 
-        AITrainSidebar aiTrainSidebar = new AITrainSidebar(mGameArea, mTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
+        AITrainSidebar aiTrainSidebar = new AITrainSidebar(this, mGameArea, mTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiTrainSidebar);
         mUpdateItems.add(aiTrainSidebar);
     }

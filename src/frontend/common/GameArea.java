@@ -12,6 +12,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
@@ -34,11 +36,11 @@ public class GameArea extends Canvas implements Updatable {
     private boolean mShowGridlines;
     private GameBrain mGameBrain;
     private double mElapsedTime;
-    private AudioClip mBackgroundMusic;
+    private MediaPlayer mBackgroundMusic;
 
-    public GameArea(double width, double height, Color bgColour, GameMode gameMode) {
+    public GameArea(MediaPlayer backgroundMusic, double width, double height, Color bgColour, GameMode gameMode) {
         super(width, height);
-        mBackgroundMusic = new AudioClip(Utilities.getResourceAsURLString(Utilities.AUDIO_BACKGROUND_MUSIC));
+        mBackgroundMusic = backgroundMusic;
         mGameBrain = new GameBrain(gameMode);
         mHeight = height;
         mWidth = width;
@@ -52,6 +54,7 @@ public class GameArea extends Canvas implements Updatable {
 
     private void newGame() {
         mBackgroundMusic.stop();
+        mBackgroundMusic.play();
         mGameBrain.newGame();
         mElapsedTime = 0;
         spawnTetromino();
@@ -83,7 +86,7 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     void togglePause() {
-        mBackgroundMusic.stop();
+        mBackgroundMusic.pause();
         mGameBrain.togglePause();
     }
 
@@ -159,9 +162,6 @@ public class GameArea extends Canvas implements Updatable {
 
     public void update(double deltaTime) {
         if (mGameBrain.getmGameState() == GameState.PLAYING) {
-            if (!mBackgroundMusic.isPlaying()) {
-                mBackgroundMusic.play();
-            }
             mElapsedTime += deltaTime;
             if (mGameBrain.getmCurTetromino() != null) {
                 mTetrominoUpdateTime -= deltaTime;
@@ -171,9 +171,7 @@ public class GameArea extends Canvas implements Updatable {
                 }
             }
         } else {
-            if (mBackgroundMusic.isPlaying()) {
-                mBackgroundMusic.stop();
-            }
+            mBackgroundMusic.stop();
         }
         drawGame();
     }

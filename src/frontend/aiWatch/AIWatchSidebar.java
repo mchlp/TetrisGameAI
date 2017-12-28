@@ -9,6 +9,7 @@ package frontend.aiWatch;
 
 import ai.Watcher;
 import backend.ControllerKeys;
+import frontend.base.GameWindow;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import frontend.common.OrganismStatusBox;
@@ -21,21 +22,23 @@ public class AIWatchSidebar extends Sidebar{
     private OrganismStatusBox mOrganismStatusBox;
     private Watcher mWatcher;
 
-    public AIWatchSidebar(GameArea gameArea, Watcher watcher, double margins, double sideBarHeight, double sideBarWidth) {
-        super(margins, sideBarHeight, sideBarWidth);
+    public AIWatchSidebar(GameWindow gameWindow, GameArea gameArea, Watcher watcher, double margins, double sideBarHeight, double sideBarWidth) {
+        super(gameWindow, margins, sideBarHeight, sideBarWidth);
 
         mWatcher = watcher;
 
         AIWatchStatsBox aiWatchStatsBox = new AIWatchStatsBox(gameArea, mWatcher);
         getChildren().add(aiWatchStatsBox);
-        mUpdateItems.add(aiWatchStatsBox);
+        mUpdateItems.add(0, aiWatchStatsBox);
 
         mOrganismStatusBox = new OrganismStatusBox("Current AI", mWatcher.getmCurOrganism());
         getChildren().add(mOrganismStatusBox);
-        mUpdateItems.add(mOrganismStatusBox);
+        mUpdateItems.add(0, mOrganismStatusBox);
+
+        addButtonBar();
 
         Button restartButton = new Button("Restart");
-        getChildren().add(restartButton);
+        mButtonBar.getChildren().add(restartButton);
 
         restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

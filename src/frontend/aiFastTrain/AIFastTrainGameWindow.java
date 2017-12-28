@@ -27,6 +27,8 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
     public AIFastTrainGameWindow(double height, double width) {
         super(height, width, GameMode.AI_FAST_TRAINER);
 
+        mWindowTitle = "Tetris Game - AI Fast Train Version";
+
         File saveFile = new File("/home/mpu/Desktop/fastTestAI.ser");
 
         //mPopulation = new Population(saveFile);
@@ -41,7 +43,7 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
         setLeft(populationStatusSidebar);
         mUpdateItems.add(populationStatusSidebar);
 
-        AIFastTrainSidebar aiFastTrainSidebar = new AIFastTrainSidebar(mGameBrain, mFastTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
+        AIFastTrainSidebar aiFastTrainSidebar = new AIFastTrainSidebar(this, mGameBrain, mFastTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiFastTrainSidebar);
         mUpdateItems.add(aiFastTrainSidebar);
     }

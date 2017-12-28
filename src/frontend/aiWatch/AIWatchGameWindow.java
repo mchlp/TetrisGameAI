@@ -22,13 +22,13 @@ public class AIWatchGameWindow extends GameWindow {
     private Organism mOrganism;
     private GameArea mGameArea;
 
-    public AIWatchGameWindow(double height, double width) {
+    public AIWatchGameWindow(Organism organism, double height, double width) {
         super(height, width, GameMode.AI_WATCHER);
 
-        File orgFile = new File("/home/mpu/Desktop/alpha.org.ser");
-        Organism mOrganism = Organism.loadOrganismFromFile(orgFile);
+        mWindowTitle = "Tetris Game - AI Watch Version";
+        mOrganism = organism;
 
-        mGameArea = new GameArea(mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
+        mGameArea = new GameArea(mBackgroundMusic, mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
         mGamePane.getChildren().add(mGameArea);
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
@@ -36,7 +36,7 @@ public class AIWatchGameWindow extends GameWindow {
         mWatcher = new Watcher(mGameArea.getmGameBrain(), mGameController, mOrganism);
         mUpdateItems.add(mWatcher);
 
-        AIWatchSidebar aiWatchSidebar = new AIWatchSidebar(mGameArea, mWatcher, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
+        AIWatchSidebar aiWatchSidebar = new AIWatchSidebar(this, mGameArea, mWatcher, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiWatchSidebar);
         mUpdateItems.add(aiWatchSidebar);
     }

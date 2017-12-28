@@ -8,10 +8,13 @@
 package frontend.base;
 
 import backend.Updatable;
+import backend.Utilities;
 import frontend.common.GameController;
 import backend.GameMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
@@ -32,11 +35,17 @@ public abstract class GameWindow extends BorderPane implements Updatable {
     protected GameController mGameController;
     protected StackPane mGamePane;
     protected GameMode mGameMode;
+    protected String mWindowTitle;
+    protected MediaPlayer mBackgroundMusic;
 
     public GameWindow(double height, double width, GameMode gameMode) {
 
         mUpdateItems = new ArrayList<>();
         mGameMode = gameMode;
+        mWindowTitle = "Game Window";
+
+        mBackgroundMusic = new MediaPlayer(new Media(Utilities.getResourceAsURLString(Utilities.AUDIO_BACKGROUND_MUSIC)));
+        mBackgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
 
         setPrefHeight(height);
         setPrefWidth(width);
@@ -56,9 +65,21 @@ public abstract class GameWindow extends BorderPane implements Updatable {
         setLeft(mGamePane);
     }
 
+    public GameMode getmGameMode() {
+        return mGameMode;
+    }
+
+    public String getmWindowTitle() {
+        return mWindowTitle;
+    }
+
     public void update(double deltaTime) {
         for (Updatable updatable : mUpdateItems) {
             updatable.update(deltaTime);
         }
+    }
+
+    public MediaPlayer getmBackgroundMusic() {
+        return mBackgroundMusic;
     }
 }

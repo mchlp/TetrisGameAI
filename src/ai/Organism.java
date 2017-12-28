@@ -27,24 +27,19 @@ public class Organism implements Serializable {
 
     public Organism(Genome genome) {
         mName = UUID.randomUUID().toString();
+        mGeneration = -1;
         mMaxScore = 0;
         mMaxLinesCleared = 0;
         mMaxLevel = 0;
         mScoreList = new ArrayList<>();
-        mGeneration = -1;
         mGenome = genome;
     }
 
-    public static Organism loadOrganismFromFile(File loadFile) {
-        try {
+    public static Organism loadOrganismFromFile(File loadFile) throws IOException, ClassNotFoundException {
             FileInputStream fileIn = new FileInputStream(loadFile);
             ObjectInputStream in = new ObjectInputStream(fileIn);
             Organism loadedOrganism = (Organism) in.readObject();
             return loadedOrganism;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
     }
 
     public Organism breed(Organism otherParent) {
