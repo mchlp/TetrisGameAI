@@ -13,9 +13,12 @@ import frontend.aiFastTrain.AIFastTrainGameWindow;
 import frontend.aiTrain.AITrainGameWindow;
 import frontend.aiWatch.AIWatchGameWindow;
 import frontend.common.GameController;
+import backend.GameMode;
 import frontend.player.PlayerGameWindow;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
@@ -23,6 +26,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import menu.MenuScreen;
 
 import java.util.ArrayList;
 
@@ -31,6 +36,8 @@ public class Game extends Application {
     private static final double WINDOW_PERCENTAGE_OF_SCREEN = 0.8;
 
     private long prevTime;
+    private AnimationTimer mMenuTimer;
+    private AnimationTimer mTimer;
 
     private Stage primaryStage;
     private Scene scene;
@@ -43,10 +50,44 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        startBasicGame();
+        //startBasicGame();
+        showMenu();
     }
 
-    public void startBasicGame() {
+    public void showMenu() {
+        Stage menuDialog = new Stage();
+
+        MenuScreen menuScreen = new MenuScreen();
+        Scene menuScene = new Scene(menuScreen);
+        menuDialog.setScene(menuScene);
+        menuDialog.setResizable(false);
+        menuDialog.show();
+
+        menuScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyPressed) {
+                switch (keyPressed.getCode()) {
+                    case A:
+                        menuScreen.toggleAdvanced();
+                        break;
+                }
+            }
+        });
+
+        mMenuTimer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                if (menuScreen.getmGameMode() != GameMode.MAIN_MENU) {
+                    menuDialog.hide();
+                    mMenuTimer.stop();
+                    startBasicGame(menuScreen.getmGameMode());
+                }
+            }
+        };
+        mMenuTimer.start();
+    }
+
+    public void startBasicGame(GameMode gameMode) {
         updateItems = new ArrayList<>();
 
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
@@ -58,7 +99,7 @@ public class Game extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        AnimationTimer timer = new AnimationTimer() {
+        mTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 double deltaTime = (now - prevTime) / 1E9;
@@ -68,12 +109,22 @@ public class Game extends Application {
         };
 
         prevTime = System.nanoTime();
-        timer.start();
+        mTimer.start();
 
-        //startPlayerGame(height, width);
-        //startAITrain(height, width);
-        //startAIFastTrain(height, width);
-        startAIWatch(height, width);
+        switch (gameMode) {
+            case PLAYER:
+                startPlayerGame(height, width);
+                break;
+            case AI_TRAINER:
+                startAITrain(height, width);
+                break;
+            case AI_FAST_TRAINER:
+                startAIFastTrain(height, width);
+                break;
+            case AI_WATCHER:
+                startAIWatch(height, width);
+                break;
+        }
     }
 
     public void startAIFastTrain(double height, double width) {

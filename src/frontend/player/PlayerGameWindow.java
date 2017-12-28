@@ -10,7 +10,7 @@ package frontend.player;
 import frontend.base.GameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
-import frontend.common.GameMode;
+import backend.GameMode;
 import javafx.scene.shape.Rectangle;
 
 public class PlayerGameWindow extends GameWindow {

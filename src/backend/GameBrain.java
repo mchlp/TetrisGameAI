@@ -8,8 +8,6 @@
 package backend;
 
 import frontend.common.GameGrid;
-import frontend.common.GameMode;
-import frontend.common.GameState;
 import frontend.common.Tetromino;
 
 public class GameBrain {

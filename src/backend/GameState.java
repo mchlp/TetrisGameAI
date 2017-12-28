@@ -5,7 +5,7 @@
  * December 26, 2017
  */
 
-package frontend.common;
+package backend;
 
 import javafx.scene.paint.Color;
 

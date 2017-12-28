@@ -9,7 +9,7 @@ package ai;
 
 import backend.ControllerKeys;
 import backend.GameBrain;
-import frontend.common.GameState;
+import backend.GameState;
 import java.util.ArrayList;
 
 public class FastTrainer extends Brain {

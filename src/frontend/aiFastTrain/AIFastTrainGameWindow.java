@@ -12,7 +12,7 @@ import ai.Population;
 import backend.GameBrain;
 import backend.Updatable;
 import frontend.base.GameWindow;
-import frontend.common.GameMode;
+import backend.GameMode;
 
 import java.io.File;
 

@@ -9,7 +9,7 @@ package frontend.base;
 
 import backend.Updatable;
 import frontend.common.GameController;
-import frontend.common.GameMode;
+import backend.GameMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;

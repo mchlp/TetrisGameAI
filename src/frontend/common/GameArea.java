@@ -7,9 +7,7 @@
 
 package frontend.common;
 
-import backend.GameBrain;
-import backend.Updatable;
-import backend.Utilities;
+import backend.*;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.GaussianBlur;
@@ -53,6 +51,7 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     private void newGame() {
+        mBackgroundMusic.stop();
         mGameBrain.newGame();
         mElapsedTime = 0;
         spawnTetromino();

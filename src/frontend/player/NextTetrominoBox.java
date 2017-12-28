@@ -9,7 +9,7 @@ package frontend.player;
 
 import backend.Updatable;
 import frontend.common.GameArea;
-import frontend.common.GameState;
+import backend.GameState;
 import frontend.common.Tetromino;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;

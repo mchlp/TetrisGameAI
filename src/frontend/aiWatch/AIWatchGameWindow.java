@@ -12,7 +12,7 @@ import ai.Watcher;
 import frontend.base.GameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
-import frontend.common.GameMode;
+import backend.GameMode;
 
 import java.io.File;
 

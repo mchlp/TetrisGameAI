@@ -12,7 +12,7 @@ import ai.Trainer;
 import frontend.base.GameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
-import frontend.common.GameMode;
+import backend.GameMode;
 import javafx.scene.shape.Rectangle;
 
 import java.io.File;
