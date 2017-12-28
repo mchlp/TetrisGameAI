@@ -24,7 +24,7 @@ public class AIFastTrainSidebar extends Sidebar {
         getChildren().add(aiFastTrainStatsBox);
         mUpdateItems.add(aiFastTrainStatsBox);
 
-        Button pauseButton = new Button("Toggle Pause");
+        Button pauseButton = new Button("Pause");
         getChildren().add(pauseButton);
 
         Button saveEliteButton = new Button("Save Elite");
@@ -33,7 +33,13 @@ public class AIFastTrainSidebar extends Sidebar {
         pauseButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
-                fastTrainer.toggleTraining();
+                if (fastTrainer.ismTraining()) {
+                    fastTrainer.setmTraining(false);
+                    pauseButton.setText("Play");
+                } else {
+                    fastTrainer.setmTraining(true);
+                    pauseButton.setText("Pause");
+                }
             }
         });
 

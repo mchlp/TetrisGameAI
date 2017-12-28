@@ -34,7 +34,7 @@ public abstract class StatsBox extends VBox implements Updatable {
         mScoreBar = new StatsBar("Score", "0");
         getChildren().add(mScoreBar);
 
-        mLinesBar = new StatsBar("Lines", "0");
+        mLinesBar = new StatsBar("Lines Cleared", "0");
         getChildren().add(mLinesBar);
 
         mLevelBar = new StatsBar("Level", "0");

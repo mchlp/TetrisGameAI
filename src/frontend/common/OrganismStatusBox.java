@@ -20,7 +20,7 @@ public class OrganismStatusBox extends VBox implements Updatable {
 
     private static final int TEXT_FONT_SIZE = 11;
     private static final int TITLE_FONT_SIZE = 15;
-    private static final int MAX_NUMBER_OF_ROWS = 23;
+    private static final int MAX_NUMBER_OF_ROWS = 27;
     private static final int ELEMENT_SPACING = 10;
     private static final int PADDING_SIZE = 10;
     private static final String DEFAULT_STYLE = "" +
@@ -44,6 +44,7 @@ public class OrganismStatusBox extends VBox implements Updatable {
         mTextArea = new TextArea();
         mTextArea.setPrefRowCount(MAX_NUMBER_OF_ROWS);
         mTextArea.setFont(new Font(TEXT_FONT_SIZE));
+        mTextArea.setWrapText(true);
         getChildren().add(mTextArea);
 
         mOrganism = organism;

@@ -132,10 +132,16 @@ public class FastTrainer extends Brain {
         return mTopScore;
     }
 
-    public void toggleTraining() {
-        mTraining = !mTraining;
-        if (mTraining) {
+    public boolean ismTraining() {
+        return mTraining;
+    }
+
+    public void setmTraining(boolean training) {
+        if (training) {
+            mTraining = true;
             mLastUpdateTime = System.currentTimeMillis();
+        } else {
+            mTraining = false;
         }
     }
 }
