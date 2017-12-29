@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - AIFastTrainGameWindow
- * ICS3U1 - Mr. Radulovic
- * December 26, 2017
+ * ICS3U1 - Mr.Radulovic
+ * December 28, 2017
  */
 
 package frontend.aiFastTrain;

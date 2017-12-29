@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - OrganismStatusBox
- * ICS3U1 - Mr. Radulovic
- * December 27, 2017
+ * ICS3U1 - Mr.Radulovic
+ * December 28, 2017
  */
 
 package frontend.common;

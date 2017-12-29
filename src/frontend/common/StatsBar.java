@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - StatsBar
- * ICS3U1 - Mr. Radulovic
- * December 25, 2017
+ * ICS3U1 - Mr.Radulovic
+ * December 28, 2017
  */
 
 package frontend.common;
