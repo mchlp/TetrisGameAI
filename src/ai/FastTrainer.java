@@ -26,7 +26,7 @@ public class FastTrainer extends Brain {
     private int mGameNum;
 
     public FastTrainer(GameBrain gameBrain, Population population) {
-        super(gameBrain);
+        super(gameBrain, true);
         mPopulation = population;
         mTraining = true;
         mLastUpdateTime = System.currentTimeMillis();

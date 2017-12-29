@@ -18,8 +18,8 @@ public abstract class GUIBrain extends Brain {
     protected int mPrevScore;
     protected GameController mGameController;
 
-    public GUIBrain(GameBrain gameBrain, GameController gameController) {
-        super(gameBrain);
+    public GUIBrain(GameBrain gameBrain, GameController gameController, boolean fastMode) {
+        super(gameBrain, fastMode);
         mGameController = gameController;
         mPrevScore = -1;
     }

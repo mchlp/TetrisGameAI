@@ -12,8 +12,8 @@ import frontend.common.GameController;
 
 public class Watcher extends GUIBrain {
 
-    public Watcher(GameBrain gameBrain, GameController gameController, Organism organism) {
-        super(gameBrain, gameController);
+    public Watcher(GameBrain gameBrain, GameController gameController, Organism organism, boolean fastMode) {
+        super(gameBrain, gameController, fastMode);
         mCurOrganism = organism;
     }
 }

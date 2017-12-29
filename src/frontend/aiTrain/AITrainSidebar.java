@@ -9,15 +9,12 @@ package frontend.aiTrain;
 
 import ai.Trainer;
 import frontend.base.GameWindow;
-import frontend.base.SaveOrganismDialog;
+import frontend.common.SaveOrganismDialog;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-
-import java.io.File;
 
 public class AITrainSidebar extends Sidebar {
 

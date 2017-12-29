@@ -23,7 +23,7 @@ public class AIWatchGameWindow extends GameWindow {
     private Organism mOrganism;
     private GameArea mGameArea;
 
-    public AIWatchGameWindow(Stage stage, Organism organism, double height, double width) {
+    public AIWatchGameWindow(Stage stage, Organism organism, double height, double width, boolean fastMode) {
         super(stage, height, width, GameMode.AI_WATCHER);
 
         mWindowTitle = "Tetris Game - AI Watch Version";
@@ -34,7 +34,7 @@ public class AIWatchGameWindow extends GameWindow {
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
 
-        mWatcher = new Watcher(mGameArea.getmGameBrain(), mGameController, mOrganism);
+        mWatcher = new Watcher(mGameArea.getmGameBrain(), mGameController, mOrganism, fastMode);
         mUpdateItems.add(mWatcher);
 
         AIWatchSidebar aiWatchSidebar = new AIWatchSidebar(this, mGameArea, mWatcher, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);

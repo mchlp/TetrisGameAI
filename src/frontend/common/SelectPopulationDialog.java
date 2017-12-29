@@ -40,6 +40,10 @@ public class SelectPopulationDialog extends Stage {
     private GameMode mTrainMode;
     private boolean mGoClicked;
 
+    private Text mErrorText;
+    private Text mFileText;
+    private Button mGoButton;
+
     public SelectPopulationDialog(Stage parent) {
 
         mGoClicked = false;
@@ -70,7 +74,6 @@ public class SelectPopulationDialog extends Stage {
         vBox.getChildren().add(guiModeButton);
 
         // source file section
-
         Text populationFileLabel = new Text("Select an AI population");
         vBox.getChildren().add(populationFileLabel);
 
@@ -86,27 +89,26 @@ public class SelectPopulationDialog extends Stage {
         existingFileButton.setToggleGroup(fileSourceGroup);
         vBox.getChildren().add(existingFileButton);
 
-        Text fileLabel = new Text();
-        vBox.getChildren().add(fileLabel);
+        // file label
+        mFileText = new Text();
+        vBox.getChildren().add(mFileText);
 
         // error label
-
-        Text errorLabel = new Text();
-        errorLabel.setText("No file selected.");
-        errorLabel.setFill(BAD_TEXT_COLOUR);
-        vBox.getChildren().add(errorLabel);
+        mErrorText = new Text();
+        vBox.getChildren().add(mErrorText);
 
         // button bar
-
         HBox hBox = new HBox(10);
         vBox.getChildren().add(hBox);
 
         Button selectFileButton = new Button("Create File");
         hBox.getChildren().add(selectFileButton);
 
-        Button goButton = new Button("Go");
-        goButton.setDisable(true);
-        hBox.getChildren().add(goButton);
+        mGoButton = new Button("Go");
+        mGoButton.setDisable(true);
+        hBox.getChildren().add(mGoButton);
+
+        setState(false, "No file selected.", "");
 
         guiModeButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -126,6 +128,7 @@ public class SelectPopulationDialog extends Stage {
             @Override
             public void handle(ActionEvent event) {
                 selectFileButton.setText("Create File");
+                setState(false, "No file selected", "");
             }
         });
 
@@ -133,6 +136,7 @@ public class SelectPopulationDialog extends Stage {
             @Override
             public void handle(ActionEvent event) {
                 selectFileButton.setText("Choose File");
+                setState(false, "No file selected", "");
             }
         });
 
@@ -148,6 +152,8 @@ public class SelectPopulationDialog extends Stage {
         selectFileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
+                String filePath = "";
                 File populationFile;
                 if (newFileButton.isSelected()) {
 
@@ -157,24 +163,16 @@ public class SelectPopulationDialog extends Stage {
                         try {
                             if (!populationFile.getName().endsWith(".pop.ser")) {
                                 populationFile = new File(populationFile.getCanonicalPath() + ".pop.ser");
+                                filePath = populationFile.getCanonicalPath();
                             }
                             mLoadedPopulation = new Population(populationFile);
-                            fileLabel.setText(populationFile.getCanonicalPath());
                         } catch (IOException e) {
-                            fileLabel.setText("");
-                            errorLabel.setText("Selected file cannot be accessed.");
-                            errorLabel.setFill(BAD_TEXT_COLOUR);
-                            fileLabel.setFill(BAD_TEXT_COLOUR);
-                            goButton.setDisable(true);
+                            setState(false, "Selected file cannot be accessed.", "");
                             e.printStackTrace();
                             return;
                         }
                     } else {
-                        fileLabel.setText("");
-                        errorLabel.setText("No file selected.");
-                        errorLabel.setFill(BAD_TEXT_COLOUR);
-                        fileLabel.setFill(BAD_TEXT_COLOUR);
-                        goButton.setDisable(true);
+                        setState(false, "No file selected.", "");
                         return;
                     }
                 } else {
@@ -182,50 +180,32 @@ public class SelectPopulationDialog extends Stage {
                     populationFile = fileChooser.showOpenDialog(fileChooseParentStage);
 
                     if (populationFile != null) {
-
                         try {
+                            filePath = populationFile.getCanonicalPath();
                             mLoadedPopulation = Population.loadPopulationFromFile((populationFile));
-                            fileLabel.setText(populationFile.getCanonicalPath());
                         } catch (InvalidClassException e) {
-                            errorLabel.setText("The selected file is corrupted or outdated.");
-                            errorLabel.setFill(BAD_TEXT_COLOUR);
-                            fileLabel.setFill(BAD_TEXT_COLOUR);
-                            goButton.setDisable(true);
+                            setState(false, "The selected file is corrupted or outdated.", filePath);
                             e.printStackTrace();
                             return;
                         } catch (ClassNotFoundException e) {
-                            errorLabel.setText("An AI organism cannot cannot be loaded from the selected file.");
-                            errorLabel.setFill(BAD_TEXT_COLOUR);
-                            fileLabel.setFill(BAD_TEXT_COLOUR);
-                            goButton.setDisable(true);
+                            setState(false, "An AI organism cannot cannot be loaded from the selected file.", filePath);
                             e.printStackTrace();
                             return;
                         } catch (IOException e) {
-                            errorLabel.setText("The selected file cannot be accessed.");
-                            errorLabel.setFill(BAD_TEXT_COLOUR);
-                            fileLabel.setFill(BAD_TEXT_COLOUR);
-                            goButton.setDisable(true);
+                            setState(false, "The selected file cannot be accessed.", filePath);
                             e.printStackTrace();
                             return;
                         }
                     } else {
-                        fileLabel.setText("");
-                        errorLabel.setText("No file selected.");
-                        errorLabel.setFill(BAD_TEXT_COLOUR);
-                        fileLabel.setFill(BAD_TEXT_COLOUR);
-                        goButton.setDisable(true);
+                        setState(false, "No file selected.", "");
                         return;
                     }
                 }
-
-                errorLabel.setText("File loaded successfully.");
-                errorLabel.setFill(GOOD_TEXT_COLOUR);
-                fileLabel.setFill(GOOD_TEXT_COLOUR);
-                goButton.setDisable(false);
+                setState(true, "File loaded successfully.", filePath);
             }
         });
 
-        goButton.setOnAction(new EventHandler<ActionEvent>() {
+        mGoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 mGoClicked = true;
@@ -239,6 +219,20 @@ public class SelectPopulationDialog extends Stage {
         initModality(Modality.WINDOW_MODAL);
     }
 
+    private void setState(boolean ready, String errorText, String fileText) {
+        mErrorText.setText(errorText);
+        mFileText.setText(fileText);
+        if (ready) {
+            mErrorText.setFill(GOOD_TEXT_COLOUR);
+            mFileText.setFill(GOOD_TEXT_COLOUR);
+            mGoButton.setDisable(false);
+        } else {
+            mErrorText.setFill(BAD_TEXT_COLOUR);
+            mFileText.setFill(BAD_TEXT_COLOUR);
+            mGoButton.setDisable(true);
+        }
+    }
+
     public Population showDialog() {
         showAndWait();
         if (mGoClicked) {
@@ -246,10 +240,6 @@ public class SelectPopulationDialog extends Stage {
         } else {
             return null;
         }
-    }
-
-    public Population getmLoadedPopulation() {
-        return mLoadedPopulation;
     }
 
     public GameMode getmTrainMode() {

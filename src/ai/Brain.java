@@ -21,9 +21,11 @@ public abstract class Brain implements Updatable {
 
     protected Organism mCurOrganism;
     protected GameBrain mGameBrain;
+    private boolean mFastMode;
 
-    public Brain(GameBrain gameBrain) {
+    public Brain(GameBrain gameBrain, boolean fastMode) {
         mGameBrain = gameBrain;
+        mFastMode = fastMode;
     }
 
     protected ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino, Genome genome) {
@@ -67,7 +69,10 @@ public abstract class Brain implements Updatable {
                             bestMoves.add(ControllerKeys.RIGHT);
                         }
                     }
-                    bestMoves.add(ControllerKeys.DROP);
+
+                    if (mFastMode || Math.random() >= 0.5) {
+                        bestMoves.add(ControllerKeys.DROP);
+                    }
                 }
             }
         }

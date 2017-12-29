@@ -59,6 +59,7 @@ public class Game extends Application {
     public void showMenu() {
         MenuScreen menuScreen = new MenuScreen(primaryStage);
         Scene menuScene = new Scene(menuScreen);
+        primaryStage.setTitle("Tetris Game - Main Menu");
         primaryStage.setScene(menuScene);
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -152,7 +153,7 @@ public class Game extends Application {
     }
 
     public void startAIWatch(Organism organism, double height, double width) {
-        gameWindow = new AIWatchGameWindow(primaryStage, organism, height, width);
+        gameWindow = new AIWatchGameWindow(primaryStage, organism, height, width, false);
         scene = new Scene(gameWindow);
     }
 

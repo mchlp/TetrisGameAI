@@ -34,11 +34,9 @@ public class SelectOrganismDialog extends Stage {
     private static final Color BAD_TEXT_COLOUR = Color.RED;
 
     private Organism mLoadedOrganism;
-    private boolean mGoClicked;
+    private Text mErrorLabel;
 
     public SelectOrganismDialog(Stage parent) {
-
-        mGoClicked = false;
 
         VBox vBox = new VBox();
         vBox.setPrefWidth(400);
@@ -50,20 +48,15 @@ public class SelectOrganismDialog extends Stage {
         Text label = new Text("Select an AI Organism file to use.");
         vBox.getChildren().add(label);
 
-        Text errorLabel = new Text();
-        errorLabel.setText("No file selected.");
-        errorLabel.setFill(BAD_TEXT_COLOUR);
-        vBox.getChildren().add(errorLabel);
+        mErrorLabel = new Text();
+        mErrorLabel.setWrappingWidth(370);
+        vBox.getChildren().add(mErrorLabel);
 
         HBox hBox = new HBox(10);
         vBox.getChildren().add(hBox);
 
         Button selectFileButton = new Button("Choose File");
         hBox.getChildren().add(selectFileButton);
-
-        Button goButton = new Button("Go");
-        goButton.setDisable(true);
-        hBox.getChildren().add(goButton);
 
         File defaultDir = new File(System.getProperty("user.home"));
         FileChooser.ExtensionFilter organismFileFilter = new FileChooser.ExtensionFilter("Organism files (*.org.ser)", "*.org.ser");
@@ -72,8 +65,7 @@ public class SelectOrganismDialog extends Stage {
         fileChooser.setInitialDirectory(defaultDir);
         fileChooser.getExtensionFilters().add(organismFileFilter);
 
-        Text fileLabel = new Text();
-        vBox.getChildren().add(fileLabel);
+        setState(false, "No file selected.");
 
         final Stage fileChooseParentStage = this;
 
@@ -83,61 +75,26 @@ public class SelectOrganismDialog extends Stage {
                 File organismFile = fileChooser.showOpenDialog(fileChooseParentStage);
                 if (organismFile != null) {
                     try {
-                        fileLabel.setText(organismFile.getCanonicalPath());
-                    } catch (IOException e) {
-                        fileLabel.setText("");
-                        errorLabel.setText("Selected file cannot be accessed.");
-                        errorLabel.setFill(BAD_TEXT_COLOUR);
-                        fileLabel.setFill(BAD_TEXT_COLOUR);
-                        goButton.setDisable(true);
-                        e.printStackTrace();
-                        return;
-                    }
-
-                    try {
                         mLoadedOrganism = Organism.loadOrganismFromFile(organismFile);
                     } catch (InvalidClassException e) {
-                        errorLabel.setText("The selected file is corrupted or outdated.");
-                        errorLabel.setFill(BAD_TEXT_COLOUR);
-                        fileLabel.setFill(BAD_TEXT_COLOUR);
-                        goButton.setDisable(true);
+                        setState(false, "The selected file is corrupted or outdated.");
                         e.printStackTrace();
                         return;
-                    } catch (ClassNotFoundException e) {
-                        errorLabel.setText("An AI organism cannot cannot be loaded from the selected file.");
-                        errorLabel.setFill(BAD_TEXT_COLOUR);
-                        fileLabel.setFill(BAD_TEXT_COLOUR);
-                        goButton.setDisable(true);
+                    } catch (ClassNotFoundException | ClassCastException e) {
+                        setState(false, "No AI organism can be found in the selected file.");
                         e.printStackTrace();
                         return;
                     } catch (IOException e) {
-                        errorLabel.setText("The selected file cannot be accessed.");
-                        errorLabel.setFill(BAD_TEXT_COLOUR);
-                        fileLabel.setFill(BAD_TEXT_COLOUR);
-                        goButton.setDisable(true);
+                        setState(false, "The selected file cannot be accessed.");
                         e.printStackTrace();
                         return;
                     }
 
-                    errorLabel.setText("File loaded successfully.");
-                    errorLabel.setFill(GOOD_TEXT_COLOUR);
-                    fileLabel.setFill(GOOD_TEXT_COLOUR);
-                    goButton.setDisable(false);
+                    setState(true, "File loaded successfully.");
+                    fileChooseParentStage.hide();
                 } else {
-                    fileLabel.setText("");
-                    errorLabel.setText("No file selected.");
-                    errorLabel.setFill(BAD_TEXT_COLOUR);
-                    fileLabel.setFill(BAD_TEXT_COLOUR);
-                    goButton.setDisable(true);
+                    setState(false, "No file selected.");
                 }
-            }
-        });
-
-        goButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                mGoClicked = true;
-                fileChooseParentStage.hide();
             }
         });
 
@@ -147,13 +104,17 @@ public class SelectOrganismDialog extends Stage {
         initModality(Modality.WINDOW_MODAL);
     }
 
-    public Organism showDialog() {
-        showAndWait();
-        if (mGoClicked) {
-            return mLoadedOrganism;
+    private void setState(boolean ready, String text) {
+        mErrorLabel.setText(text);
+        if (ready) {
+            mErrorLabel.setFill(GOOD_TEXT_COLOUR);
         } else {
-            return null;
+            mErrorLabel.setFill(BAD_TEXT_COLOUR);
         }
     }
 
+    public Organism showDialog() {
+        showAndWait();
+        return mLoadedOrganism;
+    }
 }

@@ -17,7 +17,7 @@ public class Trainer extends GUIBrain {
     private int mCurOrganismIndex;
 
     public Trainer(GameBrain gameBrain, GameController gameController, Population population) {
-        super(gameBrain, gameController);
+        super(gameBrain, gameController, true);
         mPopulation = population;
         goToFirstOrganism();
     }
