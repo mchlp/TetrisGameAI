@@ -9,17 +9,25 @@ package frontend.aiTrain;
 
 import ai.Trainer;
 import frontend.base.GameWindow;
+import frontend.base.SaveOrganismDialog;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 import java.io.File;
 
 public class AITrainSidebar extends Sidebar {
+
+    private Trainer mTrainer;
+    private Button mSaveEliteButton;
+
     public AITrainSidebar(GameWindow gameWindow, GameArea gameArea, Trainer trainer, double margins, double sideBarHeight, double sideBarWidth) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
+
+        mTrainer = trainer;
 
         AITrainStatsBox aiTrainStatsBox = new AITrainStatsBox(gameArea, trainer);
         getChildren().add(aiTrainStatsBox);
@@ -27,15 +35,25 @@ public class AITrainSidebar extends Sidebar {
 
         addButtonBar();
 
-        Button saveEliteButton = new Button("Save Elite");
-        mButtonBar.getChildren().add(saveEliteButton);
+        mSaveEliteButton = new Button("Save Elite");
+        mSaveEliteButton.setDisable(true);
+        mButtonBar.getChildren().add(mSaveEliteButton);
 
-        saveEliteButton.setOnAction(new EventHandler<ActionEvent>() {
+        mSaveEliteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
-                trainer.getmPopulation().saveElite(new File("/home/mpu/Desktop"));
+                new SaveOrganismDialog(mGameWindow.getmStage(), trainer.getmPopulation().getElite());
             }
         });
+    }
 
+    @Override
+    public void update(double deltaTime) {
+        super.update(deltaTime);
+        if (mSaveEliteButton.isDisabled()) {
+            if (mTrainer.getmPopulation().getElite() != null) {
+                mSaveEliteButton.setDisable(false);
+            }
+        }
     }
 }

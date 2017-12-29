@@ -14,6 +14,7 @@ import frontend.common.GameArea;
 import frontend.common.GameController;
 import backend.GameMode;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -23,8 +24,8 @@ public class AITrainGameWindow extends GameWindow {
     private Trainer mTrainer;
     private GameArea mGameArea;
 
-    public AITrainGameWindow(double height, double width) {
-        super(height, width, GameMode.AI_TRAINER);
+    public AITrainGameWindow(Stage stage, double height, double width) {
+        super(stage, height, width, GameMode.AI_TRAINER);
 
         mWindowTitle = "Tetris Game - AI Train Version";
 

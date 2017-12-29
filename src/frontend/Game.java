@@ -136,24 +136,24 @@ public class Game extends Application {
     }
 
     public void startAIFastTrain(double height, double width) {
-        gameWindow = new AIFastTrainGameWindow(height, width);
+        gameWindow = new AIFastTrainGameWindow(primaryStage, height, width);
         scene = new Scene(gameWindow);
     }
 
     public void startAITrain(double height, double width) {
-        gameWindow = new AITrainGameWindow(height, width);
+        gameWindow = new AITrainGameWindow(primaryStage, height, width);
         scene = new Scene(gameWindow);
     }
 
     public void startAIWatch(Organism organism, double height, double width) {
-        gameWindow = new AIWatchGameWindow(organism, height, width);
+        gameWindow = new AIWatchGameWindow(primaryStage, organism, height, width);
         scene = new Scene(gameWindow);
     }
 
 
     public void startPlayerGame(double height, double width) {
 
-        gameWindow = new PlayerGameWindow(height, width);
+        gameWindow = new PlayerGameWindow(primaryStage, height, width);
         scene = new Scene(gameWindow);
 
         scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
@@ -197,7 +197,7 @@ public class Game extends Application {
 
     private void onUpdate(double deltaTime) {
         for (Updatable updatable : updateItems) {
-            System.out.println(1/deltaTime);
+            //System.out.println(1/deltaTime);
             updatable.update(deltaTime);
         }
     }

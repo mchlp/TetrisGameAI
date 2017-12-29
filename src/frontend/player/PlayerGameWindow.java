@@ -12,13 +12,14 @@ import frontend.common.GameArea;
 import frontend.common.GameController;
 import backend.GameMode;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 public class PlayerGameWindow extends GameWindow {
 
     private GameArea mGameArea;
 
-    public PlayerGameWindow(double height, double width) {
-        super(height, width, GameMode.PLAYER);
+    public PlayerGameWindow(Stage stage, double height, double width) {
+        super(stage, height, width, GameMode.PLAYER);
 
         mWindowTitle = "Tetris Game - Human Player Version";
 

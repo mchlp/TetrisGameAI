@@ -78,6 +78,10 @@ public class Organism implements Serializable {
         return mName;
     }
 
+    public void setmName(String mName) {
+        this.mName = mName;
+    }
+
     public Genome getmGenome() {
         return mGenome;
     }
@@ -99,9 +103,8 @@ public class Organism implements Serializable {
         return message;
     }
 
-    public void saveToFile(File saveFolder) {
+    public void saveToFile(File saveFile) {
         try {
-            File saveFile = new File(saveFolder, mName+".org.ser");
             FileOutputStream fileOut = new FileOutputStream(saveFile);
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(this);

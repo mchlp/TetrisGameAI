@@ -1,11 +1,11 @@
 /*
  * Michael Pu
  * TetrisGameAI - SelectOrganismDialog
- * ICS3U1 - Mr.Radulovic
+ * ICS3U1 - Mr. Radulovic
  * December 28, 2017
  */
 
-package menu;
+package frontend.common;
 
 import ai.Organism;
 import javafx.event.ActionEvent;
@@ -26,7 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InvalidClassException;
 
-public class SelectOrganismDialog extends Stage {
+public class SelectPopulationDialog extends Stage {
 
     private static final int DEFAULT_PADDING = 10;
 
@@ -36,7 +36,7 @@ public class SelectOrganismDialog extends Stage {
     private Organism mLoadedOrganism;
     private boolean mGoClicked;
 
-    public SelectOrganismDialog(Stage parent) {
+    public SelectPopulationDialog(Stage parent) {
 
         mGoClicked = false;
 
@@ -47,7 +47,7 @@ public class SelectOrganismDialog extends Stage {
         vBox.setPadding(new Insets(DEFAULT_PADDING));
         vBox.setAlignment(Pos.CENTER_LEFT);
 
-        Text label = new Text("Select an AI Organism file to use.");
+        Text label = new Text("Select a");
         vBox.getChildren().add(label);
 
         Text errorLabel = new Text();

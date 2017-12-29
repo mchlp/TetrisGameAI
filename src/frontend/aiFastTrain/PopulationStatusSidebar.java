@@ -49,6 +49,9 @@ public class PopulationStatusSidebar extends VBox implements Updatable {
 
     @Override
     public void update(double deltaTime) {
+        for (Updatable updatable : mUpdateItems) {
+            updatable.update(deltaTime);
+        }
         if (mPopulation.getElite() != null) {
             mOrganismStatusBox.setmOrganism(mPopulation.getElite());
         }

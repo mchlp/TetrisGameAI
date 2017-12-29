@@ -13,6 +13,7 @@ import frontend.base.GameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import backend.GameMode;
+import javafx.stage.Stage;
 
 import java.io.File;
 
@@ -22,8 +23,8 @@ public class AIWatchGameWindow extends GameWindow {
     private Organism mOrganism;
     private GameArea mGameArea;
 
-    public AIWatchGameWindow(Organism organism, double height, double width) {
-        super(height, width, GameMode.AI_WATCHER);
+    public AIWatchGameWindow(Stage stage, Organism organism, double height, double width) {
+        super(stage, height, width, GameMode.AI_WATCHER);
 
         mWindowTitle = "Tetris Game - AI Watch Version";
         mOrganism = organism;

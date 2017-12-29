@@ -16,6 +16,7 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
@@ -37,11 +38,13 @@ public abstract class GameWindow extends BorderPane implements Updatable {
     protected GameMode mGameMode;
     protected String mWindowTitle;
     protected MediaPlayer mBackgroundMusic;
+    private Stage mStage;
 
-    public GameWindow(double height, double width, GameMode gameMode) {
+    public GameWindow(Stage stage, double height, double width, GameMode gameMode) {
 
         mUpdateItems = new ArrayList<>();
         mGameMode = gameMode;
+        mStage = stage;
         mWindowTitle = "Game Window";
 
         mBackgroundMusic = new MediaPlayer(new Media(Utilities.getResourceAsURLString(Utilities.AUDIO_BACKGROUND_MUSIC)));
@@ -81,5 +84,9 @@ public abstract class GameWindow extends BorderPane implements Updatable {
 
     public MediaPlayer getmBackgroundMusic() {
         return mBackgroundMusic;
+    }
+
+    public Stage getmStage() {
+        return mStage;
     }
 }

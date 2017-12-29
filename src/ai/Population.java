@@ -145,10 +145,6 @@ public class Population implements Serializable {
         }
     }
 
-    public void saveElite(File saveFolder) {
-        mElites.get(0).saveToFile(saveFolder);
-    }
-
     public Organism getElite() {
         if (mElites.size() == 0) {
             return null;

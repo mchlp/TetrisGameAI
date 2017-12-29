@@ -9,24 +9,12 @@ package menu;
 
 import ai.Organism;
 import backend.GameMode;
-import javafx.event.ActionEvent;
+import frontend.common.SelectOrganismDialog;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InvalidClassException;
 
 public class Menu extends VBox {
 
@@ -87,7 +75,7 @@ public class Menu extends VBox {
         mTrainAIButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                ((MenuScreen) getParent()).mGameMode = GameMode.MAIN_MENU;
+                ((MenuScreen) getParent()).mGameMode = GameMode.AI_TRAINER;
             }
         });
     }
