@@ -28,7 +28,7 @@ public class AIPlaySidebar extends Sidebar {
         getChildren().add(nextTetrominoBox);
         mUpdateItems.add(nextTetrominoBox);
 
-        DoubleStatsBox playerStatsBox = new DoubleStatsBox(GameMode.AI_PLAY, aiGameArea, playerGameArea);
+        DoubleStatsBox playerStatsBox = new DoubleStatsBox(GameMode.AI_PLAY, aiGameArea, playerGameArea, "AI Stats (Left)", "Player Stats (Right)");
         getChildren().add(playerStatsBox);
         mUpdateItems.add(playerStatsBox);
 

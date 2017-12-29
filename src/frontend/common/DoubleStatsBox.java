@@ -25,7 +25,7 @@ public class DoubleStatsBox extends StatsBox {
     private GameArea mLeftGameArea;
     private GameArea mRightGameArea;
 
-    public DoubleStatsBox(GameMode gameMode, GameArea leftGameArea, GameArea rightGameArea) {
+    public DoubleStatsBox(GameMode gameMode, GameArea leftGameArea, GameArea rightGameArea, String leftLabelText, String rightLabelText) {
         super(gameMode);
 
         mLeftGameArea = leftGameArea;
@@ -42,7 +42,7 @@ public class DoubleStatsBox extends StatsBox {
         leftStats.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         getChildren().add(leftStats);
 
-        Text leftLabel = new Text("Left Stats");
+        Text leftLabel = new Text(leftLabelText);
         leftStats.getChildren().add(leftLabel);
 
         mLeftGameAreaStatsBox = new GameAreaStatsBox(mLeftGameBrain, leftStats);
@@ -52,7 +52,7 @@ public class DoubleStatsBox extends StatsBox {
         rightStats.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         getChildren().add(rightStats);
 
-        Text rightLabel = new Text("Right Stats");
+        Text rightLabel = new Text(rightLabelText);
         rightStats.getChildren().add(rightLabel);
 
         mRightGameAreaStatsBox = new GameAreaStatsBox(mRightGameBrain, rightStats);
