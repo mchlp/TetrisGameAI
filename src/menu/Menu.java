@@ -27,6 +27,7 @@ public class Menu extends VBox {
     private MenuItem mPlayAIButton;
     private MenuItem mWatchAIButton;
     private MenuItem mTrainAIButton;
+    private MenuItem mExitButton;
     private Object mLoadedObject;
 
     public Menu(Stage stage) {
@@ -48,6 +49,9 @@ public class Menu extends VBox {
         getChildren().add(mTrainAIButton);
         mTrainAIButton.setVisible(false);
 
+        mExitButton = new MenuItem("Exit Game");
+        getChildren().add(mExitButton);
+
         mSinglePlayerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
@@ -58,7 +62,12 @@ public class Menu extends VBox {
         mPlayAIButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                ((MenuScreen) getParent()).mGameMode = GameMode.MAIN_MENU;
+                SelectOrganismDialog selectOrganismDialog = new SelectOrganismDialog(stage);
+                Organism loadedOrganism = selectOrganismDialog.showDialog();
+                if (loadedOrganism != null) {
+                    mLoadedObject = loadedOrganism;
+                    ((MenuScreen) getParent()).mGameMode = GameMode.AI_PLAY;
+                }
             }
         });
 
@@ -83,6 +92,13 @@ public class Menu extends VBox {
                     mLoadedObject = loadedPopulation;
                     ((MenuScreen) getParent()).mGameMode = selectPopulationDialog.getmTrainMode();
                 }
+            }
+        });
+
+        mExitButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.close();
             }
         });
     }

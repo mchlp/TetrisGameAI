@@ -8,13 +8,14 @@
 package frontend.player;
 
 import frontend.base.GameWindow;
+import frontend.base.TwoPanelGameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import backend.GameMode;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
-public class PlayerGameWindow extends GameWindow {
+public class PlayerGameWindow extends TwoPanelGameWindow {
 
     private GameArea mGameArea;
 
@@ -34,9 +35,5 @@ public class PlayerGameWindow extends GameWindow {
         PlayerSidebar playerSidebar = new PlayerSidebar(this, mGameArea, mGameController, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth, GAME_BACKGROUND_COLOUR);
         setRight(playerSidebar);
         mUpdateItems.add(playerSidebar);
-    }
-
-    public GameController getmGameController() {
-        return mGameController;
     }
 }

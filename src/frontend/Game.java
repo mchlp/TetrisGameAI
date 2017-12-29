@@ -9,21 +9,21 @@ package frontend;
 
 import ai.Organism;
 import ai.Population;
-import backend.ControllerKeys;
+import backend.GameMode;
 import backend.Updatable;
 import frontend.aiFastTrain.AIFastTrainGameWindow;
+import frontend.aiPlay.AIPlayGameWindow;
 import frontend.aiTrain.AITrainGameWindow;
 import frontend.aiWatch.AIWatchGameWindow;
 import frontend.base.GameWindow;
 import frontend.common.GameController;
-import backend.GameMode;
+import frontend.common.SinglePlayerControllerHandler;
 import frontend.player.PlayerGameWindow;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -32,17 +32,33 @@ import menu.MenuScreen;
 
 import java.util.ArrayList;
 
+/**
+ * Entry point into game
+ */
 public class Game extends Application {
 
+    /**
+     * Minimum percentage of the minimum dimension of the screen that will be taken up by the window
+     */
     private static final double WINDOW_PERCENTAGE_OF_SCREEN = 0.8;
 
+    // Variables for the animation timers
     private long prevTime;
     private AnimationTimer menuTimer;
     private AnimationTimer gameTimer;
 
+    // Variables for the JavaFX GUI display
     private Stage primaryStage;
     private Scene scene;
+
+    /**
+     * List of objects that will be updated every frame
+     */
     private ArrayList<Updatable> updateItems;
+
+    /**
+     * The current game window (root pane)
+     */
     private GameWindow gameWindow;
 
     public static void main(String[] args) {
@@ -52,11 +68,13 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
-        //startGame();
         showMenu();
     }
 
-    public void showMenu() {
+    /**
+     * Shows the window for the menu screen of the game
+     */
+    private void showMenu() {
         MenuScreen menuScreen = new MenuScreen(primaryStage);
         Scene menuScene = new Scene(menuScreen);
         primaryStage.setTitle("Tetris Game - Main Menu");
@@ -87,15 +105,41 @@ public class Game extends Application {
         menuTimer.start();
     }
 
-    public void startGame(GameMode gameMode, Menu menu) {
+    /**
+     * Shows the window for the actual game
+     *
+     * @param gameMode The {@link GameMode} that should be launched
+     * @param menu     The {@link Menu} that called this method
+     */
+    private void startGame(GameMode gameMode, Menu menu) {
         updateItems = new ArrayList<>();
 
+        // establish dimensions of screen
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+
         double minDimension = Math.min(screenBounds.getHeight(), screenBounds.getWidth());
+        double maxDimension = Math.max(screenBounds.getHeight(), screenBounds.getWidth());
 
-        double height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
-        double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
+        double height = minDimension;
+        double width = minDimension;
 
+        switch (gameMode) {
+            case PLAYER:
+            case AI_FAST_TRAINER:
+            case AI_TRAINER:
+            case AI_WATCHER:
+                height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
+                width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
+                break;
+            case AI_PLAY:
+                while ((((minDimension * WINDOW_PERCENTAGE_OF_SCREEN) / 2) * 3) > (maxDimension * WINDOW_PERCENTAGE_OF_SCREEN)) {
+                    minDimension -= 10;
+                }
+                height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
+                width = ((minDimension / 2) * 3) * WINDOW_PERCENTAGE_OF_SCREEN;
+        }
+
+        // opens game window
         Population loadedPopulation;
         Organism loadedOrganism;
 
@@ -115,6 +159,9 @@ public class Game extends Application {
                 loadedOrganism = (Organism) menu.getmLoadedObject();
                 startAIWatch(loadedOrganism, height, width);
                 break;
+            case AI_PLAY:
+                loadedOrganism = (Organism) menu.getmLoadedObject();
+                startAIPlay(loadedOrganism, height, width);
         }
 
         updateItems.add(gameWindow);
@@ -123,6 +170,7 @@ public class Game extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+        // set up animation timer for game
         gameTimer = new AnimationTimer() {
             @Override
             public void handle(long now) {
@@ -142,64 +190,47 @@ public class Game extends Application {
         gameTimer.start();
     }
 
-    public void startAIFastTrain(Population population, double height, double width) {
+    /**
+     * Starts a game in AI Fast Train mode
+     *
+     * @param population The {@link Population} to train
+     * @param height     The height of the window
+     * @param width      The width of the window
+     */
+    private void startAIFastTrain(Population population, double height, double width) {
         gameWindow = new AIFastTrainGameWindow(population, primaryStage, height, width);
         scene = new Scene(gameWindow);
     }
 
-    public void startAITrain(Population population, double height, double width) {
+    private void startAITrain(Population population, double height, double width) {
         gameWindow = new AITrainGameWindow(population, primaryStage, height, width);
         scene = new Scene(gameWindow);
     }
 
-    public void startAIWatch(Organism organism, double height, double width) {
+    private void startAIWatch(Organism organism, double height, double width) {
         gameWindow = new AIWatchGameWindow(primaryStage, organism, height, width, false);
         scene = new Scene(gameWindow);
     }
 
+    private void startAIPlay(Organism organism, double height, double width) {
+        gameWindow = new AIPlayGameWindow(primaryStage, organism, height, width);
+        scene = new Scene(gameWindow);
 
-    public void startPlayerGame(double height, double width) {
+        GameController playerGameController = ((AIPlayGameWindow) gameWindow).getmRightGameController();
+        GameController aiGameController = ((AIPlayGameWindow) gameWindow).getmLeftGameController();
+        SinglePlayerControllerHandler singlePlayerControllerHandler = new SinglePlayerControllerHandler(playerGameController, aiGameController);
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, singlePlayerControllerHandler);
+    }
+
+
+    private void startPlayerGame(double height, double width) {
 
         gameWindow = new PlayerGameWindow(primaryStage, height, width);
         scene = new Scene(gameWindow);
 
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyPressed) {
-                KeyCode code = keyPressed.getCode();
-                GameController gameController = ((PlayerGameWindow) gameWindow).getmGameController();
-                //System.out.println(code);
-                switch (code) {
-                    case LEFT:
-                        gameController.keyPressed(ControllerKeys.LEFT);
-                        break;
-                    case RIGHT:
-                        gameController.keyPressed(ControllerKeys.RIGHT);
-                        break;
-                    case UP:
-                        gameController.keyPressed(ControllerKeys.ROTATE);
-                        break;
-                    case DOWN:
-                        gameController.keyPressed(ControllerKeys.DOWN);
-                        break;
-                    case SPACE:
-                        gameController.keyPressed(ControllerKeys.DROP);
-                        break;
-                    case R:
-                        gameController.keyPressed(ControllerKeys.RESTART);
-                        break;
-                    case P:
-                        gameController.keyPressed(ControllerKeys.TOGGLE_PAUSE);
-                        break;
-                    case G:
-                        gameController.keyPressed(ControllerKeys.TOGGLE_GRIDLINES);
-                        break;
-                    case ADD:
-                        gameController.keyPressed(ControllerKeys.NEXT_LEVEL);
-                }
-                keyPressed.consume();
-            }
-        });
+        GameController playerGameController = ((PlayerGameWindow) gameWindow).getmGameController();
+        SinglePlayerControllerHandler singlePlayerControllerHandler = new SinglePlayerControllerHandler(playerGameController, null);
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, singlePlayerControllerHandler);
     }
 
     private void onUpdate(double deltaTime) {

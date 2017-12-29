@@ -18,6 +18,7 @@ import java.util.ArrayList;
 public abstract class Brain implements Updatable {
 
     private static final int GAME_OVER_RATING_PENALTY = 500;
+    private static final double DROP_RATE_FOR_SLOW_MODE = 0.7;
 
     protected Organism mCurOrganism;
     protected GameBrain mGameBrain;
@@ -70,7 +71,7 @@ public abstract class Brain implements Updatable {
                         }
                     }
 
-                    if (mFastMode || Math.random() >= 0.5) {
+                    if (mFastMode || Math.random() < DROP_RATE_FOR_SLOW_MODE) {
                         bestMoves.add(ControllerKeys.DROP);
                     }
                 }

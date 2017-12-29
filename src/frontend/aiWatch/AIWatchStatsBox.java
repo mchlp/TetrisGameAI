@@ -8,6 +8,8 @@
 package frontend.aiWatch;
 
 import ai.Watcher;
+import backend.GameBrain;
+import frontend.common.GameAreaStatsBox;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.StatsBar;
@@ -16,16 +18,17 @@ public class AIWatchStatsBox extends StatsBox {
     private StatsBar mOrganismBar;
     private Watcher mWatcher;
     private StatsBar mTimeBar;
-    private StatsBar mStateBar;
     private GameArea mGameArea;
+    private GameBrain mGameBrain;
+    private GameAreaStatsBox mGameAreaStatsBox;
 
     public AIWatchStatsBox(GameArea gameArea, Watcher watcher) {
-        super(gameArea.getmGameBrain());
+        super(gameArea.getmGameBrain().getmGameMode());
         mWatcher = watcher;
         mGameArea = gameArea;
+        mGameBrain = mGameArea.getmGameBrain();
 
-        mStateBar = new StatsBar("Game State", "Loading...");
-        getChildren().add(1, mStateBar);
+        mGameAreaStatsBox = new GameAreaStatsBox(mGameBrain, this);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         mOrganismBar.setSmallerFont();
@@ -38,8 +41,7 @@ public class AIWatchStatsBox extends StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mStateBar.setValue(mGameBrain.getmGameState().message);
-        mStateBar.setColour(mGameBrain.getmGameState().colour);
+        mGameAreaStatsBox.update(deltaTime);
         mOrganismBar.setValue(mWatcher.getmCurOrganism().getmName());
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
     }

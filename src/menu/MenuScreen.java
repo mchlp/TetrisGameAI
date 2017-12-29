@@ -29,7 +29,7 @@ public class MenuScreen extends BorderPane {
     public MenuScreen(Stage stage) {
 
         setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-        setPrefHeight(300);
+        setPrefHeight(400);
         setPrefWidth(500);
         setPadding(new Insets(DEFAULT_PADDING));
         mGameMode = GameMode.MAIN_MENU;
@@ -46,7 +46,7 @@ public class MenuScreen extends BorderPane {
 
         Text descriptionText = new Text("Michael Pu - Culminating Project - ICS3U");
         descriptionText.setFill(Color.GREY);
-        descriptionText.setFont(new Font(10));
+        descriptionText.setFont(new Font(11));
         setBottom(descriptionText);
         setAlignment(descriptionText, Pos.BOTTOM_RIGHT);
     }

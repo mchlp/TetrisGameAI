@@ -33,8 +33,6 @@ public abstract class GameWindow extends BorderPane implements Updatable {
     protected double mGameAreaWidth;
     protected double mSideBarHeight;
     protected double mSideBarWidth;
-    protected GameController mGameController;
-    protected StackPane mGamePane;
     protected GameMode mGameMode;
     protected String mWindowTitle;
     protected MediaPlayer mBackgroundMusic;
@@ -42,30 +40,26 @@ public abstract class GameWindow extends BorderPane implements Updatable {
 
     public GameWindow(Stage stage, double height, double width, GameMode gameMode) {
 
+        // initialize member variables
         mUpdateItems = new ArrayList<>();
         mGameMode = gameMode;
         mStage = stage;
         mWindowTitle = "Game Window";
 
+        // set up background music
         mBackgroundMusic = new MediaPlayer(new Media(Utilities.getResourceAsURLString(Utilities.AUDIO_BACKGROUND_MUSIC)));
         mBackgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
 
+        // set up size of screen
         setPrefHeight(height);
         setPrefWidth(width);
 
+        // set up size of components in the screen
         mCanvasHeight = height - (2 * DEFAULT_MARGINS);
-        mCanvasWidth = 10.0 * mCanvasHeight / 20.0;
+        mCanvasWidth = 1.0 * mCanvasHeight / 2.0;
 
         mGameAreaHeight = mCanvasHeight + (2 * DEFAULT_MARGINS);
         mGameAreaWidth = mCanvasWidth + (2 * DEFAULT_MARGINS);
-
-        mSideBarHeight = height;
-        mSideBarWidth = width - mGameAreaWidth;
-
-        mGamePane = new StackPane();
-        mGamePane.setPrefHeight(mGameAreaHeight);
-        mGamePane.setPrefWidth(mGameAreaWidth);
-        setLeft(mGamePane);
     }
 
     public GameMode getmGameMode() {

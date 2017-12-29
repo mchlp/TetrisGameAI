@@ -10,6 +10,7 @@ package frontend.aiTrain;
 import ai.Population;
 import ai.Trainer;
 import frontend.base.GameWindow;
+import frontend.base.TwoPanelGameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import backend.GameMode;
@@ -18,7 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-public class AITrainGameWindow extends GameWindow {
+public class AITrainGameWindow extends TwoPanelGameWindow {
 
     private Population mPopulation;
     private Trainer mTrainer;

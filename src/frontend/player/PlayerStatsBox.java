@@ -7,6 +7,8 @@
 
 package frontend.player;
 
+import backend.GameBrain;
+import frontend.common.GameAreaStatsBox;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.StatsBar;
@@ -14,26 +16,26 @@ import frontend.common.StatsBar;
 public class PlayerStatsBox extends StatsBox {
 
     private StatsBar mTimeBar;
-    private StatsBar mStateBar;
     private GameArea mGameArea;
+    private GameBrain mGameBrain;
+    private GameAreaStatsBox mGameAreaStatsBox;
 
     public PlayerStatsBox(GameArea gameArea) {
-        super(gameArea.getmGameBrain());
+        super(gameArea.getmGameBrain().getmGameMode());
 
         mGameArea = gameArea;
+        mGameBrain = mGameArea.getmGameBrain();
 
-        mStateBar = new StatsBar("Game State", "Loading...");
-        getChildren().add(1, mStateBar);
-
+        mGameAreaStatsBox = new GameAreaStatsBox(mGameBrain, this);
         mTimeBar = new StatsBar("Time", "0:0:00");
         getChildren().add(mTimeBar);
+
     }
 
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mStateBar.setValue(mGameBrain.getmGameState().message);
-        mStateBar.setColour(mGameBrain.getmGameState().colour);
+        mGameAreaStatsBox.update(deltaTime);
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
     }
 }

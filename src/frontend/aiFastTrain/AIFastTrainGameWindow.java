@@ -13,13 +13,12 @@ import backend.GameBrain;
 import backend.Updatable;
 import frontend.base.GameWindow;
 import backend.GameMode;
+import frontend.base.TwoPanelGameWindow;
 import javafx.stage.Stage;
 
 import java.io.File;
 
-public class AIFastTrainGameWindow extends GameWindow implements Updatable {
-
-    private static final int OUTPUT_CONSOLE_FONT_SIZE = 10;
+public class AIFastTrainGameWindow extends TwoPanelGameWindow {
 
     private Population mPopulation;
     private FastTrainer mFastTrainer;

@@ -8,6 +8,8 @@
 package frontend.aiTrain;
 
 import ai.Trainer;
+import backend.GameBrain;
+import frontend.common.GameAreaStatsBox;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.StatsBar;
@@ -19,18 +21,19 @@ public class AITrainStatsBox extends StatsBox {
     private StatsBar mOrganismNumBar;
     private StatsBar mTrainTimeBar;
     private StatsBar mTimeBar;
-    private StatsBar mStateBar;
     private GameArea mGameArea;
     private Trainer mTrainer;
+    private GameBrain mGameBrain;
+    private GameAreaStatsBox mGameAreaStatsBox;
 
 
     public AITrainStatsBox(GameArea gameArea, Trainer trainer) {
-        super(gameArea.getmGameBrain());
+        super(gameArea.getmGameBrain().getmGameMode());
         mTrainer = trainer;
         mGameArea = gameArea;
+        mGameBrain = mGameArea.getmGameBrain();
 
-        mStateBar = new StatsBar("Game State", "Loading...");
-        getChildren().add(1, mStateBar);
+        mGameAreaStatsBox = new GameAreaStatsBox(mGameBrain, this);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         mOrganismBar.setSmallerFont();
@@ -52,8 +55,7 @@ public class AITrainStatsBox extends StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mStateBar.setValue(mGameBrain.getmGameState().message);
-        mStateBar.setColour(mGameBrain.getmGameState().colour);
+        mGameAreaStatsBox.update(deltaTime);
         mOrganismBar.setValue(mTrainer.getmCurOrganism().getmName());
         mOrganismNumBar.setValue(mTrainer.getmCurOrganismIndex()+1 + "/" + mTrainer.getmPopulation().getNumOrganisms());
         mGenerationBar.setValue(Integer.toString(mTrainer.getmPopulation().getmGeneration()));

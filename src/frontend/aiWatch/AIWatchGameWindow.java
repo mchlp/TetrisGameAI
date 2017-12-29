@@ -10,14 +10,16 @@ package frontend.aiWatch;
 import ai.Organism;
 import ai.Watcher;
 import frontend.base.GameWindow;
+import frontend.base.TwoPanelGameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import backend.GameMode;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
 import java.io.File;
 
-public class AIWatchGameWindow extends GameWindow {
+public class AIWatchGameWindow extends TwoPanelGameWindow {
 
     private Watcher mWatcher;
     private Organism mOrganism;
@@ -28,6 +30,9 @@ public class AIWatchGameWindow extends GameWindow {
 
         mWindowTitle = "Tetris Game - AI Watch Version";
         mOrganism = organism;
+
+        Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
+        mGamePane.getChildren().add(gameAreaBackground);
 
         mGameArea = new GameArea(mBackgroundMusic, mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
         mGamePane.getChildren().add(mGameArea);
