@@ -197,6 +197,7 @@ public class Game extends Application {
 
     private void onUpdate(double deltaTime) {
         for (Updatable updatable : updateItems) {
+            System.out.println(1/deltaTime);
             updatable.update(deltaTime);
         }
     }
