@@ -25,15 +25,12 @@ public class AIFastTrainGameWindow extends GameWindow implements Updatable {
     private FastTrainer mFastTrainer;
     private GameBrain mGameBrain;
 
-    public AIFastTrainGameWindow(Stage stage, double height, double width) {
+    public AIFastTrainGameWindow(Population population, Stage stage, double height, double width) {
         super(stage, height, width, GameMode.AI_FAST_TRAINER);
 
         mWindowTitle = "Tetris Game - AI Fast Train Version";
 
-        File saveFile = new File("/home/mpu/Desktop/fastTestAI.ser");
-
-        mPopulation = new Population(saveFile);
-        //mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
+        mPopulation = population;
 
         mGameBrain = new GameBrain(GameMode.AI_FAST_TRAINER);
 

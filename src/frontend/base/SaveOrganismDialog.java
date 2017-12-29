@@ -83,12 +83,14 @@ public class SaveOrganismDialog extends Stage {
         fileChooser.setInitialDirectory(defaultDir);
         fileChooser.getExtensionFilters().add(organismFileFilter);
 
+        final Stage fileChooseParentStage = this;
+
         selectFileButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String fileName = convertToFileName(nameField.getText());
                 fileChooser.setInitialFileName(fileName);
-                mSaveFile = fileChooser.showSaveDialog(parent);
+                mSaveFile = fileChooser.showSaveDialog(fileChooseParentStage);
                 if (mSaveFile != null) {
                     try {
                         saveOrganism.setmName(nameField.getText());

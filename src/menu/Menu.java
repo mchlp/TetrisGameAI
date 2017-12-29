@@ -8,8 +8,10 @@
 package menu;
 
 import ai.Organism;
+import ai.Population;
 import backend.GameMode;
 import frontend.common.SelectOrganismDialog;
+import frontend.common.SelectPopulationDialog;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
@@ -75,7 +77,12 @@ public class Menu extends VBox {
         mTrainAIButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-                ((MenuScreen) getParent()).mGameMode = GameMode.AI_TRAINER;
+                SelectPopulationDialog selectPopulationDialog = new SelectPopulationDialog(stage);
+                Population loadedPopulation = selectPopulationDialog.showDialog();
+                if (loadedPopulation != null) {
+                    mLoadedObject = loadedPopulation;
+                    ((MenuScreen) getParent()).mGameMode = selectPopulationDialog.getmTrainMode();
+                }
             }
         });
     }

@@ -23,7 +23,14 @@ public class SerializeTest {
         }
         Population savePop = new Population(file);
         savePop.saveToFile();
-        Population readPop = Population.loadPopulationFromFile(file);
+        Population readPop = null;
+        try {
+            readPop = Population.loadPopulationFromFile(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         System.out.println(readPop.getOrganism(0).getmName());
     }
 }

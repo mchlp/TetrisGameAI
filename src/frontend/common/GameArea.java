@@ -86,7 +86,11 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     void togglePause() {
-        mBackgroundMusic.pause();
+        if (mGameBrain.getmGameState() == GameState.PAUSED) {
+            mBackgroundMusic.play();
+        } else {
+            mBackgroundMusic.pause();
+        }
         mGameBrain.togglePause();
     }
 
@@ -170,7 +174,7 @@ public class GameArea extends Canvas implements Updatable {
                     mTetrominoUpdateTime = calculateDropSpeed();
                 }
             }
-        } else {
+        } else if (mGameBrain.getmGameState() == GameState.OVER) {
             mBackgroundMusic.stop();
         }
         drawGame();

@@ -46,17 +46,12 @@ public class Population implements Serializable {
         }
     }
 
-    public static Population loadPopulationFromFile(File loadFile) {
-        try {
-            FileInputStream fileIn = new FileInputStream(loadFile);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            Population loadedPopulation = (Population) in.readObject();
-            loadedPopulation.mSaveFile = loadFile;
-            return loadedPopulation;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public static Population loadPopulationFromFile(File loadFile) throws IOException, ClassNotFoundException {
+        FileInputStream fileIn = new FileInputStream(loadFile);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        Population loadedPopulation = (Population) in.readObject();
+        loadedPopulation.mSaveFile = loadFile;
+        return loadedPopulation;
     }
 
     public void evolve() {
@@ -147,7 +142,11 @@ public class Population implements Serializable {
 
     public Organism getElite() {
         if (mElites.size() == 0) {
-            return null;
+            if (mOrganisms[0].getTotalScore() == 0) {
+                return null;
+            } else {
+                return mOrganisms[0];
+            }
         }
         return mElites.get(0);
     }

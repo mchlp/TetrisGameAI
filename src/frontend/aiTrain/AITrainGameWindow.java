@@ -24,14 +24,12 @@ public class AITrainGameWindow extends GameWindow {
     private Trainer mTrainer;
     private GameArea mGameArea;
 
-    public AITrainGameWindow(Stage stage, double height, double width) {
+    public AITrainGameWindow(Population population, Stage stage, double height, double width) {
         super(stage, height, width, GameMode.AI_TRAINER);
 
         mWindowTitle = "Tetris Game - AI Train Version";
 
-        File saveFile = new File("/home/mpu/Desktop/testAI.ser");
-        mPopulation = new Population(saveFile);
-        //mPopulation = Population.loadPopulationFromFile(new File("/home/mpu/Desktop/fastTestAI.ser"));
+        mPopulation = population;
 
         Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         mGamePane.getChildren().add(gameAreaBackground);

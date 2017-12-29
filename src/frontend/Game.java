@@ -8,6 +8,7 @@
 package frontend;
 
 import ai.Organism;
+import ai.Population;
 import backend.ControllerKeys;
 import backend.Updatable;
 import frontend.aiFastTrain.AIFastTrainGameWindow;
@@ -94,18 +95,23 @@ public class Game extends Application {
         double height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
         double width = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
 
+        Population loadedPopulation;
+        Organism loadedOrganism;
+
         switch (gameMode) {
             case PLAYER:
                 startPlayerGame(height, width);
                 break;
             case AI_TRAINER:
-                startAITrain(height, width);
+                loadedPopulation = (Population) menu.getmLoadedObject();
+                startAITrain(loadedPopulation, height, width);
                 break;
             case AI_FAST_TRAINER:
-                startAIFastTrain(height, width);
+                loadedPopulation = (Population) menu.getmLoadedObject();
+                startAIFastTrain(loadedPopulation, height, width);
                 break;
             case AI_WATCHER:
-                Organism loadedOrganism = (Organism) menu.getmLoadedObject();
+                loadedOrganism = (Organism) menu.getmLoadedObject();
                 startAIWatch(loadedOrganism, height, width);
                 break;
         }
@@ -135,13 +141,13 @@ public class Game extends Application {
         gameTimer.start();
     }
 
-    public void startAIFastTrain(double height, double width) {
-        gameWindow = new AIFastTrainGameWindow(primaryStage, height, width);
+    public void startAIFastTrain(Population population, double height, double width) {
+        gameWindow = new AIFastTrainGameWindow(population, primaryStage, height, width);
         scene = new Scene(gameWindow);
     }
 
-    public void startAITrain(double height, double width) {
-        gameWindow = new AITrainGameWindow(primaryStage, height, width);
+    public void startAITrain(Population population, double height, double width) {
+        gameWindow = new AITrainGameWindow(population, primaryStage, height, width);
         scene = new Scene(gameWindow);
     }
 
