@@ -122,6 +122,9 @@ public class Game extends Application {
         double minDimension = Math.min(screenHeight, screenWidth);
         double maxDimension = Math.max(screenHeight, screenWidth);
 
+        double minDimension = Math.min(screenHeight, screenWidth);
+        double maxDimension = Math.max(screenHeight, screenWidth);
+
         double height = minDimension;
         double width = minDimension;
 
