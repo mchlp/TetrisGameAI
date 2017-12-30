@@ -56,6 +56,8 @@ public class OrganismStatusBox extends VBox implements Updatable {
 
     @Override
     public void update(double deltaTime) {
-        mTextArea.setText(mOrganism.getStatus());
+        if (!mTextArea.getText().equals(mOrganism.getStatus())) {
+            mTextArea.setText(mOrganism.getStatus());
+        }
     }
 }

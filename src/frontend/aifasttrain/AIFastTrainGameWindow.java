@@ -32,7 +32,7 @@ public class AIFastTrainGameWindow extends TwoPanelGameWindow {
         mFastTrainer = new FastTrainer(mGameBrain, mPopulation);
         mUpdateItems.add(mFastTrainer);
 
-        PopulationStatusSidebar populationStatusSidebar = new PopulationStatusSidebar(DEFAULT_MARGINS, mCanvasHeight, mCanvasWidth, mPopulation, mFastTrainer);
+        PopulationStatusSidebar populationStatusSidebar = new PopulationStatusSidebar(DEFAULT_MARGINS, height*0.5, width*0.5, mPopulation, mFastTrainer);
         setLeft(populationStatusSidebar);
         mUpdateItems.add(populationStatusSidebar);
 

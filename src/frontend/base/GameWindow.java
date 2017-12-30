@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public abstract class GameWindow extends BorderPane implements Updatable {
 
-    protected static final int DEFAULT_MARGINS = 20;
+    protected static final int DEFAULT_MARGINS = 15;
     protected static final Color GAME_OUTLINE_COLOUR = Color.grayRgb(83);
     protected static final Color GAME_BACKGROUND_COLOUR = Color.grayRgb(23);
 
@@ -49,8 +49,8 @@ public abstract class GameWindow extends BorderPane implements Updatable {
         mBackgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
 
         // set up size of screen
-        setPrefHeight(height);
-        setPrefWidth(width);
+        setMaxHeight(height);
+        setMaxWidth(width);
 
         // set up size of components in the screen
         mCanvasHeight = height - (2 * DEFAULT_MARGINS);

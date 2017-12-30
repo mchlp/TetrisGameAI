@@ -116,9 +116,11 @@ public class Game extends Application {
 
         // establish dimensions of screen
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        double screenHeight = screenBounds.getHeight();
+        double screenWidth = screenBounds.getWidth();
 
-        double minDimension = Math.min(screenBounds.getHeight(), screenBounds.getWidth());
-        double maxDimension = Math.max(screenBounds.getHeight(), screenBounds.getWidth());
+        double minDimension = Math.min(screenHeight, screenWidth);
+        double maxDimension = Math.max(screenHeight, screenWidth);
 
         double height = minDimension;
         double width = minDimension;
@@ -137,6 +139,7 @@ public class Game extends Application {
                 }
                 height = minDimension * WINDOW_PERCENTAGE_OF_SCREEN;
                 width = ((minDimension / 2) * 3) * WINDOW_PERCENTAGE_OF_SCREEN;
+                break;
         }
 
         // opens game window

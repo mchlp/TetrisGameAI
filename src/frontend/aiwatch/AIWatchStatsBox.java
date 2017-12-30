@@ -31,7 +31,6 @@ public class AIWatchStatsBox extends StatsBox {
         mGameAreaStatsBox = new GameAreaStatsBox(mGameBrain, this);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
-        mOrganismBar.setSmallerFont();
         getChildren().add(mOrganismBar);
 
         mTimeBar = new StatsBar("Time", "0:0:00");

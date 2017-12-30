@@ -15,7 +15,7 @@ import javafx.scene.layout.VBox;
 
 public class PopulationStatusStatsBox extends VBox implements Updatable {
 
-    private static final int ELEMENT_SPACING = 10;
+    private static final int ELEMENT_SPACING = 5;
 
     private Population mPopulation;
     private Brain mBrain;
