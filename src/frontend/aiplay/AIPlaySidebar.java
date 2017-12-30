@@ -21,6 +21,10 @@ import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
 public class AIPlaySidebar extends Sidebar {
+
+    private boolean mPaused;
+    private boolean mMuted;
+
     public AIPlaySidebar(GameWindow gameWindow, GameArea aiGameArea, GameArea playerGameArea, GameController aiGameController, GameController playerGameController, double margins, double sideBarHeight, double sideBarWidth, Color gameBgColour) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
 
@@ -37,11 +41,16 @@ public class AIPlaySidebar extends Sidebar {
         Button restartButton = new Button("Restart");
         mButtonBar.getChildren().add(restartButton);
 
-        Button pauseButton = new Button("Toggle Pause");
+        Button pauseButton = new Button("Pause");
         mButtonBar.getChildren().add(pauseButton);
+        mPaused = false;
 
         Button gridlinesButton = new Button("Toggle Gridlines");
         mButtonBar.getChildren().add(gridlinesButton);
+
+        Button muteButton = new Button("Mute");
+        mButtonBar.getChildren().add(muteButton);
+        mMuted = false;
 
         restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -54,6 +63,13 @@ public class AIPlaySidebar extends Sidebar {
         pauseButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
+                if (mPaused) {
+                    mPaused = false;
+                    pauseButton.setText("Pause");
+                } else {
+                    mPaused = true;
+                    pauseButton.setText("Unpause");
+                }
                 aiGameController.keyPressed(ControllerKeys.TOGGLE_PAUSE);
                 playerGameController.keyPressed(ControllerKeys.TOGGLE_PAUSE);
             }
@@ -64,6 +80,20 @@ public class AIPlaySidebar extends Sidebar {
             public void handle(ActionEvent click) {
                 aiGameController.keyPressed(ControllerKeys.TOGGLE_GRIDLINES);
                 playerGameController.keyPressed(ControllerKeys.TOGGLE_GRIDLINES);
+            }
+        });
+
+        muteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (mMuted) {
+                    mMuted = false;
+                    muteButton.setText("Mute");
+                } else {
+                    mMuted = true;
+                    muteButton.setText("Unmute");
+                }
+                mGameWindow.getmBackgroundMusic().setMute(mMuted);
             }
         });
     }

@@ -20,6 +20,7 @@ public class AITrainSidebar extends Sidebar {
 
     private Trainer mTrainer;
     private Button mSaveEliteButton;
+    private boolean mMuted;
 
     public AITrainSidebar(GameWindow gameWindow, GameArea gameArea, Trainer trainer, double margins, double sideBarHeight, double sideBarWidth) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
@@ -36,10 +37,28 @@ public class AITrainSidebar extends Sidebar {
         mSaveEliteButton.setDisable(true);
         mButtonBar.getChildren().add(mSaveEliteButton);
 
+        Button muteButton = new Button("Mute");
+        mButtonBar.getChildren().add(muteButton);
+        mMuted = false;
+
         mSaveEliteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
                 new SaveOrganismDialog(mGameWindow.getmStage(), trainer.getmPopulation().getElite());
+            }
+        });
+
+        muteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (mMuted) {
+                    mMuted = false;
+                    muteButton.setText("Mute");
+                } else {
+                    mMuted = true;
+                    muteButton.setText("Unmute");
+                }
+                mGameWindow.getmBackgroundMusic().setMute(mMuted);
             }
         });
     }

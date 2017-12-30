@@ -21,6 +21,7 @@ public class AIWatchSidebar extends Sidebar {
 
     private OrganismStatusBox mOrganismStatusBox;
     private Watcher mWatcher;
+    private boolean mMuted;
 
     public AIWatchSidebar(GameWindow gameWindow, GameArea gameArea, Watcher watcher, double margins, double sideBarHeight, double sideBarWidth) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
@@ -40,10 +41,28 @@ public class AIWatchSidebar extends Sidebar {
         Button restartButton = new Button("Restart");
         mButtonBar.getChildren().add(restartButton);
 
+        Button muteButton = new Button("Mute");
+        mButtonBar.getChildren().add(muteButton);
+        mMuted = false;
+
         restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
                 mWatcher.getmGameController().keyPressed(ControllerKeys.RESTART);
+            }
+        });
+
+        muteButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if (mMuted) {
+                    mMuted = false;
+                    muteButton.setText("Mute");
+                } else {
+                    mMuted = true;
+                    muteButton.setText("Unmute");
+                }
+                mGameWindow.getmBackgroundMusic().setMute(mMuted);
             }
         });
     }
