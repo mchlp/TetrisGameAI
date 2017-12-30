@@ -36,7 +36,6 @@ public class AITrainStatsBox extends StatsBox {
         mGameAreaStatsBox = new GameAreaStatsBox(mGameBrain, this);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
-        mOrganismBar.setSmallerFont();
         getChildren().add(mOrganismBar);
 
         mOrganismNumBar = new StatsBar("Organism Number", "Loading...");

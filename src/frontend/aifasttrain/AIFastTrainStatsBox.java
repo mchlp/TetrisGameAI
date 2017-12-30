@@ -30,7 +30,6 @@ public class AIFastTrainStatsBox extends StatsBox {
         mGameAreaStatsBox = new GameAreaStatsBox(gameBrain, this);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
-        mOrganismBar.setSmallerFont();
         getChildren().add(mOrganismBar);
 
         mOrganismNumBar = new StatsBar("Organism Number", "Loading...");
