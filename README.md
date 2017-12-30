@@ -14,9 +14,9 @@ Package                     |Subpackage                                 | Descri
 [ai](src/ai)                |                                           | files related to the AI
 [backend](src/backend)      |                                           | files related to the processing and game logic
 [frontend](src/frontend)    |                                           | files related to the JavaFX components displayed on screen
-[frontend](src/frontend)    |[aiFastTrain](src/frontend/aiFastTrain)    | files related to the AI fast training mode
-[frontend](src/frontend)    |[aiTrain](src/frontend/aiTrain)            | files related to the AI GUI training mode
-[frontend](src/frontend)    |[aiWatch](src/frontend/aiWatch)            | files related to the AI watch mode
+[frontend](src/frontend)    |[aiFastTrain](src/frontend/aifasttrain)    | files related to the AI fast training mode
+[frontend](src/frontend)    |[aiTrain](src/frontend/aitrain)            | files related to the AI GUI training mode
+[frontend](src/frontend)    |[aiWatch](src/frontend/aiwatch)            | files related to the AI watch mode
 [frontend](src/frontend)    |[base](src/frontend/base)                  | files related to abstract classes that are used in displaying 
 [frontend](src/frontend)    |[common](src/frontend/common)              | files related to GUI elements that are shared between multiple modes
 [frontend](src/frontend)    |[player](src/frontend/common)              | files related to the human player mode

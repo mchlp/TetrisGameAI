@@ -5,12 +5,11 @@
  * December 28, 2017
  */
 
-package frontend.aiFastTrain;
+package frontend.aifasttrain;
 
 import ai.FastTrainer;
 import ai.Population;
 import backend.Updatable;
-import frontend.base.Sidebar;
 import frontend.common.OrganismStatusBox;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

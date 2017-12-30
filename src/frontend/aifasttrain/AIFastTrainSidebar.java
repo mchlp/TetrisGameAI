@@ -5,13 +5,13 @@
  * December 28, 2017
  */
 
-package frontend.aiFastTrain;
+package frontend.aifasttrain;
 
 import ai.FastTrainer;
 import backend.GameBrain;
 import frontend.base.GameWindow;
-import frontend.common.SaveOrganismDialog;
 import frontend.base.Sidebar;
+import frontend.common.SaveOrganismDialog;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

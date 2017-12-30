@@ -24,7 +24,7 @@ public abstract class ThreePanelGameWindow extends GameWindow {
         super(stage, height, width, gameMode);
 
         mSideBarHeight = height;
-        mSideBarWidth = width - (mGameAreaWidth*2);
+        mSideBarWidth = width - (mGameAreaWidth * 2);
 
         mLeftGamePane = new StackPane();
         mLeftGamePane.setPrefHeight(mGameAreaHeight);

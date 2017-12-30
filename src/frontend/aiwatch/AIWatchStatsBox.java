@@ -5,13 +5,13 @@
  * December 28, 2017
  */
 
-package frontend.aiWatch;
+package frontend.aiwatch;
 
 import ai.Watcher;
 import backend.GameBrain;
-import frontend.common.GameAreaStatsBox;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
+import frontend.common.GameAreaStatsBox;
 import frontend.common.StatsBar;
 
 public class AIWatchStatsBox extends StatsBox {

@@ -8,9 +8,9 @@
 package frontend.player;
 
 import backend.GameBrain;
-import frontend.common.GameAreaStatsBox;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
+import frontend.common.GameAreaStatsBox;
 import frontend.common.StatsBar;
 
 public class PlayerStatsBox extends StatsBox {

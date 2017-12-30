@@ -5,19 +5,16 @@
  * December 28, 2017
  */
 
-package frontend.aiWatch;
+package frontend.aiwatch;
 
 import ai.Organism;
 import ai.Watcher;
-import frontend.base.GameWindow;
+import backend.GameMode;
 import frontend.base.TwoPanelGameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
-import backend.GameMode;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 public class AIWatchGameWindow extends TwoPanelGameWindow {
 

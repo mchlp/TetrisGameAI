@@ -8,18 +8,15 @@
 package frontend.common;
 
 import backend.GameBrain;
-import frontend.base.StatsBox;
-import frontend.common.StatsBar;
 import javafx.scene.layout.VBox;
 
 public class GameAreaStatsBox {
 
+    protected GameBrain mGameBrain;
     private StatsBar mScoreBar;
     private StatsBar mLinesBar;
     private StatsBar mLevelBar;
     private StatsBar mStateBar;
-
-    protected GameBrain mGameBrain;
 
     public GameAreaStatsBox(GameBrain gameBrain, VBox parent) {
 

@@ -5,7 +5,7 @@
  * December 29, 2017
  */
 
-package frontend.aiPlay;
+package frontend.aiplay;
 
 import ai.Organism;
 import ai.Watcher;

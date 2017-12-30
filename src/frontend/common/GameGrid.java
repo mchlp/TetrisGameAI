@@ -111,8 +111,8 @@ public class GameGrid {
 
     public GameGrid clone() {
         GameGrid newGrid = new GameGrid(mWidth, mHeight, mExtraRows);
-        for (int i=0; i<newGrid.getmWidth(); i++) {
-            for (int j=0; j<newGrid.getmHeight(); j++) {
+        for (int i = 0; i < newGrid.getmWidth(); i++) {
+            for (int j = 0; j < newGrid.getmHeight(); j++) {
                 Cell newCell = getCell(i, j).clone();
                 newGrid.setCell(i, j, newCell);
             }

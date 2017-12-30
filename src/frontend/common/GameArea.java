@@ -7,12 +7,13 @@
 
 package frontend.common;
 
-import backend.*;
+import backend.GameBrain;
+import backend.GameMode;
+import backend.GameState;
+import backend.Updatable;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.effect.GaussianBlur;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 

@@ -7,11 +7,10 @@
 
 package frontend.player;
 
-import frontend.base.GameWindow;
+import backend.GameMode;
 import frontend.base.TwoPanelGameWindow;
 import frontend.common.GameArea;
 import frontend.common.GameController;
-import backend.GameMode;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 

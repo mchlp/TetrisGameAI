@@ -56,7 +56,7 @@ public class Genome implements Serializable {
 
     public Genome clone() {
         Gene[] clonedGeneList = new Gene[mGeneList.length];
-        for (int i=0; i<mGeneList.length; i++) {
+        for (int i = 0; i < mGeneList.length; i++) {
             clonedGeneList[i] = mGeneList[i].clone();
         }
         return new Genome(clonedGeneList);

@@ -8,7 +8,10 @@
 package ai;
 
 import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class Population implements Serializable {
 
@@ -66,25 +69,25 @@ public class Population implements Serializable {
         addElite(mOrganisms[0]);
         mEliteFitness = mElites.get(0).calculateFitness();
         mTopFitness = mOrganisms[0].calculateFitness();
-        mMinFitness = mOrganisms[getNumOrganisms()-1].calculateFitness();
+        mMinFitness = mOrganisms[getNumOrganisms() - 1].calculateFitness();
         int totalFitness = 0;
         for (Organism organism : mOrganisms) {
             totalFitness += organism.calculateFitness();
         }
         int top25Fitness = 0;
         int bottom25Fitness = 0;
-        int num25Per = getNumOrganisms()/4;
-        for (int i=0; i<num25Per; i++) {
+        int num25Per = getNumOrganisms() / 4;
+        for (int i = 0; i < num25Per; i++) {
             top25Fitness += mOrganisms[i].calculateFitness();
-            bottom25Fitness += mOrganisms[getNumOrganisms()-i-1].calculateFitness();
+            bottom25Fitness += mOrganisms[getNumOrganisms() - i - 1].calculateFitness();
         }
-        mTop25PerFitness = top25Fitness/num25Per;
-        mBottom25PerFitness = bottom25Fitness/num25Per;
+        mTop25PerFitness = top25Fitness / num25Per;
+        mBottom25PerFitness = bottom25Fitness / num25Per;
         mTotalFitness = totalFitness;
-        mAvgFitness = totalFitness/getNumOrganisms();
-        Organism[] survivors = Arrays.copyOfRange(mOrganisms, 0, (int) (mOrganisms.length*REPRODUCING_PERCENTAGE) - mElites.size());
-        for (int i=0; i<mElites.size(); i++) {
-            survivors[survivors.length-i-1] = mElites.get(i).clone();
+        mAvgFitness = totalFitness / getNumOrganisms();
+        Organism[] survivors = Arrays.copyOfRange(mOrganisms, 0, (int) (mOrganisms.length * REPRODUCING_PERCENTAGE) - mElites.size());
+        for (int i = 0; i < mElites.size(); i++) {
+            survivors[survivors.length - i - 1] = mElites.get(i).clone();
         }
         survivors = sort(Arrays.asList(survivors)).toArray(survivors);
         return survivors;
@@ -116,7 +119,7 @@ public class Population implements Serializable {
     }
 
     private Organism pickRandomOrganism(Organism[] organisms) {
-        int index = (int) (Math.random()*organisms.length);
+        int index = (int) (Math.random() * organisms.length);
         return organisms[index];
     }
 

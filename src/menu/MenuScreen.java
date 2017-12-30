@@ -22,9 +22,8 @@ import javafx.stage.Stage;
 public class MenuScreen extends BorderPane {
 
     private static final int DEFAULT_PADDING = 20;
-
-    private Menu mMenu;
     GameMode mGameMode;
+    private Menu mMenu;
 
     public MenuScreen(Stage stage) {
 

@@ -8,7 +8,6 @@
 package frontend.common;
 
 import backend.ControllerKeys;
-import frontend.aiPlay.AIPlayGameWindow;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,6 +17,10 @@ public class SinglePlayerControllerHandler implements EventHandler<KeyEvent> {
     private GameController mGameController;
     private GameController mSecondGameController;
 
+    /**
+     * @param gameController
+     * @param secondGameController
+     */
     public SinglePlayerControllerHandler(GameController gameController, GameController secondGameController) {
         mGameController = gameController;
         mSecondGameController = secondGameController;

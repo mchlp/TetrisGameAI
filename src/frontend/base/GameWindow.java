@@ -7,12 +7,10 @@
 
 package frontend.base;
 
+import backend.GameMode;
 import backend.Updatable;
 import backend.Utilities;
-import frontend.common.GameController;
-import backend.GameMode;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;

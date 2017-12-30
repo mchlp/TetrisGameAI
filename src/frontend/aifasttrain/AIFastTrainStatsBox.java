@@ -5,12 +5,12 @@
  * December 28, 2017
  */
 
-package frontend.aiFastTrain;
+package frontend.aifasttrain;
 
 import ai.FastTrainer;
 import backend.GameBrain;
-import frontend.common.GameAreaStatsBox;
 import frontend.base.StatsBox;
+import frontend.common.GameAreaStatsBox;
 import frontend.common.StatsBar;
 
 public class AIFastTrainStatsBox extends StatsBox {
@@ -51,7 +51,7 @@ public class AIFastTrainStatsBox extends StatsBox {
         super.update(deltaTime);
         mGameAreaStatsBox.update(deltaTime);
         mOrganismBar.setValue(mFastTrainer.getmCurOrganism().getmName());
-        mOrganismNumBar.setValue(mFastTrainer.getmCurOrganismIndex()+1 + "/" + mFastTrainer.getmPopulation().getNumOrganisms());
+        mOrganismNumBar.setValue(mFastTrainer.getmCurOrganismIndex() + 1 + "/" + mFastTrainer.getmPopulation().getNumOrganisms());
         mGenerationBar.setValue(Integer.toString(mFastTrainer.getmPopulation().getmGeneration()));
         mTrainTimeBar.setValue(getTimeInString((int) (mFastTrainer.getmPopulation().getmTrainTime())));
         mTopScoreBar.setValue(Integer.toString(mFastTrainer.getmTopScore()));

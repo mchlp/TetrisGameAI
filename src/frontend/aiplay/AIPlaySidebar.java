@@ -5,13 +5,13 @@
  * December 29, 2017
  */
 
-package frontend.aiPlay;
+package frontend.aiplay;
 
 import backend.ControllerKeys;
 import backend.GameMode;
-import frontend.common.DoubleStatsBox;
 import frontend.base.GameWindow;
 import frontend.base.Sidebar;
+import frontend.common.DoubleStatsBox;
 import frontend.common.GameArea;
 import frontend.common.GameController;
 import frontend.player.NextTetrominoBox;

@@ -7,7 +7,6 @@
 
 package frontend.base;
 
-import backend.GameBrain;
 import backend.GameMode;
 import backend.Updatable;
 import frontend.common.StatsBar;

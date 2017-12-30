@@ -85,7 +85,7 @@ public class Tetromino {
     }
 
     public void drop(boolean tryMove) {
-        while (moveDown(tryMove));
+        while (moveDown(tryMove)) ;
         freeze();
     }
 

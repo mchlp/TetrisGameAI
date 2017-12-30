@@ -5,18 +5,14 @@
  * December 28, 2017
  */
 
-package frontend.aiFastTrain;
+package frontend.aifasttrain;
 
 import ai.FastTrainer;
 import ai.Population;
 import backend.GameBrain;
-import backend.Updatable;
-import frontend.base.GameWindow;
 import backend.GameMode;
 import frontend.base.TwoPanelGameWindow;
 import javafx.stage.Stage;
-
-import java.io.File;
 
 public class AIFastTrainGameWindow extends TwoPanelGameWindow {
 

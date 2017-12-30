@@ -5,7 +5,7 @@
  * December 28, 2017
  */
 
-package frontend.aiFastTrain;
+package frontend.aifasttrain;
 
 import ai.Brain;
 import ai.Population;

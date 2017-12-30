@@ -36,10 +36,10 @@ public class Organism implements Serializable {
     }
 
     public static Organism loadOrganismFromFile(File loadFile) throws IOException, ClassNotFoundException {
-            FileInputStream fileIn = new FileInputStream(loadFile);
-            ObjectInputStream in = new ObjectInputStream(fileIn);
-            Organism loadedOrganism = (Organism) in.readObject();
-            return loadedOrganism;
+        FileInputStream fileIn = new FileInputStream(loadFile);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        Organism loadedOrganism = (Organism) in.readObject();
+        return loadedOrganism;
     }
 
     public Organism breed(Organism otherParent) {
@@ -47,23 +47,15 @@ public class Organism implements Serializable {
     }
 
     public int calculateFitness() {
-        return getTotalScore()/(Math.max(mScoreList.size(), 1));
-    }
-
-    public void setmMaxScore(int mMaxScore) {
-        this.mMaxScore = mMaxScore;
+        return getTotalScore() / (Math.max(mScoreList.size(), 1));
     }
 
     public int getmMaxScore() {
         return mMaxScore;
     }
 
-    public void setmMaxLevel(int mMaxLevel) {
-        this.mMaxLevel = mMaxLevel;
-    }
-
-    public void setmMaxLinesCleared(int mMaxLinesCleared) {
-        this.mMaxLinesCleared = mMaxLinesCleared;
+    public void setmMaxScore(int mMaxScore) {
+        this.mMaxScore = mMaxScore;
     }
 
     public int getTotalScore() {
@@ -123,8 +115,16 @@ public class Organism implements Serializable {
         return mMaxLinesCleared;
     }
 
+    public void setmMaxLinesCleared(int mMaxLinesCleared) {
+        this.mMaxLinesCleared = mMaxLinesCleared;
+    }
+
     public int getmMaxLevel() {
         return mMaxLevel;
+    }
+
+    public void setmMaxLevel(int mMaxLevel) {
+        this.mMaxLevel = mMaxLevel;
     }
 
     public void addScore(int score) {

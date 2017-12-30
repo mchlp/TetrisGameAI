@@ -36,16 +36,16 @@ public abstract class Brain implements Updatable {
         ArrayList<ControllerKeys> bestMoves = new ArrayList<>();
 
         for (int numRotations = 0; numRotations < 4; numRotations++) {
-            for (int numTranslate = -(grid.getmWidth()/2); numTranslate <= grid.getmWidth()/2; numTranslate++) {
+            for (int numTranslate = -(grid.getmWidth() / 2); numTranslate <= grid.getmWidth() / 2; numTranslate++) {
 
                 GameGrid testGrid = grid.clone();
                 Tetromino testTetromino = curTetromino.clone();
 
-                for (int i=0; i<numRotations; i++) {
+                for (int i = 0; i < numRotations; i++) {
                     testTetromino.rotate(false);
                 }
 
-                for (int i=0; i<Math.abs(numTranslate); i++) {
+                for (int i = 0; i < Math.abs(numTranslate); i++) {
                     if (numTranslate < 0) {
                         testTetromino.moveLeft(false);
                     } else {
@@ -60,10 +60,10 @@ public abstract class Brain implements Updatable {
                 if (curRating > highestRating) {
                     highestRating = curRating;
                     bestMoves.clear();
-                    for (int i=0; i<numRotations; i++) {
+                    for (int i = 0; i < numRotations; i++) {
                         bestMoves.add(ControllerKeys.ROTATE);
                     }
-                    for (int i=0; i<Math.abs(numTranslate); i++) {
+                    for (int i = 0; i < Math.abs(numTranslate); i++) {
                         if (numTranslate < 0) {
                             bestMoves.add(ControllerKeys.LEFT);
                         } else {
@@ -112,10 +112,10 @@ public abstract class Brain implements Updatable {
 
     private int getTotalHeight(GameGrid grid) {
         int sumHeight = 0;
-        for (int i=0; i<grid.getmWidth(); i++) {
-            for (int j=0; j<grid.getmHeight(); j++) {
+        for (int i = 0; i < grid.getmWidth(); i++) {
+            for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
-                    sumHeight += grid.getmHeight()-j;
+                    sumHeight += grid.getmHeight() - j;
                     break;
                 }
             }
@@ -125,11 +125,11 @@ public abstract class Brain implements Updatable {
 
     private int getNumBlocksTouchingSide(GameGrid grid) {
         int numBlocksTouchingSide = 0;
-        for (int i=0; i<grid.getmHeight(); i++) {
+        for (int i = 0; i < grid.getmHeight(); i++) {
             if (grid.isFilled(0, i)) {
                 numBlocksTouchingSide++;
             }
-            if (grid.isFilled(grid.getmWidth()-1, i)) {
+            if (grid.isFilled(grid.getmWidth() - 1, i)) {
                 numBlocksTouchingSide++;
             }
         }
@@ -138,9 +138,9 @@ public abstract class Brain implements Updatable {
 
     private int getSumBlocksAboveHole(GameGrid grid) {
         int sumBlocksAboveHole = 0;
-        for (int i=0; i<grid.getmWidth(); i++) {
+        for (int i = 0; i < grid.getmWidth(); i++) {
             int numHolesInCol = 0;
-            for (int j=grid.getmHeight()-1; j>=0; j--) {
+            for (int j = grid.getmHeight() - 1; j >= 0; j--) {
                 if (!grid.isFilled(i, j)) {
                     numHolesInCol++;
                 } else {
@@ -153,10 +153,10 @@ public abstract class Brain implements Updatable {
 
     private int getMaxHeight(GameGrid grid) {
         int maxHeight = 0;
-        for (int i=0; i<grid.getmWidth(); i++) {
-            for (int j=0; j<grid.getmHeight(); j++) {
+        for (int i = 0; i < grid.getmWidth(); i++) {
+            for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
-                    int height = grid.getmHeight()-j;
+                    int height = grid.getmHeight() - j;
                     if (height > maxHeight) {
                         maxHeight = height;
                     }
@@ -169,10 +169,10 @@ public abstract class Brain implements Updatable {
 
     private int getMinHeight(GameGrid grid) {
         int minHeight = Integer.MAX_VALUE;
-        for (int i=0; i<grid.getmWidth(); i++) {
-            for (int j=0; j<grid.getmHeight(); j++) {
+        for (int i = 0; i < grid.getmWidth(); i++) {
+            for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
-                    int height = grid.getmHeight()-j;
+                    int height = grid.getmHeight() - j;
                     if (height < minHeight) {
                         minHeight = height;
                     }
@@ -186,12 +186,12 @@ public abstract class Brain implements Updatable {
     private int getRoughness(GameGrid grid) {
         int prevHeight = 0;
         int sumAbsDiff = 0;
-        for (int i=0; i<grid.getmWidth(); i++) {
-            for (int j=0; j<grid.getmHeight(); j++) {
+        for (int i = 0; i < grid.getmWidth(); i++) {
+            for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
-                    int height = grid.getmHeight()-j;
+                    int height = grid.getmHeight() - j;
                     if (!(i == 0)) {
-                        sumAbsDiff += Math.abs(height-prevHeight);
+                        sumAbsDiff += Math.abs(height - prevHeight);
                     }
                     prevHeight = height;
                     break;
@@ -203,7 +203,7 @@ public abstract class Brain implements Updatable {
 
     private int getNumHoles(GameGrid grid) {
         int numHoles = 0;
-        for (int i=0; i<grid.getmWidth(); i++) {
+        for (int i = 0; i < grid.getmWidth(); i++) {
             boolean foundTop = false;
             for (int j = 0; j < grid.getmHeight(); j++) {
                 if (foundTop) {

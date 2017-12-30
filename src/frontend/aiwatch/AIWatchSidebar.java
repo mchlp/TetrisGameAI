@@ -5,7 +5,7 @@
  * December 28, 2017
  */
 
-package frontend.aiWatch;
+package frontend.aiwatch;
 
 import ai.Watcher;
 import backend.ControllerKeys;
@@ -17,7 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
-public class AIWatchSidebar extends Sidebar{
+public class AIWatchSidebar extends Sidebar {
 
     private OrganismStatusBox mOrganismStatusBox;
     private Watcher mWatcher;

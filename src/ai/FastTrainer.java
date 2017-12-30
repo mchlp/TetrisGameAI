@@ -10,6 +10,7 @@ package ai;
 import backend.ControllerKeys;
 import backend.GameBrain;
 import backend.GameState;
+
 import java.util.ArrayList;
 
 public class FastTrainer extends Brain {
@@ -36,7 +37,7 @@ public class FastTrainer extends Brain {
 
     private void updateTrainTime() {
         long currentTimeMillis = System.currentTimeMillis();
-        mPopulation.addmTrainTime((currentTimeMillis-mLastUpdateTime)/1000.0);
+        mPopulation.addmTrainTime((currentTimeMillis - mLastUpdateTime) / 1000.0);
         mLastUpdateTime = currentTimeMillis;
     }
 
@@ -66,7 +67,7 @@ public class FastTrainer extends Brain {
     private void startGame(Genome testGenome) {
         mGameBrain.newGame();
         mGameBrain.createTetromino();
-        int moves=0;
+        int moves = 0;
         while (mGameBrain.getmGameState() == GameState.PLAYING) {
             updateTrainTime();
             ArrayList<ControllerKeys> bestMoves = getBestMove(mGameBrain.getmGrid(), mGameBrain.getmCurTetromino(), testGenome);

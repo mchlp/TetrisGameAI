@@ -14,9 +14,7 @@ import frontend.common.GameArea;
 import frontend.common.GameController;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 
 public class PlayerSidebar extends Sidebar {

@@ -9,7 +9,7 @@ package ai;
 
 import backend.ControllerKeys;
 import backend.GameBrain;
-import frontend.common.*;
+import frontend.common.GameController;
 
 public class Trainer extends GUIBrain {
 
@@ -41,7 +41,7 @@ public class Trainer extends GUIBrain {
                 mCurOrganism.addScore(mGameBrain.getmScore());
                 mCurOrganism.setmGeneration(mPopulation.getmGeneration());
 
-                if (mCurOrganismIndex == mPopulation.getNumOrganisms()-1) {
+                if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {
                     mPopulation.evolve();
                     goToFirstOrganism();
                 } else {
