@@ -8,7 +8,7 @@
 package frontend.aifasttrain;
 
 import ai.FastTrainer;
-import backend.GameBrain;
+import backend.GameProcessor;
 import frontend.base.GameWindow;
 import frontend.base.Sidebar;
 import frontend.common.SaveOrganismDialog;
@@ -21,12 +21,12 @@ public class AIFastTrainSidebar extends Sidebar {
     private FastTrainer mFastTrainer;
     private Button mSaveEliteButton;
 
-    public AIFastTrainSidebar(GameWindow gameWindow, GameBrain gameBrain, FastTrainer fastTrainer, double margins, double sideBarHeight, double sideBarWidth) {
+    public AIFastTrainSidebar(GameWindow gameWindow, GameProcessor gameProcessor, FastTrainer fastTrainer, double margins, double sideBarHeight, double sideBarWidth) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
 
         mFastTrainer = fastTrainer;
 
-        AIFastTrainStatsBox aiFastTrainStatsBox = new AIFastTrainStatsBox(gameBrain, fastTrainer);
+        AIFastTrainStatsBox aiFastTrainStatsBox = new AIFastTrainStatsBox(gameProcessor, fastTrainer);
         getChildren().add(aiFastTrainStatsBox);
         mUpdateItems.add(aiFastTrainStatsBox);
 

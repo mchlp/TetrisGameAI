@@ -10,7 +10,7 @@ package backend;
 import frontend.common.GameGrid;
 import frontend.common.Tetromino;
 
-public class GameBrain {
+public class GameProcessor {
 
     public static final int EXTRA_ROWS_AT_TOP = 2;
     public static final int NUM_ROWS = 20;
@@ -29,7 +29,7 @@ public class GameBrain {
     private int mLevel;
     private int mLevelUpCountdown;
 
-    public GameBrain(GameMode gameMode) {
+    public GameProcessor(GameMode gameMode) {
         mGrid = new GameGrid(NUM_COLS, NUM_ROWS + EXTRA_ROWS_AT_TOP, EXTRA_ROWS_AT_TOP);
         mBlueprintGenerator = new RandomBlueprintGenerator();
         mGameMode = gameMode;

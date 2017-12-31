@@ -21,7 +21,7 @@ public class Genome implements Serializable {
         Gene[] geneList = new Gene[Genes.values().length];
 
         for (Genes geneType : Genes.values()) {
-            double randomValue = Math.random() * (Math.random() >= 0.5 ? 1 : -1);
+            double randomValue = (Math.random() * 2) - 1;
             geneList[geneType.ordinal()] = new Gene(geneType, randomValue);
         }
         return new Genome(geneList);

@@ -8,7 +8,7 @@
 package ai;
 
 import backend.ControllerKeys;
-import backend.GameBrain;
+import backend.GameProcessor;
 import frontend.common.GameController;
 
 import java.util.ArrayList;
@@ -18,28 +18,28 @@ public abstract class GUIBrain extends Brain {
     protected int mPrevScore;
     protected GameController mGameController;
 
-    public GUIBrain(GameBrain gameBrain, GameController gameController, boolean fastMode) {
-        super(gameBrain, fastMode);
+    public GUIBrain(GameProcessor gameProcessor, GameController gameController, boolean fastMode) {
+        super(gameProcessor, fastMode);
         mGameController = gameController;
         mPrevScore = -1;
     }
 
     @Override
     public void update(double deltaTime) {
-        switch (mGameBrain.getmGameState()) {
+        switch (mGameProcessor.getmGameState()) {
             case PLAYING:
-                if (mPrevScore != mGameBrain.getmScore()) {
-                    ArrayList<ControllerKeys> moves = getBestMove(mGameBrain.getmGrid(), mGameBrain.getmCurTetromino(), mCurOrganism.getmGenome());
+                if (mPrevScore != mGameProcessor.getmScore()) {
+                    ArrayList<ControllerKeys> moves = getBestMove(mGameProcessor.getmGrid(), mGameProcessor.getmCurTetromino());
                     for (ControllerKeys move : moves) {
                         mGameController.keyPressed(move);
                     }
-                    mPrevScore = mGameBrain.getmScore();
+                    mPrevScore = mGameProcessor.getmScore();
                 }
                 break;
             case OVER:
-                mCurOrganism.setmMaxScore(mGameBrain.getmScore());
-                mCurOrganism.setmMaxLevel(mGameBrain.getmLevel());
-                mCurOrganism.setmMaxLinesCleared(mGameBrain.getmNumLinesCleared());
+                mCurOrganism.setmMaxScore(mGameProcessor.getmScore());
+                mCurOrganism.setmMaxLevel(mGameProcessor.getmLevel());
+                mCurOrganism.setmMaxLinesCleared(mGameProcessor.getmNumLinesCleared());
         }
     }
 

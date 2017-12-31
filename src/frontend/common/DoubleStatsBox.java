@@ -7,7 +7,7 @@
 
 package frontend.common;
 
-import backend.GameBrain;
+import backend.GameProcessor;
 import backend.GameMode;
 import frontend.base.StatsBox;
 import javafx.geometry.Insets;
@@ -20,8 +20,8 @@ public class DoubleStatsBox extends StatsBox {
     private GameAreaStatsBox mLeftGameAreaStatsBox;
     private GameAreaStatsBox mRightGameAreaStatsBox;
     private StatsBar mTimeBar;
-    private GameBrain mLeftGameBrain;
-    private GameBrain mRightGameBrain;
+    private GameProcessor mLeftGameProcessor;
+    private GameProcessor mRightGameProcessor;
     private GameArea mLeftGameArea;
     private GameArea mRightGameArea;
 
@@ -31,8 +31,8 @@ public class DoubleStatsBox extends StatsBox {
         mLeftGameArea = leftGameArea;
         mRightGameArea = rightGameArea;
 
-        mLeftGameBrain = mLeftGameArea.getmGameBrain();
-        mRightGameBrain = mRightGameArea.getmGameBrain();
+        mLeftGameProcessor = mLeftGameArea.getmGameProcessor();
+        mRightGameProcessor = mRightGameArea.getmGameProcessor();
 
         mTimeBar = new StatsBar("Time", "0:0:00");
         getChildren().add(mTimeBar);
@@ -45,7 +45,7 @@ public class DoubleStatsBox extends StatsBox {
         Text leftLabel = new Text(leftLabelText);
         leftStats.getChildren().add(leftLabel);
 
-        mLeftGameAreaStatsBox = new GameAreaStatsBox(mLeftGameBrain, leftStats);
+        mLeftGameAreaStatsBox = new GameAreaStatsBox(mLeftGameProcessor, leftStats, true);
 
         VBox rightStats = new VBox(5);
         rightStats.setPadding(new Insets(5));
@@ -55,7 +55,7 @@ public class DoubleStatsBox extends StatsBox {
         Text rightLabel = new Text(rightLabelText);
         rightStats.getChildren().add(rightLabel);
 
-        mRightGameAreaStatsBox = new GameAreaStatsBox(mRightGameBrain, rightStats);
+        mRightGameAreaStatsBox = new GameAreaStatsBox(mRightGameProcessor, rightStats, true);
     }
 
     @Override

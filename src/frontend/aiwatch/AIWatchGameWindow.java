@@ -36,7 +36,7 @@ public class AIWatchGameWindow extends TwoPanelGameWindow {
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
 
-        mWatcher = new Watcher(mGameArea.getmGameBrain(), mGameController, mOrganism, fastMode);
+        mWatcher = new Watcher(mGameArea.getmGameProcessor(), mGameController, mOrganism, fastMode);
         mUpdateItems.add(mWatcher);
 
         AIWatchSidebar aiWatchSidebar = new AIWatchSidebar(this, mGameArea, mWatcher, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);

@@ -7,23 +7,27 @@
 
 package frontend.common;
 
-import backend.GameBrain;
+import backend.GameProcessor;
 import javafx.scene.layout.VBox;
 
 public class GameAreaStatsBox {
 
-    protected GameBrain mGameBrain;
+    protected GameProcessor mGameProcessor;
     private StatsBar mScoreBar;
     private StatsBar mLinesBar;
     private StatsBar mLevelBar;
     private StatsBar mStateBar;
+    private boolean mShowGameState;
 
-    public GameAreaStatsBox(GameBrain gameBrain, VBox parent) {
+    public GameAreaStatsBox(GameProcessor gameProcessor, VBox parent, boolean showGameState) {
 
-        mGameBrain = gameBrain;
+        mGameProcessor = gameProcessor;
+        mShowGameState = showGameState;
 
-        mStateBar = new StatsBar("Game State", "Loading...");
-        parent.getChildren().add(mStateBar);
+        if (mShowGameState) {
+            mStateBar = new StatsBar("Game State", "Loading...");
+            parent.getChildren().add(mStateBar);
+        }
 
         mScoreBar = new StatsBar("Score", "0");
         parent.getChildren().add(mScoreBar);
@@ -36,10 +40,12 @@ public class GameAreaStatsBox {
     }
 
     public void update(double deltaTime) {
-        mStateBar.setValue(mGameBrain.getmGameState().message);
-        mStateBar.setColour(mGameBrain.getmGameState().colour);
-        mScoreBar.setValue(Integer.toString(mGameBrain.getmScore()));
-        mLinesBar.setValue(Integer.toString(mGameBrain.getmNumLinesCleared()));
-        mLevelBar.setValue(Integer.toString(mGameBrain.getmLevel()));
+        if (mShowGameState) {
+            mStateBar.setValue(mGameProcessor.getmGameState().message);
+            mStateBar.setColour(mGameProcessor.getmGameState().colour);
+        }
+        mScoreBar.setValue(Integer.toString(mGameProcessor.getmScore()));
+        mLinesBar.setValue(Integer.toString(mGameProcessor.getmNumLinesCleared()));
+        mLevelBar.setValue(Integer.toString(mGameProcessor.getmLevel()));
     }
 }

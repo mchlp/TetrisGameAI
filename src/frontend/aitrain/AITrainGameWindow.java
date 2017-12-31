@@ -37,7 +37,7 @@ public class AITrainGameWindow extends TwoPanelGameWindow {
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
 
-        mTrainer = new Trainer(mGameArea.getmGameBrain(), mGameController, mPopulation);
+        mTrainer = new Trainer(mGameArea.getmGameProcessor(), mGameController, mPopulation);
         mUpdateItems.add(mTrainer);
 
         AITrainSidebar aiTrainSidebar = new AITrainSidebar(this, mGameArea, mTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);

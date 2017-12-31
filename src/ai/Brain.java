@@ -8,43 +8,86 @@
 package ai;
 
 import backend.ControllerKeys;
-import backend.GameBrain;
+import backend.GameProcessor;
 import backend.Updatable;
 import frontend.common.GameGrid;
 import frontend.common.Tetromino;
 
 import java.util.ArrayList;
 
+/**
+ * An abstract class that acts as the "brain" of an AI {@link Organism}. Uses the genes in the {@link Genome} of the
+ * {@link Organism} to calculate the next move to make in the game. Classes that extend this abstract class will need to
+ * assign an organism to use ({@link #mCurOrganism}) for calculating the next move and to relay the moves calculated by
+ * this class to the actual game.
+ */
 public abstract class Brain implements Updatable {
 
+    /**
+     * The rating penalty for a move if the move results in losing the game.
+     */
     private static final int GAME_OVER_RATING_PENALTY = 500;
-    private static final double DROP_RATE_FOR_SLOW_MODE = 0.7;
 
+    /**
+     * Percentage of Tetrominos that are left to slowly descend to the bottom rather than dropped immediately when
+     * {@link #mFastMode} is disabled.
+     */
+    private static final double DROP_RATE_FOR_SLOW_MODE = 0.3;
+
+    /**
+     * The {@link Organism} that will be used to make decisions as to which move to make.
+     */
     protected Organism mCurOrganism;
-    protected GameBrain mGameBrain;
+
+    /**
+     * The {@link GameProcessor} that is linked to the game that the AI is currently playing.
+     */
+    protected GameProcessor mGameProcessor;
+
+    /**
+     * If enabled, the AI will immediately drop all tetrominos after they are in their desired horizontal position and
+     * orientation. If disabled, the AI will only drop some tetrominos (mimics a human playing), depending on the {@link
+     * #DROP_RATE_FOR_SLOW_MODE}.
+     */
     private boolean mFastMode;
 
-    public Brain(GameBrain gameBrain, boolean fastMode) {
-        mGameBrain = gameBrain;
+    public Brain(GameProcessor gameProcessor, boolean fastMode) {
+        mGameProcessor = gameProcessor;
         mFastMode = fastMode;
     }
 
-    protected ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino, Genome genome) {
+    /**
+     * Calculates the optimal set of moves to make using the {@link Genome} of {@link #mCurOrganism} when provided with
+     * a {@link GameGrid} and the current {@link Tetromino}.
+     *
+     * @param grid         Represents the current state of the game grid.
+     * @param curTetromino The current tetromino that is dropping.
+     * @return An ArrayList that contains the optimal set of moves to make represented as {@link ControllerKeys}.
+     */
+    protected ArrayList<ControllerKeys> getBestMove(GameGrid grid, Tetromino curTetromino) {
 
+        // initialize the highest rating at the lowest possible number
         double highestRating = Double.NEGATIVE_INFINITY;
 
+        // initialize the ArrayList that stores the set of optimal moves
         ArrayList<ControllerKeys> bestMoves = new ArrayList<>();
 
+        // loop through all possible rotations (maximum of 4 possible rotation states for each tetromino)
         for (int numRotations = 0; numRotations < 4; numRotations++) {
+
+            // loop through all possible horizontal translations (from left edge to right edge)
             for (int numTranslate = -(grid.getmWidth() / 2); numTranslate <= grid.getmWidth() / 2; numTranslate++) {
 
+                // create a clone of the current game state and tetromino to apply the current set of testing moves on
                 GameGrid testGrid = grid.clone();
                 Tetromino testTetromino = curTetromino.clone();
 
+                // rotate the tetromino
                 for (int i = 0; i < numRotations; i++) {
                     testTetromino.rotate(false);
                 }
 
+                // horizontally translate the tetromino
                 for (int i = 0; i < Math.abs(numTranslate); i++) {
                     if (numTranslate < 0) {
                         testTetromino.moveLeft(false);
@@ -53,12 +96,19 @@ public abstract class Brain implements Updatable {
                     }
                 }
 
+                // drop the tetromino to its final resting position
                 testTetromino.drop(false);
 
-                double curRating = getRating(testGrid, genome, testTetromino);
+                // calculate the rating of applied set of moves
+                double curRating = getRating(testGrid, mCurOrganism.getmGenome(), testTetromino);
 
+                // if the rating of the current set of moves is higher than the highest rating
                 if (curRating > highestRating) {
+
+                    // update the highest rating variable
                     highestRating = curRating;
+
+                    // update the list that stores the optimal set of moves
                     bestMoves.clear();
                     for (int i = 0; i < numRotations; i++) {
                         bestMoves.add(ControllerKeys.ROTATE);
@@ -71,7 +121,8 @@ public abstract class Brain implements Updatable {
                         }
                     }
 
-                    if (mFastMode || Math.random() < DROP_RATE_FOR_SLOW_MODE) {
+                    // add drop to the set of optimal moves if desired (see comment for mFastMode)
+                    if (mFastMode || Math.random() > DROP_RATE_FOR_SLOW_MODE) {
                         bestMoves.add(ControllerKeys.DROP);
                     }
                 }
@@ -80,16 +131,35 @@ public abstract class Brain implements Updatable {
         return bestMoves;
     }
 
+    /**
+     * Calculates the rating for a game state described by a {@link GameGrid} and a {@link Tetromino} using a {@link
+     * Genome}
+     *
+     * @param grid      Represents the current state of the game grid.
+     * @param genome    The genome to use to calculate the rating.
+     * @param tetromino The current tetromino, which has already dropped to its final resting position.
+     * @return A double representing the rating of the current game state.
+     */
     protected double getRating(GameGrid grid, Genome genome, Tetromino tetromino) {
 
-        int beforeHoles = getNumHoles(grid);
-        grid.applyTetromino(tetromino);
-        int numClearRows = grid.checkCompleteRows();
+        // initialize the rating to zero
         double rating = 0;
 
+        // calculate number of holes before the tetromino was dropped
+        int beforeHoles = getNumHoles(grid);
+
+        // apply the current tetromino to the game grid
+        grid.applyTetromino(tetromino);
+
+        // calculate the number of complete rows
+        int numClearRows = grid.checkCompleteRows();
+
+        // calculate the height of the tallest column and the lowest column
         int minHeight = getMinHeight(grid);
         int maxHeight = getMaxHeight(grid);
 
+        // for each gene, multiply the gene value by the corresponding value in the game state and add it to the current rating
+        // for more information on each gene, see the comments in the Genes enum class
         rating += genome.getGeneValue(Genes.LINES_CLEARED) * numClearRows;
         rating += genome.getGeneValue(Genes.NUM_HOLES) * getNumHoles(grid);
         rating += genome.getGeneValue(Genes.INCREASED_NUMBER_OF_HOLES) * getNumHoles(grid) - beforeHoles;

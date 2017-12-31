@@ -28,7 +28,7 @@ public class Gene implements Serializable {
     public Gene merge(Gene parentGene) {
         double newValue = Math.random() >= 0.5 ? mValue : parentGene.mValue;
         if (Math.random() < MUTATION_RATE) {
-            newValue += Math.random() * Math.abs(mType.modifier) * (Math.random() >= 0.5 ? 1 : -1);
+            newValue += ((Math.random()*2)-1) * Math.abs(mType.modifier);
         }
         return new Gene(mType, newValue);
     }

@@ -8,7 +8,7 @@
 package frontend.aifasttrain;
 
 import ai.FastTrainer;
-import backend.GameBrain;
+import backend.GameProcessor;
 import frontend.base.StatsBox;
 import frontend.common.GameAreaStatsBox;
 import frontend.common.StatsBar;
@@ -23,11 +23,11 @@ public class AIFastTrainStatsBox extends StatsBox {
     private FastTrainer mFastTrainer;
     private GameAreaStatsBox mGameAreaStatsBox;
 
-    public AIFastTrainStatsBox(GameBrain gameBrain, FastTrainer fastTrainer) {
-        super(gameBrain.getmGameMode());
+    public AIFastTrainStatsBox(GameProcessor gameProcessor, FastTrainer fastTrainer) {
+        super(gameProcessor.getmGameMode());
         mFastTrainer = fastTrainer;
 
-        mGameAreaStatsBox = new GameAreaStatsBox(gameBrain, this);
+        mGameAreaStatsBox = new GameAreaStatsBox(gameProcessor, this, false);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);

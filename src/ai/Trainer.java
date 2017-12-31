@@ -8,7 +8,7 @@
 package ai;
 
 import backend.ControllerKeys;
-import backend.GameBrain;
+import backend.GameProcessor;
 import frontend.common.GameController;
 
 public class Trainer extends GUIBrain {
@@ -16,29 +16,29 @@ public class Trainer extends GUIBrain {
     private Population mPopulation;
     private int mCurOrganismIndex;
 
-    public Trainer(GameBrain gameBrain, GameController gameController, Population population) {
-        super(gameBrain, gameController, true);
+    public Trainer(GameProcessor gameProcessor, GameController gameController, Population population) {
+        super(gameProcessor, gameController, true);
         mPopulation = population;
         goToFirstOrganism();
     }
 
     public void update(double deltaTime) {
         super.update(deltaTime);
-        switch (mGameBrain.getmGameState()) {
+        switch (mGameProcessor.getmGameState()) {
             case PLAYING:
                 mPopulation.addmTrainTime(deltaTime);
                 break;
             case OVER:
-                if (mGameBrain.getmScore() > mCurOrganism.getmMaxScore()) {
-                    mCurOrganism.setmMaxScore(mGameBrain.getmScore());
+                if (mGameProcessor.getmScore() > mCurOrganism.getmMaxScore()) {
+                    mCurOrganism.setmMaxScore(mGameProcessor.getmScore());
                 }
-                if (mGameBrain.getmLevel() > mCurOrganism.getmMaxLevel()) {
-                    mCurOrganism.setmMaxLevel(mGameBrain.getmLevel());
+                if (mGameProcessor.getmLevel() > mCurOrganism.getmMaxLevel()) {
+                    mCurOrganism.setmMaxLevel(mGameProcessor.getmLevel());
                 }
-                if (mGameBrain.getmNumLinesCleared() > mCurOrganism.getmMaxLinesCleared()) {
-                    mCurOrganism.setmMaxLinesCleared(mGameBrain.getmNumLinesCleared());
+                if (mGameProcessor.getmNumLinesCleared() > mCurOrganism.getmMaxLinesCleared()) {
+                    mCurOrganism.setmMaxLinesCleared(mGameProcessor.getmNumLinesCleared());
                 }
-                mCurOrganism.addScore(mGameBrain.getmScore());
+                mCurOrganism.addScore(mGameProcessor.getmScore());
                 mCurOrganism.setmGeneration(mPopulation.getmGeneration());
 
                 if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {

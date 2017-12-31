@@ -8,7 +8,7 @@
 package frontend.aiwatch;
 
 import ai.Watcher;
-import backend.GameBrain;
+import backend.GameProcessor;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.GameAreaStatsBox;
@@ -19,16 +19,16 @@ public class AIWatchStatsBox extends StatsBox {
     private Watcher mWatcher;
     private StatsBar mTimeBar;
     private GameArea mGameArea;
-    private GameBrain mGameBrain;
+    private GameProcessor mGameProcessor;
     private GameAreaStatsBox mGameAreaStatsBox;
 
     public AIWatchStatsBox(GameArea gameArea, Watcher watcher) {
-        super(gameArea.getmGameBrain().getmGameMode());
+        super(gameArea.getmGameProcessor().getmGameMode());
         mWatcher = watcher;
         mGameArea = gameArea;
-        mGameBrain = mGameArea.getmGameBrain();
+        mGameProcessor = mGameArea.getmGameProcessor();
 
-        mGameAreaStatsBox = new GameAreaStatsBox(mGameBrain, this);
+        mGameAreaStatsBox = new GameAreaStatsBox(mGameProcessor, this, true);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);

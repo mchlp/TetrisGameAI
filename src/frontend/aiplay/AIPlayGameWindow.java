@@ -38,7 +38,7 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
         mLeftGameController = new GameController(mAIGameArea);
         mUpdateItems.add(mAIGameArea);
 
-        mWatcher = new Watcher(mAIGameArea.getmGameBrain(), mLeftGameController, mOrganism, false);
+        mWatcher = new Watcher(mAIGameArea.getmGameProcessor(), mLeftGameController, mOrganism, false);
         mUpdateItems.add(mWatcher);
 
         // right side of screen

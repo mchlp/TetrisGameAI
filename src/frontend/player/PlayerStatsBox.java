@@ -7,7 +7,7 @@
 
 package frontend.player;
 
-import backend.GameBrain;
+import backend.GameProcessor;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
 import frontend.common.GameAreaStatsBox;
@@ -17,16 +17,16 @@ public class PlayerStatsBox extends StatsBox {
 
     private StatsBar mTimeBar;
     private GameArea mGameArea;
-    private GameBrain mGameBrain;
+    private GameProcessor mGameProcessor;
     private GameAreaStatsBox mGameAreaStatsBox;
 
     public PlayerStatsBox(GameArea gameArea) {
-        super(gameArea.getmGameBrain().getmGameMode());
+        super(gameArea.getmGameProcessor().getmGameMode());
 
         mGameArea = gameArea;
-        mGameBrain = mGameArea.getmGameBrain();
+        mGameProcessor = mGameArea.getmGameProcessor();
 
-        mGameAreaStatsBox = new GameAreaStatsBox(mGameBrain, this);
+        mGameAreaStatsBox = new GameAreaStatsBox(mGameProcessor, this, true);
         mTimeBar = new StatsBar("Time", "0:0:00");
         getChildren().add(mTimeBar);
 

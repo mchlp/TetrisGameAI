@@ -8,6 +8,7 @@
 package frontend.aitrain;
 
 import ai.Trainer;
+import backend.ControllerKeys;
 import frontend.base.GameWindow;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
@@ -21,6 +22,7 @@ public class AITrainSidebar extends Sidebar {
     private Trainer mTrainer;
     private Button mSaveEliteButton;
     private boolean mMuted;
+    private boolean mPaused;
 
     public AITrainSidebar(GameWindow gameWindow, GameArea gameArea, Trainer trainer, double margins, double sideBarHeight, double sideBarWidth) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
@@ -41,6 +43,10 @@ public class AITrainSidebar extends Sidebar {
         mButtonBar.getChildren().add(muteButton);
         mMuted = false;
 
+        Button pauseButton = new Button("Pause");
+        mButtonBar.getChildren().add(pauseButton);
+        mPaused = false;
+
         mSaveEliteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
@@ -59,6 +65,20 @@ public class AITrainSidebar extends Sidebar {
                     muteButton.setText("Unmute");
                 }
                 mGameWindow.getmBackgroundMusic().setMute(mMuted);
+            }
+        });
+
+        pauseButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent click) {
+                if (mPaused) {
+                    mPaused = false;
+                    pauseButton.setText("Pause");
+                } else {
+                    mPaused = true;
+                    pauseButton.setText("Unpause");
+                }
+                trainer.getmGameController().keyPressed(ControllerKeys.TOGGLE_PAUSE);
             }
         });
     }

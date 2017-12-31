@@ -8,7 +8,7 @@
 package ai;
 
 import backend.ControllerKeys;
-import backend.GameBrain;
+import backend.GameProcessor;
 import backend.GameState;
 
 import java.util.ArrayList;
@@ -26,8 +26,8 @@ public class FastTrainer extends Brain {
     private int mMaxNumMoves;
     private int mGameNum;
 
-    public FastTrainer(GameBrain gameBrain, Population population) {
-        super(gameBrain, true);
+    public FastTrainer(GameProcessor gameProcessor, Population population) {
+        super(gameProcessor, true);
         mPopulation = population;
         mTraining = true;
         mLastUpdateTime = System.currentTimeMillis();
@@ -49,7 +49,7 @@ public class FastTrainer extends Brain {
                 mGameNum = 0;
             }
             if (mGameNum < NUM_GAMES_PER_SESSION) {
-                startGame(mCurOrganism.getmGenome());
+                startGame();
                 mGameNum++;
             } else {
                 mCurOrganism.setmGeneration(mPopulation.getmGeneration());
@@ -64,31 +64,31 @@ public class FastTrainer extends Brain {
         }
     }
 
-    private void startGame(Genome testGenome) {
-        mGameBrain.newGame();
-        mGameBrain.createTetromino();
+    private void startGame() {
+        mGameProcessor.newGame();
+        mGameProcessor.createTetromino();
         int moves = 0;
-        while (mGameBrain.getmGameState() == GameState.PLAYING) {
+        while (mGameProcessor.getmGameState() == GameState.PLAYING) {
             updateTrainTime();
-            ArrayList<ControllerKeys> bestMoves = getBestMove(mGameBrain.getmGrid(), mGameBrain.getmCurTetromino(), testGenome);
+            ArrayList<ControllerKeys> bestMoves = getBestMove(mGameProcessor.getmGrid(), mGameProcessor.getmCurTetromino());
             for (ControllerKeys move : bestMoves) {
                 switch (move) {
                     case LEFT:
-                        mGameBrain.moveLeft();
+                        mGameProcessor.moveLeft();
                         break;
                     case RIGHT:
-                        mGameBrain.moveRight();
+                        mGameProcessor.moveRight();
                         break;
                     case ROTATE:
-                        mGameBrain.rotate();
+                        mGameProcessor.rotate();
                         break;
                     case DROP:
-                        mGameBrain.drop();
+                        mGameProcessor.drop();
                         break;
                 }
             }
-            mGameBrain.moveDown();
-            mGameBrain.update();
+            mGameProcessor.moveDown();
+            mGameProcessor.update();
             moves++;
         }
 
@@ -96,19 +96,19 @@ public class FastTrainer extends Brain {
             mMaxNumMoves = moves;
             System.out.println(moves);
         }
-        if (mGameBrain.getmScore() > mCurOrganism.getmMaxScore()) {
-            mCurOrganism.setmMaxScore(mGameBrain.getmScore());
+        if (mGameProcessor.getmScore() > mCurOrganism.getmMaxScore()) {
+            mCurOrganism.setmMaxScore(mGameProcessor.getmScore());
         }
-        if (mGameBrain.getmLevel() > mCurOrganism.getmMaxLevel()) {
-            mCurOrganism.setmMaxLevel(mGameBrain.getmLevel());
+        if (mGameProcessor.getmLevel() > mCurOrganism.getmMaxLevel()) {
+            mCurOrganism.setmMaxLevel(mGameProcessor.getmLevel());
         }
-        if (mGameBrain.getmNumLinesCleared() > mCurOrganism.getmMaxLinesCleared()) {
-            mCurOrganism.setmMaxLinesCleared(mGameBrain.getmNumLinesCleared());
+        if (mGameProcessor.getmNumLinesCleared() > mCurOrganism.getmMaxLinesCleared()) {
+            mCurOrganism.setmMaxLinesCleared(mGameProcessor.getmNumLinesCleared());
         }
         if (mCurOrganism.getmMaxScore() > mTopScore) {
             mTopScore = mCurOrganism.getmMaxScore();
         }
-        mCurOrganism.addScore(mGameBrain.getmScore());
+        mCurOrganism.addScore(mGameProcessor.getmScore());
     }
 
     private void goToFirstOrganism() {
