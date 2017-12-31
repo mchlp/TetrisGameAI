@@ -14,6 +14,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -35,6 +36,7 @@ public class SelectOrganismDialog extends Stage {
 
     private Organism mLoadedOrganism;
     private Text mErrorLabel;
+    private CheckBox mFastModeBox;
 
     public SelectOrganismDialog(Stage parent) {
 
@@ -47,6 +49,9 @@ public class SelectOrganismDialog extends Stage {
 
         Text label = new Text("Select an AI Organism file to use.");
         vBox.getChildren().add(label);
+
+        mFastModeBox = new CheckBox("AI Fast Mode");
+        vBox.getChildren().add(mFastModeBox);
 
         mErrorLabel = new Text();
         mErrorLabel.setWrappingWidth(370);
@@ -116,5 +121,9 @@ public class SelectOrganismDialog extends Stage {
     public Organism showDialog() {
         showAndWait();
         return mLoadedOrganism;
+    }
+
+    public boolean getIsFastMode() {
+        return mFastModeBox.isSelected();
     }
 }

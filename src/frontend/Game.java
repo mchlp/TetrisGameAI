@@ -145,6 +145,7 @@ public class Game extends Application {
         // opens game window
         Population loadedPopulation;
         Organism loadedOrganism;
+        boolean fastMode;
 
         switch (gameMode) {
             case PLAYER:
@@ -160,11 +161,13 @@ public class Game extends Application {
                 break;
             case AI_WATCHER:
                 loadedOrganism = (Organism) menu.getmLoadedObject();
-                startAIWatch(loadedOrganism, height, width);
+                fastMode = menu.ismFastMode();
+                startAIWatch(loadedOrganism, height, width, fastMode);
                 break;
             case AI_PLAY:
                 loadedOrganism = (Organism) menu.getmLoadedObject();
-                startAIPlay(loadedOrganism, height, width);
+                fastMode = menu.ismFastMode();
+                startAIPlay(loadedOrganism, height, width, fastMode);
         }
 
         updateItems.add(gameWindow);
@@ -210,13 +213,13 @@ public class Game extends Application {
         scene = new Scene(gameWindow);
     }
 
-    private void startAIWatch(Organism organism, double height, double width) {
-        gameWindow = new AIWatchGameWindow(primaryStage, organism, height, width, false);
+    private void startAIWatch(Organism organism, double height, double width, boolean fastMode) {
+        gameWindow = new AIWatchGameWindow(primaryStage, organism, height, width, fastMode);
         scene = new Scene(gameWindow);
     }
 
-    private void startAIPlay(Organism organism, double height, double width) {
-        gameWindow = new AIPlayGameWindow(primaryStage, organism, height, width);
+    private void startAIPlay(Organism organism, double height, double width, boolean fastMode) {
+        gameWindow = new AIPlayGameWindow(primaryStage, organism, height, width, fastMode);
         scene = new Scene(gameWindow);
 
         GameController playerGameController = ((AIPlayGameWindow) gameWindow).getmRightGameController();

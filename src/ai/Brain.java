@@ -12,7 +12,6 @@ import backend.GameProcessor;
 import backend.Updatable;
 import frontend.common.GameGrid;
 import frontend.common.Tetromino;
-import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
 

@@ -29,6 +29,7 @@ public class Menu extends VBox {
     private MenuItem mTrainAIButton;
     private MenuItem mExitButton;
     private Object mLoadedObject;
+    private boolean mFastMode;
 
     public Menu(Stage stage) {
 
@@ -66,6 +67,7 @@ public class Menu extends VBox {
                 Organism loadedOrganism = selectOrganismDialog.showDialog();
                 if (loadedOrganism != null) {
                     mLoadedObject = loadedOrganism;
+                    mFastMode = selectOrganismDialog.getIsFastMode();
                     ((MenuScreen) getParent()).mGameMode = GameMode.AI_PLAY;
                 }
             }
@@ -78,6 +80,7 @@ public class Menu extends VBox {
                 Organism loadedOrganism = selectOrganismDialog.showDialog();
                 if (loadedOrganism != null) {
                     mLoadedObject = loadedOrganism;
+                    mFastMode = selectOrganismDialog.getIsFastMode();
                     ((MenuScreen) getParent()).mGameMode = GameMode.AI_WATCHER;
                 }
             }
@@ -114,5 +117,9 @@ public class Menu extends VBox {
 
     public Object getmLoadedObject() {
         return mLoadedObject;
+    }
+
+    public boolean ismFastMode() {
+        return mFastMode;
     }
 }

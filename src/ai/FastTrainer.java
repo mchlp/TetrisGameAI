@@ -13,8 +13,17 @@ import backend.GameState;
 
 import java.util.ArrayList;
 
+/**
+ * Trains an AI {@link Population} without display the gameplay graphically, which allows the training to take place at
+ * a much faster rate. Extends the {@link Brain} class, which is used to determines the best move. Each organism in the
+ * population plays multiple games ({@link #NUM_GAMES_PER_SESSION} during each generation before the population is
+ * bred.
+ */
 public class FastTrainer extends Brain {
 
+    /**
+     * The number of games each organism plays in each generation
+     */
     private static final int NUM_GAMES_PER_SESSION = 5;
 
     private Population mPopulation;

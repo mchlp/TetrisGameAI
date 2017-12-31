@@ -23,7 +23,7 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
     private GameArea mAIGameArea;
     private GameArea mPlayerGameArea;
 
-    public AIPlayGameWindow(Stage stage, Organism organism, double height, double width) {
+    public AIPlayGameWindow(Stage stage, Organism organism, double height, double width, boolean fastMode) {
         super(stage, height, width, GameMode.AI_PLAY);
 
         mWindowTitle = "Tetris Game - Play Against AI Version";
@@ -38,7 +38,7 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
         mLeftGameController = new GameController(mAIGameArea);
         mUpdateItems.add(mAIGameArea);
 
-        mWatcher = new Watcher(mAIGameArea.getmGameProcessor(), mLeftGameController, mOrganism, false);
+        mWatcher = new Watcher(mAIGameArea.getmGameProcessor(), mLeftGameController, mOrganism, fastMode);
         mUpdateItems.add(mWatcher);
 
         // right side of screen
