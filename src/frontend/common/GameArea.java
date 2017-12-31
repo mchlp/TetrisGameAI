@@ -26,6 +26,7 @@ public class GameArea extends Canvas implements Updatable {
     private static final Color LINE_COLOUR = Color.GREY;
     private static final double LINE_WIDTH = 0.5;
     private static final int MAX_SPEED_LEVEL = 20;
+    private static final double BACKGROUND_MUSIC_VOLUME = 0.5;
 
     private double mWidth;
     private double mHeight;
@@ -42,6 +43,7 @@ public class GameArea extends Canvas implements Updatable {
     public GameArea(MediaPlayer backgroundMusic, double width, double height, Color bgColour, GameMode gameMode) {
         super(width, height);
         mBackgroundMusic = backgroundMusic;
+        mBackgroundMusic.setVolume(BACKGROUND_MUSIC_VOLUME);
         mGameProcessor = new GameProcessor(gameMode);
         mHeight = height;
         mWidth = width;

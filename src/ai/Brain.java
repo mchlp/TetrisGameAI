@@ -12,6 +12,7 @@ import backend.GameProcessor;
 import backend.Updatable;
 import frontend.common.GameGrid;
 import frontend.common.Tetromino;
+import javafx.geometry.Rectangle2D;
 
 import java.util.ArrayList;
 
@@ -133,7 +134,7 @@ public abstract class Brain implements Updatable {
 
     /**
      * Calculates the rating for a game state described by a {@link GameGrid} and a {@link Tetromino} using a {@link
-     * Genome}
+     * Genome}.
      *
      * @param grid      Represents the current state of the game grid.
      * @param genome    The genome to use to calculate the rating.
@@ -176,15 +177,28 @@ public abstract class Brain implements Updatable {
         return rating;
     }
 
+    /**
+     * Determines if the game is over.
+     *
+     * @param grid Represents the current state of the game.
+     * @return <code>true</code> if the game is over, <code>false</code> otherwise.
+     */
     private boolean getGameOver(GameGrid grid) {
         return grid.checkGameOver();
     }
 
+    /**
+     * @param grid Represents the current state of the game.
+     * @return The sum of the heights of each of the columns.
+     */
     private int getTotalHeight(GameGrid grid) {
         int sumHeight = 0;
+        // loop through columns
         for (int i = 0; i < grid.getmWidth(); i++) {
+            // loop through rows from top to bottom
             for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
+                    // found the top of the column
                     sumHeight += grid.getmHeight() - j;
                     break;
                 }
@@ -193,27 +207,42 @@ public abstract class Brain implements Updatable {
         return sumHeight;
     }
 
+    /**
+     * @param grid Represents the current state of the game.
+     * @return The number of filled cells in the grid that are touching the left or right edge.
+     */
     private int getNumBlocksTouchingSide(GameGrid grid) {
         int numBlocksTouchingSide = 0;
+        // loop through all rows
         for (int i = 0; i < grid.getmHeight(); i++) {
             if (grid.isFilled(0, i)) {
+                // if cell beside left edge is filled
                 numBlocksTouchingSide++;
-            }
-            if (grid.isFilled(grid.getmWidth() - 1, i)) {
+            } else if (grid.isFilled(grid.getmWidth() - 1, i)) {
+                // if cell beside right edge is filled
                 numBlocksTouchingSide++;
             }
         }
         return numBlocksTouchingSide;
     }
 
+    /**
+     * @param grid Represents the current state of the game.
+     * @return The sum of the number of blocks above each hole (an empty cell that has a filled cell above it) in the
+     * grid.
+     */
     private int getSumBlocksAboveHole(GameGrid grid) {
         int sumBlocksAboveHole = 0;
+        // loop through all columns
         for (int i = 0; i < grid.getmWidth(); i++) {
             int numHolesInCol = 0;
+            // loop through rows from bottom to top
             for (int j = grid.getmHeight() - 1; j >= 0; j--) {
                 if (!grid.isFilled(i, j)) {
+                    // found a hole
                     numHolesInCol++;
                 } else {
+                    // found a filled cell
                     sumBlocksAboveHole += numHolesInCol;
                 }
             }
@@ -221,11 +250,18 @@ public abstract class Brain implements Updatable {
         return sumBlocksAboveHole;
     }
 
+    /**
+     * @param grid Represents the current state of the game.
+     * @return The height of tallest column.
+     */
     private int getMaxHeight(GameGrid grid) {
         int maxHeight = 0;
+        // loop through all columns
         for (int i = 0; i < grid.getmWidth(); i++) {
+            // loop through rows from top to bottom
             for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
+                    // found top of column
                     int height = grid.getmHeight() - j;
                     if (height > maxHeight) {
                         maxHeight = height;
@@ -237,11 +273,18 @@ public abstract class Brain implements Updatable {
         return maxHeight;
     }
 
+    /**
+     * @param grid Represents the current state of the game.
+     * @return The height of the shortest column.
+     */
     private int getMinHeight(GameGrid grid) {
         int minHeight = Integer.MAX_VALUE;
+        // loop through all columns
         for (int i = 0; i < grid.getmWidth(); i++) {
+            // loop through all rows from top to bottom
             for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
+                    // found top of column
                     int height = grid.getmHeight() - j;
                     if (height < minHeight) {
                         minHeight = height;
@@ -253,14 +296,22 @@ public abstract class Brain implements Updatable {
         return minHeight;
     }
 
+    /**
+     * @param grid Represents the current state of the game.
+     * @return The sum of the absolute differences between adjacent columns.
+     */
     private int getRoughness(GameGrid grid) {
         int prevHeight = 0;
         int sumAbsDiff = 0;
+        // loop through columns
         for (int i = 0; i < grid.getmWidth(); i++) {
+            // loop through rows from top to bottom
             for (int j = 0; j < grid.getmHeight(); j++) {
                 if (grid.isFilled(i, j)) {
+                    // found top of column
                     int height = grid.getmHeight() - j;
                     if (!(i == 0)) {
+                        // if not the first column, add the absolute difference in column height to the sum
                         sumAbsDiff += Math.abs(height - prevHeight);
                     }
                     prevHeight = height;
@@ -271,17 +322,26 @@ public abstract class Brain implements Updatable {
         return sumAbsDiff;
     }
 
+    /**
+     * @param grid Represents the current state of the game.
+     * @return The number of holes in the grid
+     */
     private int getNumHoles(GameGrid grid) {
         int numHoles = 0;
+        // loop through the columns
         for (int i = 0; i < grid.getmWidth(); i++) {
             boolean foundTop = false;
+            // loop through the rows from top to bottom
             for (int j = 0; j < grid.getmHeight(); j++) {
                 if (foundTop) {
+                    // if currently past the top of the column
                     if (!grid.isFilled(i, j)) {
+                        // if the cell is not filled
                         numHoles++;
                     }
                 } else {
                     if (grid.isFilled(i, j)) {
+                        // found the top of the column
                         foundTop = true;
                     }
                 }
@@ -290,6 +350,9 @@ public abstract class Brain implements Updatable {
         return numHoles;
     }
 
+    /**
+     * @return The AI organism that is used to calculate the next move
+     */
     public Organism getmCurOrganism() {
         return mCurOrganism;
     }
