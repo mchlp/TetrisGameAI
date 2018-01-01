@@ -1,8 +1,8 @@
 /*
  * Michael Pu
- * TetrisGameAI - AIPlayTrainSidebar
+ * TetrisGameAI - AIPlaySidebar
  * ICS3U1 - Mr. Radulovic
- * December 29, 2017
+ * December 30, 2017
  */
 
 package frontend.aiplay;

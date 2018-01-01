@@ -1,7 +1,7 @@
 /*
  * Michael Pu
  * TetrisGameAI - GameController
- * ICS3U1 - Mr.Radulovic
+ * ICS3U1 - Mr. Radulovic
  * December 28, 2017
  */
 
