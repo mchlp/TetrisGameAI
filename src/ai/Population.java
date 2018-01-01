@@ -114,6 +114,7 @@ public class Population implements Serializable {
         }*/
         while (childIndex < MAX_NUMBER_OF_ORGANISMS) {
             mOrganisms[childIndex] = pickRandomOrganism(parents).breed(pickRandomOrganism(parents));
+            mOrganisms[childIndex].setmGeneration(mGeneration);
             childIndex++;
         }
     }

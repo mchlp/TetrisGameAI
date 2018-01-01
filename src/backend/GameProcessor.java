@@ -8,7 +8,6 @@
 package backend;
 
 import frontend.common.GameGrid;
-import frontend.common.Tetromino;
 
 public class GameProcessor {
 

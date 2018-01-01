@@ -7,6 +7,7 @@
 
 package frontend.common;
 
+import backend.Tetromino;
 import javafx.scene.paint.Color;
 
 import java.awt.*;

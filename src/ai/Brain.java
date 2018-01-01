@@ -11,7 +11,7 @@ import backend.ControllerKeys;
 import backend.GameProcessor;
 import backend.Updatable;
 import frontend.common.GameGrid;
-import frontend.common.Tetromino;
+import backend.Tetromino;
 
 import java.util.ArrayList;
 
@@ -46,8 +46,8 @@ public abstract class Brain implements Updatable {
 
     /**
      * If enabled, the AI will immediately drop all tetrominos after they are in their desired horizontal position and
-     * orientation. If disabled, the AI will only drop some tetrominos (mimics a human playing), depending on the {@link
-     * #DROP_RATE_FOR_SLOW_MODE}.
+     * orientation. If disabled, the AI will only drop {@value #DROP_RATE_FOR_SLOW_MODE} of tetrominos (mimics a human
+     * playing).
      */
     private boolean mFastMode;
 
@@ -355,4 +355,12 @@ public abstract class Brain implements Updatable {
     public Organism getmCurOrganism() {
         return mCurOrganism;
     }
+
+    /**
+     * To be called every frame when the JavaFX application is updated.
+     *
+     * @param deltaTime The amount of time that has passed since the last time this function was called in seconds.
+     */
+    @Override
+    public abstract void update(double deltaTime);
 }

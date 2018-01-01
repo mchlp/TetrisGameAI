@@ -1,14 +1,12 @@
 /*
  * Michael Pu
  * TetrisGameAI - Tetromino
- * ICS3U1 - Mr.Radulovic
- * December 28, 2017
+ * ICS3U1 - Mr. Radulovic
+ * December 30, 2017
  */
 
-package frontend.common;
+package backend;
 
-import backend.GameProcessor;
-import backend.TetrominoBlueprint;
 import javafx.scene.paint.Color;
 
 import java.awt.*;
