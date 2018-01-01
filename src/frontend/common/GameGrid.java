@@ -110,11 +110,11 @@ public class GameGrid {
         return mGrid[x][y];
     }
 
-    public GameGrid clone() {
+    public GameGrid duplicate() {
         GameGrid newGrid = new GameGrid(mWidth, mHeight, mExtraRows);
         for (int i = 0; i < newGrid.getmWidth(); i++) {
             for (int j = 0; j < newGrid.getmHeight(); j++) {
-                Cell newCell = getCell(i, j).clone();
+                Cell newCell = getCell(i, j).duplicate();
                 newGrid.setCell(i, j, newCell);
             }
         }

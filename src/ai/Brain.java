@@ -79,8 +79,8 @@ public abstract class Brain implements Updatable {
             for (int numTranslate = -(grid.getmWidth() / 2); numTranslate <= grid.getmWidth() / 2; numTranslate++) {
 
                 // create a clone of the current game state and tetromino to apply the current set of testing moves on
-                GameGrid testGrid = grid.clone();
-                Tetromino testTetromino = curTetromino.clone();
+                GameGrid testGrid = grid.duplicate();
+                Tetromino testTetromino = curTetromino.duplicate();
 
                 // rotate the tetromino
                 for (int i = 0; i < numRotations; i++) {

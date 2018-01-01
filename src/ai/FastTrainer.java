@@ -187,7 +187,8 @@ public class FastTrainer extends Brain {
     }
 
     /**
-     * Restarts the training of the population. Sets the {@link #mCurOrganism} to the first organism in the population.
+     * Restarts the training of the population. Sets the {@link #mCurOrganism} to the first organism in the population
+     * and updates the {@link #mCurOrganismIndex}.
      */
     private void goToFirstOrganism() {
         mCurOrganismIndex = -1;
@@ -195,7 +196,8 @@ public class FastTrainer extends Brain {
     }
 
     /**
-     *
+     * Sets the {@link #mCurOrganism} to the next organism in the population and updates the {@link
+     * #mCurOrganismIndex}.
      */
     private void prepareNextOrganism() {
         mCurOrganismIndex++;

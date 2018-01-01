@@ -31,7 +31,7 @@ public class Cell {
         return mColour;
     }
 
-    public Cell clone() {
+    public Cell duplicate() {
         Cell newCell = new Cell();
         if (ismIsFilled()) {
             newCell.fill(mColour);

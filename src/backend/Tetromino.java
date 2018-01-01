@@ -146,7 +146,7 @@ public class Tetromino {
         }
     }
 
-    public Tetromino clone() {
+    public Tetromino duplicate() {
         Tetromino newTetromino = new Tetromino(mGameProcessor, mBlueprint, mNumCols);
         newTetromino.mCurPos = new Point(mCurPos.x, mCurPos.y);
         newTetromino.mLastMove = mLastMove;

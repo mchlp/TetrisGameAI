@@ -54,10 +54,10 @@ public class Genome implements Serializable {
         return mGeneList[gene.ordinal()].getmValue();
     }
 
-    public Genome clone() {
+    public Genome duplicate() {
         Gene[] clonedGeneList = new Gene[mGeneList.length];
         for (int i = 0; i < mGeneList.length; i++) {
-            clonedGeneList[i] = mGeneList[i].clone();
+            clonedGeneList[i] = mGeneList[i].duplicate();
         }
         return new Genome(clonedGeneList);
     }

@@ -107,8 +107,8 @@ public class Organism implements Serializable {
         }
     }
 
-    public Organism clone() {
-        return new Organism(mGenome.clone());
+    public Organism duplicate() {
+        return new Organism(mGenome.duplicate());
     }
 
     public int getmMaxLinesCleared() {
