@@ -299,7 +299,6 @@ public class Population implements Serializable {
         if (addTime >= 0) {
             mTrainTime += addTime;
         } else {
-            System.out.println(addTime);
             throw new IllegalArgumentException("Negative number entered.");
         }
     }

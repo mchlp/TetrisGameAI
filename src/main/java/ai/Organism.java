@@ -216,4 +216,8 @@ public class Organism implements Serializable {
     public void setmGeneration(int mGeneration) {
         this.mGeneration = mGeneration;
     }
+
+    public int getmGeneration() {
+        return mGeneration;
+    }
 }
