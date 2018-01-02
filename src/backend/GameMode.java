@@ -9,6 +9,9 @@ package backend;
 
 import javafx.scene.paint.Color;
 
+/**
+ * The possible modes for the game. These are the different windows that can opened.
+ */
 public enum GameMode {
 
     MAIN_MENU("Main Menu", Color.GREY),
@@ -18,7 +21,14 @@ public enum GameMode {
     AI_WATCHER("AI Watching", Color.rgb(185, 69, 255)),
     AI_PLAY("Play Against AI", Color.rgb(220, 59, 63));
 
+    /**
+     * Human-readable form of the mode.
+     */
     public final String message;
+
+    /**
+     * Colour associated with the mode.
+     */
     public final Color colour;
 
     GameMode(String message, Color colour) {

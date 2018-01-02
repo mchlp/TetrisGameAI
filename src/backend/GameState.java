@@ -9,6 +9,9 @@ package backend;
 
 import javafx.scene.paint.Color;
 
+/**
+ * The possible states for a game.
+ */
 public enum GameState {
 
     PAUSED("Paused", Color.rgb(255, 51, 51)),
@@ -16,7 +19,14 @@ public enum GameState {
     OVER("Game Over!", Color.rgb(255, 51, 51)),
     LOADING("Loading...", Color.rgb(255, 207, 61));
 
+    /**
+     * Human-readable format of the state.
+     */
     public final String message;
+
+    /**
+     * Colour associated with the state.
+     */
     public final Color colour;
 
     GameState(String message, Color colour) {

@@ -7,6 +7,11 @@
 
 package backend;
 
+import frontend.common.GameController;
+
+/**
+ * The possible inputs that can be sent to a {@link GameController};
+ */
 public enum ControllerKeys {
     LEFT,
     RIGHT,

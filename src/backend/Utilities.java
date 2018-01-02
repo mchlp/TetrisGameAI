@@ -7,25 +7,28 @@
 
 package backend;
 
-import java.io.InputStream;
-import java.net.URL;
+/**
+ * Class for performing class independent actions such as loading resources.
+ */
+public final class Utilities {
 
-public class Utilities {
-
+    /**
+     * Directory of resource audio files.
+     */
     public static final String AUDIO_DIRECTORY = "/audio/";
 
+    /**
+     * Path to the background music file.
+     */
     public static final String AUDIO_BACKGROUND_MUSIC = AUDIO_DIRECTORY + "tetrisSoundtrack.mp3";
 
-    public static URL getResourceAsURL(String resource) {
-        return Utilities.class.getResource(resource);
-    }
-
+    /**
+     * @param resource The name of the resource.
+     * @return A string representing the URL of the resource. <code>null</code> if no resource matching that name is
+     * found.
+     */
     public static String getResourceAsURLString(String resource) {
         return Utilities.class.getResource(resource).toString();
-    }
-
-    public static InputStream getResourceAsInputStream(String resource) {
-        return Utilities.class.getResourceAsStream(resource);
     }
 
 }

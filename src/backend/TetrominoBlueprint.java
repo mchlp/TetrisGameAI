@@ -9,6 +9,9 @@ package backend;
 
 import javafx.scene.paint.Color;
 
+/**
+ * All the possible Tetrominos.
+ */
 public enum TetrominoBlueprint {
 
     I(Color.rgb(0, 159, 218), new int[][]{
@@ -47,7 +50,15 @@ public enum TetrominoBlueprint {
             {0, 0, 0},
     });
 
+    /**
+     * An integer array presenting the structure of the Tetromino. An integer array was used to easier human
+     * readability.
+     */
     public final int[][] body;
+
+    /**
+     * The colour of the Tetromino.
+     */
     public final Color colour;
 
     TetrominoBlueprint(Color colour, int[][] body) {
