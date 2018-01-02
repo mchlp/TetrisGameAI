@@ -11,20 +11,20 @@ Work log can be found in the commit history of this [GitHub repository](https://
 - Includes a single player mode and AI mode
 
 ## Project Organization
-Package                     |Subpackage                                 | Description
----                         |---                                        | ---
-[main.java.ai](src/main/java/ai)                |                                           | files related to the AI
-[main.java.backend](src/main/java/backend)      |                                           | files related to the processing and game logic
-[main.java.frontend](src/main/java/frontend)    |                                           | files related to the JavaFX components displayed on screen
-[main.java.frontend](src/main/java/frontend)    |[aiFastTrain](src/main/java/frontend/aifasttrain)    | files related to the AI fast training mode
-[main.java.frontend](src/main/java/frontend)    |[aiTrain](src/main/java/frontend/aitrain)            | files related to the AI GUI training mode
-[main.java.frontend](src/main/java/frontend)    |[aiWatch](src/main/java/frontend/aiwatch)            | files related to the AI watch mode
-[main.java.frontend](src/main/java/frontend)    |[base](src/main/java/frontend/base)                  | files related to abstract classes that are used in displaying 
-[main.java.frontend](src/main/java/frontend)    |[common](src/main/java/frontend/common)              | files related to GUI elements that are shared between multiple modes
-[main.java.frontend](src/main/java/frontend)    |[player](src/main/java/frontend/common)              | files related to the human player mode
-[main.java.frontend](src/main/java/frontend)    |[menu](src/main/java/frontend/menu)                  | files related to the main menu
-[main.java.frontend](src/main/java/frontend)    |[Game.java](src/main/java/frontend/Game.java)        | the class that is the entry point into the game
-[tests](src/tests)          |                                           | test cases files and JUnit test files
+Package                               |Subpackage                                           | Description
+---                                   |---                                                  | ---
+[ai](src/main/java/ai)                |                                                     | files related to the AI
+[backend](src/main/java/backend)      |                                                     | files related to the processing and game logic          
+[frontend](src/main/java/frontend)    |                                                     | files related to the JavaFX components displayed on screen
+[frontend](src/main/java/frontend)    |[aiFastTrain](src/main/java/frontend/aifasttrain)    | files related to the AI fast training mode
+[frontend](src/main/java/frontend)    |[aiTrain](src/main/java/frontend/aitrain)            | files related to the AI GUI training mode
+[frontend](src/main/java/frontend)    |[aiWatch](src/main/java/frontend/aiwatch)            | files related to the AI watch mode
+[frontend](src/main/java/frontend)    |[base](src/main/java/frontend/base)                  | files related to abstract classes that are used in displaying 
+[frontend](src/main/java/frontend)    |[common](src/main/java/frontend/common)              | files related to GUI elements that are shared between multiple modes
+[frontend](src/main/java/frontend)    |[player](src/main/java/frontend/common)              | files related to the human player mode
+[frontend](src/main/java/frontend)    |[menu](src/main/java/frontend/menu)                  | files related to the main menu
+[frontend](src/main/java/frontend)    |[Game.java](src/main/java/frontend/Game.java)        | the class that is the entry point into the game
+[unittests](src/test/java/unittests)  |                                                      | files related to the JUnit test files
 
 ## Features
 - Various indicators on the side that show the score, level, lines cleared, etc.
