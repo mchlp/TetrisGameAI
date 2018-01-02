@@ -27,8 +27,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import menu.Menu;
-import menu.MenuScreen;
+import frontend.menu.Menu;
+import frontend.menu.MenuScreen;
 
 import java.util.ArrayList;
 
@@ -72,7 +72,7 @@ public class Game extends Application {
     }
 
     /**
-     * Shows the window for the menu screen of the game
+     * Shows the window for the frontend.menu screen of the game
      */
     private void showMenu() {
         MenuScreen menuScreen = new MenuScreen(primaryStage);

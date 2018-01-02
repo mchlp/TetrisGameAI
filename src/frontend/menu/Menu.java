@@ -5,7 +5,7 @@
  * December 31, 2017
  */
 
-package menu;
+package frontend.menu;
 
 import ai.Organism;
 import ai.Population;

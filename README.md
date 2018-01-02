@@ -22,7 +22,8 @@ Package                     |Subpackage                                 | Descri
 [frontend](src/frontend)    |[base](src/frontend/base)                  | files related to abstract classes that are used in displaying 
 [frontend](src/frontend)    |[common](src/frontend/common)              | files related to GUI elements that are shared between multiple modes
 [frontend](src/frontend)    |[player](src/frontend/common)              | files related to the human player mode
-[frontend](src/frontend)    |[Game.java](src/frontend/Game.java)                  | the class that is the entry point into the game
+[frontend](src/frontend)    |[menu](src/frontend/menu)                  | files related to the main menu
+[frontend](src/frontend)    |[Game.java](src/frontend/Game.java)        | the class that is the entry point into the game
 [tests](src/tests)          |                                           | test cases files and JUnit test files
 
 ## Features

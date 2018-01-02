@@ -85,7 +85,7 @@ public class GUITrainer extends GUIBrain {
                         alert.setTitle("Error writing population to file.");
                         alert.setHeaderText("Error writing population to file.");
                         alert.setContentText("The file specified may be read-only or no longer available. " +
-                                "Try returning to the main menu and selecting another file to save the population.");
+                                "Try returning to the main frontend.menu and selecting another file to save the population.");
                         alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
                         alert.showAndWait();
                     }

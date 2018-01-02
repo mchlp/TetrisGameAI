@@ -5,7 +5,7 @@
  * December 28, 2017
  */
 
-package menu;
+package frontend.menu;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;

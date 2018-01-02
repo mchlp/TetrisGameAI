@@ -5,7 +5,7 @@
  * December 29, 2017
  */
 
-package menu;
+package frontend.menu;
 
 import backend.GameMode;
 import javafx.geometry.Insets;
