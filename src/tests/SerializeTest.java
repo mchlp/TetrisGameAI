@@ -22,7 +22,11 @@ public class SerializeTest {
             e.printStackTrace();
         }
         Population savePop = new Population(file);
-        savePop.saveToFile();
+        try {
+            savePop.writeToFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         Population readPop = null;
         try {
             readPop = Population.loadPopulationFromFile(file);

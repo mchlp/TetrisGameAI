@@ -9,6 +9,11 @@ package ai;
 
 import java.io.Serializable;
 
+/**
+ * Represents a gene in the genetic algorithm training process. It stores the type of gene it represents as well as the
+ * value of the gene. It implements the {@link Serializable} interface to allow the genome it is a part of to be
+ * exported to a file and loaded from a file for later use.
+ */
 public class Gene implements Serializable {
 
     /**
@@ -36,9 +41,10 @@ public class Gene implements Serializable {
     }
 
     /**
-     * Merges two genes together to form a child gene. The child gene will contain the value of either parent gene. For
-     * {@value #MUTATION_RATE} of all merges, a value between -1 and 1 multiplied by the multiplier for that type of
-     * gene is added to the value of the child gene.
+     * Merges two genes together to form a child gene. The two parents genes undergo crossover and possibly mutation to
+     * create the child gene. The child gene will contain the value of either parent gene. For {@value #MUTATION_RATE}
+     * of all merges, a value between -1 and 1 multiplied by the multiplier for that type of gene is added to the value
+     * of the child gene.
      *
      * @param parentGene The other parent gene.
      * @return The child gene.

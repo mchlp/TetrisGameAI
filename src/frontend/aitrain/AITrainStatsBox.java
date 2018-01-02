@@ -7,7 +7,7 @@
 
 package frontend.aitrain;
 
-import ai.Trainer;
+import ai.GUITrainer;
 import backend.GameProcessor;
 import frontend.base.StatsBox;
 import frontend.common.GameArea;
@@ -22,14 +22,14 @@ public class AITrainStatsBox extends StatsBox {
     private StatsBar mTrainTimeBar;
     private StatsBar mTimeBar;
     private GameArea mGameArea;
-    private Trainer mTrainer;
+    private GUITrainer mGUITrainer;
     private GameProcessor mGameProcessor;
     private GameAreaStatsBox mGameAreaStatsBox;
 
 
-    public AITrainStatsBox(GameArea gameArea, Trainer trainer) {
+    public AITrainStatsBox(GameArea gameArea, GUITrainer GUITrainer) {
         super(gameArea.getmGameProcessor().getmGameMode());
-        mTrainer = trainer;
+        mGUITrainer = GUITrainer;
         mGameArea = gameArea;
         mGameProcessor = mGameArea.getmGameProcessor();
 
@@ -55,10 +55,10 @@ public class AITrainStatsBox extends StatsBox {
     public void update(double deltaTime) {
         super.update(deltaTime);
         mGameAreaStatsBox.update(deltaTime);
-        mOrganismBar.setValue(mTrainer.getmCurOrganism().getmName());
-        mOrganismNumBar.setValue(mTrainer.getmCurOrganismIndex() + 1 + "/" + mTrainer.getmPopulation().getNumOrganisms());
-        mGenerationBar.setValue(Integer.toString(mTrainer.getmPopulation().getmGeneration()));
-        mTrainTimeBar.setValue(getTimeInString((int) (mTrainer.getmPopulation().getmTrainTime())));
+        mOrganismBar.setValue(mGUITrainer.getmCurOrganism().getmName());
+        mOrganismNumBar.setValue(mGUITrainer.getmCurOrganismIndex() + 1 + "/" + mGUITrainer.getmPopulation().getNumOrganisms());
+        mGenerationBar.setValue(Integer.toString(mGUITrainer.getmPopulation().getmGeneration()));
+        mTrainTimeBar.setValue(getTimeInString((int) (mGUITrainer.getmPopulation().getmTrainTime())));
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
     }
 }

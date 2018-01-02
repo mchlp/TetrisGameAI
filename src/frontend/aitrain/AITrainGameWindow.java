@@ -8,7 +8,7 @@
 package frontend.aitrain;
 
 import ai.Population;
-import ai.Trainer;
+import ai.GUITrainer;
 import backend.GameMode;
 import frontend.base.TwoPanelGameWindow;
 import frontend.common.GameArea;
@@ -19,7 +19,7 @@ import javafx.stage.Stage;
 public class AITrainGameWindow extends TwoPanelGameWindow {
 
     private Population mPopulation;
-    private Trainer mTrainer;
+    private GUITrainer mGUITrainer;
     private GameArea mGameArea;
 
     public AITrainGameWindow(Population population, Stage stage, double height, double width) {
@@ -37,11 +37,17 @@ public class AITrainGameWindow extends TwoPanelGameWindow {
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
 
-        mTrainer = new Trainer(mGameArea.getmGameProcessor(), mGameController, mPopulation);
-        mUpdateItems.add(mTrainer);
+        mGUITrainer = new GUITrainer(mGameArea.getmGameProcessor(), mGameController, mPopulation);
+        mUpdateItems.add(mGUITrainer);
 
-        AITrainSidebar aiTrainSidebar = new AITrainSidebar(this, mGameArea, mTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
+        AITrainSidebar aiTrainSidebar = new AITrainSidebar(this, mGameArea, mGUITrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiTrainSidebar);
         mUpdateItems.add(aiTrainSidebar);
+    }
+
+    @Override
+    public void update(double deltaTime) {
+        super.update(deltaTime);
+
     }
 }

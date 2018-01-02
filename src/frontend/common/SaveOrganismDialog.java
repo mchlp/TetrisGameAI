@@ -15,10 +15,12 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -105,8 +107,18 @@ public class SaveOrganismDialog extends Stage {
         mSaveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                saveOrganism.saveToFile(mSaveFile);
-                hide();
+                try {
+                    saveOrganism.writeToFile(mSaveFile);
+                    hide();
+                } catch (IOException e) {
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error writing organism to file.");
+                    alert.setHeaderText("Error writing organism to file.");
+                    alert.setContentText("The file specified may be read-only or no longer available. " +
+                            "Try selecting another file to save the organism.");
+                    alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                    alert.showAndWait();
+                }
             }
         });
 

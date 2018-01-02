@@ -7,7 +7,7 @@
 
 package frontend.aitrain;
 
-import ai.Trainer;
+import ai.GUITrainer;
 import backend.ControllerKeys;
 import frontend.base.GameWindow;
 import frontend.base.Sidebar;
@@ -19,17 +19,17 @@ import javafx.scene.control.Button;
 
 public class AITrainSidebar extends Sidebar {
 
-    private Trainer mTrainer;
+    private GUITrainer mGUITrainer;
     private Button mSaveEliteButton;
     private boolean mMuted;
     private boolean mPaused;
 
-    public AITrainSidebar(GameWindow gameWindow, GameArea gameArea, Trainer trainer, double margins, double sideBarHeight, double sideBarWidth) {
+    public AITrainSidebar(GameWindow gameWindow, GameArea gameArea, GUITrainer GUITrainer, double margins, double sideBarHeight, double sideBarWidth) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
 
-        mTrainer = trainer;
+        mGUITrainer = GUITrainer;
 
-        AITrainStatsBox aiTrainStatsBox = new AITrainStatsBox(gameArea, trainer);
+        AITrainStatsBox aiTrainStatsBox = new AITrainStatsBox(gameArea, GUITrainer);
         getChildren().add(aiTrainStatsBox);
         mUpdateItems.add(aiTrainStatsBox);
 
@@ -50,7 +50,7 @@ public class AITrainSidebar extends Sidebar {
         mSaveEliteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
-                new SaveOrganismDialog(mGameWindow.getmStage(), trainer.getmPopulation().getElite());
+                new SaveOrganismDialog(mGameWindow.getmStage(), GUITrainer.getmPopulation().getElite());
             }
         });
 
@@ -78,7 +78,7 @@ public class AITrainSidebar extends Sidebar {
                     mPaused = true;
                     pauseButton.setText("Unpause");
                 }
-                trainer.getmGameController().keyPressed(ControllerKeys.TOGGLE_PAUSE);
+                GUITrainer.getmGameController().keyPressed(ControllerKeys.TOGGLE_PAUSE);
             }
         });
     }
@@ -87,7 +87,7 @@ public class AITrainSidebar extends Sidebar {
     public void update(double deltaTime) {
         super.update(deltaTime);
         if (mSaveEliteButton.isDisabled()) {
-            if (mTrainer.getmPopulation().getElite() != null) {
+            if (mGUITrainer.getmPopulation().getElite() != null) {
                 mSaveEliteButton.setDisable(false);
             }
         }

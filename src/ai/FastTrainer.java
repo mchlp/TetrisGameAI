@@ -10,7 +10,10 @@ package ai;
 import backend.ControllerKeys;
 import backend.GameProcessor;
 import backend.GameState;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.Region;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -65,8 +68,8 @@ public class FastTrainer extends Brain {
     /**
      * Initializes a training session using the FastTrainer.
      *
-     * @param gameProcessor The {@link GameProcessor} of the game that being played
-     * @param population    The {@link Population} to be trained
+     * @param gameProcessor The {@link GameProcessor} of the game that being played.
+     * @param population    The {@link Population} to be trained.
      */
     public FastTrainer(GameProcessor gameProcessor, Population population) {
         super(gameProcessor, true);
@@ -108,7 +111,18 @@ public class FastTrainer extends Brain {
                 // if the organism has finished all of its games
                 if (mCurOrganismIndex == mPopulation.getNumOrganisms() - 1) {
                     // if all the organisms in the population have been tested, evolve the population and restart
-                    mPopulation.evolve();
+                    try {
+                        mPopulation.evolve();
+                    } catch (IOException e) {
+                        // if there is an error writing to the file, show an error window
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setTitle("Error writing population to file.");
+                        alert.setHeaderText("Error writing population to file.");
+                        alert.setContentText("The file specified may be read-only or no longer available. " +
+                                "Try returning to the main menu and selecting another file to save the population.");
+                        alert.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
+                        alert.show();
+                    }
                     goToFirstOrganism();
                 } else {
                     // advance to the next organism in the population
