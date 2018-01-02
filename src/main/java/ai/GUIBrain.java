@@ -11,7 +11,6 @@ import backend.ControllerKeys;
 import backend.GameProcessor;
 import frontend.common.GameController;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

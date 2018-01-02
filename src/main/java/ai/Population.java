@@ -296,7 +296,12 @@ public class Population implements Serializable {
     }
 
     public void addmTrainTime(double addTime) {
-        mTrainTime += addTime;
+        if (addTime >= 0) {
+            mTrainTime += addTime;
+        } else {
+            System.out.println(addTime);
+            throw new IllegalArgumentException("Negative number entered.");
+        }
     }
 
     public int getmTotalFitness() {

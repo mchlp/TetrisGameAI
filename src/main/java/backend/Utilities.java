@@ -13,7 +13,7 @@ package backend;
 public final class Utilities {
 
     /**
-     * Directory of resource audio files.
+     * Directory of resource main.res.audio files.
      */
     public static final String AUDIO_DIRECTORY = "/audio/";
 
