@@ -5,8 +5,6 @@
  * January 01, 2018
  */
 
-package tests;
-
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 

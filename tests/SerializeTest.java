@@ -5,8 +5,6 @@
  * December 28, 2017
  */
 
-package tests;
-
 import ai.Population;
 
 import java.io.File;
