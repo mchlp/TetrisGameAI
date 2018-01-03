@@ -15,10 +15,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InvalidClassException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashSet;
@@ -33,7 +30,8 @@ public class PopulationTest {
     private static File readOnlyFile;
 
     private static final String LOAD_POPULATION_FROM_FILE_NO_ERROR = "res/Test_loadPopulationFromFile_NoError.pop.ser";
-    private static final String LOAD_POPULATION_FROM_FILE_OUTDATED = "res/Test_loadPopulationFromFile_OutdatedFile.pop.ser";
+    private static final String LOAD_POPULATION_FROM_FILE_OUTDATED = "res/Test_loadPopulationFromFile_Outdated.pop.ser";
+    private static final String LOAD_POPULATION_FROM_FILE_INVALID = "res/Test_loadPopulationFromFile_InvalidFile.pop.ser";
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -48,6 +46,20 @@ public class PopulationTest {
         permissionSet.add(PosixFilePermission.OTHERS_READ);
         Files.setPosixFilePermissions(readOnlyFile.toPath(), permissionSet);
         saveFile = new File("Test_population.pop.ser");
+    }
+
+    @Test
+    public void loadPopulationFromFile_NonExistentFile_FileNotFoundException() throws IOException, ClassNotFoundException {
+        exception.expect(FileNotFoundException.class);
+        File nonExistentFile = new File("fileDoesNotExist.pop.ser");
+        Population.loadPopulationFromFile(nonExistentFile);
+    }
+
+    @Test
+    public void loadPopulationFromFile_InvalidFile_StreamCorruptedException() throws IOException, ClassNotFoundException {
+        exception.expect(StreamCorruptedException.class);
+        File invalidFile = new File(LOAD_POPULATION_FROM_FILE_INVALID);
+        Population.loadPopulationFromFile(invalidFile);
     }
 
     @Test
