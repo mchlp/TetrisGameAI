@@ -117,7 +117,6 @@ public class GUITrainer extends GUIBrain {
     private void prepareNextOrganism() {
         mCurOrganismIndex++;
         mCurOrganism = mPopulation.getOrganism(mCurOrganismIndex);
-        System.out.println(mCurOrganism.getStatus());
     }
 
     public Population getmPopulation() {

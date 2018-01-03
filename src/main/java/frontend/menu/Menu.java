@@ -36,21 +36,23 @@ public class Menu extends VBox {
         mAdvancedMode = false;
         setSpacing(10);
         setPadding(new Insets(DEFAULT_PADDING));
+        setFillWidth(true);
 
-        mSinglePlayerButton = new MenuItem("Single Player");
+        mSinglePlayerButton = new MenuItem("Single Player", this);
         getChildren().add(mSinglePlayerButton);
 
-        mPlayAIButton = new MenuItem("Play Against AI");
+        mPlayAIButton = new MenuItem("Play Against AI", this);
         getChildren().add(mPlayAIButton);
 
-        mWatchAIButton = new MenuItem("Watch AI");
+        mWatchAIButton = new MenuItem("Watch AI", this);
         getChildren().add(mWatchAIButton);
 
-        mTrainAIButton = new MenuItem("Train AI");
+        mTrainAIButton = new MenuItem("Train AI", this);
         getChildren().add(mTrainAIButton);
         mTrainAIButton.setVisible(false);
 
-        mExitButton = new MenuItem("Exit Game");
+        mExitButton = new MenuItem("Exit Game", this);
+        mExitButton.setId("exitButton");
         getChildren().add(mExitButton);
 
         mSinglePlayerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {

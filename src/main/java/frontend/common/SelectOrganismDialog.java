@@ -103,6 +103,7 @@ public class SelectOrganismDialog extends Stage {
             }
         });
 
+        setTitle("Select an Organism");
         setScene(new Scene(vBox));
         setResizable(false);
         initOwner(parent);

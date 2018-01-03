@@ -32,7 +32,6 @@ public class PopulationStatusSidebar extends VBox implements Updatable {
         setAlignment(Pos.TOP_CENTER);
         setHeight(sideBarHeight);
         setMaxWidth(sideBarWidth);
-        System.out.println(sideBarWidth);
         mUpdateItems = new ArrayList<>();
 
         mPopulation = population;

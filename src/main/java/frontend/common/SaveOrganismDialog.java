@@ -129,6 +129,7 @@ public class SaveOrganismDialog extends Stage {
             }
         });
 
+        setTitle("Save an Organism");
         setScene(new Scene(vBox));
         setResizable(false);
         initOwner(parent);

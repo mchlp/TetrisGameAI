@@ -12,6 +12,7 @@ import org.junit.runners.Suite;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
         MainMenuTest.class,
+        SinglePlayerTest.class
 })
 public class FrontendTests {
 }

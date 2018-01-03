@@ -46,6 +46,7 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
         mRightGamePane.getChildren().add(rightGameAreaBackground);
 
         mPlayerGameArea = new GameArea(mBackgroundMusic, mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
+        mGameProcessor = mPlayerGameArea.getmGameProcessor();
         mRightGamePane.getChildren().add(mPlayerGameArea);
         mRightGameController = new GameController(mPlayerGameArea);
         mUpdateItems.add(mPlayerGameArea);
@@ -54,5 +55,13 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
         AIPlaySidebar aiPlaySidebar = new AIPlaySidebar(this, mAIGameArea, mPlayerGameArea, mLeftGameController, mRightGameController, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth, GAME_BACKGROUND_COLOUR);
         setCenter(aiPlaySidebar);
         mUpdateItems.add(aiPlaySidebar);
+    }
+
+    public GameArea getmAIGameArea() {
+        return mAIGameArea;
+    }
+
+    public GameArea getmPlayerGameArea() {
+        return mPlayerGameArea;
     }
 }

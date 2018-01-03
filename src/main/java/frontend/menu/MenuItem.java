@@ -10,23 +10,25 @@ package frontend.menu;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 
-public class MenuItem extends BorderPane {
+public class MenuItem extends Button {
 
     private static final int PADDING_SIZE = 10;
 
     private static final Color SELECTED_COLOUR = Color.GREEN;
     private static final Color NORMAL_COLOUR = Color.LIGHTGREEN;
 
-    private Text mText;
+    public MenuItem(String text, Menu menu) {
 
-    public MenuItem(String text) {
-        mText = new Text(text);
-        setCenter(mText);
+        setText(text);
+        setTextAlignment(TextAlignment.CENTER);
+        prefWidthProperty().bind(menu.widthProperty());
 
         setPadding(new Insets(PADDING_SIZE));
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));

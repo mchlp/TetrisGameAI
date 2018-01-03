@@ -8,6 +8,7 @@
 package frontend.base;
 
 import backend.GameMode;
+import backend.GameProcessor;
 import backend.Updatable;
 import backend.Utilities;
 import javafx.scene.layout.BorderPane;
@@ -34,6 +35,7 @@ public abstract class GameWindow extends BorderPane implements Updatable {
     protected GameMode mGameMode;
     protected String mWindowTitle;
     protected MediaPlayer mBackgroundMusic;
+    protected GameProcessor mGameProcessor;
     private Stage mStage;
 
     public GameWindow(Stage stage, double height, double width, GameMode gameMode) {
@@ -80,5 +82,9 @@ public abstract class GameWindow extends BorderPane implements Updatable {
 
     public Stage getmStage() {
         return mStage;
+    }
+
+    public GameProcessor getmGameProcessor() {
+        return mGameProcessor;
     }
 }

@@ -205,4 +205,8 @@ public class GameArea extends Canvas implements Updatable {
     public GameProcessor getmGameProcessor() {
         return mGameProcessor;
     }
+
+    public boolean ismShowGridlines() {
+        return mShowGridlines;
+    }
 }

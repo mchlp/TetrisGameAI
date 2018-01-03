@@ -18,7 +18,6 @@ public class AIFastTrainGameWindow extends TwoPanelGameWindow {
 
     private Population mPopulation;
     private FastTrainer mFastTrainer;
-    private GameProcessor mGameProcessor;
 
     public AIFastTrainGameWindow(Population population, Stage stage, double height, double width) {
         super(stage, height, width, GameMode.AI_FAST_TRAINER);

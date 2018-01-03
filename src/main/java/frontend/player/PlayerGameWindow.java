@@ -27,6 +27,7 @@ public class PlayerGameWindow extends TwoPanelGameWindow {
         mGamePane.getChildren().add(gameAreaBackground);
 
         mGameArea = new GameArea(mBackgroundMusic, mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
+        mGameProcessor = mGameArea.getmGameProcessor();
         mGamePane.getChildren().add(mGameArea);
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);
@@ -34,5 +35,9 @@ public class PlayerGameWindow extends TwoPanelGameWindow {
         PlayerSidebar playerSidebar = new PlayerSidebar(this, mGameArea, mGameController, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth, GAME_BACKGROUND_COLOUR);
         setRight(playerSidebar);
         mUpdateItems.add(playerSidebar);
+    }
+
+    public GameArea getmGameArea() {
+        return mGameArea;
     }
 }

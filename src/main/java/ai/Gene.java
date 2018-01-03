@@ -19,7 +19,7 @@ public class Gene implements Serializable {
     /**
      * The chance that a child gene will undergo mutation.
      */
-    private static final double MUTATION_RATE = 0.1;
+    private static final double MUTATION_RATE = 0.05;
 
     /**
      * The type of information this gene stores.

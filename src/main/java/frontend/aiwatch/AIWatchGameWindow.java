@@ -32,6 +32,7 @@ public class AIWatchGameWindow extends TwoPanelGameWindow {
         mGamePane.getChildren().add(gameAreaBackground);
 
         mGameArea = new GameArea(mBackgroundMusic, mCanvasWidth, mCanvasHeight, GAME_BACKGROUND_COLOUR, mGameMode);
+        mGameProcessor = mGameArea.getmGameProcessor();
         mGamePane.getChildren().add(mGameArea);
         mGameController = new GameController(mGameArea);
         mUpdateItems.add(mGameArea);

@@ -213,6 +213,7 @@ public class SelectPopulationDialog extends Stage {
             }
         });
 
+        setTitle("Select a Population");
         setScene(new Scene(vBox));
         setResizable(false);
         initOwner(parent);
