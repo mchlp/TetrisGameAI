@@ -12,7 +12,8 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-        PopulationTest.class
+        PopulationTest.class,
+        OrganismTest.class
 })
 public class TetrisGameAITests {
 

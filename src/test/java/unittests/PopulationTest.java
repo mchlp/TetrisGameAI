@@ -37,7 +37,7 @@ public class PopulationTest {
     public ExpectedException exception = ExpectedException.none();
 
     @BeforeClass
-    public static void initializePopulation() throws IOException {
+    public static void initialize() throws IOException {
         readOnlyFile = new File("Test_readOnlyPopulation.pop.ser");
         assertThat(readOnlyFile.createNewFile(), is(true));
         Set<PosixFilePermission> permissionSet = new HashSet<>();
