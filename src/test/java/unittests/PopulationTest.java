@@ -9,25 +9,31 @@ package unittests;
 
 import ai.Organism;
 import ai.Population;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.nio.file.Files;
 import java.nio.file.attribute.PosixFilePermission;
 import java.util.HashSet;
 import java.util.Set;
 
-import static unittests.TetrisGameAITests.DELTA;
+import static org.hamcrest.CoreMatchers.*;
+import static org.junit.Assert.assertThat;
 
 public class PopulationTest {
 
     private static File saveFile;
     private static File readOnlyFile;
 
-    private static final String LOAD_POPULATION_FROM_FILE_TESTFILE = "res/Test_loadPopulationFromFile_NoError.pop.ser";
+    private static final String LOAD_POPULATION_FROM_FILE_NO_ERROR = "res/Test_loadPopulationFromFile_NoError.pop.ser";
+    private static final String LOAD_POPULATION_FROM_FILE_OUTDATED = "res/Test_loadPopulationFromFile_OutdatedFile.pop.ser";
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
@@ -35,7 +41,7 @@ public class PopulationTest {
     @BeforeClass
     public static void initializePopulation() throws IOException {
         readOnlyFile = new File("Test_readOnlyPopulation.pop.ser");
-        readOnlyFile.createNewFile();
+        assertThat(readOnlyFile.createNewFile(), is(true));
         Set<PosixFilePermission> permissionSet = new HashSet<>();
         permissionSet.add(PosixFilePermission.OWNER_READ);
         permissionSet.add(PosixFilePermission.GROUP_READ);
@@ -45,46 +51,46 @@ public class PopulationTest {
     }
 
     @Test
-    public void loadPopulationFromFile_ReadOnlyFile_IOException() throws IOException {
-        exception.expect(FileNotFoundException.class);
-        exception.expectMessage("Test_readOnlyPopulation.pop.ser (Permission denied)");
-        Population population = new Population(readOnlyFile);
-        population.writeToFile();
+    public void loadPopulationFromFile_OutdatedFile_InvalidClassException() throws IOException, ClassNotFoundException {
+        exception.expect(InvalidClassException.class);
+        exception.expectMessage("local class incompatible");
+        File outdatedFile = new File(LOAD_POPULATION_FROM_FILE_OUTDATED);
+        Population.loadPopulationFromFile(outdatedFile);
     }
 
     @Test
     public void loadPopulationFromFile_NoError() throws IOException, ClassNotFoundException {
 
-        File loadFile = new File(LOAD_POPULATION_FROM_FILE_TESTFILE);
+        File loadFile = new File(LOAD_POPULATION_FROM_FILE_NO_ERROR);
         Population loadedPopulation = Population.loadPopulationFromFile(loadFile);
 
-        Assert.assertEquals(50, loadedPopulation.getNumOrganisms());
-        Assert.assertEquals(Organism.class, loadedPopulation.getElite().getClass());
+        assertThat(loadedPopulation.getNumOrganisms(), is(50));
+        assertThat(loadedPopulation.getElite(), instanceOf(Organism.class));
         for (int i = 0; i < 50; i++) {
-            Assert.assertNotNull(loadedPopulation.getOrganism(i));
-            Assert.assertEquals(Organism.class, loadedPopulation.getOrganism(0).getClass());
+            assertThat(loadedPopulation.getOrganism(i), notNullValue());
+            assertThat(loadedPopulation.getOrganism(0), instanceOf(Organism.class));
         }
-        Assert.assertEquals(8.339000000000743, loadedPopulation.getmTrainTime(), DELTA);
-        Assert.assertEquals(2, loadedPopulation.getmGeneration());
-        Assert.assertEquals(9270, loadedPopulation.getmAvgFitness());
-        Assert.assertEquals(228, loadedPopulation.getmBottom25PerFitness());
-        Assert.assertEquals(398516, loadedPopulation.getmEliteFitness());
-        Assert.assertEquals(180, loadedPopulation.getmMinFitness());
-        Assert.assertEquals(37650, loadedPopulation.getmTop25PerFitness());
-        Assert.assertEquals(398516, loadedPopulation.getmTopFitness());
-        Assert.assertEquals(463541, loadedPopulation.getmTotalFitness());
+        assertThat(loadedPopulation.getmTrainTime(), is(8.339000000000743));
+        assertThat(loadedPopulation.getmGeneration(), is(2));
+        assertThat(loadedPopulation.getmAvgFitness(), is(9270));
+        assertThat(loadedPopulation.getmBottom25PerFitness(), is(228));
+        assertThat(loadedPopulation.getmEliteFitness(), is(398516));
+        assertThat(loadedPopulation.getmMinFitness(), is(180));
+        assertThat(loadedPopulation.getmTop25PerFitness(), is(37650));
+        assertThat(loadedPopulation.getmTopFitness(), is(398516));
+        assertThat(loadedPopulation.getmTotalFitness(), is(463541));
     }
 
     @Test
     public void addPopulationTrainTime_NoError() {
         Population population = new Population(saveFile);
-        Assert.assertEquals(0, population.getmTrainTime(), DELTA);
+        assertThat(population.getmTrainTime(), is(0.0));
         population.addmTrainTime(0);
-        Assert.assertEquals(0, population.getmTrainTime(), DELTA);
+        assertThat(population.getmTrainTime(), is(0.0));
         population.addmTrainTime(10);
-        Assert.assertEquals(10.0, population.getmTrainTime(), DELTA);
+        assertThat(population.getmTrainTime(), is(10.0));
         population.addmTrainTime(34.1231344532);
-        Assert.assertEquals(44.1231344532, population.getmTrainTime(), DELTA);
+        assertThat(population.getmTrainTime(), is(44.1231344532));
     }
 
     @Test
@@ -94,7 +100,7 @@ public class PopulationTest {
 
         Population population = new Population(saveFile);
         population.addmTrainTime(-1);
-        Assert.assertEquals(0, population.getmTrainTime(), DELTA);
+        assertThat(population.getmTrainTime(), is(0));
     }
 
     @Test
@@ -123,14 +129,14 @@ public class PopulationTest {
         organism3.setmMaxScore(1);
 
         Organism[] survivors = population.selectAndKill();
-        Assert.assertEquals(organism1, survivors[0]);
-        Assert.assertEquals(organism2, survivors[1]);
-        Assert.assertEquals(organism3, survivors[2]);
+        assertThat(organism1, is(survivors[0]));
+        assertThat(organism2, is(survivors[1]));
+        assertThat(organism3, is(survivors[2]));
 
-        Assert.assertEquals(0, survivors[3].getTotalScore());
-        Assert.assertEquals(0, survivors[3].getmMaxScore());
-        Assert.assertEquals(0, survivors[3].getmMaxLevel());
-        Assert.assertEquals(0, survivors[3].getmMaxLinesCleared());
+        assertThat(0, is(survivors[3].getTotalScore()));
+        assertThat(survivors[3].getmMaxScore(), is(0));
+        assertThat(survivors[3].getmMaxLevel(), is(0));
+        assertThat(survivors[3].getmMaxLinesCleared(), is(0));
     }
 
     @Test
@@ -161,9 +167,9 @@ public class PopulationTest {
         population.evolve();
 
         for (int i = 0; i < 50; i++) {
-            Assert.assertNotNull(population.getOrganism(i));
-            Assert.assertEquals(Organism.class, population.getOrganism(i).getClass());
-            Assert.assertEquals(2, population.getOrganism(i).getmGeneration());
+            assertThat(population.getOrganism(i), notNullValue());
+            assertThat(population.getOrganism(i), instanceOf(Organism.class));
+            assertThat(population.getOrganism(i).getmGeneration(), is(2));
         }
     }
 
@@ -172,14 +178,22 @@ public class PopulationTest {
         Population population = new Population(saveFile);
         population.evolve();
         Organism elite = population.getElite();
-        Assert.assertEquals(elite.getClass(), Organism.class);
+        assertThat(elite, instanceOf(Organism.class));
     }
 
     @Test
     public void getElite_EmptyList_NullObject() {
         Population population = new Population(saveFile);
         Organism elite = population.getElite();
-        Assert.assertNull(elite);
+        assertThat(elite, nullValue());
+    }
+
+    @Test
+    public void writeToFile_ReadOnlyFile_IOException() throws IOException {
+        exception.expect(FileNotFoundException.class);
+        exception.expectMessage("Test_readOnlyPopulation.pop.ser (Permission denied)");
+        Population population = new Population(readOnlyFile);
+        population.writeToFile();
     }
 
     @Test
