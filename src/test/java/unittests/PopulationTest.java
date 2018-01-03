@@ -7,28 +7,49 @@
 
 package unittests;
 
-import static unittests.TetrisGameAITests.DELTA;
-
 import ai.Organism;
 import ai.Population;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.PosixFilePermission;
+import java.util.HashSet;
+import java.util.Set;
+
+import static unittests.TetrisGameAITests.DELTA;
 
 public class PopulationTest {
 
-    private File saveFile;
+    private static File saveFile;
+    private static File readOnlyFile;
 
     private static final String LOAD_POPULATION_FROM_FILE_TESTFILE = "res/Test_loadPopulationFromFile_NoError.pop.ser";
 
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
-    @Before
-    public void initializePopulation() throws IOException {
+    @BeforeClass
+    public static void initializePopulation() throws IOException {
+        readOnlyFile = new File("Test_readOnlyPopulation.pop.ser");
+        readOnlyFile.createNewFile();
+        Set<PosixFilePermission> permissionSet = new HashSet<>();
+        permissionSet.add(PosixFilePermission.OWNER_READ);
+        permissionSet.add(PosixFilePermission.GROUP_READ);
+        permissionSet.add(PosixFilePermission.OTHERS_READ);
+        Files.setPosixFilePermissions(readOnlyFile.toPath(), permissionSet);
         saveFile = new File("Test_population.pop.ser");
+    }
+
+    @Test
+    public void loadPopulationFromFile_ReadOnlyFile_IOException() throws IOException {
+        exception.expect(FileNotFoundException.class);
+        exception.expectMessage("Test_readOnlyPopulation.pop.ser (Permission denied)");
+        Population population = new Population(readOnlyFile);
+        population.writeToFile();
     }
 
     @Test
@@ -39,7 +60,7 @@ public class PopulationTest {
 
         Assert.assertEquals(50, loadedPopulation.getNumOrganisms());
         Assert.assertEquals(Organism.class, loadedPopulation.getElite().getClass());
-        for (int i=0; i<50; i++) {
+        for (int i = 0; i < 50; i++) {
             Assert.assertNotNull(loadedPopulation.getOrganism(i));
             Assert.assertEquals(Organism.class, loadedPopulation.getOrganism(0).getClass());
         }
@@ -67,7 +88,7 @@ public class PopulationTest {
     }
 
     @Test
-    public void addPopulationTrainTime_NegativeNumber() {
+    public void addPopulationTrainTime_NegativeNumber_IllegalArgumentException() {
         exception.expect(IllegalArgumentException.class);
         exception.expectMessage("Negative number entered.");
 
@@ -139,7 +160,7 @@ public class PopulationTest {
 
         population.evolve();
 
-        for (int i=0; i<50; i++) {
+        for (int i = 0; i < 50; i++) {
             Assert.assertNotNull(population.getOrganism(i));
             Assert.assertEquals(Organism.class, population.getOrganism(i).getClass());
             Assert.assertEquals(2, population.getOrganism(i).getmGeneration());
@@ -155,7 +176,7 @@ public class PopulationTest {
     }
 
     @Test
-    public void getElite_EmptyList() {
+    public void getElite_EmptyList_NullObject() {
         Population population = new Population(saveFile);
         Organism elite = population.getElite();
         Assert.assertNull(elite);
@@ -167,9 +188,10 @@ public class PopulationTest {
         population.writeToFile();
     }
 
-    @After
-    public void cleanUp() {
+    @AfterClass
+    public static void cleanUp() {
         saveFile.delete();
+        readOnlyFile.delete();
     }
 
 }
