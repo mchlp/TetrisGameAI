@@ -5,7 +5,7 @@
  * January 02, 2018
  */
 
-package unittests;
+package unittests.backend;
 
 import ai.Genes;
 import ai.Genome;
