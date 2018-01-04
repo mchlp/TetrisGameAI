@@ -239,7 +239,7 @@ public class Game extends Application {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, singlePlayerControllerHandler);
     }
 
-    private void onUpdate(double deltaTime) {
+    public void onUpdate(double deltaTime) {
         for (Updatable updatable : updateItems) {
             //System.out.println(1/deltaTime);
             updatable.update(deltaTime);

@@ -9,8 +9,10 @@ package unittests.frontend;
 
 import com.sun.javafx.robot.impl.FXRobotHelper;
 import frontend.Game;
+import javafx.application.Application;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;
@@ -23,12 +25,14 @@ import java.util.concurrent.TimeoutException;
 
 public abstract class FrontendTestBase extends ApplicationTest {
 
+    protected Game game;
+
     @Rule
     public ExpectedException exception = ExpectedException.none();
 
     @Before
     public void beforeEachTest() throws Exception {
-        ApplicationTest.launch(Game.class);
+        game = (Game) (FxToolkit.setupApplication(Game.class));
     }
 
     @Override

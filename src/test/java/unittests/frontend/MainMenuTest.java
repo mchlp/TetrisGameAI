@@ -34,6 +34,7 @@ public class MainMenuTest extends FrontendTestBase {
         clickOn("Single Player");
         WaitForAsyncUtils.waitForFxEvents();
         assertThat(getTopMostWindow().getTitle(), is("Tetris Game - Human Player Version"));
+        clickOn("Main Menu");
     }
 
     @Test
