@@ -72,7 +72,7 @@ public class Game extends Application {
     }
 
     /**
-     * Shows the window for the main.java.frontend.menu screen of the game
+     * Shows the window for the {@link MenuScreen} of the game
      */
     private void showMenu() {
         MenuScreen menuScreen = new MenuScreen(primaryStage);
