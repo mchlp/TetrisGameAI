@@ -9,6 +9,7 @@ package ai;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.UUID;
 
 /**
@@ -106,12 +107,20 @@ public class Organism implements Serializable {
     }
 
     /**
-     * The fitness of the organism is defined as the average of the scores of all the games this organism has played.
+     * The fitness of the organism is defined as the median of the scores of all the games this organism has played.
      *
      * @return An integer representing the fitness of the organism.
      */
     public int calculateFitness() {
-        return getTotalScore() / (Math.max(mScoreList.size(), 1));
+        Collections.sort(mScoreList);
+        if (mScoreList.isEmpty()) {
+            return 0;
+        }
+        if (mScoreList.size()%2 == 0) {
+            return (mScoreList.get(mScoreList.size()/2) + mScoreList.get(mScoreList.size()/2-1))/2;
+        } else {
+            return mScoreList.get(mScoreList.size()/2);
+        }
     }
 
     public int getmMaxScore() {
