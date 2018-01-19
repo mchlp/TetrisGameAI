@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - TetrisGameAITests
- * ICS3U1 - Mr. Radulovic
- * January 02, 2018
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package unittests;

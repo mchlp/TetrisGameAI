@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - GameGrid
- * ICS3U1 - Mr. Radulovic
- * January 01, 2018
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package frontend.common;

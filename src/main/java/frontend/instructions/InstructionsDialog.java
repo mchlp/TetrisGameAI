@@ -1,6 +1,6 @@
 /*
  * Michael Pu
- * TetrisGameAI - InstructionsWindow
+ * TetrisGameAI - InstructionsDialog
  * ICS3U1 - Mr.Radulovic
  * January 18, 2018
  */

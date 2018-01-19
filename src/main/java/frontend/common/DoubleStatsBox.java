@@ -1,68 +1,116 @@
 /*
  * Michael Pu
  * TetrisGameAI - DoubleStatsBox
- * ICS3U1 - Mr. Radulovic
- * December 30, 2017
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package frontend.common;
 
 import backend.GameProcessor;
 import backend.GameMode;
-import frontend.base.StatsBox;
 import javafx.geometry.Insets;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
-public class DoubleStatsBox extends StatsBox {
+/**
+ * A box that displays that stats of two games at are both playing at once.
+ */
+public class DoubleStatsBox extends frontend.base.StatsBox {
 
-    private GameAreaStatsBox mLeftGameAreaStatsBox;
-    private GameAreaStatsBox mRightGameAreaStatsBox;
+    /**
+     * The {@link StatsBox} for the game on the left.
+     */
+    private StatsBox mLeftStatsBox;
+
+    /**
+     * The {@link StatsBox} for the game on the right.
+     */
+    private StatsBox mRightStatsBox;
+
+    /**
+     * StatsBar for displaying the time elapsed.
+     */
     private StatsBar mTimeBar;
+
+    /**
+     * The {@link GameProcessor} for the game on the left.
+     */
     private GameProcessor mLeftGameProcessor;
+
+    /**
+     * The {@link GameProcessor} for the game on the right.
+     */
     private GameProcessor mRightGameProcessor;
+
+    /**
+     * The {@link GameArea} for the game on the left.
+     */
     private GameArea mLeftGameArea;
+
+    /**
+     * The {@link GameArea} for the game on the right.
+     */
     private GameArea mRightGameArea;
 
+    /**
+     * Creates a box that displays the stats for two games that are both playing at once.
+     *
+     * @param gameMode The current game mode.
+     * @param leftGameArea The {@link GameArea} of the game on the left.
+     * @param rightGameArea The {@link GameArea} of the right game on the right.
+     * @param leftLabelText The text to label the game on the left.
+     * @param rightLabelText The text to label the game on the right.
+     */
     public DoubleStatsBox(GameMode gameMode, GameArea leftGameArea, GameArea rightGameArea, String leftLabelText, String rightLabelText) {
         super(gameMode);
 
+        // initialize member variables
         mLeftGameArea = leftGameArea;
         mRightGameArea = rightGameArea;
 
         mLeftGameProcessor = mLeftGameArea.getmGameProcessor();
         mRightGameProcessor = mRightGameArea.getmGameProcessor();
 
+        // set up the StatsBar to keep track of the amount of time that has passed
         mTimeBar = new StatsBar("Time", "0:0:00");
         getChildren().add(mTimeBar);
 
+        // set up VBox to hold the stats of the game on the left
         VBox leftStats = new VBox(5);
         leftStats.setPadding(new Insets(5));
         leftStats.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         getChildren().add(leftStats);
 
+        // label for the game on the left
         Text leftLabel = new Text(leftLabelText);
         leftStats.getChildren().add(leftLabel);
 
-        mLeftGameAreaStatsBox = new GameAreaStatsBox(mLeftGameProcessor, leftStats, true);
+        // set up StatsBox for game on the left
+        mLeftStatsBox = new StatsBox(mLeftGameProcessor, leftStats, true);
 
+        // set up VBox to hold the stats of the game on the right
         VBox rightStats = new VBox(5);
         rightStats.setPadding(new Insets(5));
         rightStats.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         getChildren().add(rightStats);
 
+        // label for game on the right
         Text rightLabel = new Text(rightLabelText);
         rightStats.getChildren().add(rightLabel);
 
-        mRightGameAreaStatsBox = new GameAreaStatsBox(mRightGameProcessor, rightStats, true);
+        // set up the StatsBox for the game on the right
+        mRightStatsBox = new StatsBox(mRightGameProcessor, rightStats, true);
     }
 
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mLeftGameAreaStatsBox.update(deltaTime);
-        mRightGameAreaStatsBox.update(deltaTime);
+        // update the stats boxes
+        mLeftStatsBox.update(deltaTime);
+        mRightStatsBox.update(deltaTime);
+        // update the time StatsBar
         mTimeBar.setValue(getTimeInString((int) mLeftGameArea.getmElapsedTime()));
     }
 }

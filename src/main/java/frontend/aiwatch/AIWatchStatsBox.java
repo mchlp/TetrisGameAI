@@ -1,26 +1,25 @@
 /*
  * Michael Pu
  * TetrisGameAI - AIWatchStatsBox
- * ICS3U1 - Mr. Radulovic
- * December 30, 2017
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package frontend.aiwatch;
 
 import ai.Watcher;
 import backend.GameProcessor;
-import frontend.base.StatsBox;
 import frontend.common.GameArea;
-import frontend.common.GameAreaStatsBox;
+import frontend.common.StatsBox;
 import frontend.common.StatsBar;
 
-public class AIWatchStatsBox extends StatsBox {
+public class AIWatchStatsBox extends frontend.base.StatsBox {
     private StatsBar mOrganismBar;
     private Watcher mWatcher;
     private StatsBar mTimeBar;
     private GameArea mGameArea;
     private GameProcessor mGameProcessor;
-    private GameAreaStatsBox mGameAreaStatsBox;
+    private StatsBox mStatsBox;
 
     public AIWatchStatsBox(GameArea gameArea, Watcher watcher) {
         super(gameArea.getmGameProcessor().getmGameMode());
@@ -28,7 +27,7 @@ public class AIWatchStatsBox extends StatsBox {
         mGameArea = gameArea;
         mGameProcessor = mGameArea.getmGameProcessor();
 
-        mGameAreaStatsBox = new GameAreaStatsBox(mGameProcessor, this, true);
+        mStatsBox = new StatsBox(mGameProcessor, this, true);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);
@@ -40,7 +39,7 @@ public class AIWatchStatsBox extends StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mGameAreaStatsBox.update(deltaTime);
+        mStatsBox.update(deltaTime);
         mOrganismBar.setValue(mWatcher.getmCurOrganism().getmName());
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
     }

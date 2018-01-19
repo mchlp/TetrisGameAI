@@ -1,19 +1,18 @@
 /*
  * Michael Pu
  * TetrisGameAI - AIFastTrainStatsBox
- * ICS3U1 - Mr. Radulovic
- * December 30, 2017
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package frontend.aifasttrain;
 
 import ai.FastTrainer;
 import backend.GameProcessor;
-import frontend.base.StatsBox;
-import frontend.common.GameAreaStatsBox;
+import frontend.common.StatsBox;
 import frontend.common.StatsBar;
 
-public class AIFastTrainStatsBox extends StatsBox {
+public class AIFastTrainStatsBox extends frontend.base.StatsBox {
 
     private StatsBar mOrganismBar;
     private StatsBar mGenerationBar;
@@ -21,13 +20,13 @@ public class AIFastTrainStatsBox extends StatsBox {
     private StatsBar mTrainTimeBar;
     private StatsBar mTopScoreBar;
     private FastTrainer mFastTrainer;
-    private GameAreaStatsBox mGameAreaStatsBox;
+    private StatsBox mStatsBox;
 
     public AIFastTrainStatsBox(GameProcessor gameProcessor, FastTrainer fastTrainer) {
         super(gameProcessor.getmGameMode());
         mFastTrainer = fastTrainer;
 
-        mGameAreaStatsBox = new GameAreaStatsBox(gameProcessor, this, false);
+        mStatsBox = new StatsBox(gameProcessor, this, false);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);
@@ -48,7 +47,7 @@ public class AIFastTrainStatsBox extends StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mGameAreaStatsBox.update(deltaTime);
+        mStatsBox.update(deltaTime);
         mOrganismBar.setValue(mFastTrainer.getmCurOrganism().getmName());
         mOrganismNumBar.setValue(mFastTrainer.getmCurOrganismIndex() + 1 + "/" + mFastTrainer.getmPopulation().getNumOrganisms());
         mGenerationBar.setValue(Integer.toString(mFastTrainer.getmPopulation().getmGeneration()));

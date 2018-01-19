@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - Game
- * ICS3U1 - Mr. Radulovic
- * January 01, 2018
+ * ICS3U1 - Mr.Radulovic
+ * January 18, 2018
  */
 
 package frontend;
@@ -45,7 +45,7 @@ public class Game extends Application {
     private static final String ICON_IMAGE = "icon.png";
 
     /**
-     * Minimum percentage of the minimum dimension of the screen that will be taken up by the window
+     * Minimum percentage of the minimum dimension of the screen that will be taken up by the window.
      */
     private static final double WINDOW_PERCENTAGE_OF_SCREEN = 0.8;
 
@@ -59,12 +59,12 @@ public class Game extends Application {
     private Scene scene;
 
     /**
-     * List of objects that will be updated every frame
+     * List of objects that will be updated every frame.
      */
     private ArrayList<Updatable> updateItems;
 
     /**
-     * The current game window (root pane)
+     * The current game window (root pane).
      */
     private GameWindow gameWindow;
 
@@ -80,7 +80,7 @@ public class Game extends Application {
     }
 
     /**
-     * Shows the window for the {@link MenuScreen} of the game
+     * Shows the window for the {@link MenuScreen} of the game.
      */
     private void showMenu() {
         MenuScreen menuScreen = new MenuScreen(primaryStage);
@@ -114,10 +114,10 @@ public class Game extends Application {
     }
 
     /**
-     * Shows the window for the actual game
+     * Shows the window for the game.
      *
-     * @param gameMode The {@link GameMode} that should be launched
-     * @param menu     The {@link Menu} that called this method
+     * @param gameMode The {@link GameMode} that should be launched.
+     * @param menu     The {@link Menu} that called this method.
      */
     private void startGame(GameMode gameMode, Menu menu) {
         updateItems = new ArrayList<>();
@@ -205,11 +205,11 @@ public class Game extends Application {
     }
 
     /**
-     * Starts a game in AI Fast Train mode
+     * Starts a game in AI Fast Train mode.
      *
-     * @param population The {@link Population} to train
-     * @param height     The height of the window
-     * @param width      The width of the window
+     * @param population The {@link Population} to train.
+     * @param height     The height of the window.
+     * @param width      The width of the window.
      */
     private void startAIFastTrain(Population population, double height, double width) {
         gameWindow = new AIFastTrainGameWindow(population, primaryStage, height, width);

@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - GameController
- * ICS3U1 - Mr. Radulovic
- * December 28, 2017
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package frontend.common;

@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - Menu
- * ICS3U1 - Mr. Radulovic
- * December 31, 2017
+ * ICS3U1 - Mr.Radulovic
+ * January 18, 2018
  */
 
 package frontend.menu;
@@ -55,7 +55,6 @@ public class Menu extends VBox {
         mTrainAIButton.setVisible(false);
 
         mExitButton = new MenuItem("Exit Game", this);
-        mExitButton.setId("exitButton");
         getChildren().add(mExitButton);
 
         mInstructionsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {

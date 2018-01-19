@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - GameAreaStatsBox
- * ICS3U1 - Mr. Radulovic
- * December 30, 2017
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package frontend.common;
@@ -10,16 +10,47 @@ package frontend.common;
 import backend.GameProcessor;
 import javafx.scene.layout.VBox;
 
-public class GameAreaStatsBox {
+/**
+ * Displays the stats of a GameArea.
+ */
+public class StatsBox {
 
+    /**
+     * The stats of the {@link GameProcessor} to display.
+     */
     protected GameProcessor mGameProcessor;
+
+    /**
+     * The StatsBar that displays the score.
+     */
     private StatsBar mScoreBar;
+
+    /**
+     * The StatsBar that displays the lines cleared.
+     */
     private StatsBar mLinesBar;
+
+    /**
+     * The StatsBar that displays the level.
+     */
     private StatsBar mLevelBar;
+
+    /**
+     * The StatsBar that displays the current game state.
+     */
     private StatsBar mStateBar;
+
+    /**
+     * To display the state of the game or not.
+     */
     private boolean mShowGameState;
 
-    public GameAreaStatsBox(GameProcessor gameProcessor, VBox parent, boolean showGameState) {
+    /**
+     * @param gameProcessor The game processor to display the stats of.
+     * @param parent The VBox that will hold the contents of the StatsBox.
+     * @param showGameState To show the game state StatsBar or not.
+     */
+    public StatsBox(GameProcessor gameProcessor, VBox parent, boolean showGameState) {
 
         mGameProcessor = gameProcessor;
         mShowGameState = showGameState;

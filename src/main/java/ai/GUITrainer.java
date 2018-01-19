@@ -1,8 +1,8 @@
 /*
  * Michael Pu
- * TetrisGameAI - Trainer
- * ICS3U1 - Mr. Radulovic
- * December 30, 2017
+ * TetrisGameAI - GUITrainer
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package ai;

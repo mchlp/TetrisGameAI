@@ -1,8 +1,8 @@
 /*
  * Michael Pu
  * TetrisGameAI - Brain
- * ICS3U1 - Mr. Radulovic
- * January 01, 2018
+ * ICS3U1 - Mr.Radulovic
+ * January 18, 2018
  */
 
 package ai;

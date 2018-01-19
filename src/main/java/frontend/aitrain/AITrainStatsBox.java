@@ -1,20 +1,19 @@
 /*
  * Michael Pu
  * TetrisGameAI - AITrainStatsBox
- * ICS3U1 - Mr. Radulovic
- * December 30, 2017
+ * ICS3U1 - Mr.Radulovic
+ * January 13, 2018
  */
 
 package frontend.aitrain;
 
 import ai.GUITrainer;
 import backend.GameProcessor;
-import frontend.base.StatsBox;
 import frontend.common.GameArea;
-import frontend.common.GameAreaStatsBox;
+import frontend.common.StatsBox;
 import frontend.common.StatsBar;
 
-public class AITrainStatsBox extends StatsBox {
+public class AITrainStatsBox extends frontend.base.StatsBox {
 
     private StatsBar mOrganismBar;
     private StatsBar mGenerationBar;
@@ -24,7 +23,7 @@ public class AITrainStatsBox extends StatsBox {
     private GameArea mGameArea;
     private GUITrainer mGUITrainer;
     private GameProcessor mGameProcessor;
-    private GameAreaStatsBox mGameAreaStatsBox;
+    private StatsBox mStatsBox;
 
 
     public AITrainStatsBox(GameArea gameArea, GUITrainer GUITrainer) {
@@ -33,7 +32,7 @@ public class AITrainStatsBox extends StatsBox {
         mGameArea = gameArea;
         mGameProcessor = mGameArea.getmGameProcessor();
 
-        mGameAreaStatsBox = new GameAreaStatsBox(mGameProcessor, this, true);
+        mStatsBox = new StatsBox(mGameProcessor, this, true);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);
@@ -54,7 +53,7 @@ public class AITrainStatsBox extends StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mGameAreaStatsBox.update(deltaTime);
+        mStatsBox.update(deltaTime);
         mOrganismBar.setValue(mGUITrainer.getmCurOrganism().getmName());
         mOrganismNumBar.setValue(mGUITrainer.getmCurOrganismIndex() + 1 + "/" + mGUITrainer.getmPopulation().getNumOrganisms());
         mGenerationBar.setValue(Integer.toString(mGUITrainer.getmPopulation().getmGeneration()));
