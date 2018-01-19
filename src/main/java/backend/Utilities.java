@@ -13,9 +13,14 @@ package backend;
 public final class Utilities {
 
     /**
-     * Directory of resource main.res.audio files.
+     * Directory of resource audio files.
      */
     public static final String AUDIO_DIRECTORY = "/audio/";
+
+    /**
+     * Directory of the resource image files.
+     */
+    public static final String IMAGES_DIRECTORY = "/images/";
 
     /**
      * Path to the background music file.
@@ -30,5 +35,4 @@ public final class Utilities {
     public static String getResourceAsURLString(String resource) {
         return Utilities.class.getResource(resource).toString();
     }
-
 }

@@ -10,8 +10,7 @@ package frontend.menu;
 import ai.Organism;
 import ai.Population;
 import backend.GameMode;
-import frontend.common.SelectOrganismDialog;
-import frontend.common.SelectPopulationDialog;
+import frontend.instructions.InstructionsDialog;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.input.MouseEvent;
@@ -26,6 +25,7 @@ public class Menu extends VBox {
     private MenuItem mSinglePlayerButton;
     private MenuItem mPlayAIButton;
     private MenuItem mWatchAIButton;
+    private MenuItem mInstructionsButton;
     private MenuItem mTrainAIButton;
     private MenuItem mExitButton;
     private Object mLoadedObject;
@@ -37,6 +37,9 @@ public class Menu extends VBox {
         setSpacing(10);
         setPadding(new Insets(DEFAULT_PADDING));
         setFillWidth(true);
+
+        mInstructionsButton = new MenuItem("Instructions", this);
+        getChildren().add(mInstructionsButton);
 
         mSinglePlayerButton = new MenuItem("Single Player", this);
         getChildren().add(mSinglePlayerButton);
@@ -54,6 +57,14 @@ public class Menu extends VBox {
         mExitButton = new MenuItem("Exit Game", this);
         mExitButton.setId("exitButton");
         getChildren().add(mExitButton);
+
+        mInstructionsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                InstructionsDialog instructionsDialog = new InstructionsDialog(stage);
+                instructionsDialog.showAndWait();
+            }
+        });
 
         mSinglePlayerButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
