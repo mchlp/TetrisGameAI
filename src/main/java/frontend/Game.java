@@ -11,6 +11,7 @@ import ai.Organism;
 import ai.Population;
 import backend.GameMode;
 import backend.Updatable;
+import backend.Utilities;
 import frontend.aifasttrain.AIFastTrainGameWindow;
 import frontend.aiplay.AIPlayGameWindow;
 import frontend.aitrain.AITrainGameWindow;
@@ -24,6 +25,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -36,6 +38,11 @@ import java.util.ArrayList;
  * Entry point into game
  */
 public class Game extends Application {
+
+    /**
+     * Name of image file containing icon of application.
+     */
+    private static final String ICON_IMAGE = "icon.png";
 
     /**
      * Minimum percentage of the minimum dimension of the screen that will be taken up by the window
@@ -68,6 +75,7 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
+        primaryStage.getIcons().add(Utilities.getImage(ICON_IMAGE));
         showMenu();
     }
 

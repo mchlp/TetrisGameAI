@@ -7,6 +7,8 @@
 
 package backend;
 
+import javafx.scene.image.Image;
+
 /**
  * Class for performing class independent actions such as loading resources.
  */
@@ -28,11 +30,23 @@ public final class Utilities {
     public static final String AUDIO_BACKGROUND_MUSIC = AUDIO_DIRECTORY + "tetrisSoundtrack.mp3";
 
     /**
+     * Retrieves a string representing the URL of a file by the name of the file.
+     *
      * @param resource The name of the resource.
      * @return A string representing the URL of the resource. <code>null</code> if no resource matching that name is
      * found.
      */
     public static String getResourceAsURLString(String resource) {
         return Utilities.class.getResource(resource).toString();
+    }
+
+    /**
+     * Retrieves an image by the name of the file containing the image.
+     *
+     * @param imageName Name of image file.
+     * @return {@link Image} that was in the image file.
+     */
+    public static Image getImage(String imageName) {
+        return new Image(Utilities.getResourceAsURLString(IMAGES_DIRECTORY + imageName));
     }
 }
