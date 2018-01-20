@@ -17,6 +17,10 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 
+/**
+ * A SideBar which displays the status of a population and its organisms. This is intended to replace the game area
+ * display in AI fast train mode.
+ */
 public class PopulationStatusSidebar extends VBox implements Updatable {
 
     private ArrayList<Updatable> mUpdateItems;
@@ -28,6 +32,7 @@ public class PopulationStatusSidebar extends VBox implements Updatable {
     public PopulationStatusSidebar(double margins, double sideBarHeight, double sideBarWidth, Population population, FastTrainer fastTrainer) {
         super(margins);
 
+        // set up display properties
         setPadding(new Insets(margins));
         setAlignment(Pos.TOP_CENTER);
         setHeight(sideBarHeight);
@@ -37,10 +42,12 @@ public class PopulationStatusSidebar extends VBox implements Updatable {
         mPopulation = population;
         mFastTrainer = fastTrainer;
 
+        // set up the population stats box
         PopulationStatusStatsBox populationStatusStatsBox = new PopulationStatusStatsBox(mPopulation, mFastTrainer);
         getChildren().add(populationStatusStatsBox);
         mUpdateItems.add(populationStatusStatsBox);
 
+        // set up the elite organism stats box
         mOrganismStatusBox = new OrganismStatusBox("Elite Organism Data", mPopulation.getOrganism(0));
         getChildren().add(mOrganismStatusBox);
         mUpdateItems.add(mOrganismStatusBox);

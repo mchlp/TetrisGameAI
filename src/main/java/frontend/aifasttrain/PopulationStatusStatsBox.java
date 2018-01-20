@@ -13,6 +13,9 @@ import backend.Updatable;
 import frontend.common.StatsBar;
 import javafx.scene.layout.VBox;
 
+/**
+ * Displays the status of the fitness of a population.
+ */
 public class PopulationStatusStatsBox extends VBox implements Updatable {
 
     private static final int ELEMENT_SPACING = 5;
@@ -32,8 +35,10 @@ public class PopulationStatusStatsBox extends VBox implements Updatable {
         mPopulation = population;
         mBrain = brain;
 
+        // set up display properties
         setSpacing(ELEMENT_SPACING);
 
+        // add stats bars
         mEliteFitnessBar = new StatsBar("Elite Fitness", "0");
         getChildren().add(mEliteFitnessBar);
 

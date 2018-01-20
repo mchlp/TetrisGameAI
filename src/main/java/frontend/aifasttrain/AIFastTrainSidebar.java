@@ -16,6 +16,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
+/**
+ * Side bar for AI fast train mode.
+ */
 public class AIFastTrainSidebar extends Sidebar {
 
     private FastTrainer mFastTrainer;
@@ -26,12 +29,15 @@ public class AIFastTrainSidebar extends Sidebar {
 
         mFastTrainer = fastTrainer;
 
+        // statsBox
         AIFastTrainStatsBox aiFastTrainStatsBox = new AIFastTrainStatsBox(gameProcessor, fastTrainer);
         getChildren().add(aiFastTrainStatsBox);
         mUpdateItems.add(aiFastTrainStatsBox);
 
+        // add button bar to sidebar
         addButtonBar();
 
+        // add buttons
         Button pauseButton = new Button("Pause");
         mButtonBar.getChildren().add(pauseButton);
 
@@ -39,6 +45,7 @@ public class AIFastTrainSidebar extends Sidebar {
         mSaveEliteButton.setDisable(true);
         mButtonBar.getChildren().add(mSaveEliteButton);
 
+        // set actions for buttons
         pauseButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {
@@ -67,6 +74,7 @@ public class AIFastTrainSidebar extends Sidebar {
         super.update(deltaTime);
         if (mSaveEliteButton.isDisabled()) {
             if (mFastTrainer.getmPopulation().getElite() != null) {
+                // only enable save button when an elite organism has been found
                 mSaveEliteButton.setDisable(false);
             }
         }

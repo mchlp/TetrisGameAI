@@ -9,10 +9,14 @@ package frontend.aifasttrain;
 
 import ai.FastTrainer;
 import backend.GameProcessor;
+import frontend.base.StatsBox;
 import frontend.common.BasicStatsBox;
 import frontend.common.StatsBar;
 
-public class AIFastTrainStatsBox extends frontend.base.StatsBox {
+/**
+ * StatsBox for AI fast train mode.
+ */
+public class AIFastTrainStatsBox extends StatsBox {
 
     private StatsBar mOrganismBar;
     private StatsBar mGenerationBar;
@@ -26,8 +30,10 @@ public class AIFastTrainStatsBox extends frontend.base.StatsBox {
         super(gameProcessor.getmGameMode());
         mFastTrainer = fastTrainer;
 
+        // set up basic statsBox
         mBasicStatsBox = new BasicStatsBox(gameProcessor, this, false);
 
+        // add additional stats bars for this mode
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);
 

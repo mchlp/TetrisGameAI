@@ -14,6 +14,9 @@ import backend.GameMode;
 import frontend.base.TwoPanelGameWindow;
 import javafx.stage.Stage;
 
+/**
+ * Game window for AI fast train mode.
+ */
 public class AIFastTrainGameWindow extends TwoPanelGameWindow {
 
     private Population mPopulation;
@@ -31,10 +34,12 @@ public class AIFastTrainGameWindow extends TwoPanelGameWindow {
         mFastTrainer = new FastTrainer(mGameProcessor, mPopulation);
         mUpdateItems.add(mFastTrainer);
 
+        // add population status sidebar (left) instead of game area display (does not display game play)
         PopulationStatusSidebar populationStatusSidebar = new PopulationStatusSidebar(DEFAULT_MARGINS, height*0.5, width*0.5, mPopulation, mFastTrainer);
         setLeft(populationStatusSidebar);
         mUpdateItems.add(populationStatusSidebar);
 
+        // add game sidebar (right)
         AIFastTrainSidebar aiFastTrainSidebar = new AIFastTrainSidebar(this, mGameProcessor, mFastTrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiFastTrainSidebar);
         mUpdateItems.add(aiFastTrainSidebar);
