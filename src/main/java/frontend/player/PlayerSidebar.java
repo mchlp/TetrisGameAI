@@ -18,6 +18,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
+/**
+ * Sidebar for single player mode.
+ */
 public class PlayerSidebar extends Sidebar {
 
     private boolean mMuted;
@@ -26,16 +29,20 @@ public class PlayerSidebar extends Sidebar {
     public PlayerSidebar(GameWindow gameWindow, GameArea gameArea, GameController gameController, double margins, double sideBarHeight, double sideBarWidth, Color gameBgColour) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
 
+        // box for displaying next Tetromino
         NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(gameArea, sideBarWidth / 2, gameBgColour);
         getChildren().add(nextTetrominoBox);
         mUpdateItems.add(nextTetrominoBox);
 
+        // statsBox
         PlayerStatsBox playerStatsBox = new PlayerStatsBox(gameArea);
         getChildren().add(playerStatsBox);
         mUpdateItems.add(playerStatsBox);
 
+        // add button bar to side bar
         addButtonBar();
 
+        // add buttons
         Button restartButton = new Button("Restart");
         mButtonBar.getChildren().add(restartButton);
 
@@ -50,6 +57,7 @@ public class PlayerSidebar extends Sidebar {
         mButtonBar.getChildren().add(muteButton);
         mMuted = false;
 
+        // add actions for buttons
         restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {

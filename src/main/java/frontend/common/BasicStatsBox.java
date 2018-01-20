@@ -13,7 +13,7 @@ import javafx.scene.layout.VBox;
 /**
  * Displays the stats of a GameArea.
  */
-public class StatsBox {
+public class BasicStatsBox {
 
     /**
      * The stats of the {@link GameProcessor} to display.
@@ -47,10 +47,10 @@ public class StatsBox {
 
     /**
      * @param gameProcessor The game processor to display the stats of.
-     * @param parent The VBox that will hold the contents of the StatsBox.
+     * @param parent The VBox that will hold the contents of the BasicStatsBox.
      * @param showGameState To show the game state StatsBar or not.
      */
-    public StatsBox(GameProcessor gameProcessor, VBox parent, boolean showGameState) {
+    public BasicStatsBox(GameProcessor gameProcessor, VBox parent, boolean showGameState) {
 
         mGameProcessor = gameProcessor;
         mShowGameState = showGameState;

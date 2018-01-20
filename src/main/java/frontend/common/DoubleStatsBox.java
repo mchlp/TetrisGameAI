@@ -20,14 +20,14 @@ import javafx.scene.text.Text;
 public class DoubleStatsBox extends frontend.base.StatsBox {
 
     /**
-     * The {@link StatsBox} for the game on the left.
+     * The {@link BasicStatsBox} for the game on the left.
      */
-    private StatsBox mLeftStatsBox;
+    private BasicStatsBox mLeftBasicStatsBox;
 
     /**
-     * The {@link StatsBox} for the game on the right.
+     * The {@link BasicStatsBox} for the game on the right.
      */
-    private StatsBox mRightStatsBox;
+    private BasicStatsBox mRightBasicStatsBox;
 
     /**
      * StatsBar for displaying the time elapsed.
@@ -87,8 +87,8 @@ public class DoubleStatsBox extends frontend.base.StatsBox {
         Text leftLabel = new Text(leftLabelText);
         leftStats.getChildren().add(leftLabel);
 
-        // set up StatsBox for game on the left
-        mLeftStatsBox = new StatsBox(mLeftGameProcessor, leftStats, true);
+        // set up BasicStatsBox for game on the left
+        mLeftBasicStatsBox = new BasicStatsBox(mLeftGameProcessor, leftStats, true);
 
         // set up VBox to hold the stats of the game on the right
         VBox rightStats = new VBox(5);
@@ -100,16 +100,16 @@ public class DoubleStatsBox extends frontend.base.StatsBox {
         Text rightLabel = new Text(rightLabelText);
         rightStats.getChildren().add(rightLabel);
 
-        // set up the StatsBox for the game on the right
-        mRightStatsBox = new StatsBox(mRightGameProcessor, rightStats, true);
+        // set up the BasicStatsBox for the game on the right
+        mRightBasicStatsBox = new BasicStatsBox(mRightGameProcessor, rightStats, true);
     }
 
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
         // update the stats boxes
-        mLeftStatsBox.update(deltaTime);
-        mRightStatsBox.update(deltaTime);
+        mLeftBasicStatsBox.update(deltaTime);
+        mRightBasicStatsBox.update(deltaTime);
         // update the time StatsBar
         mTimeBar.setValue(getTimeInString((int) mLeftGameArea.getmElapsedTime()));
     }

@@ -10,7 +10,7 @@ package frontend.aiwatch;
 import ai.Watcher;
 import backend.GameProcessor;
 import frontend.common.GameArea;
-import frontend.common.StatsBox;
+import frontend.common.BasicStatsBox;
 import frontend.common.StatsBar;
 
 public class AIWatchStatsBox extends frontend.base.StatsBox {
@@ -19,7 +19,7 @@ public class AIWatchStatsBox extends frontend.base.StatsBox {
     private StatsBar mTimeBar;
     private GameArea mGameArea;
     private GameProcessor mGameProcessor;
-    private StatsBox mStatsBox;
+    private BasicStatsBox mBasicStatsBox;
 
     public AIWatchStatsBox(GameArea gameArea, Watcher watcher) {
         super(gameArea.getmGameProcessor().getmGameMode());
@@ -27,7 +27,7 @@ public class AIWatchStatsBox extends frontend.base.StatsBox {
         mGameArea = gameArea;
         mGameProcessor = mGameArea.getmGameProcessor();
 
-        mStatsBox = new StatsBox(mGameProcessor, this, true);
+        mBasicStatsBox = new BasicStatsBox(mGameProcessor, this, true);
 
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);
@@ -39,7 +39,7 @@ public class AIWatchStatsBox extends frontend.base.StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mStatsBox.update(deltaTime);
+        mBasicStatsBox.update(deltaTime);
         mOrganismBar.setValue(mWatcher.getmCurOrganism().getmName());
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
     }

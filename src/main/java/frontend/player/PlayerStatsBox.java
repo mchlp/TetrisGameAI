@@ -8,24 +8,32 @@
 package frontend.player;
 
 import backend.GameProcessor;
+import frontend.base.StatsBox;
 import frontend.common.GameArea;
-import frontend.common.StatsBox;
+import frontend.common.BasicStatsBox;
 import frontend.common.StatsBar;
 
-public class PlayerStatsBox extends frontend.base.StatsBox {
+/**
+ * BasicStatsBox for single player mode.
+ */
+public class PlayerStatsBox extends StatsBox {
 
     private StatsBar mTimeBar;
     private GameArea mGameArea;
     private GameProcessor mGameProcessor;
-    private StatsBox mStatsBox;
+    private BasicStatsBox mBasicStatsBox;
 
     public PlayerStatsBox(GameArea gameArea) {
         super(gameArea.getmGameProcessor().getmGameMode());
 
+        // set up source of stats
         mGameArea = gameArea;
         mGameProcessor = mGameArea.getmGameProcessor();
 
-        mStatsBox = new StatsBox(mGameProcessor, this, true);
+        // set up basic statsBox
+        mBasicStatsBox = new BasicStatsBox(mGameProcessor, this, true);
+
+        // add time bar
         mTimeBar = new StatsBar("Time", "0:0:00");
         getChildren().add(mTimeBar);
 
@@ -34,7 +42,7 @@ public class PlayerStatsBox extends frontend.base.StatsBox {
     @Override
     public void update(double deltaTime) {
         super.update(deltaTime);
-        mStatsBox.update(deltaTime);
+        mBasicStatsBox.update(deltaTime);
         mTimeBar.setValue(getTimeInString((int) mGameArea.getmElapsedTime()));
     }
 }
