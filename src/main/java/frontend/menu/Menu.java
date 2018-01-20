@@ -17,27 +17,40 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Holds the menu items and arranges them vertically.
+ */
 public class Menu extends VBox {
 
     private static final int DEFAULT_PADDING = 20;
 
+    /**
+     * Displays the AI Train button if <code>true</code>, otherwise it is hidden.
+     */
     private boolean mAdvancedMode;
+
     private MenuItem mSinglePlayerButton;
     private MenuItem mPlayAIButton;
     private MenuItem mWatchAIButton;
     private MenuItem mInstructionsButton;
     private MenuItem mTrainAIButton;
     private MenuItem mExitButton;
+
+    /**
+     * Object loaded from a dialog (population or organism) that can be accessed by application.
+     */
     private Object mLoadedObject;
     private boolean mFastMode;
 
     public Menu(Stage stage) {
 
+        // set up display properties
         mAdvancedMode = false;
         setSpacing(10);
         setPadding(new Insets(DEFAULT_PADDING));
         setFillWidth(true);
 
+        // buttons
         mInstructionsButton = new MenuItem("Instructions", this);
         getChildren().add(mInstructionsButton);
 
@@ -57,6 +70,7 @@ public class Menu extends VBox {
         mExitButton = new MenuItem("Exit Game", this);
         getChildren().add(mExitButton);
 
+        // actions for when each button is clicked
         mInstructionsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {

@@ -12,16 +12,21 @@ import javafx.event.EventHandler;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
-public class SinglePlayerControllerHandler implements EventHandler<KeyEvent> {
+/**
+ * Serves as a connection between the {@link GameController} of the game and the keyboard. It handles {@link KeyEvent}
+ * and calls the corresponding methods in its {@link GameController}.
+ */
+public class KeyboardControllerHandler implements EventHandler<KeyEvent> {
 
     private GameController mGameController;
     private GameController mSecondGameController;
 
     /**
-     * @param gameController
-     * @param secondGameController
+     * @param gameController       The {@link GameController} for the primary game.
+     * @param secondGameController The {@link GameController} for the other game in the window, if there is one.
+     *                             <code>null</code> otherwise.
      */
-    public SinglePlayerControllerHandler(GameController gameController, GameController secondGameController) {
+    public KeyboardControllerHandler(GameController gameController, GameController secondGameController) {
         mGameController = gameController;
         mSecondGameController = secondGameController;
     }
@@ -70,6 +75,7 @@ public class SinglePlayerControllerHandler implements EventHandler<KeyEvent> {
                 }
                 break;
         }
+        // prevent key press from causing other buttons to click
         keyPressed.consume();
     }
 }

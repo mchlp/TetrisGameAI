@@ -173,7 +173,6 @@ public class FastTrainer extends Brain {
         if (moves > mMaxNumMoves) {
             // if the number of moves made this game is higher than the maximum number of moves
             mMaxNumMoves = moves;
-            System.out.println(moves);
         }
 
         // update the max score of the training session

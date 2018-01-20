@@ -17,10 +17,12 @@ Package                               |Subpackage                               
 [backend](src/main/java/backend)      |                                                     | files related to the processing and game logic          
 [frontend](src/main/java/frontend)    |                                                     | files related to the JavaFX components displayed on screen
 [frontend](src/main/java/frontend)    |[aiFastTrain](src/main/java/frontend/aifasttrain)    | files related to the AI fast training mode
+[frontend](src/main/java/fronted)      |[aiPlay](src/main/java/frontend/aiplay) | files related to the AI vs. Player mode 
 [frontend](src/main/java/frontend)    |[aiTrain](src/main/java/frontend/aitrain)            | files related to the AI GUI training mode
 [frontend](src/main/java/frontend)    |[aiWatch](src/main/java/frontend/aiwatch)            | files related to the AI watch mode
 [frontend](src/main/java/frontend)    |[base](src/main/java/frontend/base)                  | files related to abstract classes that are used in displaying 
 [frontend](src/main/java/frontend)    |[common](src/main/java/frontend/common)              | files related to GUI elements that are shared between multiple modes
+[frontend](src/main/java/frontend)    |[instructions](src/main/java/fronted/instructions) | files related to the instructions of the game
 [frontend](src/main/java/frontend)    |[player](src/main/java/frontend/common)              | files related to the human player mode
 [frontend](src/main/java/frontend)    |[menu](src/main/java/frontend/menu)                  | files related to the main menu
 [frontend](src/main/java/frontend)    |[Game.java](src/main/java/frontend/Game.java)        | the class that is the entry point into the game

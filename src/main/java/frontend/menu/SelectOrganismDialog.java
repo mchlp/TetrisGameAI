@@ -27,6 +27,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InvalidClassException;
 
+/**
+ * Dialog that opens to select an {@link Organism} saved to a file and loads it.
+ */
 public class SelectOrganismDialog extends Stage {
 
     private static final int DEFAULT_PADDING = 10;
@@ -40,6 +43,7 @@ public class SelectOrganismDialog extends Stage {
 
     public SelectOrganismDialog(Stage parent) {
 
+        // set up display properties
         VBox vBox = new VBox();
         vBox.setPrefWidth(400);
         vBox.setFillWidth(true);
@@ -47,22 +51,24 @@ public class SelectOrganismDialog extends Stage {
         vBox.setPadding(new Insets(DEFAULT_PADDING));
         vBox.setAlignment(Pos.CENTER_LEFT);
 
+        // label text
         Text label = new Text("Select an AI Organism file to use.");
         vBox.getChildren().add(label);
 
+        // checkbox for fast mode
         mFastModeBox = new CheckBox("AI Fast Mode");
         vBox.getChildren().add(mFastModeBox);
 
+        // error label
         mErrorLabel = new Text();
         mErrorLabel.setWrappingWidth(370);
         vBox.getChildren().add(mErrorLabel);
 
-        HBox hBox = new HBox(10);
-        vBox.getChildren().add(hBox);
-
+        // button to select file
         Button selectFileButton = new Button("Choose File");
-        hBox.getChildren().add(selectFileButton);
+        vBox.getChildren().add(selectFileButton);
 
+        // set up file chooser
         File defaultDir = new File(System.getProperty("user.home"));
         FileChooser.ExtensionFilter organismFileFilter = new FileChooser.ExtensionFilter("Organism files (*.org.ser)", "*.org.ser");
         FileChooser fileChooser = new FileChooser();
@@ -70,6 +76,7 @@ public class SelectOrganismDialog extends Stage {
         fileChooser.setInitialDirectory(defaultDir);
         fileChooser.getExtensionFilters().add(organismFileFilter);
 
+        // set initial state
         setState(false, "No file selected.");
 
         final Stage fileChooseParentStage = this;
@@ -79,22 +86,20 @@ public class SelectOrganismDialog extends Stage {
             public void handle(ActionEvent event) {
                 File organismFile = fileChooser.showOpenDialog(fileChooseParentStage);
                 if (organismFile != null) {
+                    // if an organism file has been selected
                     try {
                         mLoadedOrganism = Organism.loadOrganismFromFile(organismFile);
                     } catch (InvalidClassException e) {
                         setState(false, "The selected file is corrupted or outdated.");
-                        e.printStackTrace();
                         return;
                     } catch (ClassNotFoundException | ClassCastException e) {
                         setState(false, "No AI organism can be found in the selected file.");
-                        e.printStackTrace();
                         return;
                     } catch (IOException e) {
                         setState(false, "The selected file cannot be accessed.");
-                        e.printStackTrace();
                         return;
                     }
-
+                    // when the file has been loaded successfully
                     setState(true, "File loaded successfully.");
                     fileChooseParentStage.hide();
                 } else {
@@ -103,6 +108,7 @@ public class SelectOrganismDialog extends Stage {
             }
         });
 
+        // set up window
         setTitle("Select an Organism");
         setScene(new Scene(vBox));
         setResizable(false);
@@ -110,6 +116,12 @@ public class SelectOrganismDialog extends Stage {
         initModality(Modality.WINDOW_MODAL);
     }
 
+    /**
+     * Updates the state of the window, changing the text and colour of the error label
+     *
+     * @param ready <code>true</code> if the loaded file is ready, <code>false</code> otherwise.
+     * @param text Text to display in the status label.
+     */
     private void setState(boolean ready, String text) {
         mErrorLabel.setText(text);
         if (ready) {

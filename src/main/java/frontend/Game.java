@@ -18,14 +18,13 @@ import frontend.aitrain.AITrainGameWindow;
 import frontend.aiwatch.AIWatchGameWindow;
 import frontend.base.GameWindow;
 import frontend.common.GameController;
-import frontend.common.SinglePlayerControllerHandler;
+import frontend.common.KeyboardControllerHandler;
 import frontend.player.PlayerGameWindow;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -232,8 +231,8 @@ public class Game extends Application {
 
         GameController playerGameController = ((AIPlayGameWindow) gameWindow).getmRightGameController();
         GameController aiGameController = ((AIPlayGameWindow) gameWindow).getmLeftGameController();
-        SinglePlayerControllerHandler singlePlayerControllerHandler = new SinglePlayerControllerHandler(playerGameController, aiGameController);
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, singlePlayerControllerHandler);
+        KeyboardControllerHandler keyboardControllerHandler = new KeyboardControllerHandler(playerGameController, aiGameController);
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, keyboardControllerHandler);
     }
 
 
@@ -243,13 +242,12 @@ public class Game extends Application {
         scene = new Scene(gameWindow);
 
         GameController playerGameController = ((PlayerGameWindow) gameWindow).getmGameController();
-        SinglePlayerControllerHandler singlePlayerControllerHandler = new SinglePlayerControllerHandler(playerGameController, null);
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, singlePlayerControllerHandler);
+        KeyboardControllerHandler keyboardControllerHandler = new KeyboardControllerHandler(playerGameController, null);
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, keyboardControllerHandler);
     }
 
     public void onUpdate(double deltaTime) {
         for (Updatable updatable : updateItems) {
-            //System.out.println(1/deltaTime);
             updatable.update(deltaTime);
         }
     }

@@ -2,10 +2,10 @@
  * Michael Pu
  * TetrisGameAI - NextTetrominoBox
  * ICS3U1 - Mr.Radulovic
- * January 13, 2018
+ * January 18, 2018
  */
 
-package frontend.player;
+package frontend.common;
 
 import backend.GameState;
 import backend.Updatable;

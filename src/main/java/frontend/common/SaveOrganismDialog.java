@@ -31,6 +31,9 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 
+/**
+ * Dialog that opens to select a file to save an {@link Organism} to.
+ */
 public class SaveOrganismDialog extends Stage {
 
     private static final int DEFAULT_PADDING = 10;
@@ -51,6 +54,7 @@ public class SaveOrganismDialog extends Stage {
 
         mSaveOrganism = saveOrganism;
 
+        // set up display properties
         VBox vBox = new VBox();
         vBox.setPrefWidth(400);
         vBox.setFillWidth(true);
@@ -58,12 +62,15 @@ public class SaveOrganismDialog extends Stage {
         vBox.setPadding(new Insets(DEFAULT_PADDING));
         vBox.setAlignment(Pos.CENTER_LEFT);
 
+        // label text
         Text label = new Text("Select a folder to store the organism.");
         vBox.getChildren().add(label);
 
+        // status text
         mErrorLabel = new Text();
         vBox.getChildren().add(mErrorLabel);
 
+        // file name entry field
         HBox hBox = new HBox(10);
         hBox.setAlignment(Pos.CENTER_LEFT);
         vBox.getChildren().add(hBox);
@@ -76,27 +83,31 @@ public class SaveOrganismDialog extends Stage {
         mNameField.setText(saveOrganism.getmName());
         hBox.getChildren().add(mNameField);
 
+        // buttons
         HBox buttonBox = new HBox(10);
         buttonBox.setAlignment(Pos.CENTER_LEFT);
         vBox.getChildren().add(buttonBox);
 
-        Button selectFileButton = new Button("Choose Folder");
-        buttonBox.getChildren().add(selectFileButton);
+        Button selectFolderButton = new Button("Choose Folder");
+        buttonBox.getChildren().add(selectFolderButton);
 
         mSaveButton = new Button("Save");
         mSaveButton.setDisable(true);
         buttonBox.getChildren().add(mSaveButton);
 
+        // set up directory chooser
         File defaultDir = new File(System.getProperty("user.home"));
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Select a folder to save the organism");
         directoryChooser.setInitialDirectory(defaultDir);
 
+        // set default state
         setState(false, "No folder selected.");
 
         final Stage fileChooseParentStage = this;
 
-        selectFileButton.setOnAction(new EventHandler<ActionEvent>() {
+        // open up directory chooser when the select button is pressed
+        selectFolderButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 mSaveFolder = directoryChooser.showDialog(fileChooseParentStage);
@@ -104,6 +115,7 @@ public class SaveOrganismDialog extends Stage {
             }
         });
 
+        // write the organism to the file when the save button is pressed
         mSaveButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -122,6 +134,7 @@ public class SaveOrganismDialog extends Stage {
             }
         });
 
+        // update the save file when the name of the file is changed
         mNameField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -129,19 +142,31 @@ public class SaveOrganismDialog extends Stage {
             }
         });
 
+        // set up display properties of the window
         setTitle("Save an Organism");
         setScene(new Scene(vBox));
         setResizable(false);
         initOwner(parent);
         initModality(Modality.WINDOW_MODAL);
+
+        // block input to the parent window until this window is closed
         showAndWait();
     }
 
+    /**
+     * Creates a file to save the organism in and updates the status of the window accordingly.
+     */
     private void createSaveFile() {
         String fileName = convertToFileName(mNameField.getText());
         if (mSaveFolder != null) {
+
+            // if a folder to save the file in has been selected
             mSaveOrganism.setmName(mNameField.getText());
+
+            // create save file
             mSaveFile = new File(mSaveFolder, fileName + ".org.ser");
+
+            // update the state of the window
             try {
                 setState(true, mSaveFile.getCanonicalPath());
             } catch (IOException e) {
@@ -151,6 +176,13 @@ public class SaveOrganismDialog extends Stage {
         }
     }
 
+    /**
+     * Updates the state of the window, changing the text and colour of the status label as well as updating the button
+     * states.
+     *
+     * @param ready <code>true</code> if the save file is ready, <code>false</code> otherwise.
+     * @param text Text to display in the status label.
+     */
     private void setState(boolean ready, String text) {
         mErrorLabel.setText(text);
         if (ready) {
@@ -162,6 +194,12 @@ public class SaveOrganismDialog extends Stage {
         }
     }
 
+    /**
+     * Converts a string into a file name by replaces all spaces in the string with underscores.
+     *
+     * @param name Original name of the file.
+     * @return Formatted name of the file.
+     */
     private String convertToFileName(String name) {
         return name.replace(" ", "_");
     }

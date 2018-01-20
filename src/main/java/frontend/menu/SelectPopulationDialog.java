@@ -29,6 +29,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InvalidClassException;
 
+/**
+ * Dialog that opens to select an {@link Population} saved to a file and loads it.
+ */
 public class SelectPopulationDialog extends Stage {
 
     private static final int DEFAULT_PADDING = 10;
@@ -48,6 +51,7 @@ public class SelectPopulationDialog extends Stage {
 
         mGoClicked = false;
 
+        // set up display properties
         VBox vBox = new VBox();
         vBox.setPrefWidth(400);
         vBox.setFillWidth(true);
@@ -55,41 +59,46 @@ public class SelectPopulationDialog extends Stage {
         vBox.setPadding(new Insets(DEFAULT_PADDING));
         vBox.setAlignment(Pos.CENTER_LEFT);
 
-        // training mode section
-
+        // mode select label text
         Text modeLabel = new Text("Select an training mode");
         vBox.getChildren().add(modeLabel);
 
+        // mode select toggle group
         ToggleGroup modeGroup = new ToggleGroup();
 
+        // fast mode radio button
         RadioButton fastModeButton = new RadioButton("Fast Training Mode");
         fastModeButton.setSelected(true);
         fastModeButton.setToggleGroup(modeGroup);
         vBox.getChildren().add(fastModeButton);
         mTrainMode = GameMode.AI_FAST_TRAINER;
 
+        // gui mode radio button
         RadioButton guiModeButton = new RadioButton("GUI Training Mode");
         guiModeButton.setSelected(false);
         guiModeButton.setToggleGroup(modeGroup);
         vBox.getChildren().add(guiModeButton);
 
-        // source file section
+        // select file text
         Text populationFileLabel = new Text("Select an AI population");
         vBox.getChildren().add(populationFileLabel);
 
+        // file type toggle group
         ToggleGroup fileSourceGroup = new ToggleGroup();
 
+        // create new file radio button
         RadioButton newFileButton = new RadioButton("Create new population file");
         newFileButton.setSelected(true);
         newFileButton.setToggleGroup(fileSourceGroup);
         vBox.getChildren().add(newFileButton);
 
+        // use existing file radio button
         RadioButton existingFileButton = new RadioButton("Use existing population file");
         existingFileButton.setSelected(false);
         existingFileButton.setToggleGroup(fileSourceGroup);
         vBox.getChildren().add(existingFileButton);
 
-        // file label
+        // file name label
         mFileText = new Text();
         vBox.getChildren().add(mFileText);
 
@@ -108,6 +117,7 @@ public class SelectPopulationDialog extends Stage {
         mGoButton.setDisable(true);
         hBox.getChildren().add(mGoButton);
 
+        // set inital state
         setState(false, "No file selected.", "");
 
         guiModeButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -140,6 +150,7 @@ public class SelectPopulationDialog extends Stage {
             }
         });
 
+        // set up file chooser
         File defaultDir = new File(System.getProperty("user.home"));
         FileChooser.ExtensionFilter organismFileFilter = new FileChooser.ExtensionFilter("Population files (*.pop.ser)", "*.pop.ser");
         FileChooser fileChooser = new FileChooser();
@@ -156,7 +167,7 @@ public class SelectPopulationDialog extends Stage {
                 String filePath = "";
                 File populationFile;
                 if (newFileButton.isSelected()) {
-
+                    // create new file
                     populationFile = fileChooser.showSaveDialog(fileChooseParentStage);
 
                     if (populationFile != null) {
@@ -168,7 +179,6 @@ public class SelectPopulationDialog extends Stage {
                             mLoadedPopulation = new Population(populationFile);
                         } catch (IOException e) {
                             setState(false, "Selected file cannot be accessed.", "");
-                            e.printStackTrace();
                             return;
                         }
                     } else {
@@ -176,7 +186,7 @@ public class SelectPopulationDialog extends Stage {
                         return;
                     }
                 } else {
-
+                    // user existing file
                     populationFile = fileChooser.showOpenDialog(fileChooseParentStage);
 
                     if (populationFile != null) {
@@ -185,15 +195,12 @@ public class SelectPopulationDialog extends Stage {
                             mLoadedPopulation = Population.loadPopulationFromFile((populationFile));
                         } catch (InvalidClassException e) {
                             setState(false, "The selected file is corrupted or outdated.", filePath);
-                            e.printStackTrace();
                             return;
                         } catch (ClassNotFoundException e) {
                             setState(false, "An AI organism cannot cannot be loaded from the selected file.", filePath);
-                            e.printStackTrace();
                             return;
                         } catch (IOException e) {
                             setState(false, "The selected file cannot be accessed.", filePath);
-                            e.printStackTrace();
                             return;
                         }
                     } else {
@@ -213,6 +220,7 @@ public class SelectPopulationDialog extends Stage {
             }
         });
 
+        // set up window
         setTitle("Select a Population");
         setScene(new Scene(vBox));
         setResizable(false);
@@ -220,6 +228,14 @@ public class SelectPopulationDialog extends Stage {
         initModality(Modality.WINDOW_MODAL);
     }
 
+    /**
+     * Updates the state of the window, changing the text and colour of the error label as well as the states of the
+     * button.
+     *
+     * @param ready     <code>true</code> if the loaded file is ready, <code>false</code> otherwise.
+     * @param errorText Text to display in the status label.
+     * @param fileText  Text to display as the file name.
+     */
     private void setState(boolean ready, String errorText, String fileText) {
         mErrorText.setText(errorText);
         mFileText.setText(fileText);

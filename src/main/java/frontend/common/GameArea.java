@@ -115,8 +115,8 @@ public class GameArea extends Canvas implements Updatable {
     /**
      * Fills a cell in the grid a certain colour.
      *
-     * @param x The column of the cell to fill.
-     * @param y The row of the cell to fill.
+     * @param x      The column of the cell to fill.
+     * @param y      The row of the cell to fill.
      * @param colour The colour to fill the cell.
      */
     private void drawCell(int x, int y, Color colour) {
@@ -213,15 +213,14 @@ public class GameArea extends Canvas implements Updatable {
     }
 
     /**
-     *
+     * Calculates the drop speed for the current level. The drop speed is the minimum number of seconds that should pass
+     * before the Tetromino is dropped one line.
      *
      * @return
      */
     private double calculateDropSpeed() {
         int dropSpeedLevel = Math.min(mGameProcessor.getmLevel(), MAX_SPEED_LEVEL);
-        // return -0.04242*mLevel + 0.6884;
         return (725 * Math.pow(0.85, dropSpeedLevel) + dropSpeedLevel) / 1000;
-        //return Math.pow(0.8 - ((mLevel - 1) * 0.007), mLevel - 1);
     }
 
     public double getmCellWidth() {

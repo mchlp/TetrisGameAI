@@ -16,6 +16,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * Displays the details of an {@link Organism}.
+ */
 public class OrganismStatusBox extends VBox implements Updatable {
 
     private static final int TEXT_FONT_SIZE = 11;
@@ -32,15 +35,19 @@ public class OrganismStatusBox extends VBox implements Updatable {
 
     public OrganismStatusBox(String name, Organism organism) {
         super();
+
+        // set up display properties
         setSpacing(ELEMENT_SPACING);
         setPadding(new Insets(PADDING_SIZE));
         setStyle(DEFAULT_STYLE);
         setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
+        // title of status box
         Text title = new Text(name);
         title.setFont(new Font(TITLE_FONT_SIZE));
         getChildren().add(title);
 
+        // details of status box
         mTextArea = new TextArea();
         mTextArea.setPrefRowCount(MAX_NUMBER_OF_ROWS);
         mTextArea.setFont(new Font(TEXT_FONT_SIZE));

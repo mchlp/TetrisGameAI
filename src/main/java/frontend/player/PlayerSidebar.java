@@ -12,6 +12,7 @@ import frontend.base.GameWindow;
 import frontend.base.Sidebar;
 import frontend.common.GameArea;
 import frontend.common.GameController;
+import frontend.common.NextTetrominoBox;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;

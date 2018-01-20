@@ -39,7 +39,6 @@ public class TestDataGenerator {
                 taskCounter++;
                 if (taskCounter >= taskTimes) {
                     timer.cancel();
-                    System.out.println(getPopulationData(fastTrainer.getmPopulation()));
                 }
 
             }
