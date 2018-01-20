@@ -4,7 +4,7 @@ _Michael Pu - January 2018<br>
 Mr. Radulovic - Don Mills Collegiate Institute<br>_
 Work log can be found in the commit history of this [GitHub repository](https://github.com/mchlp/TetrisGameAI)
 
-*Links may not work properly if you are viewing a PDF version of the file*
+*Links may not work properly if you are viewing a PDF version of this file.*
 
 ## Description
 - Clone of the classic Tetris game
