@@ -16,6 +16,9 @@ import frontend.common.GameController;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+/**
+ * Game window for playing against AI mode.
+ */
 public class AIPlayGameWindow extends ThreePanelGameWindow {
 
     private Watcher mWatcher;
@@ -29,7 +32,7 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
         mWindowTitle = "Tetris Game - Play Against AI Version";
         mOrganism = organism;
 
-        // left side of screen
+        // game on left side of screen (AI)
         Rectangle leftGameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         mLeftGamePane.getChildren().add(leftGameAreaBackground);
 
@@ -41,7 +44,7 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
         mWatcher = new Watcher(mAIGameArea.getmGameProcessor(), mLeftGameController, mOrganism, fastMode);
         mUpdateItems.add(mWatcher);
 
-        // right side of screen
+        // game on right side of screen (player)
         Rectangle rightGameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         mRightGamePane.getChildren().add(rightGameAreaBackground);
 
@@ -51,17 +54,9 @@ public class AIPlayGameWindow extends ThreePanelGameWindow {
         mRightGameController = new GameController(mPlayerGameArea);
         mUpdateItems.add(mPlayerGameArea);
 
-        // side bar in the middle
+        // sidebar in the middle
         AIPlaySidebar aiPlaySidebar = new AIPlaySidebar(this, mAIGameArea, mPlayerGameArea, mLeftGameController, mRightGameController, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth, GAME_BACKGROUND_COLOUR);
         setCenter(aiPlaySidebar);
         mUpdateItems.add(aiPlaySidebar);
-    }
-
-    public GameArea getmAIGameArea() {
-        return mAIGameArea;
-    }
-
-    public GameArea getmPlayerGameArea() {
-        return mPlayerGameArea;
     }
 }

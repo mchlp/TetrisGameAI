@@ -17,6 +17,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
+/**
+ * Sidebar for AI train mode with GUI.
+ */
 public class AITrainSidebar extends Sidebar {
 
     private GUITrainer mGUITrainer;
@@ -29,12 +32,15 @@ public class AITrainSidebar extends Sidebar {
 
         mGUITrainer = GUITrainer;
 
+        // statsBox
         AITrainStatsBox aiTrainStatsBox = new AITrainStatsBox(gameArea, GUITrainer);
         getChildren().add(aiTrainStatsBox);
         mUpdateItems.add(aiTrainStatsBox);
 
+        // add button bar
         addButtonBar();
 
+        // add buttons
         mSaveEliteButton = new Button("Save Elite");
         mSaveEliteButton.setDisable(true);
         mButtonBar.getChildren().add(mSaveEliteButton);
@@ -47,6 +53,7 @@ public class AITrainSidebar extends Sidebar {
         mButtonBar.getChildren().add(pauseButton);
         mPaused = false;
 
+        // set action for buttons
         mSaveEliteButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {

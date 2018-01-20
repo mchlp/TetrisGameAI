@@ -17,6 +17,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
+/**
+ * Sidebar for watching AI play mode.
+ */
 public class AIWatchSidebar extends Sidebar {
 
     private OrganismStatusBox mOrganismStatusBox;
@@ -28,16 +31,20 @@ public class AIWatchSidebar extends Sidebar {
 
         mWatcher = watcher;
 
+        // statsBox
         AIWatchStatsBox aiWatchStatsBox = new AIWatchStatsBox(gameArea, mWatcher);
         getChildren().add(aiWatchStatsBox);
         mUpdateItems.add(0, aiWatchStatsBox);
 
+        // organism details
         mOrganismStatusBox = new OrganismStatusBox("Current AI", mWatcher.getmCurOrganism());
         getChildren().add(mOrganismStatusBox);
         mUpdateItems.add(0, mOrganismStatusBox);
 
+        // add button bar
         addButtonBar();
 
+        // add buttons to button bar
         Button restartButton = new Button("Restart");
         mButtonBar.getChildren().add(restartButton);
 
@@ -45,6 +52,7 @@ public class AIWatchSidebar extends Sidebar {
         mButtonBar.getChildren().add(muteButton);
         mMuted = false;
 
+        // set actions for button
         restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {

@@ -13,6 +13,9 @@ import frontend.common.GameArea;
 import frontend.common.BasicStatsBox;
 import frontend.common.StatsBar;
 
+/**
+ * StatsBox for watching AI play mode.
+ */
 public class AIWatchStatsBox extends frontend.base.StatsBox {
     private StatsBar mOrganismBar;
     private Watcher mWatcher;
@@ -27,8 +30,10 @@ public class AIWatchStatsBox extends frontend.base.StatsBox {
         mGameArea = gameArea;
         mGameProcessor = mGameArea.getmGameProcessor();
 
+        // set up basic statsBox
         mBasicStatsBox = new BasicStatsBox(mGameProcessor, this, true);
 
+        // set up statsBars for this mode
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);
 

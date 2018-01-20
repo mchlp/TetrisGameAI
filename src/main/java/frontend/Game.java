@@ -126,6 +126,9 @@ public class Game extends Application {
         double screenHeight = screenBounds.getHeight();
         double screenWidth = screenBounds.getWidth();
 
+        screenWidth = 1024;
+        screenHeight = 768;
+
         double minDimension = Math.min(screenHeight, screenWidth);
         double maxDimension = Math.max(screenHeight, screenWidth);
 

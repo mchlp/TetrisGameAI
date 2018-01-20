@@ -13,6 +13,9 @@ import frontend.common.BasicStatsBox;
 import frontend.common.GameArea;
 import frontend.common.StatsBar;
 
+/**
+ * StatsBox for AI train mode with GUI.
+ */
 public class AITrainStatsBox extends frontend.base.StatsBox {
 
     private StatsBar mOrganismBar;
@@ -32,8 +35,10 @@ public class AITrainStatsBox extends frontend.base.StatsBox {
         mGameArea = gameArea;
         mGameProcessor = mGameArea.getmGameProcessor();
 
+        // basic statsBox
         mBasicStatsBox = new BasicStatsBox(mGameProcessor, this, true);
 
+        // add statsBars for this mode
         mOrganismBar = new StatsBar("Organism Name", "Loading...");
         getChildren().add(mOrganismBar);
 

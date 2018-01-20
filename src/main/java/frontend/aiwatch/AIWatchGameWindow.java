@@ -16,6 +16,9 @@ import frontend.common.GameController;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+/**
+ * Game window for watching AI mode.
+ */
 public class AIWatchGameWindow extends TwoPanelGameWindow {
 
     private Watcher mWatcher;
@@ -28,6 +31,7 @@ public class AIWatchGameWindow extends TwoPanelGameWindow {
         mWindowTitle = "Tetris Game - AI Watch Version";
         mOrganism = organism;
 
+        // left side (game area)
         Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         mGamePane.getChildren().add(gameAreaBackground);
 
@@ -40,6 +44,7 @@ public class AIWatchGameWindow extends TwoPanelGameWindow {
         mWatcher = new Watcher(mGameArea.getmGameProcessor(), mGameController, mOrganism, fastMode);
         mUpdateItems.add(mWatcher);
 
+        // right side (side bar)
         AIWatchSidebar aiWatchSidebar = new AIWatchSidebar(this, mGameArea, mWatcher, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiWatchSidebar);
         mUpdateItems.add(aiWatchSidebar);

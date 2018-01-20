@@ -20,6 +20,9 @@ import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 
+/**
+ * Sidebar for playing against AI mode.
+ */
 public class AIPlaySidebar extends Sidebar {
 
     private boolean mPaused;
@@ -28,16 +31,20 @@ public class AIPlaySidebar extends Sidebar {
     public AIPlaySidebar(GameWindow gameWindow, GameArea aiGameArea, GameArea playerGameArea, GameController aiGameController, GameController playerGameController, double margins, double sideBarHeight, double sideBarWidth, Color gameBgColour) {
         super(gameWindow, margins, sideBarHeight, sideBarWidth);
 
+        // box for showing next Tetromino for player
         NextTetrominoBox nextTetrominoBox = new NextTetrominoBox(playerGameArea, sideBarWidth / 2, gameBgColour);
         getChildren().add(nextTetrominoBox);
         mUpdateItems.add(nextTetrominoBox);
 
+        // statsBox
         DoubleStatsBox playerStatsBox = new DoubleStatsBox(GameMode.AI_PLAY, aiGameArea, playerGameArea, "AI Stats (Left)", "Player Stats (Right)");
         getChildren().add(playerStatsBox);
         mUpdateItems.add(playerStatsBox);
 
+        // add button bar to sidebar
         addButtonBar();
 
+        // add buttons
         Button restartButton = new Button("Restart");
         mButtonBar.getChildren().add(restartButton);
 
@@ -52,6 +59,7 @@ public class AIPlaySidebar extends Sidebar {
         mButtonBar.getChildren().add(muteButton);
         mMuted = false;
 
+        // set actions for buttons
         restartButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent click) {

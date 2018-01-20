@@ -16,6 +16,9 @@ import frontend.common.GameController;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 
+/**
+ * Game window for AI train mode with GUI.
+ */
 public class AITrainGameWindow extends TwoPanelGameWindow {
 
     private Population mPopulation;
@@ -29,6 +32,7 @@ public class AITrainGameWindow extends TwoPanelGameWindow {
 
         mPopulation = population;
 
+        // set up left side of screen (game area)
         Rectangle gameAreaBackground = new Rectangle(mCanvasWidth + 10, mCanvasHeight + 10, GAME_OUTLINE_COLOUR);
         mGamePane.getChildren().add(gameAreaBackground);
 
@@ -41,6 +45,7 @@ public class AITrainGameWindow extends TwoPanelGameWindow {
         mGUITrainer = new GUITrainer(mGameArea.getmGameProcessor(), mGameController, mPopulation);
         mUpdateItems.add(mGUITrainer);
 
+        // set up right side of screen (sidebar)
         AITrainSidebar aiTrainSidebar = new AITrainSidebar(this, mGameArea, mGUITrainer, DEFAULT_MARGINS, mSideBarHeight, mSideBarWidth);
         setRight(aiTrainSidebar);
         mUpdateItems.add(aiTrainSidebar);

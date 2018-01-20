@@ -21,9 +21,9 @@ import javafx.scene.text.Text;
  */
 public class KeyInstructionsBar extends BorderPane {
 
-    private static final int FONT_SIZE = 20;
+    private static final int FONT_SIZE = 15;
     private static final int PADDING_SIZE = 10;
-    private static final int BAR_HEIGHT = 40;
+    private static final int BAR_HEIGHT = 30;
 
     public KeyInstructionsBar(String keyFunction, Image keyImage) {
 
