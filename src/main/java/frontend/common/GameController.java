@@ -9,6 +9,9 @@ package frontend.common;
 
 import backend.ControllerKeys;
 
+/**
+ * Serves as a connection between the player or AI and the game, allowing the game to be controlled.
+ */
 public class GameController {
 
     private GameArea mGameArea;

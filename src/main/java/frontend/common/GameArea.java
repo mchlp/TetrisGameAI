@@ -19,6 +19,9 @@ import javafx.scene.paint.Color;
 
 import java.awt.*;
 
+/**
+ * A {@link Canvas} with added methods and variables to display the game grid.
+ */
 public class GameArea extends Canvas implements Updatable {
 
     public static final double CELL_OUTLINE_WIDTH = 3;
@@ -109,7 +112,15 @@ public class GameArea extends Canvas implements Updatable {
         return mGameProcessor.getmGrid();
     }
 
+    /**
+     * Fills a cell in the grid a certain colour.
+     *
+     * @param x The column of the cell to fill.
+     * @param y The row of the cell to fill.
+     * @param colour The colour to fill the cell.
+     */
     private void drawCell(int x, int y, Color colour) {
+        // checks if the cell should be visible to the player (is it above the top of the grid?)
         if (y >= mGameProcessor.getExtraRowsAtTop()) {
             int screenY = y - mGameProcessor.getExtraRowsAtTop();
             mGc.setFill(CELL_OUTLINE_COLOUR);
@@ -125,12 +136,17 @@ public class GameArea extends Canvas implements Updatable {
         mTetrominoUpdateTime = calculateDropSpeed();
     }
 
+    /**
+     * Draws the game grid to canvas.
+     */
     private void drawGame() {
 
+        // repaints over everything in the game grid
         setEffect(null);
         mGc.setFill(mBgColour);
         mGc.fillRect(0, 0, mWidth, mHeight);
 
+        // loops through the grid and draws the cell to the canvas
         for (int i = 0; i < mGameProcessor.getmGrid().getmWidth(); i++) {
             for (int j = 0; j < mGameProcessor.getmGrid().getmHeight(); j++) {
                 if (mGameProcessor.getmGrid().isFilled(i, j)) {
@@ -139,6 +155,7 @@ public class GameArea extends Canvas implements Updatable {
             }
         }
 
+        // draws the tetromino to the canvas
         int[][] tBody = mGameProcessor.getmCurTetromino().getmBody();
         Point tPos = mGameProcessor.getmCurTetromino().getmCurPos();
         for (int i = 0; i < tBody.length; i++) {
@@ -149,10 +166,12 @@ public class GameArea extends Canvas implements Updatable {
             }
         }
 
+        // if it's paused, blur it
         if (mGameProcessor.getmGameState() == GameState.PAUSED) {
             setEffect(new GaussianBlur(15));
         }
 
+        // draw the grid lines
         if (mShowGridlines) {
             mGc.setStroke(LINE_COLOUR);
             mGc.setLineWidth(LINE_WIDTH);
@@ -167,22 +186,37 @@ public class GameArea extends Canvas implements Updatable {
         }
     }
 
+    /**
+     * This function is run every frame of the game.
+     *
+     * @param deltaTime The number of seconds passed since the last update.
+     */
+    @Override
     public void update(double deltaTime) {
         if (mGameProcessor.getmGameState() == GameState.PLAYING) {
+            // if the game is still playing
             mElapsedTime += deltaTime;
             if (mGameProcessor.getmCurTetromino() != null) {
+                // if the next tetromino has spawned
                 mTetrominoUpdateTime -= deltaTime;
                 if (mTetrominoUpdateTime <= 0) {
+                    // if the tetromino update time has passed (the amount of time before dropping one line)
                     mGameProcessor.update();
                     mTetrominoUpdateTime = calculateDropSpeed();
                 }
             }
         } else if (mGameProcessor.getmGameState() == GameState.OVER) {
+            // if the game is paused or over
             mBackgroundMusic.stop();
         }
         drawGame();
     }
 
+    /**
+     *
+     *
+     * @return
+     */
     private double calculateDropSpeed() {
         int dropSpeedLevel = Math.min(mGameProcessor.getmLevel(), MAX_SPEED_LEVEL);
         // return -0.04242*mLevel + 0.6884;
