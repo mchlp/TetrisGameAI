@@ -4,11 +4,11 @@ _Michael Pu - January 2018<br>
 Mr. Radulovic - Don Mills Collegiate Institute<br>_
 Work log can be found in the commit history of this [GitHub repository](https://github.com/mchlp/TetrisGameAI)
 
-- _**Currently Under Development**_
+*Links may not work properly if you are viewing a PDF version of the file*
 
 ## Description
 - Clone of the classic Tetris game
-- Includes a single player mode and AI mode
+- Includes a single player mode and AI modes
 
 ## Project Organization
 Package                               |Subpackage                                           | Description
