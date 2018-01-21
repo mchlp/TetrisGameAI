@@ -7,10 +7,7 @@
 
 package unittests.frontend;
 
-import com.sun.javafx.robot.impl.FXRobotHelper;
-import com.sun.javafx.stage.StageHelper;
 import javafx.scene.input.KeyCode;
-import javafx.stage.Window;
 import org.junit.Test;
 import org.testfx.api.*;
 import org.testfx.util.WaitForAsyncUtils;
@@ -18,7 +15,6 @@ import java.util.concurrent.TimeoutException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.testfx.api.FxAssert.verifyThat;
 
 public class MainMenuTest extends FrontendTestBase {
 

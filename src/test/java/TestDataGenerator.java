@@ -9,7 +9,6 @@ import ai.FastTrainer;
 import ai.Population;
 import backend.GameMode;
 import backend.GameProcessor;
-import frontend.common.StatsBar;
 
 import java.io.File;
 import java.util.Timer;
@@ -47,15 +46,15 @@ public class TestDataGenerator {
 
     private static String getPopulationData(Population population) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("\nTrain Time: " + population.getmTrainTime());
-        stringBuilder.append("\nGeneration: " + population.getmGeneration());
-        stringBuilder.append("\nElite Fitness: " + population.getmEliteFitness());
-        stringBuilder.append("\nTop Fitness: " + population.getmTopFitness());
-        stringBuilder.append("\nTotal Fitness: " + population.getmTotalFitness());
-        stringBuilder.append("\nMin Fitness: " + population.getmMinFitness());
-        stringBuilder.append("\nAverage Fitness: " + population.getmAvgFitness());
-        stringBuilder.append("\nTop 25 Fitness: " + population.getmTop25PerFitness());
-        stringBuilder.append("\nBottom 25 Fitness: " + population.getmBottom25PerFitness());
+        stringBuilder.append("\nTrain Time: ").append(population.getmTrainTime());
+        stringBuilder.append("\nGeneration: ").append(population.getmGeneration());
+        stringBuilder.append("\nElite Fitness: ").append(population.getmEliteFitness());
+        stringBuilder.append("\nTop Fitness: ").append(population.getmTopFitness());
+        stringBuilder.append("\nTotal Fitness: ").append(population.getmTotalFitness());
+        stringBuilder.append("\nMin Fitness: ").append(population.getmMinFitness());
+        stringBuilder.append("\nAverage Fitness: ").append(population.getmAvgFitness());
+        stringBuilder.append("\nTop 25 Fitness: ").append(population.getmTop25PerFitness());
+        stringBuilder.append("\nBottom 25 Fitness: ").append(population.getmBottom25PerFitness());
         return stringBuilder.toString();
     }
 

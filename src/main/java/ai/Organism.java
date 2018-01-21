@@ -92,8 +92,7 @@ public class Organism implements Serializable {
     public static Organism loadOrganismFromFile(File loadFile) throws IOException, ClassNotFoundException {
         FileInputStream fileIn = new FileInputStream(loadFile);
         ObjectInputStream in = new ObjectInputStream(fileIn);
-        Organism loadedOrganism = (Organism) in.readObject();
-        return loadedOrganism;
+        return (Organism) in.readObject();
     }
 
     /**
@@ -160,20 +159,20 @@ public class Organism implements Serializable {
      * @return A string which contains the details of the organism, statistics of the organism, and its genome.
      */
     public String getStatus() {
-        String message = "";
-        message += "ORGANISM NAME\n" + mName + "\n\n";
-        message += "Generation: " + mGeneration + "\n";
-        message += "Max Score: " + mMaxScore + "\n";
-        message += "Max Level: " + mMaxLevel + "\n";
-        message += "Max Lines: " + mMaxLinesCleared + "\n";
-        message += "Fitness: " + calculateFitness() + "\n";
-        message += "Scores: " + mScoreList.toString() + "\n";
-        message += "Total Score: " + getTotalScore() + "\n";
-        message += "\nGenes\n";
+        StringBuilder message = new StringBuilder();
+        message.append("ORGANISM NAME\n").append(mName).append("\n\n");
+        message.append("Generation: ").append(mGeneration).append("\n");
+        message.append("Max Score: ").append(mMaxScore).append("\n");
+        message.append("Max Level: ").append(mMaxLevel).append("\n");
+        message.append("Max Lines: ").append(mMaxLinesCleared).append("\n");
+        message.append("Fitness: ").append(calculateFitness()).append("\n");
+        message.append("Scores: ").append(mScoreList.toString()).append("\n");
+        message.append("Total Score: ").append(getTotalScore()).append("\n");
+        message.append("\nGenes\n");
         for (Genes geneType : Genes.values()) {
-            message += geneType.name() + ": " + mGenome.getGeneValue(geneType) + "\n";
+            message.append(geneType.name()).append(": ").append(mGenome.getGeneValue(geneType)).append("\n");
         }
-        return message;
+        return message.toString();
     }
 
     /**

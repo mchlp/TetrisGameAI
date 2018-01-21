@@ -51,8 +51,8 @@ public class GameArea extends Canvas implements Updatable {
         mHeight = height;
         mWidth = width;
         mBgColour = bgColour;
-        mCellHeight = this.mHeight / mGameProcessor.getNumRows();
-        mCellWidth = this.mWidth / mGameProcessor.getNumCols();
+        mCellHeight = this.mHeight / mGameProcessor.NUM_ROWS;
+        mCellWidth = this.mWidth / mGameProcessor.NUM_COLS;
         mGc = getGraphicsContext2D();
         mShowGridlines = true;
         newGame();
@@ -121,8 +121,8 @@ public class GameArea extends Canvas implements Updatable {
      */
     private void drawCell(int x, int y, Color colour) {
         // checks if the cell should be visible to the player (is it above the top of the grid?)
-        if (y >= mGameProcessor.getExtraRowsAtTop()) {
-            int screenY = y - mGameProcessor.getExtraRowsAtTop();
+        if (y >= mGameProcessor.EXTRA_ROWS_AT_TOP) {
+            int screenY = y - mGameProcessor.EXTRA_ROWS_AT_TOP;
             mGc.setFill(CELL_OUTLINE_COLOUR);
             mGc.fillRoundRect(x * mCellWidth, screenY * mCellHeight, mCellWidth, mCellHeight, 5, 5);
             mGc.setFill(colour);
@@ -176,11 +176,11 @@ public class GameArea extends Canvas implements Updatable {
             mGc.setStroke(LINE_COLOUR);
             mGc.setLineWidth(LINE_WIDTH);
 
-            for (int col = 0; col < mGameProcessor.getNumCols(); col++) {
+            for (int col = 0; col < mGameProcessor.NUM_COLS; col++) {
                 mGc.strokeLine(col * mCellWidth, 0, col * mCellWidth, mHeight);
             }
 
-            for (int row = 0; row < mGameProcessor.getNumRows(); row++) {
+            for (int row = 0; row < mGameProcessor.NUM_ROWS; row++) {
                 mGc.strokeLine(0, row * mCellHeight, mWidth, row * mCellHeight);
             }
         }
@@ -216,7 +216,7 @@ public class GameArea extends Canvas implements Updatable {
      * Calculates the drop speed for the current level. The drop speed is the minimum number of seconds that should pass
      * before the Tetromino is dropped one line.
      *
-     * @return
+     * @return A double representing the drop speed for the current level.
      */
     private double calculateDropSpeed() {
         int dropSpeedLevel = Math.min(mGameProcessor.getmLevel(), MAX_SPEED_LEVEL);

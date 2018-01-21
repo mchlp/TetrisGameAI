@@ -91,12 +91,11 @@ public class SinglePlayerTest extends FrontendTestBase {
     @Test
     public void moveLeft_NoError() {
         int startX = playerGameWindow.getmGameProcessor().getmCurTetromino().getmCurPos().x;
-        int numMove = startX;
-        for (int i = 0; i < numMove + 3; i++) {
+        for (int i = 0; i < startX + 3; i++) {
             push(KeyCode.LEFT);
             WaitForAsyncUtils.waitForFxEvents();
-            if (i >= numMove) {
-                assertThat(playerGameWindow.getmGameProcessor().getmCurTetromino().getmCurPos().x, is(startX - numMove));
+            if (i >= startX) {
+                assertThat(playerGameWindow.getmGameProcessor().getmCurTetromino().getmCurPos().x, is(startX - startX));
             } else {
                 assertThat(playerGameWindow.getmGameProcessor().getmCurTetromino().getmCurPos().x, is(startX - 1 - i));
             }

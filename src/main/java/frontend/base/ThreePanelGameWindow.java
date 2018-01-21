@@ -8,7 +8,6 @@
 package frontend.base;
 
 import backend.GameMode;
-import frontend.common.GameArea;
 import frontend.common.GameController;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;

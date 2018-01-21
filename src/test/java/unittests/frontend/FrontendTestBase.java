@@ -9,10 +9,8 @@ package unittests.frontend;
 
 import com.sun.javafx.robot.impl.FXRobotHelper;
 import frontend.Game;
-import javafx.application.Application;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseButton;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import org.junit.After;
 import org.junit.Before;

@@ -275,18 +275,6 @@ public class GameProcessor {
         return mCurTetromino;
     }
 
-    public int getNumCols() {
-        return NUM_COLS;
-    }
-
-    public int getNumRows() {
-        return NUM_ROWS;
-    }
-
-    public int getExtraRowsAtTop() {
-        return EXTRA_ROWS_AT_TOP;
-    }
-
     public GameState getmGameState() {
         return mGameState;
     }

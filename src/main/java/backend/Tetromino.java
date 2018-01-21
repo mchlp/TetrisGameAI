@@ -167,7 +167,8 @@ public class Tetromino {
      *                otherwise.
      */
     public void drop(boolean tryMove) {
-        while (moveDown(tryMove)) ;
+        // drop down as far as possible
+        while (moveDown(tryMove));
         freeze();
     }
 
