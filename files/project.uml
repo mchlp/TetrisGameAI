@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>ai</OriginalElement>
+  <nodes>
+    <node x="0.0" y="2486.0">frontend.instructions.InstructionsDialog</node>
+    <node x="435.75" y="339.0">ai.Brain</node>
+    <node x="1067.3608870967737" y="135.0">frontend.common.GameArea</node>
+    <node x="928.0" y="2486.0">backend.TetrominoBlueprint</node>
+    <node x="2630.0" y="2486.0">ai.Genome</node>
+    <node x="1906.0" y="2851.0">frontend.instructions.KeyInstructionsBar</node>
+    <node x="3263.60649641577" y="423.0">frontend.common.OrganismStatusBox</node>
+    <node x="1970.0" y="2486.0">backend.ControllerKeys</node>
+    <node x="608.0" y="2486.0">frontend.menu.SelectOrganismDialog</node>
+    <node x="2951.0" y="2486.0">backend.GameState</node>
+    <node x="948.0" y="2851.0">backend.RandomBlueprintGenerator</node>
+    <node x="1822.0" y="1711.0">ai.Organism</node>
+    <node x="3705.6740143369175" y="1501.0">frontend.aitrain.AITrainGameWindow</node>
+    <node x="4421.3108870967735" y="1189.5">frontend.base.TwoPanelGameWindow</node>
+    <node x="715.5" y="1045.0">ai.FastTrainer</node>
+    <node x="0.0" y="1489.0">ai.GUITrainer</node>
+    <node x="3239.0" y="2486.0">ai.Gene</node>
+    <node x="7848.924014336918" y="1178.0">frontend.aiwatch.AIWatchSidebar</node>
+    <node x="3178.6740143369175" y="1501.5">frontend.aiplay.AIPlayGameWindow</node>
+    <node x="2031.6740143369175" y="1117.5">frontend.aifasttrain.AIFastTrainStatsBox</node>
+    <node x="4692.674014336917" y="1513.5">frontend.aiwatch.AIWatchGameWindow</node>
+    <node x="2199.0" y="1711.0">frontend.common.GameGrid</node>
+    <node x="4184.674014336917" y="1525.5">frontend.aifasttrain.AIFastTrainGameWindow</node>
+    <node x="5352.7625" y="471.5">frontend.aifasttrain.PopulationStatusSidebar</node>
+    <node x="2537.0" y="1711.0">frontend.common.SaveOrganismDialog</node>
+    <node x="457.0" y="1711.0">ai.Population</node>
+    <node x="4948.7625" y="411.5">frontend.aifasttrain.PopulationStatusStatsBox</node>
+    <node x="2823.6740143369175" y="1093.5">frontend.aitrain.AITrainStatsBox</node>
+    <node x="4082.1324820788523" y="339.0">frontend.base.GameWindow</node>
+    <node x="3187.6740143369175" y="1165.5">frontend.base.ThreePanelGameWindow</node>
+    <node x="266.5" y="1177.0">ai.GUIBrain</node>
+    <node x="1563.3608870967737" y="459.5">frontend.common.NextTetrominoBox</node>
+    <node x="3291.0" y="1711.0">frontend.menu.Menu</node>
+    <node x="292.0" y="2851.0">frontend.menu.MenuScreen</node>
+    <node x="5572.924014336917" y="1190.0">frontend.aiplay.AIPlaySidebar</node>
+    <node x="6461.924014336917" y="1190.0">frontend.player.PlayerSidebar</node>
+    <node x="294.0" y="2486.0">ai.Genes</node>
+    <node x="2590.0" y="2851.0">ai.OrganismComparator</node>
+    <node x="1166.6740143369175" y="1117.5">frontend.common.DoubleStatsBox</node>
+    <node x="1679.0" y="2486.0">backend.GameMode</node>
+    <node x="2255.0" y="2851.0">frontend.common.GameController</node>
+    <node x="3370.9865143369175" y="0.0">backend.Updatable</node>
+    <node x="6601.924014336917" y="471.5">frontend.base.Sidebar</node>
+    <node x="4950.924014336917" y="1153.5">frontend.aitrain.AITrainSidebar</node>
+    <node x="883.0" y="1711.0">backend.Tetromino</node>
+    <node x="5235.674014336917" y="1537.5">frontend.player.PlayerGameWindow</node>
+    <node x="1364.0" y="2851.0">frontend.common.KeyboardControllerHandler</node>
+    <node x="481.0" y="1550.0">ai.Watcher</node>
+    <node x="7156.924014336917" y="1177.5">frontend.aifasttrain.AIFastTrainSidebar</node>
+    <node x="2191.0" y="2486.0">frontend.common.BasicStatsBox</node>
+    <node x="1712.6740143369175" y="1153.5">frontend.player.PlayerStatsBox</node>
+    <node x="3523.0" y="2486.0">frontend.common.Cell</node>
+    <node x="2923.0" y="1711.0">frontend.menu.SelectPopulationDialog</node>
+    <node x="565.0" y="2851.0">backend.Utilities</node>
+    <node x="1333.0" y="1711.0">frontend.Game</node>
+    <node x="0.0" y="1711.0">backend.GameProcessor</node>
+    <node x="0.0" y="2851.0">frontend.menu.MenuItem</node>
+    <node x="2465.6740143369175" y="1129.5">frontend.aiwatch.AIWatchStatsBox</node>
+    <node x="1275.0" y="2486.0">frontend.common.StatsBar</node>
+    <node x="2037.444982078852" y="459.5">frontend.base.StatsBox</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="frontend.aifasttrain.AIFastTrainGameWindow" target="frontend.base.TwoPanelGameWindow">
+      <point x="0.0" y="-52.0" />
+      <point x="4428.674014336917" y="1469.0" />
+      <point x="4600.9358870967735" y="1469.0" />
+      <point x="-59.875" y="52.5" />
+    </edge>
+    <edge source="frontend.aitrain.AITrainStatsBox" target="frontend.base.StatsBox">
+      <point x="0.0" y="-148.5" />
+      <point x="2995.6740143369175" y="1005.0" />
+      <point x="2266.0449820788526" y="1005.0" />
+      <point x="101.60000000000036" y="100.5" />
+    </edge>
+    <edge source="frontend.base.StatsBox" target="backend.Updatable">
+      <point x="0.0" y="-100.5" />
+      <point x="2164.4449820788523" y="105.0" />
+      <point x="3452.264292114695" y="105.0" />
+      <point x="-23.222222222222626" y="27.5" />
+    </edge>
+    <edge source="frontend.base.TwoPanelGameWindow" target="frontend.base.GameWindow">
+      <point x="0.0" y="-52.5" />
+      <point x="4660.8108870967735" y="1025.0" />
+      <point x="4391.132482078852" y="1025.0" />
+      <point x="103.0" y="221.0" />
+    </edge>
+    <edge source="frontend.common.DoubleStatsBox" target="frontend.base.StatsBox">
+      <point x="0.0" y="-124.5" />
+      <point x="1429.6740143369175" y="1015.0" />
+      <point x="2062.844982078852" y="1015.0" />
+      <point x="-101.60000000000036" y="100.5" />
+    </edge>
+    <edge source="frontend.aifasttrain.PopulationStatusSidebar" target="backend.Updatable">
+      <point x="0.0" y="-88.5" />
+      <point x="5642.7625" y="95.0" />
+      <point x="3545.1531810035845" y="95.0" />
+      <point x="69.66666666666697" y="27.5" />
+    </edge>
+    <edge source="frontend.aiplay.AIPlayGameWindow" target="frontend.base.ThreePanelGameWindow">
+      <point x="0.0" y="-76.0" />
+      <point x="0.0" y="76.5" />
+    </edge>
+    <edge source="frontend.aiwatch.AIWatchStatsBox" target="frontend.base.StatsBox">
+      <point x="0.0" y="-112.5" />
+      <point x="2634.6740143369175" y="1015.0" />
+      <point x="2215.2449820788524" y="1015.0" />
+      <point x="50.80000000000018" y="100.5" />
+    </edge>
+    <edge source="frontend.aiplay.AIPlaySidebar" target="frontend.base.Sidebar">
+      <point x="0.0" y="-52.0" />
+      <point x="6007.424014336917" y="1025.0" />
+      <point x="6720.424014336917" y="1025.0" />
+      <point x="-79.0" y="88.5" />
+    </edge>
+    <edge source="ai.Watcher" target="ai.GUIBrain">
+      <point x="0.0" y="-27.5" />
+      <point x="731.5" y="1469.0" />
+      <point x="588.25" y="1469.0" />
+      <point x="107.25" y="65.0" />
+    </edge>
+    <edge source="ai.GUITrainer" target="ai.GUIBrain">
+      <point x="0.0" y="-88.5" />
+      <point x="230.5" y="1469.0" />
+      <point x="373.75" y="1469.0" />
+      <point x="-107.25" y="65.0" />
+    </edge>
+    <edge source="frontend.common.OrganismStatusBox" target="backend.Updatable">
+      <point x="0.0" y="-137.0" />
+      <point x="3432.60649641577" y="115.0" />
+      <point x="3475.4865143369175" y="115.0" />
+      <point x="0.0" y="27.5" />
+    </edge>
+    <edge source="frontend.base.Sidebar" target="backend.Updatable">
+      <point x="0.0" y="-88.5" />
+      <point x="6799.424014336917" y="85.0" />
+      <point x="3568.375403225806" y="85.0" />
+      <point x="92.88888888888869" y="27.5" />
+    </edge>
+    <edge source="frontend.aifasttrain.PopulationStatusStatsBox" target="backend.Updatable">
+      <point x="0.0" y="-148.5" />
+      <point x="5140.7625" y="105.0" />
+      <point x="3521.930958781362" y="105.0" />
+      <point x="46.44444444444434" y="27.5" />
+    </edge>
+    <edge source="frontend.aitrain.AITrainSidebar" target="frontend.base.Sidebar">
+      <point x="0.0" y="-88.5" />
+      <point x="5251.924014336917" y="1015.0" />
+      <point x="6641.424014336917" y="1015.0" />
+      <point x="-158.0" y="88.5" />
+    </edge>
+    <edge source="frontend.aitrain.AITrainGameWindow" target="frontend.base.TwoPanelGameWindow">
+      <point x="0.0" y="-76.5" />
+      <point x="3935.1740143369175" y="1459.0" />
+      <point x="4481.1858870967735" y="1459.0" />
+      <point x="-179.625" y="52.5" />
+    </edge>
+    <edge source="frontend.player.PlayerStatsBox" target="frontend.base.StatsBox">
+      <point x="0.0" y="-88.5" />
+      <point x="1862.1740143369175" y="1025.0" />
+      <point x="2113.644982078852" y="1025.0" />
+      <point x="-50.80000000000018" y="100.5" />
+    </edge>
+    <edge source="frontend.aifasttrain.AIFastTrainSidebar" target="frontend.base.Sidebar">
+      <point x="0.0" y="-64.5" />
+      <point x="7492.924014336917" y="1025.0" />
+      <point x="6878.424014336917" y="1025.0" />
+      <point x="79.0" y="88.5" />
+    </edge>
+    <edge source="frontend.player.PlayerGameWindow" target="frontend.base.TwoPanelGameWindow">
+      <point x="0.0" y="-40.0" />
+      <point x="5420.174014336917" y="1459.0" />
+      <point x="4840.4358870967735" y="1459.0" />
+      <point x="179.625" y="52.5" />
+    </edge>
+    <edge source="frontend.base.GameWindow" target="backend.Updatable">
+      <point x="0.0" y="-221.0" />
+      <point x="4288.132482078852" y="115.0" />
+      <point x="3498.70873655914" y="115.0" />
+      <point x="23.222222222222626" y="27.5" />
+    </edge>
+    <edge source="frontend.common.NextTetrominoBox" target="backend.Updatable">
+      <point x="0.0" y="-100.5" />
+      <point x="1777.8608870967737" y="95.0" />
+      <point x="3429.042069892473" y="95.0" />
+      <point x="-46.44444444444434" y="27.5" />
+    </edge>
+    <edge source="frontend.player.PlayerSidebar" target="frontend.base.Sidebar">
+      <point x="0.0" y="-52.0" />
+      <point x="0.0" y="88.5" />
+    </edge>
+    <edge source="ai.Brain" target="backend.Updatable">
+      <point x="0.0" y="-221.0" />
+      <point x="685.75" y="75.0" />
+      <point x="3382.597625448029" y="75.0" />
+      <point x="-92.88888888888869" y="27.5" />
+    </edge>
+    <edge source="frontend.common.GameArea" target="backend.Updatable">
+      <point x="0.0" y="-425.0" />
+      <point x="1305.3608870967737" y="85.0" />
+      <point x="3405.8198476702505" y="85.0" />
+      <point x="-69.66666666666697" y="27.5" />
+    </edge>
+    <edge source="frontend.aifasttrain.AIFastTrainStatsBox" target="frontend.base.StatsBox">
+      <point x="0.0" y="-124.5" />
+      <point x="2238.6740143369175" y="1025.0" />
+      <point x="2164.4449820788523" y="1025.0" />
+      <point x="0.0" y="100.5" />
+    </edge>
+    <edge source="frontend.aiwatch.AIWatchGameWindow" target="frontend.base.TwoPanelGameWindow">
+      <point x="0.0" y="-64.0" />
+      <point x="4954.174014336917" y="1469.0" />
+      <point x="4720.6858870967735" y="1469.0" />
+      <point x="59.875" y="52.5" />
+    </edge>
+    <edge source="ai.GUIBrain" target="ai.Brain">
+      <point x="0.0" y="-65.0" />
+      <point x="481.0" y="1025.0" />
+      <point x="560.75" y="1025.0" />
+      <point x="-125.0" y="221.0" />
+    </edge>
+    <edge source="frontend.base.ThreePanelGameWindow" target="frontend.base.GameWindow">
+      <point x="0.0" y="-76.5" />
+      <point x="3432.1740143369175" y="1025.0" />
+      <point x="4185.132482078852" y="1025.0" />
+      <point x="-103.0" y="221.0" />
+    </edge>
+    <edge source="frontend.aiwatch.AIWatchSidebar" target="frontend.base.Sidebar">
+      <point x="0.0" y="-64.0" />
+      <point x="8146.924014336918" y="1015.0" />
+      <point x="6957.424014336917" y="1015.0" />
+      <point x="158.0" y="88.5" />
+    </edge>
+    <edge source="ai.FastTrainer" target="ai.Brain">
+      <point x="0.0" y="-197.0" />
+      <point x="890.5" y="1025.0" />
+      <point x="810.75" y="1025.0" />
+      <point x="125.0" y="221.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.18606024808033078" x="4222.5" y="1514.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
