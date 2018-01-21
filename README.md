@@ -32,6 +32,6 @@ Package                               |Subpackage                               
 - Various indicators on the side that show the score, level, lines cleared, etc.
 - Two AI training modes: GUI training mode which shows the training game play and fast training mode which only shows the statistics 
 - Includes an AI watch mode where one AI can be loaded to play multiple games
-- AI is trained using a genetic algorithm, genes can be found in the [Genes](/main/ai/Genes.java) class
+- AI is trained using a genetic algorithm, genes can be found in the [Genes](src/main/java/ai/Genes.java) class
 - Window resizes automatically according to the size of the screen (80% of the height or width of the screen, depending on which is smaller)
-- Trained [population](testPop.pop.ser) and [organism](alpha.org.ser) files are included.
+- Trained [population](files/testPop.pop.ser) and [organism](files/alpha.org.ser) files are included.
