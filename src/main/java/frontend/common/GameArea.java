@@ -2,7 +2,7 @@
  * Michael Pu
  * TetrisGameAI - GameArea
  * ICS3U1 - Mr.Radulovic
- * January 13, 2018
+ * January 20, 2018
  */
 
 package frontend.common;
@@ -51,8 +51,8 @@ public class GameArea extends Canvas implements Updatable {
         mHeight = height;
         mWidth = width;
         mBgColour = bgColour;
-        mCellHeight = this.mHeight / mGameProcessor.NUM_ROWS;
-        mCellWidth = this.mWidth / mGameProcessor.NUM_COLS;
+        mCellHeight = this.mHeight / GameProcessor.NUM_ROWS;
+        mCellWidth = this.mWidth / GameProcessor.NUM_COLS;
         mGc = getGraphicsContext2D();
         mShowGridlines = true;
         newGame();
@@ -121,8 +121,8 @@ public class GameArea extends Canvas implements Updatable {
      */
     private void drawCell(int x, int y, Color colour) {
         // checks if the cell should be visible to the player (is it above the top of the grid?)
-        if (y >= mGameProcessor.EXTRA_ROWS_AT_TOP) {
-            int screenY = y - mGameProcessor.EXTRA_ROWS_AT_TOP;
+        if (y >= GameProcessor.EXTRA_ROWS_AT_TOP) {
+            int screenY = y - GameProcessor.EXTRA_ROWS_AT_TOP;
             mGc.setFill(CELL_OUTLINE_COLOUR);
             mGc.fillRoundRect(x * mCellWidth, screenY * mCellHeight, mCellWidth, mCellHeight, 5, 5);
             mGc.setFill(colour);
@@ -176,11 +176,11 @@ public class GameArea extends Canvas implements Updatable {
             mGc.setStroke(LINE_COLOUR);
             mGc.setLineWidth(LINE_WIDTH);
 
-            for (int col = 0; col < mGameProcessor.NUM_COLS; col++) {
+            for (int col = 0; col < GameProcessor.NUM_COLS; col++) {
                 mGc.strokeLine(col * mCellWidth, 0, col * mCellWidth, mHeight);
             }
 
-            for (int row = 0; row < mGameProcessor.NUM_ROWS; row++) {
+            for (int row = 0; row < GameProcessor.NUM_ROWS; row++) {
                 mGc.strokeLine(0, row * mCellHeight, mWidth, row * mCellHeight);
             }
         }
