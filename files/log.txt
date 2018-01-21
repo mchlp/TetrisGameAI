@@ -1,3 +1,27 @@
+commit 1d630891f925aeb9073b6f8740b72a21debecf57
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Jan 21 11:25:46 2018 -0500
+
+    added uml
+
+commit 3e0b3e38480921ddfa00c596d8e01150af6eb07b
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Jan 21 10:45:50 2018 -0500
+
+    updated explaination files
+
+commit 3c4b380ecf22582aeea1b93dc26e2aca5268376a
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 23:47:47 2018 -0500
+
+    updated manual
+
+commit 7220c4e30b3f5da9bfe1509cedfc992a4756b1f4
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 23:44:08 2018 -0500
+
+    added log from git log
+
 commit 582477dd2b1122d1ba2f76ffa386019fafa81e18
 Author: Michael Pu <michael.pu123@gmail.com>
 Date:   Sat Jan 20 23:43:41 2018 -0500
