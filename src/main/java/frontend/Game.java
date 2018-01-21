@@ -74,6 +74,7 @@ public class Game extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         this.primaryStage = primaryStage;
+        // set icon for application
         primaryStage.getIcons().add(Utilities.getImage(ICON_IMAGE));
         showMenu();
     }
@@ -177,6 +178,7 @@ public class Game extends Application {
                 startAIPlay(loadedOrganism, height, width, fastMode);
         }
 
+        // set up window
         updateItems.add(gameWindow);
         primaryStage.setScene(scene);
         primaryStage.setTitle(gameWindow.getmWindowTitle());
@@ -203,13 +205,6 @@ public class Game extends Application {
         gameTimer.start();
     }
 
-    /**
-     * Starts a game in AI Fast Train mode.
-     *
-     * @param population The {@link Population} to train.
-     * @param height     The height of the window.
-     * @param width      The width of the window.
-     */
     private void startAIFastTrain(Population population, double height, double width) {
         gameWindow = new AIFastTrainGameWindow(population, primaryStage, height, width);
         scene = new Scene(gameWindow);
@@ -234,7 +229,6 @@ public class Game extends Application {
         KeyboardControllerHandler keyboardControllerHandler = new KeyboardControllerHandler(playerGameController, aiGameController);
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyboardControllerHandler);
     }
-
 
     private void startPlayerGame(double height, double width) {
 
