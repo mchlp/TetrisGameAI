@@ -34,5 +34,4 @@ Package                               |Subpackage                               
 - Includes an AI watch mode where one AI can be loaded to play multiple games
 - AI is trained using a genetic algorithm, genes can be found in the [Genes](/main/ai/Genes.java) class
 - Window resizes automatically according to the size of the screen (80% of the height or width of the screen, depending on which is smaller)
-- The size of the window changes automatically depending on the dimensions of the map and the size of the window
 - Trained [population](testPop.pop.ser) and [organism](alpha.org.ser) files are included.

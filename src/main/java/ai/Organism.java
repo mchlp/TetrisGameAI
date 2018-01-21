@@ -104,8 +104,9 @@ public class Organism implements Serializable {
 	public static Organism loadOrganismFromFile(File loadFile) throws IOException, ClassNotFoundException {
 		FileInputStream fileIn = new FileInputStream(loadFile);
 		ObjectInputStream in = new ObjectInputStream(fileIn);
+		Organism loadedOrganism = (Organism) in.readObject();
 		in.close();
-		return (Organism) in.readObject();
+        return loadedOrganism;
 	}
 
 	/**
