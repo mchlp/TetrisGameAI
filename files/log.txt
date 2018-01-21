@@ -1,3 +1,21 @@
+commit 24e3749bae144cc35c217797f16721d76b63957d
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Jan 21 12:28:12 2018 -0500
+
+    updated manual
+
+commit e3323b994d360c513d2d1b0698aa5fb966af7656
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Jan 21 11:33:38 2018 -0500
+
+    updated manual
+
+commit 15ccae3e245cc8381b3f6bc27948d832f9f215f8
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Jan 21 11:33:03 2018 -0500
+
+    updated manual and log
+
 commit 1d630891f925aeb9073b6f8740b72a21debecf57
 Author: Michael Pu <michael.pu123@gmail.com>
 Date:   Sun Jan 21 11:25:46 2018 -0500
