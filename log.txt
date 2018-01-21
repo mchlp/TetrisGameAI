@@ -1,0 +1,735 @@
+commit 582477dd2b1122d1ba2f76ffa386019fafa81e18
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 23:43:41 2018 -0500
+
+    trained ai further, added manual
+
+commit 38420e30be818a82419b2749a4e7e1e322350339
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 23:15:43 2018 -0500
+
+    updated readme
+
+commit 730e263c773a530684bef66b97c507d5ec939408
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 20:27:17 2018 -0500
+
+    update readme
+
+commit 2f09512ae404fb47006c74b68fc0b2840931c9f3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 20:25:19 2018 -0500
+
+    clean up code and fix warnings
+
+commit bbfe47668078f2e4736dea800e6dd512d12271be
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 20:09:01 2018 -0500
+
+    updated header and commetn shell
+
+commit 931c37100cbd4c465aba5bacd86af89406e1ce7f
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 20:07:20 2018 -0500
+
+    optimize code
+
+commit 63ef9a8cdd22d6742df40fb3ce9ee9318b7e1dbe
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 19:51:05 2018 -0500
+
+    added more comments
+
+commit b5ee8269e1b7e6704f83f619bc809a0a41e2fbb8
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 18:55:48 2018 -0500
+
+    added ai files
+
+commit 915a6b090f3fffc18528272c8214b45aadd49585
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 18:02:36 2018 -0500
+
+    added pdf readme
+
+commit 4bcb2397b550f8b7d8f957216afb935d98aa363f
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 17:59:41 2018 -0500
+
+    update readme
+
+commit 4035a19e652b64f2ad2f2c3f02785cba122514d4
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 17:59:08 2018 -0500
+
+    updated readme
+
+commit 91f18a802e4a0a49820b388750573cf0b4a07379
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 17:53:47 2018 -0500
+
+    finished comments
+
+commit 76be1ef74e2e68ed7753668d881f809b6d7d03e6
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 17:39:27 2018 -0500
+
+    added comments for ai fast train mode
+
+commit 6670803aca9675f867038bdccd743c65706e0ed4
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 17:25:25 2018 -0500
+
+    completed comments for common and player packages
+
+commit 68e8c67a26006a9b2e1098674586a883622d3112
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Jan 20 16:03:25 2018 -0500
+
+    updated comments
+
+commit 2c5e62fc3f89e1f9044328aa8825ecab0fcd2e9c
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Fri Jan 19 20:30:15 2018 -0500
+
+    added comments
+
+commit fa78b0a07be020bade2d309f1cc5f82554f3b39a
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Jan 18 23:25:50 2018 -0500
+
+    added comments and updated comment shell
+
+commit cd1c9bdea8fc01455a5fa160b198bc4f166fdea5
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Jan 18 20:40:09 2018 -0500
+
+    added icon
+
+commit c688de7beb5b5bf87642a786def44bc18741549c
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Jan 18 19:47:03 2018 -0500
+
+    added comments and instructions
+
+commit eef9bad454a774ba0f2276d8a56c425454756196
+Merge: 5f699d7 74afe01
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 15 12:54:19 2018 -0500
+
+    Merge branch 'master' of github.com:mchlp/TetrisGameAI
+
+commit 5f699d72c657e829c9ed82ae965cb1b86cb039af
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 15 12:53:53 2018 -0500
+
+    test
+
+commit 74afe01d038bc3b62317771daf3736d0354cf829
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Jan 14 12:07:33 2018 -0500
+
+    changed fitness to median of scores
+
+commit 2abb3bc599fab95dd2647126d8a2f1b249758eb4
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Jan 10 14:47:45 2018 -0500
+
+    updated stuff
+
+commit 558295bfe94e97f14e39943d8cf52c836eef1e63
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Jan 3 22:12:43 2018 -0500
+
+    added single player tests
+
+commit 6dbbd43302731d488120018694391c25ef333a3b
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Jan 3 19:27:26 2018 -0500
+
+    added tests for single player mode
+
+commit a7213ed5235c5f318bbbd2349edcf6602145bbc0
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Jan 3 16:37:42 2018 -0500
+
+    added unit tests for main menu and player mode
+
+commit 5d7532df451598e75de2d4bf246fbc216b0b9897
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Jan 3 12:19:28 2018 -0500
+
+    added testfx test case, organized tests
+
+commit 2a8b449c4f606d8ade3f04d34c78e600b54c1130
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 22:53:39 2018 -0500
+
+    added testfx libraries
+
+commit 45766f34662d46a587c6fab371c08726d3b2dfa0
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 21:30:54 2018 -0500
+
+    add organism tests
+
+commit 230a636a2f3c3780b5e77bcfd15015c580b24b49
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 21:15:08 2018 -0500
+
+    updated test data
+
+commit ed2a64127a4dc1c903da1275791e24d68294bb3f
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 20:46:44 2018 -0500
+
+    update library files, use assertThat
+
+commit a1b7ebf9981fb589bc2107478e122b5f73fbefa3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 19:15:49 2018 -0500
+
+    added try to write to readonly file test
+
+commit db7152038c7817349e853bf09264624159e2aa2f
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 18:03:01 2018 -0500
+
+    added lib files
+
+commit aa4918c069b89279897bf9ba0dd229d243f65007
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 17:54:19 2018 -0500
+
+    update gitignore
+
+commit d5b39ca46a649bf4d138f8a20c66f3efdacc97a6
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 17:51:17 2018 -0500
+
+    add test files
+
+commit 3a5e5b185e919d158ae5482923e4e8367a76b2f9
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 15:38:05 2018 -0500
+
+    added test data generator and added more unit tests
+
+commit 626954986a7beb9a9708957630f1e8ce3269b437
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 13:06:10 2018 -0500
+
+    update readme links
+
+commit 00b3446c75002941123bfcf5bc253d5fb9ef9968
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 13:02:01 2018 -0500
+
+    switch to maven project structure
+
+commit d3ed74eb966fbb2ed120d9e41ae517835a99bade
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Jan 2 12:02:56 2018 -0500
+
+    added tests
+
+commit fa12f14e87afe381afe0226cfdc63ba27daf90fc
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 1 23:36:42 2018 -0500
+
+    added tests
+
+commit a4c21d84e713c77dde5de8d44102076f7f1c1751
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 1 22:54:00 2018 -0500
+
+    updated readme and rearranged packages
+
+commit fa9854eb7a6199c04ff620267306af7a75298143
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 1 22:37:46 2018 -0500
+
+    finished comments for backend package
+
+commit 8992373da2fd37e796918dc0b685a1c3084944d0
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 1 20:14:29 2018 -0500
+
+    finished comments for ai package
+
+commit 2a074912ceb720b68ba8847ef19a1bf90c31cdeb
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 1 14:05:11 2018 -0500
+
+    update header
+
+commit 06b00042290fe8ba33d8ffa0509f82ffccd0bf21
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Jan 1 14:03:00 2018 -0500
+
+    added comments
+
+commit 0422cd369d09ef1f5fc782852b7da249222e8bb3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 31 20:44:06 2017 -0500
+
+    added comments
+
+commit 6a9cdd5892332345df226819ea0c51825d060b64
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 31 18:13:18 2017 -0500
+
+    added comments
+
+commit a083693e18c42a46a6b7c288844dbe6986fe05ab
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 30 23:52:39 2017 -0500
+
+    made background music quieter
+
+commit a5a9244dd6dc50f8aef9ffb3d744bf7dc5f2f2ab
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 30 23:49:24 2017 -0500
+
+    Update README.md
+
+commit 08e4c471b4ddbffac40ee4f6ae7143e5716b9378
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 30 20:18:52 2017 -0500
+
+    added comments and renamed some classes
+
+commit bfb7a664ebaeba71d964c1d9b5388c17523bcc8b
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 30 18:30:29 2017 -0500
+
+    added background music controls
+
+commit 889c805e301cd60ec7b62aae6ea7088f726cde68
+Merge: 8e7d5f2 c340070
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 30 18:19:14 2017 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 8e7d5f281d4b924d288d9635557341f81a3583ca
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 30 18:15:51 2017 -0500
+
+    finished responsive ui design
+
+commit c340070934b3d991933450c161ecb6ded9148f3b
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 30 18:15:51 2017 -0500
+
+    finished responsive ui design
+
+commit e96ec47b4e9c8cb1831af11e3a4a911fb90daa72
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Fri Dec 29 22:22:46 2017 -0500
+
+    updated names and formatting
+
+commit 72ad311f8fbdae8a9b5cbace279c453a07a8d2b5
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Fri Dec 29 17:41:15 2017 -0500
+
+    updated play against ai mode stats box label text
+
+commit bf0e9632583626b2e08921064c0983470bb1f81b
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Fri Dec 29 17:38:04 2017 -0500
+
+    finished play against ai mode
+
+commit 7208b5c01dd8572f072e939944df6d5f77b64be7
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Fri Dec 29 13:17:27 2017 -0500
+
+    improved file select dialog layout and function
+
+commit 07a5edfd35bbc765f1b6a9e9b6150821432a27c3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 23:14:11 2017 -0500
+
+    added population select screen
+
+commit daaf0081d594c98b4e2384ee159291ebdfd1ce2d
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 22:04:39 2017 -0500
+
+    added select organism and save organism dialog
+
+commit 6445a3145d7f9b2b55637d3f79e7d4df0ba540b2
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 20:05:30 2017 -0500
+
+    update header
+
+commit 90b1ecc7056bb38012ccdf71105f8f397237c5de
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 19:55:53 2017 -0500
+
+    update
+
+commit 5719e89094b70902d7dde7d884e96f9dce47782f
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 19:24:02 2017 -0500
+
+    remove artificats
+
+commit 94b06c35f3bcc6b32e083faf4d1740303ea84f4d
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 18:36:14 2017 -0500
+
+    add organism select dialog to menu screen
+
+commit ed75dfc6b3db98fb89ed30f6f75ec47d6630f786
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 15:25:17 2017 -0500
+
+    added menu screen
+
+commit 29e139447baa9dbeb4808a22671abeb97fdac829
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 11:41:33 2017 -0500
+
+    stop background music when game over
+
+commit 172aa78a82916a9b1fd0673cd80641810e0b0b82
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Thu Dec 28 11:39:54 2017 -0500
+
+    added background music
+
+commit 96e6d39fd82aa6c1ea8722e4b783b3ce817c3897
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 22:04:37 2017 -0500
+
+    added pause button to fast train
+
+commit 016f8c772f7ad830576a0e5ddfbc17528d1e3082
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 13:33:25 2017 -0500
+
+    fixed links in readme
+
+commit d8dc2fa177d88897f428c8e88062fdf8bc08c5bd
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 13:32:33 2017 -0500
+
+    complete readme
+
+commit b46ca11fa214b22e874ade12c177b7a5a46f087a
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 13:31:37 2017 -0500
+
+    update readme
+
+commit 94d31b60edc7241f05e085e8f441b124ec6ea1b0
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 13:29:52 2017 -0500
+
+    update readme
+
+commit 7e6e6350ad8cc84b1126074e6f75d4f16c2c82a7
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 13:22:04 2017 -0500
+
+    updated readme
+
+commit 4eaee5227e2abb856fc4d9acf6828147a5a83c90
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 13:13:25 2017 -0500
+
+    Create README.md
+
+commit a58ba662058253066167250fdc60c167780236ed
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 12:32:51 2017 -0500
+
+    change to player mode
+
+commit 6ae11ad6274ba64e21fe5e73bda10d65a73519ef
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Wed Dec 27 12:18:47 2017 -0500
+
+    code cleanup and changed  next blueprint algorithm to bag (permuation of 7 blocks) and improved ai debugging layout
+
+commit 4a9bf8c4b00fe19c83db26764957ab960ba394b2
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 23:34:58 2017 -0500
+
+    added population and organisms
+
+commit 5767d8c4aa47068c429d15cffe9f511287d3390e
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 23:26:50 2017 -0500
+
+    update header and added blocks touching side gene
+
+commit 60212478fcda8d35238396694ed5dcf9947c6a3e
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 22:14:28 2017 -0500
+
+    improve ai debug display
+
+commit ee363e230204c0d2de4a9892a94227cbc4d02a39
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 22:11:32 2017 -0500
+
+    fitness now calculs now calculated over five games
+
+commit 49d1bc3e0e933322feb12a551864054b5627da1c
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 21:13:44 2017 -0500
+
+    updated ai values
+
+commit 15a217f8a577d1267e238e306874dc868c961aeb
+Merge: 6206b54 7ad218c
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 20:37:58 2017 -0500
+
+    Merge branch 'master' of github.com:mchlp/TetrisGameAI
+
+commit 6206b54f927dc76fe179a99dbb0cc5b429cfbfe3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 20:37:56 2017 -0500
+
+    merge with remote
+
+commit 7ad218cde6bc597e8c002f947baff6557fffc488
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 20:05:35 2017 -0500
+
+    update ai values
+
+commit 872458a5891aea9d12c5ae323a2097032a149b7d
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 19:12:44 2017 -0500
+
+    change ai gene parameters
+
+commit 4b55463e0c7047e3db7d8ad9d848afbfca1253ff
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 17:41:20 2017 -0500
+
+    improved selection algorithm
+
+commit 0edd2e19c796211c7a13d064967b1e0c5c85cac3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 17:25:02 2017 -0500
+
+    added more info fields to fast ai training mode
+
+commit 8c57e5b8f63310887472953b178273c7ef163710
+Merge: 3b68b02 c0451f5
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 15:27:08 2017 -0500
+
+    Merge branch 'master' of github.com:mchlp/TetrisGameAI
+
+commit 3b68b028fe1570fb6471ae432780b160fff71de3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 15:26:31 2017 -0500
+
+    completed fast ai training and fixed selectAndKill sort algorithm
+
+commit c0451f544ca31f3e48b4432d09b78a9a4bac58f3
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 15:26:31 2017 -0500
+
+    completed fast ai training
+
+commit 666b408b23d8f3c94ed78bc13de04b2d489efee9
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Tue Dec 26 12:41:53 2017 -0500
+
+    detach processing game logic from game gui
+
+commit c5cca057aaec21afaf27206015cf324a25c33051
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 22:38:54 2017 -0500
+
+    added ai watch mode
+
+commit 16069356be3d42d59c2a02843321e53fe20a16da
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 21:34:58 2017 -0500
+
+    added genes
+
+commit 78606b9ea27987b87eaf7a441e8725ad440f2279
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 20:31:55 2017 -0500
+
+    improved ai inital values
+
+commit 54454ae01c839f9ab244f4004f092d54fdb6f482
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 20:18:24 2017 -0500
+
+    added ai debugging messages
+
+commit 09482bcc90ce2231f611697ce666918fc04f1a59
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 19:53:59 2017 -0500
+
+    fixed file error from saving populatoin
+
+commit 21609264f21dcca962ad5d5cf4fb9eb7d33a712d
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 19:51:53 2017 -0500
+
+    finished ai testing
+
+commit 628e3af2cb696945560ea10297a38bbcf75b9910
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 18:07:39 2017 -0500
+
+    added printing genes and fitness to organisms
+
+commit e07ada3d5f25ad959680084d9779177958f05a4d
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 18:02:29 2017 -0500
+
+    added basic population breeding
+
+commit 60bda6dabf58e3d25be9bb70781b34497b368c06
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 17:54:34 2017 -0500
+
+    added ai decision making
+
+commit f77391b9beaa6e870a3d3ab5f5d22b8dbf7d455e
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 17:38:53 2017 -0500
+
+    added checking all possible moves for ai
+
+commit 5d2df51236a39f13ee21591eb1fe00502390c1a1
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 17:28:54 2017 -0500
+
+    moved GameGrid to separate class
+
+commit cb2df0ce64b2675e62add2cc4c3fbe12d5b9a9cf
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 15:48:21 2017 -0500
+
+    added gene checking functions
+
+commit cbbd65f100fa76c3f242f6f2281ddae282d7d7bc
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 15:05:26 2017 -0500
+
+    improved ai trainer gui layout
+
+commit fb7465d4167b50386cd7771379cb336723c0f59e
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 14:01:24 2017 -0500
+
+    restrict access to gameArea to only through gameController and add basic AI trainer
+
+commit ecf5709984b5cdade6b03cecd72ffbca689a4aab
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 13:02:30 2017 -0500
+
+    separated game start into player and ai mode
+
+commit 62291c057736ae42c76c353b076b5aa44d18037c
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 12:54:46 2017 -0500
+
+    added ai components and save ai to file functionality
+
+commit 45e9a271fab93cc251ee60236259e262d73eed76
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Mon Dec 25 00:13:39 2017 -0500
+
+    added base sidebar abstract class to implement ai sidebar later
+
+commit 141cb962d4c3ca7c560d02705984926f43623e52
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 24 23:07:57 2017 -0500
+
+    added shortcuts
+
+commit 4af1dc050b1146ebd8976f6b01cbb2b44851ea04
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 24 22:48:27 2017 -0500
+
+    added toggle pause and toggle gridlines
+
+commit 2408d10da8e02f0aa98ea451af120de9df21c521
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 24 21:01:17 2017 -0500
+
+    improved next tetromino box
+
+commit cce6162a8bafd145b04b3d55c8cfaa095af61a69
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 24 15:26:57 2017 -0500
+
+    added next piece viewport
+
+commit 45e535bbcee7acd0ebafcbc4f3708483652568d0
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 24 14:27:51 2017 -0500
+
+    added jar manifest
+
+commit d22eb218bc3854d169e395fbda0f6ae10f88ee10
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 24 13:41:41 2017 -0500
+
+    implemented statsbox, restart button, score and level calculations:
+
+commit cee2140ff2fcf535dc4a8795ff9571f9fc4da374
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sun Dec 24 10:30:03 2017 -0500
+
+    correct spelling error
+
+commit b9e7dfcf0f0138c20c96d7ca82d6f3ca060487fd
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 23 23:40:54 2017 -0500
+
+    added row clearing and checking for game over
+
+commit e064671304c8d7f0629f92c31c306b1937b976c6
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 23 22:07:31 2017 -0500
+
+    added controls for moving blocks and collision checking
+
+commit 3db090ccdcae3a4df092e7b8cb9ea33a824c0e4d
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 23 20:52:25 2017 -0500
+
+    added tetromino update
+
+commit 612c1c387dcff98e80a78f4aa542d4b568dbc169
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 23 20:08:15 2017 -0500
+
+    added tetromino spawning
+
+commit 7381294e5dc6febd5d1ee42b4f5edd277651bbec
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 23 19:34:28 2017 -0500
+
+    improved gui and started on implementing grid
+
+commit b7e49b1acb144b958b750a91a915a6e698691ebf
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 23 16:22:44 2017 -0500
+
+    added basic gui layout and key detection
+
+commit 59c3a1d556c1685729692ff0334511d2200a56c7
+Author: Michael Pu <michael.pu123@gmail.com>
+Date:   Sat Dec 23 12:05:21 2017 -0500
+
+    update project
