@@ -1,7 +1,7 @@
 # TetrisGameAI
 **Culminating Project for ICS3U1<br>**
 _Michael Pu - January 2018<br>
-Mr. Radulovic - Don Mills Collegiate Institute<br>_
+Don Mills Collegiate Institute<br>_
 Work log can be found in the commit history of this [GitHub repository](https://github.com/mchlp/TetrisGameAI)
 
 *Links may not work properly if you are viewing a PDF version of this file.*
